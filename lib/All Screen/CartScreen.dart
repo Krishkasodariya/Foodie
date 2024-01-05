@@ -1973,7 +1973,7 @@ class _CartScreenState extends State<CartScreen> {
                                     Color(0xffFFF5E3)
                                   ]),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
+                                  BorderRadius.all(Radius.circular(15))),
                               child: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
