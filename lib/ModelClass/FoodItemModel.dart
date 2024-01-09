@@ -15,7 +15,7 @@ class FoodItemModel {
    int selectitem = 1;
    int foodbill;
    int foodtotal;
-   String? rating;
+   double? rating;
 
    // Uint8List? imagebyte;
 
@@ -42,8 +42,6 @@ class FoodItemModel {
   });
 
 
-
-
  Map<String, dynamic> toJson() {
      return {
        "id": id,
@@ -52,9 +50,9 @@ class FoodItemModel {
        "image": image,
        "name": name,
        "rating": rating,
-       "size": pizzasizelist,
+   /*    "size": pizzasizelist,
        "ingredients": ingredients,
-       "pizzametalist": pizzametalist,
+       "pizzametalist": pizzametalist,*/
        "price": price,
        "selectitem": selectitem,
        "foodbill": foodbill,
@@ -72,9 +70,9 @@ class FoodItemModel {
      selectitem: data["selectitem"],
      foodbill: data["foodbill"],
      foodtotal: data["foodtotal"],
-     pizzametalist: data["pizzametalist"],
+   /*  pizzametalist: data["pizzametalist"],
      ingredients: data["ingredients"],
-     pizzasizelist: data["size"],
+     pizzasizelist: data["size"],*/
      rating: data["rating"],
      name:  data["name"]);
    }

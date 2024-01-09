@@ -11,7 +11,6 @@ import 'package:Pizza/All%20Screen/CartScreen.dart';
 import 'package:Pizza/All%20Screen/CustomizePizza.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
-import 'package:Pizza/ModelClass/OfferModel.dart';
 import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -41,6 +40,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
 
     pizzalist = widget.data;
     pizzaindex = widget.pizzaindex;
@@ -80,13 +80,11 @@ class _PizzaScreenState extends State<PizzaScreen> {
                 backgroundColor: Colors.white,
                 pinned: false,
                 stretch: true,
-
                 snap: false,
                 floating: false,
                 leading: Container(),
                 expandedHeight: 265,
                 flexibleSpace: FlexibleSpaceBar(
-
 
                   background: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -603,7 +601,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
               SliverPadding(
                 padding: EdgeInsets.only(bottom: 80),
                 sliver: SliverList.separated(
-                  itemCount: pizzalist.length,
+                  itemCount: pizzalist[pizzaindex].foodimagelist.length,
                   itemBuilder: (context, index) {
                     return StatefulBuilder(
                       builder: (context, setState) {

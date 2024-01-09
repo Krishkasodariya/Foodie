@@ -10,6 +10,7 @@ class PizzaItemModel extends GetxController{
   double? rating;
   RxList<FoodItemModel> foodimagelist=<FoodItemModel>[].obs;
   String? subname;
+
   PizzaItemModel({
     required this.checklike,
       required this.foodimagelist,

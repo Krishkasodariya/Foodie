@@ -146,8 +146,11 @@ class PizzaController extends GetxController {
   late StreamSubscription subscription;
   RxList<FoodItemModel> yourOrderBottomList = <FoodItemModel>[].obs;
   RxList<PizzaItemModel> likelist = <PizzaItemModel>[].obs;
+  RxList<PizzaItemModel> pizzalist = <PizzaItemModel>[].obs;
 
+  RxList<FoodItemModel> sodalist = <FoodItemModel>[].obs;
   RxList<FoodItemModel> foundsoda = <FoodItemModel>[].obs;
+
   RxInt pizzaindex = 0.obs;
   RxInt ingredientindex = 0.obs;
   RxInt total = 180.obs;
@@ -329,42 +332,48 @@ class PizzaController extends GetxController {
 
   Future<List<PizzaItemModel>> getPizzaData() async {
     try {
-       await FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection("pizza")
           .get()
-          .then((QuerySnapshot querySnapshot){
-            querySnapshot.docs.forEach((element){
-              Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-              RxList<FoodItemModel> food = <FoodItemModel>[].obs;
-              List<dynamic> dynamicList =data['foodimagelist'];
-              dynamicList.forEach((element) {
-                print("------)${element["name"]}");
-                food.add(FoodItemModel.fromJson(element));
-              });
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
+          log("${data}");
 
-              PizzaItemModel pizzaItem = PizzaItemModel(
-                checklike: data['checklike'],
-                name: data['name'],
-                distance: data['distance'],
-                price: data['price'],
-                rating: data['rating'],
-                time: data['time'],
-                subname: data['subname'],
-                foodimagelist: food,
-              );
+          RxList<FoodItemModel> food = <FoodItemModel>[].obs;
+          List<dynamic> dynamicList = data['foodimagelist'];
 
-              pizzalist.add(pizzaItem);
-            });
+          dynamicList.forEach((element) {
+            print("------)${element["name"]}");
+            food.add(FoodItemModel.fromJson(element));
+            // print("---food.length----)${food.length}");
+          });
+
+          PizzaItemModel pizzaItem = PizzaItemModel(
+            checklike: data['checklike'],
+            name: data['name'],
+            distance: data['distance'],
+            price: data['price'],
+            rating: data['rating'],
+            time: data['time'],
+            subname: data['subname'],
+            foodimagelist: food,
+          );
+
+          // pizzalist.clear();
+          // pizzalist.value=[];
+          pizzalist.add(pizzaItem);
+          print("--pizzalist-length---)${pizzalist.length}");
+        });
       });
     } catch (e) {
-
-      print(e);
+      print("----444444---------${e}");
     }
     return pizzalist;
   }
 
-  RxList<PizzaItemModel> pizzalist = [
+  /*RxList<PizzaItemModel> pizzalist = [
     PizzaItemModel(
       checklike: false,
       name: "Domino's Pizza",
@@ -776,7 +785,7 @@ class PizzaController extends GetxController {
         rating: 4.2,
         time: "25-30 min",
         subname: "Pizza"),
-  ].obs;
+  ].obs;*/
 
   void Pizzaadd(int pizzaindex, int index) {
     pizzalist[pizzaindex].foodimagelist[index].checkadd = true;
@@ -1140,22 +1149,19 @@ class PizzaController extends GetxController {
     addsizelist!.clear();
     iscountfoodtotal.value = 0;
 
-    print(
-        "------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
-    print(
-        "------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
-    print(
-        "------------pizzabottomlist-------------------)${addsizelist!.length}");
+    print("------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
+    print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
+    print("------------pizzabottomlist-------------------)${addsizelist!.length}");
 
     Navigator.pop(context);
   }
 
-  void Pizzatotalprice() {
+  void Pizzatotalprice(){
     grandtotal.value = 0;
     Customfoodtotal.value = 0;
     iscountfoodtotal.value = 0;
 
-    for (int i = 0; i < pizzabottomlist.length; i++) {
+    for (int i = 0; i < pizzabottomlist.length; i++){
       if (pizzabottomlist.isNotEmpty ||
           customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
@@ -1183,13 +1189,13 @@ class PizzaController extends GetxController {
 
   //----------------------------------------------------------SODA---------------------------------------------------------------)
 
-  RxList<FoodItemModel> sodalist = [
+/*  RxList<FoodItemModel> sodalist = [
     FoodItemModel(
       id: 31,
       image: "images/s1.webp",
       price: 30,
       name: "Pepsi Throwback",
-      rating: "50 rating",
+      rating: 5.0,
       selectitem: 1,
       checkadd: false,
       foodtotal: 0,
@@ -1201,7 +1207,7 @@ class PizzaController extends GetxController {
       image: "images/s3.webp",
       price: 20,
       name: "Cocacola",
-      rating: "100 rating",
+      rating: 1.0,
       selectitem: 1,
       checkadd: false,
       foodtotal: 0,
@@ -1484,7 +1490,23 @@ class PizzaController extends GetxController {
         checkadd: false,
         foodtotal: 0,
         foodbill: 40),
-  ].obs;
+  ].obs;*/
+
+  Future<List<FoodItemModel>> getSodaData()async{
+    await FirebaseFirestore.instance
+        .collection("coldDrink")
+        .get()
+        .then((QuerySnapshot querySnapshot){
+          querySnapshot.docs.forEach((element) {
+            Map<String,dynamic>data=element.data() as Map<String, dynamic>;
+
+            log("${data}");
+
+          });
+    });
+
+    return sodalist;
+  }
 
   void Sodaadd(int index) {
     isBootomSheet.value = true;
@@ -1536,7 +1558,7 @@ class PizzaController extends GetxController {
     update();
   }
 
-  void Sodaplus(int index) {
+  void Sodaplus(int index){
     grandtotal.value = 0;
     Customfoodtotal.value = 0;
     iscountfoodtotal.value = 0;

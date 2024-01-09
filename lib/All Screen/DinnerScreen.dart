@@ -57,13 +57,15 @@ class _DinnerScreenState extends State<DinnerScreen> {
         tital: "aa"),
   ];
 
-
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
     loaded();
     pizzaController.UpdateLike(ref);
+    pizzaController.pizzalist.clear();
+
+    pizzaController.getPizzaData();
   }
 
   @override
@@ -351,7 +353,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                   itemCount: pizzaController.pizzalist.length,
                   itemBuilder: (context, index) {
 
-                    if(isLoaded && index % 4 == 2){
+                  /*  if(isLoaded && index % 4 == 2){
                       return Padding(
                         padding: const EdgeInsets.only(left: 15,right: 15),
                         child: StatefulBuilder(
@@ -365,7 +367,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
 
                         ),
                       );
-                    }else{
+                    }else{*/
                       return Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15),
                         child: GestureDetector(
@@ -421,7 +423,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                             return Stack(
                                               children: [
                                                 Image(
-                                                    image: AssetImage(
+                                                 image: AssetImage(
                                                         "${pizzaController
                                                             .pizzalist[index]
                                                             .foodimagelist[iindex]
@@ -749,7 +751,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                           ),
                         ),
                       );
-                    }
+                 //   }
 
                   },
                   separatorBuilder: (BuildContext context, int index) {

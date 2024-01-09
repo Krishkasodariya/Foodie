@@ -154,6 +154,7 @@ class LoginController extends GetxController {
 /*Future<void>getdata()async{
     userid=await Getuid();
 }*/
+
   Future<void> logout() async {
     await GoogleSignIn().signOut();
     firebaseAuth.signOut();
