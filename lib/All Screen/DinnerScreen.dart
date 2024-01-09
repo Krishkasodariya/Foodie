@@ -64,7 +64,6 @@ class _DinnerScreenState extends State<DinnerScreen> {
     loaded();
     pizzaController.UpdateLike(ref);
     pizzaController.pizzalist.clear();
-
     pizzaController.getPizzaData();
   }
 

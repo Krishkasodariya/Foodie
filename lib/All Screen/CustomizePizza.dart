@@ -862,8 +862,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
 
       PizzaBoxAnimationController!
           .addStatusListener((status) {
-        if (status ==
-            AnimationStatus.completed) {
+        if (status == AnimationStatus.completed) {
           setState(() {
             resetdata();
             checkEnabled=false;
@@ -912,17 +911,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
   }
 
   FunctionSize(int index){
-
     checkEnabled=true;
-
     setState(() {
       pizzaController.sizeindex.value = index;
     });
     if (index == 0) {
-      Width = BoxConstraints(
-          maxWidth: 200);
-      Height = BoxConstraints(
-          maxHeight: 200);
+      Width = BoxConstraints(maxWidth: 200);
+      Height = BoxConstraints(maxHeight: 200);
       IngredientWidth = 25;
       IngredientHeight = 25;
       RotationPizzaAnimationController!
@@ -930,10 +925,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
       pizzaController.total.value = 150 + 10 * listofingredient.length;
     }
     else if (index == 1) {
-      Width = BoxConstraints(
-          maxWidth: 240);
-      Height = BoxConstraints(
-          maxHeight: 240);
+      Width = BoxConstraints(maxWidth: 240);
+      Height = BoxConstraints(maxHeight: 240);
       IngredientWidth = 30;
       IngredientHeight = 30;
       RotationPizzaAnimationController!
@@ -958,9 +951,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
               listofingredient
                   .length;
     }
-
     checkEnabled=false;
-
   }
 
 

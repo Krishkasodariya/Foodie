@@ -52,7 +52,7 @@ class LoginController extends GetxController {
     updateData = ref;
   }
 
-  Future adduserdetail(UserModel user) async {
+  Future adduserdetail(UserModel user) async{
     print("object");
     FirebaseFirestore.instance
         .collection("user")
@@ -67,10 +67,10 @@ class LoginController extends GetxController {
     await sharedPreferences!.setString("savedata", jsonencode);
     print("setdata");
   }
+
   Future<UserModel?> getmodel() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    Map<String, dynamic> jsondecode =
-        jsonDecode(sharedPreferences!.getString("savedata")!);
+    Map<String, dynamic> jsondecode = jsonDecode(sharedPreferences!.getString("savedata")!);
     UserModel user = UserModel.fromJson(jsondecode);
     if (jsondecode.isNotEmpty) {
       addname.text = user.name!;
@@ -142,7 +142,7 @@ class LoginController extends GetxController {
     await sharedPreferences!.setString("uid", uid);
   }
 
-  Future Getuid() async {
+  Future Getuid()async{
     try {
       sharedPreferences = await SharedPreferences.getInstance();
       userid = sharedPreferences!.getString("uid")!;

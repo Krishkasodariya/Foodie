@@ -13,8 +13,7 @@ class AiChatbot {
     try {
       final header = await getheader();
       String apiKey = "AIzaSyAg-hzGNUNGlJr88aYbRE0jCB2FfUjN0WA";
-      String url =
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}";
+      String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}";
 
       final Map<String, dynamic> requestBody = {
         "contents": [
@@ -34,7 +33,7 @@ class AiChatbot {
           headers: header, body: jsonEncode(requestBody));
       print("---response------)${response.body}");
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200){
         final data = jsonDecode(response.body);
         final recipe = data['candidates'][0]['content']['parts'][0]['text'];
         print("---recipe------)${recipe}");

@@ -1,14 +1,18 @@
+import 'dart:math';
+
 import 'package:Pizza/All%20Screen/DonationBottomsheetDialog.dart';
 import 'package:Pizza/All%20Screen/PaymentScreen.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Drawer/AddressBook.dart';
 import 'package:Pizza/Drawer/ProfileScreen.dart';
+import 'package:Pizza/ModelClass/FoodItemModel.dart';
+import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:Pizza/All%20Screen/GoldBottomSheetDialog.dart';
@@ -269,8 +273,8 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Obx(()=>
-                               Container(
+                            child: Obx(
+                              () => Container(
                                 padding: EdgeInsets.only(top: 10, bottom: 10),
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
@@ -279,11 +283,12 @@ class _CartScreenState extends State<CartScreen> {
                                         topLeft: Radius.circular(20),
                                         topRight: Radius.circular(20))),
                                 child: ListView.separated(
-                                  itemCount: pizzaController.pizzabottomlist.length,
+                                  itemCount:
+                                      pizzaController.pizzabottomlist.length,
                                   physics: NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
-                                   scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index){
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
                                     return Padding(
                                       padding: const EdgeInsets.only(
                                           left: 10, right: 10),
@@ -297,7 +302,8 @@ class _CartScreenState extends State<CartScreen> {
                                                 ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                            Radius.circular(15)),
+                                                            Radius.circular(
+                                                                15)),
                                                     child: Image(
                                                       image: AssetImage(
                                                           "${pizzaController.pizzabottomlist[index].image}"),
@@ -306,23 +312,26 @@ class _CartScreenState extends State<CartScreen> {
                                                       fit: BoxFit.cover,
                                                     )),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10, right: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10, right: 10),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Container(
                                                         width: 150,
                                                         child: Text(
                                                           "${pizzaController.pizzabottomlist[index].name}",
                                                           maxLines: 1,
-                                                          style:
-                                                              GoogleFonts.nunito(
-                                                            color:
-                                                                Color(0xff373D4D),
+                                                          style: GoogleFonts
+                                                              .nunito(
+                                                            color: Color(
+                                                                0xff373D4D),
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.w700,
@@ -332,14 +341,13 @@ class _CartScreenState extends State<CartScreen> {
                                                         ),
                                                       ),
                                                       Text("4.3 ratings",
-                                                          style:
-                                                              GoogleFonts.nunito(
-                                                                  color: Color(
-                                                                      0xff535B6D),
-                                                                  fontSize: 13,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500)),
+                                                          style: GoogleFonts.nunito(
+                                                              color: Color(
+                                                                  0xff535B6D),
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500)),
                                                       Row(
                                                         children: [
                                                           Image(
@@ -347,8 +355,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                 "images/rupee.webp"),
                                                             width: 13,
                                                             height: 13,
-                                                            color:
-                                                                Color(0xff1F1F1F),
+                                                            color: Color(
+                                                                0xff1F1F1F),
                                                           ),
                                                           Text(
                                                               "${pizzaController.pizzabottomlist[index].price}",
@@ -368,12 +376,14 @@ class _CartScreenState extends State<CartScreen> {
                                                 Obx(
                                                   () => Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Container(
                                                         width: 75,
                                                         height: 30,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color:
                                                               Color(0xffFFF6F7),
                                                           boxShadow: [
@@ -390,8 +400,9 @@ class _CartScreenState extends State<CartScreen> {
                                                                   0xffEF4F5F)),
                                                           borderRadius:
                                                               BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10)),
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
                                                         ),
                                                         child: Row(
                                                           mainAxisAlignment:
@@ -411,7 +422,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                         .Sodabottomremove(
                                                                             index,
                                                                             context);
-                                                                    print("soda");
+                                                                    print(
+                                                                        "soda");
                                                                   } else {
                                                                     pizzaController.Pizzabottomremove(
                                                                         pizzaController
@@ -454,7 +466,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                     pizzaController
                                                                         .Sodabottompluse(
                                                                             index);
-                                                                    print("soda");
+                                                                    print(
+                                                                        "soda");
                                                                   } else {
                                                                     pizzaController
                                                                         .Pizzabottomplus(
@@ -480,8 +493,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                 "images/rupee.webp"),
                                                             width: 15,
                                                             height: 15,
-                                                            color:
-                                                                Color(0xff1F1F1F),
+                                                            color: Color(
+                                                                0xff1F1F1F),
                                                           ),
                                                           Obx(
                                                             () => Text(
@@ -489,7 +502,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                 style: GoogleFonts.nunito(
                                                                     color: Color(
                                                                         0xff1F1F1F),
-                                                                    fontSize: 15,
+                                                                    fontSize:
+                                                                        15,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500)),
@@ -528,7 +542,8 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Obx(()=> Container(
+                            child: Obx(
+                              () => Container(
                                 padding: EdgeInsets.only(top: 10, bottom: 10),
                                 width: double.infinity,
                                 decoration: BoxDecoration(
@@ -537,8 +552,10 @@ class _CartScreenState extends State<CartScreen> {
                                         bottomLeft: Radius.circular(20),
                                         bottomRight: Radius.circular(20))),
                                 child: ListView.separated(
-                                  itemCount: pizzaController.customizepizzalist[0]
-                                      .pizzametalist!.length,
+                                  itemCount: pizzaController
+                                      .customizepizzalist[0]
+                                      .pizzametalist!
+                                      .length,
                                   physics: NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   // scrollDirection: Axis.vertical,
@@ -556,7 +573,8 @@ class _CartScreenState extends State<CartScreen> {
                                                 ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                            Radius.circular(15)),
+                                                            Radius.circular(
+                                                                15)),
                                                     child: Image(
                                                       image: MemoryImage(
                                                           pizzaController
@@ -570,23 +588,26 @@ class _CartScreenState extends State<CartScreen> {
                                                       fit: BoxFit.cover,
                                                     )),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10, right: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10, right: 10),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Container(
                                                         width: 150,
                                                         child: Text(
                                                           "Customize Pizza",
                                                           maxLines: 1,
-                                                          style:
-                                                              GoogleFonts.nunito(
-                                                            color:
-                                                                Color(0xff373D4D),
+                                                          style: GoogleFonts
+                                                              .nunito(
+                                                            color: Color(
+                                                                0xff373D4D),
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.w700,
@@ -597,14 +618,13 @@ class _CartScreenState extends State<CartScreen> {
                                                       ),
                                                       Text(
                                                           "Size : ${pizzaController.addsizelist![index].name}",
-                                                          style:
-                                                              GoogleFonts.nunito(
-                                                                  color: Color(
-                                                                      0xff535B6D),
-                                                                  fontSize: 13,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500)),
+                                                          style: GoogleFonts.nunito(
+                                                              color: Color(
+                                                                  0xff535B6D),
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500)),
                                                       Row(
                                                         children: [
                                                           Image(
@@ -612,8 +632,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                 "images/rupee.webp"),
                                                             width: 13,
                                                             height: 13,
-                                                            color:
-                                                                Color(0xff1F1F1F),
+                                                            color: Color(
+                                                                0xff1F1F1F),
                                                           ),
                                                           Text(
                                                               "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaPrice}",
@@ -638,14 +658,16 @@ class _CartScreenState extends State<CartScreen> {
                                                       width: 75,
                                                       height: 30,
                                                       decoration: BoxDecoration(
-                                                        color: Color(0xffFFF6F7),
+                                                        color:
+                                                            Color(0xffFFF6F7),
                                                         boxShadow: [
                                                           BoxShadow(
                                                               color: Color(
                                                                   0xffdedede),
                                                               blurRadius: 5,
                                                               blurStyle:
-                                                                  BlurStyle.outer)
+                                                                  BlurStyle
+                                                                      .outer)
                                                         ],
                                                         border: Border.all(
                                                             color: Color(
@@ -680,7 +702,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                 style: GoogleFonts.nunito(
                                                                     color: Colors
                                                                         .black,
-                                                                    fontSize: 16,
+                                                                    fontSize:
+                                                                        16,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500)),
@@ -693,7 +716,8 @@ class _CartScreenState extends State<CartScreen> {
                                                                         index);
                                                               });
                                                             },
-                                                            child: Icon(Icons.add,
+                                                            child: Icon(
+                                                                Icons.add,
                                                                 color: Color(
                                                                     0xffEF4F5F),
                                                                 size: 20),
@@ -800,8 +824,8 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                             Spacer(),
                                             Image(
-                                              image:
-                                                  AssetImage("images/next.webp"),
+                                              image: AssetImage(
+                                                  "images/next.webp"),
                                               width: 22,
                                               height: 22,
                                               color: Color(0xff7e878d),
@@ -858,8 +882,8 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                             Spacer(),
                                             Image(
-                                              image:
-                                                  AssetImage("images/next.webp"),
+                                              image: AssetImage(
+                                                  "images/next.webp"),
                                               width: 22,
                                               height: 22,
                                               color: Color(0xff7e878d),
@@ -1041,8 +1065,8 @@ class _CartScreenState extends State<CartScreen> {
                                             padding:
                                                 const EdgeInsets.only(top: 2),
                                             child: Image(
-                                              image:
-                                                  AssetImage("images/next.webp"),
+                                              image: AssetImage(
+                                                  "images/next.webp"),
                                               width: 25,
                                               height: 25,
                                               color: Color(0xff7e878d),
@@ -1560,8 +1584,8 @@ class _CartScreenState extends State<CartScreen> {
                                     child: Row(
                                       children: [
                                         Image(
-                                          image:
-                                              AssetImage("images/scooter1.webp"),
+                                          image: AssetImage(
+                                              "images/scooter1.webp"),
                                           width: 20,
                                           height: 20,
                                         ),
@@ -1672,302 +1696,339 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15,),
-                    
-                          Obx(()=>
-                             Container(
-                              child:  googleMapControllerScreen.visibleAddress.value?  Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
-                                      child: Container(
-                                        height: 1,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                          color: Color(0xffDAD9DD),
-                                          width: 1,
-                                        )),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "DELIVERY ADDRESS",
-                                    style: GoogleFonts.nunito(
-                                        color: Color(0xff7e878d),
-                                        fontSize: 15.2,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
-                                      child: Container(
-                                        height: 1,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                          color: Color(0xffDAD9DD),
-                                          width: 1,
-                                        )),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ):Container(),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Obx(
+                            () => Container(
+                              child:
+                                  googleMapControllerScreen.visibleAddress.value
+                                      ? Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 20, right: 20),
+                                                child: Container(
+                                                  height: 1,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                    color: Color(0xffDAD9DD),
+                                                    width: 1,
+                                                  )),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              "DELIVERY ADDRESS",
+                                              style: GoogleFonts.nunito(
+                                                  color: Color(0xff7e878d),
+                                                  fontSize: 15.2,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 20, right: 20),
+                                                child: Container(
+                                                  height: 1,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                    color: Color(0xffDAD9DD),
+                                                    width: 1,
+                                                  )),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      : Container(),
                             ),
                           ),
-
-                          Obx(()=>
-                             Padding(
-                              padding: googleMapControllerScreen.visibleAddress.value?const EdgeInsets.only(left: 10, right: 10,top: 15):EdgeInsets.only(left: 0, right: 0,top: 0),
-                              child:googleMapControllerScreen.visibleAddress.value?
-                              Container(
-                                width: double.infinity,
-                                height: 175,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15))),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: Row(
+                          Obx(
+                            () => Padding(
+                              padding: googleMapControllerScreen
+                                      .visibleAddress.value
+                                  ? const EdgeInsets.only(
+                                      left: 10, right: 10, top: 15)
+                                  : EdgeInsets.only(left: 0, right: 0, top: 0),
+                              child: googleMapControllerScreen
+                                      .visibleAddress.value
+                                  ? Container(
+                                      width: double.infinity,
+                                      height: 175,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15))),
+                                      child: Column(
                                         children: [
-                                          Icon(
-                                            Icons.watch_later_rounded,
-                                            color: Color(0xff267E3E),
-                                            size: 18,
-                                          ),
                                           SizedBox(
-                                            width: 10,
+                                            height: 12,
                                           ),
-                                          Text(
-                                            "Delivery in  ",
-                                            style: GoogleFonts.lexend(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 17.5,
-                                              color: Color(0xff313848),
-                                            ),
-                                          ),
-                                          Text(
-                                            "30-35 mins",
-                                            style: GoogleFonts.lexend(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 17.5,
-                                              color: Color(0xff313848),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: DottedDashedLine(
-                                        height: 0,
-                                        width: double.infinity,
-                                        axis: Axis.horizontal,
-                                        dashColor: Color(0xffDAD9DD),
-                                        strokeWidth: 1,
-                                        dashSpace: 3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                            backgroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(20),
-                                                  topLeft: Radius.circular(20)),
-                                            ),
-                                            context: context,
-                                            builder: (context) {
-                                              return AddressBook();
-                                            },
-                                          );
-                                          setState(() {
-                                            googleMapControllerScreen
-                                                .changeAddressHeight.value = true;
-                                          });
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: Row(
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      CupertinoIcons.house,
-                                                      size: 20,
-                                                      color: Color(0xff313848),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Text(
-                                                      "Delivery at ",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 16,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    Obx(
-                                                      () => Text(
-                                                        "${googleMapControllerScreen.addresstype.value}",
-                                                        style: GoogleFonts.lexend(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 17,
-                                                          color:
-                                                              Color(0xff313848),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                Icon(
+                                                  Icons.watch_later_rounded,
+                                                  color: Color(0xff267E3E),
+                                                  size: 18,
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 30),
-                                                  child: Obx(
-                                                    () => Text(
-                                                      "${googleMapControllerScreen.area.value}",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 16,
-                                                        color: Color(0xff8F94A4),
-                                                      ),
-                                                    ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  "Delivery in  ",
+                                                  style: GoogleFonts.lexend(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 17.5,
+                                                    color: Color(0xff313848),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "30-35 mins",
+                                                  style: GoogleFonts.lexend(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 17.5,
+                                                    color: Color(0xff313848),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            Spacer(),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color: Color(0xff313848),
-                                                size: 17,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: DottedDashedLine(
+                                              height: 0,
+                                              width: double.infinity,
+                                              axis: Axis.horizontal,
+                                              dashColor: Color(0xffDAD9DD),
+                                              strokeWidth: 1,
+                                              dashSpace: 3,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                showModalBottomSheet(
+                                                  backgroundColor: Colors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topRight: Radius
+                                                                .circular(20),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    20)),
+                                                  ),
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AddressBook();
+                                                  },
+                                                );
+                                                setState(() {
+                                                  googleMapControllerScreen
+                                                      .changeAddressHeight
+                                                      .value = true;
+                                                });
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            CupertinoIcons
+                                                                .house,
+                                                            size: 20,
+                                                            color: Color(
+                                                                0xff313848),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            "Delivery at ",
+                                                            style: GoogleFonts
+                                                                .lexend(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 16,
+                                                              color: Color(
+                                                                  0xff313848),
+                                                            ),
+                                                          ),
+                                                          Obx(
+                                                            () => Text(
+                                                              "${googleMapControllerScreen.addresstype.value}",
+                                                              style: GoogleFonts
+                                                                  .lexend(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 17,
+                                                                color: Color(
+                                                                    0xff313848),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 30),
+                                                        child: Obx(
+                                                          () => Text(
+                                                            "${googleMapControllerScreen.area.value}",
+                                                            style: GoogleFonts
+                                                                .lexend(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 16,
+                                                              color: Color(
+                                                                  0xff8F94A4),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Spacer(),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10),
+                                                    child: Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color: Color(0xff313848),
+                                                      size: 17,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: DottedDashedLine(
+                                              height: 0,
+                                              width: double.infinity,
+                                              axis: Axis.horizontal,
+                                              dashColor: Color(0xffDAD9DD),
+                                              strokeWidth: 1,
+                                              dashSpace: 3,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                showModalBottomSheet(
+                                                  backgroundColor: Colors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topRight: Radius
+                                                                .circular(20),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    20)),
+                                                  ),
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return ProfileScreen();
+                                                  },
+                                                );
+                                                setState(() {
+                                                  googleMapControllerScreen
+                                                      .changeProfileHeight
+                                                      .value = true;
+                                                });
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.phone_in_talk_rounded,
+                                                    size: 21,
+                                                    color: Color(0xff313848),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Obx(
+                                                    () => Text(
+                                                      "${loginController.cartName.value}  ",
+                                                      style: GoogleFonts.lexend(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xff313848),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Obx(
+                                                    () => Text(
+                                                      "${loginController.cartPhone.value}",
+                                                      style: GoogleFonts.lexend(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xff313848),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Spacer(),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10),
+                                                    child: Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color: Color(0xff313848),
+                                                      size: 17,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: DottedDashedLine(
-                                        height: 0,
-                                        width: double.infinity,
-                                        axis: Axis.horizontal,
-                                        dashColor: Color(0xffDAD9DD),
-                                        strokeWidth: 1,
-                                        dashSpace: 3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                            backgroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(20),
-                                                  topLeft: Radius.circular(20)),
-                                            ),
-                                            context: context,
-                                            builder: (context) {
-                                              return ProfileScreen();
-                                            },
-                                          );
-                                          setState(() {
-                                            googleMapControllerScreen
-                                                .changeProfileHeight.value = true;
-                                          });
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.phone_in_talk_rounded,
-                                              size: 21,
-                                              color: Color(0xff313848),
-                                            ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Obx(
-                                              () => Text(
-                                                "${loginController.cartName.value}  ",
-                                                style: GoogleFonts.lexend(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                  color: Color(0xff313848),
-                                                ),
-                                              ),
-                                            ),
-                                            Obx(
-                                              () => Text(
-                                                "${loginController.cartPhone.value}",
-                                                style: GoogleFonts.lexend(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                  color: Color(0xff313848),
-                                                ),
-                                              ),
-                                            ),
-                                            Spacer(),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color: Color(0xff313848),
-                                                size: 17,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ):Container(),
+                                    )
+                                  : Container(),
                             ),
                           ),
-
                           Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10,top: 15),
+                            padding: const EdgeInsets.only(
+                                left: 10, right: 10, top: 15),
                             child: Container(
                               width: double.infinity,
                               height: 120,
@@ -1977,7 +2038,7 @@ class _CartScreenState extends State<CartScreen> {
                                     Color(0xffFFF5E3)
                                   ]),
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
+                                      BorderRadius.all(Radius.circular(15))),
                               child: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
@@ -2449,8 +2510,8 @@ class _CartScreenState extends State<CartScreen> {
                           boxShadow: [
                             BoxShadow(color: Colors.black38, blurRadius: 10)
                           ]),
-                      child: Obx(()=>
-                         Column(
+                      child: Obx(
+                        () => Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
@@ -2464,9 +2525,10 @@ class _CartScreenState extends State<CartScreen> {
                                     backgroundColor: MaterialStateProperty.all(
                                         Color(0xffEF505F))),
                                 onPressed: () async {
-                                  if (googleMapControllerScreen.selectAddress.value) {
-
-                                    if (pizzaController.orderMethod.value == "Cash") {
+                                  if (googleMapControllerScreen
+                                      .selectAddress.value) {
+                                    if (pizzaController.orderMethod.value ==
+                                        "Cash") {
                                       print("cash");
                                       Navigator.push(
                                           context,
@@ -2476,12 +2538,16 @@ class _CartScreenState extends State<CartScreen> {
                                                       .grandtotal.value),
                                               type: PageTransitionType
                                                   .rightToLeft));
-                                      googleMapControllerScreen.selectAddress.value = false;
-                                      googleMapControllerScreen.visibleAddress.value=false;
+
+                                      googleMapControllerScreen
+                                          .selectAddress.value = false;
+                                      googleMapControllerScreen
+                                          .visibleAddress.value = false;
                                       pizzaController.resetOffer();
                                       pizzaController.functionCartClear();
-                                    }
-                                    else if (pizzaController.orderMethod.value == "Online") {
+                                    } else if(pizzaController
+                                            .orderMethod.value ==
+                                        "Online") {
                                       showModalBottomSheet(
                                         backgroundColor: Colors.white,
                                         isScrollControlled: true,
@@ -2510,39 +2576,39 @@ class _CartScreenState extends State<CartScreen> {
                                       },
                                     );
                                     setState(() {
-                                      googleMapControllerScreen.changeAddressHeight.value = true;
+                                      googleMapControllerScreen
+                                          .changeAddressHeight.value = true;
                                     });
                                   }
                                 },
-                                child:
-                                    googleMapControllerScreen.selectAddress.value
-                                        ? Text(
-                                            "Conform Order",
+                                child: googleMapControllerScreen
+                                        .selectAddress.value
+                                    ? Text(
+                                        "Conform Order",
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.white),
+                                      )
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Select address at next step",
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 color: Colors.white),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 2),
+                                            child: Icon(
+                                              Icons.navigate_next_rounded,
+                                              color: Colors.white,
+                                              size: 20,
+                                            ),
                                           )
-                                        : Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Select address at next step",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.white),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.only(top: 2),
-                                                child: Icon(
-                                                  Icons.navigate_next_rounded,
-                                                  color: Colors.white,
-                                                  size: 20,
-                                                ),
-                                              )
-                                            ],
-                                          )),
+                                        ],
+                                      )),
                           ],
                         ),
                       ),
@@ -2554,6 +2620,8 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+
+
 
   void ref() {
     setState(() {});

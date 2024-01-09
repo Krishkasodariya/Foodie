@@ -20,15 +20,18 @@ class _SodaScreenState extends State<SodaScreen> {
 
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
+    pizzaController.sodalist.clear();
+    pizzaController.getSodaData();
+
     pizzaController.Allupdate(ref);
     pizzaController.Searchupdate(ref);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
         backgroundColor: Colors.white,
         body: WillPopScope(
@@ -38,6 +41,7 @@ class _SodaScreenState extends State<SodaScreen> {
           },
           child: Stack(
             children: [
+
               CustomScrollView(
                 physics: BouncingScrollPhysics(),
                 slivers: [
@@ -108,325 +112,311 @@ class _SodaScreenState extends State<SodaScreen> {
                     ),
                   ),*/
                   SliverPadding(padding: EdgeInsets.only(top: 10)),
-                  pizzaController.sodalist.isNotEmpty
-                      ? SliverList.separated(
-                          itemCount:  pizzaController.sodalist.length,
-                          itemBuilder: (context, index) {
-                            return StatefulBuilder(
-                              builder: (context, setState) {
-                                return Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 15, left: 15),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            //    0xfff5f5f5
-                                            BoxShadow(
-                                                color: Color(0xffe8e8e8),
-                                                spreadRadius: 2,
-                                                blurRadius: 10,
-                                                blurStyle: BlurStyle.outer)
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 3,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10, left: 10),
-                                              child: Container(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                            width: 22,
+                       Obx(()=> SliverList.separated(
+                            itemCount: pizzaController.sodalist.length,
+                            itemBuilder: (context, index) {
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 15, left: 15),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 160,
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                              //    0xfff5f5f5
+                                              BoxShadow(
+                                                  color: Color(0xffe8e8e8),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 10,
+                                                  blurStyle: BlurStyle.outer)
+                                            ],
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 3,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10, left: 10),
+                                                child: Container(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 15,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                              width: 22,
+                                                              height: 22,
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Color(
+                                                                          0xffA45B40),
+                                                                      width: 1.5),
+                                                                  borderRadius: BorderRadius
+                                                                      .all(Radius
+                                                                          .circular(
+                                                                              5))),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(2.0),
+                                                                child: Image(
+                                                                  image: AssetImage(
+                                                                      "images/arrowup.webp"),
+                                                                  color: Color(
+                                                                      0xffA45B40),
+                                                                ),
+                                                              )),
+                                                          SizedBox(
+                                                            width: 15,
+                                                          ),
+                                                          Container(
+                                                            width: 70,
                                                             height: 22,
                                                             decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Color(
-                                                                        0xffA45B40),
-                                                                    width: 1.5),
+                                                                color: Color(
+                                                                    0xffDB9C07),
                                                                 borderRadius: BorderRadius
                                                                     .all(Radius
                                                                         .circular(
                                                                             5))),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(2.0),
-                                                              child: Image(
-                                                                image: AssetImage(
-                                                                    "images/arrowup.webp"),
-                                                                color: Color(
-                                                                    0xffA45B40),
-                                                              ),
-                                                            )),
-                                                        SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        Container(
-                                                          width: 70,
-                                                          height: 22,
-                                                          decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  0xffDB9C07),
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          5))),
-                                                          child: Center(
-                                                            child: Text(
-                                                                "Bestseller",
-                                                                style: GoogleFonts.nunito(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                  "Bestseller",
+                                                                  style: GoogleFonts.nunito(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500)),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                          "${pizzaController.sodalist[index].name}",
+                                                          maxLines: 2,
+                                                          style:
+                                                              GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff373D4D),
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700)),
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
+                                                      Text(
+                                                          "${ pizzaController.sodalist[index].rating}",
+                                                          style:
+                                                              GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff535B6D),
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                      SizedBox(
+                                                        height: 1,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                "images/rupee.webp"),
+                                                            width: 15,
+                                                            height: 15,
+                                                            color:
+                                                                Color(0xff1F1F1F),
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                        "${pizzaController.sodalist[index].name}",
-                                                        maxLines: 2,
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff373D4D),
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700)),
-                                                    SizedBox(
-                                                      height: 1,
-                                                    ),
-                                                    Text(
-                                                        "${ pizzaController.sodalist[index].rating}",
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff535B6D),
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                    SizedBox(
-                                                      height: 1,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Image(
-                                                          image: AssetImage(
-                                                              "images/rupee.webp"),
-                                                          width: 15,
-                                                          height: 15,
-                                                          color:
-                                                              Color(0xff1F1F1F),
-                                                        ),
-                                                        Text(
-                                                            "${pizzaController.sodalist[index].price}",
-                                                            style: GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff1F1F1F),
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                          Text(
+                                                              "${pizzaController.sodalist[index].price}",
+                                                              style: GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff1F1F1F),
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 18, bottom: 18),
-                                            child: Container(
-                                              width: 1.5,
-                                              decoration: BoxDecoration(
-                                                  color: Color(0xffe5e5e5),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5))),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 18, bottom: 18),
+                                              child: Container(
+                                                width: 1.5,
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xffe5e5e5),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5))),
+                                              ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              children: [
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 10,
-                                                              left: 10),
-                                                      child: Stack(
-                                                        children: [
-                                                          Align(
-                                                            alignment:
-                                                                FractionalOffset
-                                                                    .topCenter,
-                                                            child: ClipRRect(
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          10)),
-                                                              child: Image(
-                                                                image: AssetImage(
-                                                                    "${pizzaController.sodalist[index].image}"),
-                                                                width: 120,
-                                                                height: 120,
-                                                                fit: BoxFit
-                                                                    .cover,
+                                            Expanded(
+                                              flex: 2,
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                                right: 10,
+                                                                left: 10),
+                                                        child: Stack(
+                                                          children: [
+                                                            Align(
+                                                              alignment:
+                                                                  FractionalOffset
+                                                                      .topCenter,
+                                                              child: ClipRRect(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                                child: Image(
+                                                                  image: AssetImage(
+                                                                      "${pizzaController.sodalist[index].image}"),
+                                                                  width: 120,
+                                                                  height: 120,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .bottomCenter,
-                                                            child: !
-                                                                    pizzaController.sodalist[
-                                                                      index]
-                                                                    .checkadd
-                                                                ? GestureDetector(
-                                                                    onTap: () {
-                                                                      setState(() =>
-                                                                          pizzaController.Sodaadd(
-                                                                              index));
-                                                                    },
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          bottom:
-                                                                              10),
+                                                            Align(
+                                                              alignment: Alignment
+                                                                  .bottomCenter,
+                                                              child: !
+                                                                      pizzaController.sodalist[
+                                                                        index]
+                                                                      .checkadd
+                                                                  ? GestureDetector(
+                                                                      onTap: () {
+                                                                        setState(() =>
+                                                                            pizzaController.Sodaadd(
+                                                                                index));
+                                                                      },
                                                                       child:
-                                                                          Container(
-                                                                        width:
-                                                                            80,
-                                                                        height:
-                                                                            35,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xffFFF6F7),
-                                                                          border:
-                                                                              Border.all(color: Color(0xffEF4F5F)),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(10)),
-                                                                        ),
+                                                                          Padding(
+                                                                        padding: const EdgeInsets
+                                                                                .only(
+                                                                            bottom:
+                                                                                10),
                                                                         child:
-                                                                            Center(
-                                                                          child: Text(
-                                                                              "Add",
-                                                                              style: GoogleFonts.nunito(color: Color(0xffEF4F5F), fontSize: 17, fontWeight: FontWeight.w500)),
+                                                                            Container(
+                                                                          width:
+                                                                              80,
+                                                                          height:
+                                                                              35,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                Color(0xffFFF6F7),
+                                                                            border:
+                                                                                Border.all(color: Color(0xffEF4F5F)),
+                                                                            borderRadius:
+                                                                                BorderRadius.all(Radius.circular(10)),
+                                                                          ),
+                                                                          child:
+                                                                              Center(
+                                                                            child: Text(
+                                                                                "Add",
+                                                                                style: GoogleFonts.nunito(color: Color(0xffEF4F5F), fontSize: 17, fontWeight: FontWeight.w500)),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    )
+                                                                  : Padding(
+                                                                        padding: const EdgeInsets
+                                                                                .only(
+                                                                            bottom:
+                                                                                10),
+                                                                        child:
+                                                                            Container(
+                                                                          width:
+                                                                              80,
+                                                                          height:
+                                                                              35,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                Color(0xffEF4F5F),
+                                                                            border:
+                                                                                Border.all(color: Color(0xffEF4F5F)),
+                                                                            borderRadius:
+                                                                                BorderRadius.all(Radius.circular(10)),
+                                                                          ),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceAround,
+                                                                            children: [
+                                                                              GestureDetector(
+                                                                                onTap: () {
+                                                                                  setState(() => pizzaController.Sodaremove(index));
+                                                                                },
+                                                                                child: Icon(Icons.remove, color: Colors.white, size: 20),
+                                                                              ),
+                                                                              Center(
+                                                                                child: Text("${pizzaController.sodalist[index].selectitem}", style: GoogleFonts.nunito(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500)),
+                                                                              ),
+                                                                              GestureDetector(
+                                                                                onTap: () {
+                                                                                  setState(() => pizzaController.Sodaplus(index));
+                                                                                },
+                                                                                child: Icon(Icons.add, color: Colors.white, size: 20),
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                  )
-                                                                : Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          bottom:
-                                                                              10),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            80,
-                                                                        height:
-                                                                            35,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xffEF4F5F),
-                                                                          border:
-                                                                              Border.all(color: Color(0xffEF4F5F)),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(10)),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceAround,
-                                                                          children: [
-                                                                            GestureDetector(
-                                                                              onTap: () {
-                                                                                setState(() => pizzaController.Sodaremove(index));
-                                                                              },
-                                                                              child: Icon(Icons.remove, color: Colors.white, size: 20),
-                                                                            ),
-                                                                            Center(
-                                                                              child: Text("${pizzaController.sodalist[index].selectitem}", style: GoogleFonts.nunito(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500)),
-                                                                            ),
-                                                                            GestureDetector(
-                                                                              onTap: () {
-                                                                                setState(() => pizzaController.Sodaplus(index));
-                                                                              },
-                                                                              child: Icon(Icons.add, color: Colors.white, size: 20),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
 
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ));
-                              },
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return SizedBox(
-                              height: 15,
-                            );
-                          },
-                        )
-                      : SliverToBoxAdapter(
-                          child: Container(
-                          width: 300,
-                          height: 350,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Lottie.asset(
-                                "images/search.json",
-                                width: 150,
-                                height: 150,
-                              ),
-                            ],
+                                          ],
+                                        ),
+                                      ));
+                                },
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                height: 15,
+                              );
+                            },
                           ),
-                        ))
+                       )
+
                 ],
               ),
               Obx(() => Align(

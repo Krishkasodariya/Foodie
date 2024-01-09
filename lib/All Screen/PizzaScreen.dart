@@ -55,10 +55,8 @@ class _PizzaScreenState extends State<PizzaScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(
-              context,
-            );
+          onTap: (){
+            Navigator.pop(context,);
             setState(() {});
           },
           child: Icon(
@@ -85,7 +83,6 @@ class _PizzaScreenState extends State<PizzaScreen> {
                 leading: Container(),
                 expandedHeight: 265,
                 flexibleSpace: FlexibleSpaceBar(
-
                   background: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
