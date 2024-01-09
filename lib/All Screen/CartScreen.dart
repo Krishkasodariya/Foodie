@@ -68,7 +68,7 @@ class _CartScreenState extends State<CartScreen> {
           child: Container(
             color: Color(0xffFFF6F7),
             child: Image(
-              image: AssetImage("images/bg1.jpg"),
+              image: AssetImage("images/bg1.webp"),
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width,
               height: 230,
@@ -98,7 +98,7 @@ class _CartScreenState extends State<CartScreen> {
                     padding: const EdgeInsets.all(10),
                     child: Center(
                       child: Image(
-                        image: AssetImage("images/cart.png"),
+                        image: AssetImage("images/cart.webp"),
                         color: Color(0xffB1BBDA),
                       ),
                     ),
@@ -269,103 +269,368 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Container(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))),
-                              child: ListView.separated(
-                                itemCount:
-                                    pizzaController.pizzabottomlist.length,
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                // scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10),
-                                    child: Container(
-                                      width: double.infinity,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(15)),
-                                                  child: Image(
-                                                    image: AssetImage(
-                                                        "${pizzaController.pizzabottomlist[index].image}"),
-                                                    width: 70,
-                                                    height: 70,
-                                                    fit: BoxFit.cover,
-                                                  )),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      width: 150,
-                                                      child: Text(
-                                                        "${pizzaController.pizzabottomlist[index].name}",
-                                                        maxLines: 1,
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                          color:
-                                                              Color(0xff373D4D),
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w700,
+                            child: Obx(()=>
+                               Container(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                width: double.infinity,
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))),
+                                child: ListView.separated(
+                                  itemCount: pizzaController.pizzabottomlist.length,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                   scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index){
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 80,
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(15)),
+                                                    child: Image(
+                                                      image: AssetImage(
+                                                          "${pizzaController.pizzabottomlist[index].image}"),
+                                                      width: 70,
+                                                      height: 70,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 10, right: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    children: [
+                                                      Container(
+                                                        width: 150,
+                                                        child: Text(
+                                                          "${pizzaController.pizzabottomlist[index].name}",
+                                                          maxLines: 1,
+                                                          style:
+                                                              GoogleFonts.nunito(
+                                                            color:
+                                                                Color(0xff373D4D),
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                         ),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
                                                       ),
-                                                    ),
-                                                    Text("4.3 ratings",
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff535B6D),
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                    Row(
-                                                      children: [
-                                                        Image(
-                                                          image: AssetImage(
-                                                              "images/rupee.png"),
-                                                          width: 13,
-                                                          height: 13,
-                                                          color:
-                                                              Color(0xff1F1F1F),
-                                                        ),
-                                                        Text(
-                                                            "${pizzaController.pizzabottomlist[index].price}",
-                                                            style: GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff1F1F1F),
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                      Text("4.3 ratings",
+                                                          style:
+                                                              GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff535B6D),
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                      Row(
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                "images/rupee.webp"),
+                                                            width: 13,
+                                                            height: 13,
+                                                            color:
+                                                                Color(0xff1F1F1F),
+                                                          ),
+                                                          Text(
+                                                              "${pizzaController.pizzabottomlist[index].price}",
+                                                              style: GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff1F1F1F),
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Spacer(),
-                                              Obx(
-                                                () => Column(
+                                                Spacer(),
+                                                Obx(
+                                                  () => Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    children: [
+                                                      Container(
+                                                        width: 75,
+                                                        height: 30,
+                                                        decoration: BoxDecoration(
+                                                          color:
+                                                              Color(0xffFFF6F7),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Color(
+                                                                    0xffdedede),
+                                                                blurRadius: 5,
+                                                                blurStyle:
+                                                                    BlurStyle
+                                                                        .outer)
+                                                          ],
+                                                          border: Border.all(
+                                                              color: Color(
+                                                                  0xffEF4F5F)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10)),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  if (pizzaController
+                                                                      .pizzabottomlist[
+                                                                          index]
+                                                                      .food!
+                                                                      .contains(
+                                                                          "soda")) {
+                                                                    pizzaController
+                                                                        .Sodabottomremove(
+                                                                            index,
+                                                                            context);
+                                                                    print("soda");
+                                                                  } else {
+                                                                    pizzaController.Pizzabottomremove(
+                                                                        pizzaController
+                                                                            .pizzaindex
+                                                                            .value,
+                                                                        index,
+                                                                        context);
+                                                                    print(
+                                                                        "pizza");
+                                                                  }
+                                                                });
+                                                              },
+                                                              child: Icon(
+                                                                  Icons.remove,
+                                                                  color: Color(
+                                                                      0xffEF4F5F),
+                                                                  size: 20),
+                                                            ),
+                                                            Center(
+                                                              child: Text(
+                                                                  "${pizzaController.pizzabottomlist[index].selectitem}",
+                                                                  style: GoogleFonts.nunito(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500)),
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  if (pizzaController
+                                                                      .pizzabottomlist[
+                                                                          index]
+                                                                      .food!
+                                                                      .contains(
+                                                                          "soda")) {
+                                                                    pizzaController
+                                                                        .Sodabottompluse(
+                                                                            index);
+                                                                    print("soda");
+                                                                  } else {
+                                                                    pizzaController
+                                                                        .Pizzabottomplus(
+                                                                            index);
+                                                                    print(
+                                                                        "pizza");
+                                                                  }
+                                                                });
+                                                              },
+                                                              child: Icon(
+                                                                  Icons.add,
+                                                                  color: Color(
+                                                                      0xffEF4F5F),
+                                                                  size: 20),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                "images/rupee.webp"),
+                                                            width: 15,
+                                                            height: 15,
+                                                            color:
+                                                                Color(0xff1F1F1F),
+                                                          ),
+                                                          Obx(
+                                                            () => Text(
+                                                                "${pizzaController.pizzabottomlist[index].foodbill}",
+                                                                style: GoogleFonts.nunito(
+                                                                    color: Color(
+                                                                        0xff1F1F1F),
+                                                                    fontSize: 15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500)),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            DottedDashedLine(
+                                              height: 0,
+                                              width: double.infinity,
+                                              axis: Axis.horizontal,
+                                              dashColor: Color(0xffDAD9DD),
+                                              strokeWidth: 1,
+                                              dashSpace: 3,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return SizedBox(
+                                      height: 10,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Obx(()=> Container(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(20),
+                                        bottomRight: Radius.circular(20))),
+                                child: ListView.separated(
+                                  itemCount: pizzaController.customizepizzalist[0]
+                                      .pizzametalist!.length,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  // scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 80,
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(15)),
+                                                    child: Image(
+                                                      image: MemoryImage(
+                                                          pizzaController
+                                                              .customizepizzalist[
+                                                                  0]
+                                                              .pizzametalist![
+                                                                  index]
+                                                              .customPizzametaUint8list),
+                                                      width: 70,
+                                                      height: 70,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 10, right: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    children: [
+                                                      Container(
+                                                        width: 150,
+                                                        child: Text(
+                                                          "Customize Pizza",
+                                                          maxLines: 1,
+                                                          style:
+                                                              GoogleFonts.nunito(
+                                                            color:
+                                                                Color(0xff373D4D),
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                          "Size : ${pizzaController.addsizelist![index].name}",
+                                                          style:
+                                                              GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff535B6D),
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                      Row(
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                "images/rupee.webp"),
+                                                            width: 13,
+                                                            height: 13,
+                                                            color:
+                                                                Color(0xff1F1F1F),
+                                                          ),
+                                                          Text(
+                                                              "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaPrice}",
+                                                              style: GoogleFonts.nunito(
+                                                                  color: Color(
+                                                                      0xff1F1F1F),
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Spacer(),
+                                                Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
@@ -373,16 +638,14 @@ class _CartScreenState extends State<CartScreen> {
                                                       width: 75,
                                                       height: 30,
                                                       decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xffFFF6F7),
+                                                        color: Color(0xffFFF6F7),
                                                         boxShadow: [
                                                           BoxShadow(
                                                               color: Color(
                                                                   0xffdedede),
                                                               blurRadius: 5,
                                                               blurStyle:
-                                                                  BlurStyle
-                                                                      .outer)
+                                                                  BlurStyle.outer)
                                                         ],
                                                         border: Border.all(
                                                             color: Color(
@@ -400,27 +663,9 @@ class _CartScreenState extends State<CartScreen> {
                                                           GestureDetector(
                                                             onTap: () {
                                                               setState(() {
-                                                                if (pizzaController
-                                                                    .pizzabottomlist[
-                                                                        index]
-                                                                    .food!
-                                                                    .contains(
-                                                                        "soda")) {
-                                                                  pizzaController
-                                                                      .Sodabottomremove(
-                                                                          index,
-                                                                          context);
-                                                                  print("soda");
-                                                                } else {
-                                                                  pizzaController.Pizzabottomremove(
-                                                                      pizzaController
-                                                                          .pizzaindex
-                                                                          .value,
-                                                                      index,
-                                                                      context);
-                                                                  print(
-                                                                      "pizza");
-                                                                }
+                                                                pizzaController
+                                                                    .custompizzaRemove(
+                                                                        index);
                                                               });
                                                             },
                                                             child: Icon(
@@ -431,12 +676,11 @@ class _CartScreenState extends State<CartScreen> {
                                                           ),
                                                           Center(
                                                             child: Text(
-                                                                "${pizzaController.pizzabottomlist[index].selectitem}",
+                                                                "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaSelectitem}",
                                                                 style: GoogleFonts.nunito(
                                                                     color: Colors
                                                                         .black,
-                                                                    fontSize:
-                                                                        16,
+                                                                    fontSize: 16,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500)),
@@ -444,27 +688,12 @@ class _CartScreenState extends State<CartScreen> {
                                                           GestureDetector(
                                                             onTap: () {
                                                               setState(() {
-                                                                if (pizzaController
-                                                                    .pizzabottomlist[
-                                                                        index]
-                                                                    .food!
-                                                                    .contains(
-                                                                        "soda")) {
-                                                                  pizzaController
-                                                                      .Sodabottompluse(
-                                                                          index);
-                                                                  print("soda");
-                                                                } else {
-                                                                  pizzaController
-                                                                      .Pizzabottomplus(
-                                                                          index);
-                                                                  print(
-                                                                      "pizza");
-                                                                }
+                                                                pizzaController
+                                                                    .custompizzaPlus(
+                                                                        index);
                                                               });
                                                             },
-                                                            child: Icon(
-                                                                Icons.add,
+                                                            child: Icon(Icons.add,
                                                                 color: Color(
                                                                     0xffEF4F5F),
                                                                 size: 20),
@@ -476,7 +705,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       children: [
                                                         Image(
                                                           image: AssetImage(
-                                                              "images/rupee.png"),
+                                                              "images/rupee.webp"),
                                                           width: 15,
                                                           height: 15,
                                                           color:
@@ -484,7 +713,7 @@ class _CartScreenState extends State<CartScreen> {
                                                         ),
                                                         Obx(
                                                           () => Text(
-                                                              "${pizzaController.pizzabottomlist[index].foodbill}",
+                                                              "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaBill}",
                                                               style: GoogleFonts.nunito(
                                                                   color: Color(
                                                                       0xff1F1F1F),
@@ -497,255 +726,30 @@ class _CartScreenState extends State<CartScreen> {
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          DottedDashedLine(
-                                            height: 0,
-                                            width: double.infinity,
-                                            axis: Axis.horizontal,
-                                            dashColor: Color(0xffDAD9DD),
-                                            strokeWidth: 1,
-                                            dashSpace: 3,
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            DottedDashedLine(
+                                              height: 0,
+                                              width: double.infinity,
+                                              axis: Axis.horizontal,
+                                              dashColor: Color(0xffDAD9DD),
+                                              strokeWidth: 1,
+                                              dashSpace: 3,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: 10,
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Container(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(20))),
-                              child: ListView.separated(
-                                itemCount: pizzaController.customizepizzalist[0]
-                                    .pizzametalist!.length,
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                // scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10),
-                                    child: Container(
-                                      width: double.infinity,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(15)),
-                                                  child: Image(
-                                                    image: MemoryImage(
-                                                        pizzaController
-                                                            .customizepizzalist[
-                                                                0]
-                                                            .pizzametalist![
-                                                                index]
-                                                            .customPizzametaUint8list),
-                                                    width: 70,
-                                                    height: 70,
-                                                    fit: BoxFit.cover,
-                                                  )),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      width: 150,
-                                                      child: Text(
-                                                        "Customize Pizza",
-                                                        maxLines: 1,
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                          color:
-                                                              Color(0xff373D4D),
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                        ),
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                        "Size : ${pizzaController.addsizelist![index].name}",
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff535B6D),
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                    Row(
-                                                      children: [
-                                                        Image(
-                                                          image: AssetImage(
-                                                              "images/rupee.png"),
-                                                          width: 13,
-                                                          height: 13,
-                                                          color:
-                                                              Color(0xff1F1F1F),
-                                                        ),
-                                                        Text(
-                                                            "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaPrice}",
-                                                            style: GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff1F1F1F),
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Spacer(),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    width: 75,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xffFFF6F7),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            color: Color(
-                                                                0xffdedede),
-                                                            blurRadius: 5,
-                                                            blurStyle:
-                                                                BlurStyle.outer)
-                                                      ],
-                                                      border: Border.all(
-                                                          color: Color(
-                                                              0xffEF4F5F)),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10)),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              pizzaController
-                                                                  .custompizzaRemove(
-                                                                      index);
-                                                            });
-                                                          },
-                                                          child: Icon(
-                                                              Icons.remove,
-                                                              color: Color(
-                                                                  0xffEF4F5F),
-                                                              size: 20),
-                                                        ),
-                                                        Center(
-                                                          child: Text(
-                                                              "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaSelectitem}",
-                                                              style: GoogleFonts.nunito(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500)),
-                                                        ),
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              pizzaController
-                                                                  .custompizzaPlus(
-                                                                      index);
-                                                            });
-                                                          },
-                                                          child: Icon(Icons.add,
-                                                              color: Color(
-                                                                  0xffEF4F5F),
-                                                              size: 20),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Image(
-                                                        image: AssetImage(
-                                                            "images/rupee.png"),
-                                                        width: 15,
-                                                        height: 15,
-                                                        color:
-                                                            Color(0xff1F1F1F),
-                                                      ),
-                                                      Obx(
-                                                        () => Text(
-                                                            "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaBill}",
-                                                            style: GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xff1F1F1F),
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          DottedDashedLine(
-                                            height: 0,
-                                            width: double.infinity,
-                                            axis: Axis.horizontal,
-                                            dashColor: Color(0xffDAD9DD),
-                                            strokeWidth: 1,
-                                            dashSpace: 3,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: 10,
-                                  );
-                                },
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return SizedBox(
+                                      height: 10,
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -779,7 +783,7 @@ class _CartScreenState extends State<CartScreen> {
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                  "images/addpizza.png"),
+                                                  "images/addpizza.webp"),
                                               width: 19,
                                               height: 19,
                                               color: Color(0xff7e878d),
@@ -797,7 +801,7 @@ class _CartScreenState extends State<CartScreen> {
                                             Spacer(),
                                             Image(
                                               image:
-                                                  AssetImage("images/next.png"),
+                                                  AssetImage("images/next.webp"),
                                               width: 22,
                                               height: 22,
                                               color: Color(0xff7e878d),
@@ -837,7 +841,7 @@ class _CartScreenState extends State<CartScreen> {
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                  "images/addsoda.png"),
+                                                  "images/addsoda.webp"),
                                               width: 19,
                                               height: 19,
                                               color: Color(0xff7e878d),
@@ -855,7 +859,7 @@ class _CartScreenState extends State<CartScreen> {
                                             Spacer(),
                                             Image(
                                               image:
-                                                  AssetImage("images/next.png"),
+                                                  AssetImage("images/next.webp"),
                                               width: 22,
                                               height: 22,
                                               color: Color(0xff7e878d),
@@ -1038,7 +1042,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 const EdgeInsets.only(top: 2),
                                             child: Image(
                                               image:
-                                                  AssetImage("images/next.png"),
+                                                  AssetImage("images/next.webp"),
                                               width: 25,
                                               height: 25,
                                               color: Color(0xff7e878d),
@@ -1126,7 +1130,7 @@ class _CartScreenState extends State<CartScreen> {
                                             opacity: 0.5,
                                             child: Image(
                                               image: AssetImage(
-                                                  "images/primium.png"),
+                                                  "images/primium.webp"),
                                               color: Color(0xfff8edde),
                                               width: 120,
                                               height: 120,
@@ -1199,7 +1203,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       ),
                                                       Image(
                                                         image: AssetImage(
-                                                            "images/next.png"),
+                                                            "images/next.webp"),
                                                         width: 22,
                                                         height: 22,
                                                         color:
@@ -1454,7 +1458,7 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               Image(
                                                 image: AssetImage(
-                                                    "images/rupee.png"),
+                                                    "images/rupee.webp"),
                                                 width: 17,
                                                 height: 17,
                                                 color: Color(0xff1F1F1F),
@@ -1484,7 +1488,7 @@ class _CartScreenState extends State<CartScreen> {
                                     child: Row(
                                       children: [
                                         Image(
-                                          image: AssetImage("images/bank.png"),
+                                          image: AssetImage("images/bank.webp"),
                                           width: 20,
                                           height: 20,
                                         ),
@@ -1513,7 +1517,7 @@ class _CartScreenState extends State<CartScreen> {
                                           },
                                           child: Image(
                                             image: AssetImage(
-                                                "images/information.png"),
+                                                "images/information.webp"),
                                             width: 19,
                                             height: 19,
                                           ),
@@ -1526,7 +1530,7 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               Image(
                                                 image: AssetImage(
-                                                    "images/rupee.png"),
+                                                    "images/rupee.webp"),
                                                 width: 16,
                                                 height: 16,
                                                 color: Color(0xff1F1F1F),
@@ -1557,7 +1561,7 @@ class _CartScreenState extends State<CartScreen> {
                                       children: [
                                         Image(
                                           image:
-                                              AssetImage("images/scooter1.png"),
+                                              AssetImage("images/scooter1.webp"),
                                           width: 20,
                                           height: 20,
                                         ),
@@ -1580,7 +1584,7 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               Image(
                                                 image: AssetImage(
-                                                    "images/rupee.png"),
+                                                    "images/rupee.webp"),
                                                 width: 16,
                                                 height: 16,
                                                 color: Color(0xff1F1F1F),
@@ -1643,7 +1647,7 @@ class _CartScreenState extends State<CartScreen> {
                                             children: [
                                               Image(
                                                 image: AssetImage(
-                                                    "images/rupee.png"),
+                                                    "images/rupee.webp"),
                                                 width: 16,
                                                 height: 16,
                                                 color: Color(0xff1F1F1F),
@@ -1961,7 +1965,7 @@ class _CartScreenState extends State<CartScreen> {
                               ):Container(),
                             ),
                           ),
-                       
+
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10,top: 15),
                             child: Container(
@@ -1981,7 +1985,7 @@ class _CartScreenState extends State<CartScreen> {
                                       opacity: 0.5,
                                       child: Image(
                                         image:
-                                            AssetImage("images/donation.jpeg"),
+                                            AssetImage("images/donation.webp"),
                                         width: double.infinity,
                                         height: 80,
                                         fit: BoxFit.cover,
@@ -2049,7 +2053,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 children: [
                                                   Image(
                                                     image: AssetImage(
-                                                        "images/rupee.png"),
+                                                        "images/rupee.webp"),
                                                     width: 15,
                                                     height: 15,
                                                     color: Color(0xff1F1F1F),
@@ -2103,7 +2107,7 @@ class _CartScreenState extends State<CartScreen> {
                                                 ),
                                                 Image(
                                                   image: AssetImage(
-                                                      "images/next.png"),
+                                                      "images/next.webp"),
                                                   width: 22,
                                                   height: 22,
                                                   color: Color(0xff313848),

@@ -45,7 +45,7 @@ class _RatingScreenState extends State<RatingScreen> {
                     },
                     child: Image(
                       image: AssetImage(
-                          "images/close.png"),
+                          "images/close.webp"),
                       width: 25,
                       height: 25,
                       color:
@@ -56,7 +56,7 @@ class _RatingScreenState extends State<RatingScreen> {
               ),
               Center(
                   child: Image(
-                    image: AssetImage("images/star.png"),
+                    image: AssetImage("images/star.webp"),
                     width: 100,
                     height: 100,
                   )),

@@ -170,7 +170,7 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                  "images/rupee.png"),
+                                                  "images/rupee.webp"),
                                               width: 13,
                                               height: 13,
                                               color: Color(0xff1F1F1F),
@@ -234,7 +234,7 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                  "images/rupee.png"),
+                                                  "images/rupee.webp"),
                                               width: 15,
                                               height: 15,
                                               color: Color(0xff1F1F1F),
@@ -351,7 +351,7 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                  "images/rupee.png"),
+                                                  "images/rupee.webp"),
                                               width: 13,
                                               height: 13,
                                               color: Color(0xff1F1F1F),
@@ -417,7 +417,7 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                         children: [
                                           Image(
                                             image: AssetImage(
-                                                "images/rupee.png"),
+                                                "images/rupee.webp"),
                                             width: 15,
                                             height: 15,
                                             color: Color(0xff1F1F1F),

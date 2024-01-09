@@ -327,7 +327,7 @@ class _AddressBookState extends State<AddressBook> {
                                                     child: Center(
                                                         child: Image(
                                                       image: AssetImage(
-                                                          "images/share1.png"),
+                                                          "images/share1.webp"),
                                                       width: 14,
                                                       height: 14,
                                                       color: Color(0xffEF4F5F),

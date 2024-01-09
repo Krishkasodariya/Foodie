@@ -34,7 +34,7 @@ class _ExitDialogState extends State<ExitDialog> {
                       });
                     },
                     child: Image(
-                      image: AssetImage("images/close.png"),
+                      image: AssetImage("images/close.webp"),
                       width: 25,
                       height: 25,
                         color: Color(0xff313848),
@@ -43,7 +43,7 @@ class _ExitDialogState extends State<ExitDialog> {
                 ),
               ),
 
-              Image(image: AssetImage("images/exit_photo.jpg"),width: 150,height: 150,),
+              Image(image: AssetImage("images/exit_photo.webp"),width: 150,height: 150,),
               Text("Exit App?",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,

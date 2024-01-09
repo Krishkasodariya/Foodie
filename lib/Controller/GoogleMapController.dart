@@ -1,11 +1,8 @@
-
-
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 class GoogleMapControllerScreen extends GetxController{
   RxString area="".obs;
   RxString addresstype="".obs;
@@ -20,10 +17,13 @@ class GoogleMapControllerScreen extends GetxController{
 
   Placemark place = Placemark();
   late GoogleMapController googleMapController;
-
   void Allupdate(Function ref){
     reference = ref;
   }
+
+
+
+
   void HomeLocationupdate(Function ref){
     update1 = ref;
   }

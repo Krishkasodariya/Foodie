@@ -39,7 +39,7 @@ class _AdDialogScreenState extends State<AdDialogScreen> {
                   },
                   child: Image(
                     image: AssetImage(
-                        "images/close.png"),
+                        "images/close.webp"),
                     width: 25,
                     height: 25,
                     color:

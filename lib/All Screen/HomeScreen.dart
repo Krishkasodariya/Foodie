@@ -38,17 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
   List<HomeCetegorieModel> categorieslist = [
     HomeCetegorieModel(
         name: "Food",
-        image: "images/sfood.png",
+        image: "images/sfood.webp",
         navigate: DinnerScreen(),
         index: 1),
     HomeCetegorieModel(
         name: "Cold drinks",
-        image: "images/soda.png",
+        image: "images/soda.webp",
         navigate: SodaScreen(),
         index: 2),
     HomeCetegorieModel(
         name: "Cart",
-        image: "images/basket.png",
+        image: "images/basket.webp",
         navigate: CartScreen(),
         index: 3),
     /*  HomeCetegorieModel(
@@ -59,66 +59,66 @@ class _HomeScreenState extends State<HomeScreen> {
        ),*/
   ];
   List<String> homeimagelist = [
-    "images/m2.jpg",
-    "images/m1.jpg",
-    "images/m4.jpg",
-    "images/m3.jpg",
-    "images/m5.jpg",
+    "images/m2.webp",
+    "images/m1.webp",
+    "images/m4.webp",
+    "images/m3.webp",
+    "images/m5.webp",
   ];
 
   List<EatingPizzaOne> eatingOneList = [
     EatingPizzaOne(
-        image: "images/e11.jpg", name: "Farmhouse", pizza: "images/p11.jpg"),
+        image: "images/e11.webp", name: "Farmhouse", pizza: "images/p11.webp"),
     EatingPizzaOne(
-        image: "images/e1.jpg", name: "Margherita", pizza: "images/p1.jpg"),
+        image: "images/e1.webp", name: "Margherita", pizza: "images/p1.webp"),
     EatingPizzaOne(
-        image: "images/e2.jpg", name: "Veg Loaded", pizza: "images/p2.jpg"),
+        image: "images/e2.webp", name: "Veg Loaded", pizza: "images/p2.webp"),
     EatingPizzaOne(
-        image: "images/e3.jpg", name: "California", pizza: "images/p3.jpg"),
+        image: "images/e3.webp", name: "California", pizza: "images/p3.webp"),
     EatingPizzaOne(
-        image: "images/e4.jpg", name: "Cheese", pizza: "images/p4.jpg"),
+        image: "images/e4.webp", name: "Cheese", pizza: "images/p4.webp"),
     EatingPizzaOne(
-        image: "images/e5.jpg", name: "Garden Fling", pizza: "images/p5.jpg"),
+        image: "images/e5.webp", name: "Garden Fling", pizza: "images/p5.webp"),
     EatingPizzaOne(
-        image: "images/e6.jpg", name: "Bbq Paneer", pizza: "images/p6.jpg"),
+        image: "images/e6.webp", name: "Bbq Paneer", pizza: "images/p6.webp"),
     EatingPizzaOne(
-        image: "images/e7.jpg", name: "Mexican", pizza: "images/p7.jpg"),
+        image: "images/e7.webp", name: "Mexican", pizza: "images/p7.webp"),
     EatingPizzaOne(
-        image: "images/e8.jpg", name: "Tomatoes", pizza: "images/p8.jpg"),
+        image: "images/e8.webp", name: "Tomatoes", pizza: "images/p8.webp"),
     EatingPizzaOne(
-        image: "images/e9.jpg", name: "Farmhouse", pizza: "images/p9.jpg"),
+        image: "images/e9.webp", name: "Farmhouse", pizza: "images/p9.webp"),
     EatingPizzaOne(
-        image: "images/e10.jpg", name: "Margherita", pizza: "images/p10.jpg"),
+        image: "images/e10.webp", name: "Margherita", pizza: "images/p10.webp"),
     EatingPizzaOne(
-        image: "images/e12.jpg", name: "Mexican", pizza: "images/p12.jpg"),
+        image: "images/e12.webp", name: "Mexican", pizza: "images/p12.webp"),
   ];
   List<EatingPizzaTwo> eatingTwoList = [
-    EatingPizzaTwo(image: "images/e5.jpg"),
-    EatingPizzaTwo(image: "images/e12.jpg"),
-    EatingPizzaTwo(image: "images/e11.jpg"),
-    EatingPizzaTwo(image: "images/e10.jpg"),
-    EatingPizzaTwo(image: "images/e9.jpg"),
-    EatingPizzaTwo(image: "images/e8.jpg"),
-    EatingPizzaTwo(image: "images/e7.jpg"),
-    EatingPizzaTwo(image: "images/e6.jpg"),
-    EatingPizzaTwo(image: "images/e4.jpg"),
-    EatingPizzaTwo(image: "images/e3.jpg"),
-    EatingPizzaTwo(image: "images/e2.jpg"),
-    EatingPizzaTwo(image: "images/e1.jpg"),
+    EatingPizzaTwo(image: "images/e5.webp"),
+    EatingPizzaTwo(image: "images/e12.webp"),
+    EatingPizzaTwo(image: "images/e11.webp"),
+    EatingPizzaTwo(image: "images/e10.webp"),
+    EatingPizzaTwo(image: "images/e9.webp"),
+    EatingPizzaTwo(image: "images/e8.webp"),
+    EatingPizzaTwo(image: "images/e7.webp"),
+    EatingPizzaTwo(image: "images/e6.webp"),
+    EatingPizzaTwo(image: "images/e4.webp"),
+    EatingPizzaTwo(image: "images/e3.webp"),
+    EatingPizzaTwo(image: "images/e2.webp"),
+    EatingPizzaTwo(image: "images/e1.webp"),
   ];
   List<EatingPizzaThree> eatingThreeList = [
-    EatingPizzaThree(image: "images/e2.jpg"),
-    EatingPizzaThree(image: "images/e8.jpg"),
-    EatingPizzaThree(image: "images/e5.jpg"),
-    EatingPizzaThree(image: "images/e9.jpg"),
-    EatingPizzaThree(image: "images/e1.jpg"),
-    EatingPizzaThree(image: "images/e10.jpg"),
-    EatingPizzaThree(image: "images/e4.jpg"),
-    EatingPizzaThree(image: "images/e6.jpg"),
-    EatingPizzaThree(image: "images/e11.jpg"),
-    EatingPizzaThree(image: "images/e3.jpg"),
-    EatingPizzaThree(image: "images/e12.jpg"),
-    EatingPizzaThree(image: "images/e7.jpg"),
+    EatingPizzaThree(image: "images/e2.webp"),
+    EatingPizzaThree(image: "images/e8.webp"),
+    EatingPizzaThree(image: "images/e5.webp"),
+    EatingPizzaThree(image: "images/e9.webp"),
+    EatingPizzaThree(image: "images/e1.webp"),
+    EatingPizzaThree(image: "images/e10.webp"),
+    EatingPizzaThree(image: "images/e4.webp"),
+    EatingPizzaThree(image: "images/e6.webp"),
+    EatingPizzaThree(image: "images/e11.webp"),
+    EatingPizzaThree(image: "images/e3.webp"),
+    EatingPizzaThree(image: "images/e12.webp"),
+    EatingPizzaThree(image: "images/e7.webp"),
   ];
 
   List<HomeCetegorieModel> foundcategorieslist = [];
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             cursorColor: Color(0xff7E8286),
                             decoration: InputDecoration(
                               icon: Image(
-                                image: AssetImage("images/search.png"),
+                                image: AssetImage("images/search.webp"),
                                 width: 25,
                                 height: 25,
                                 color: Color(0xffEF4F5F),
@@ -204,6 +204,38 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            minimumSize:
+                            MaterialStateProperty.all(
+                                Size(
+                                    double
+                                        .infinity,
+                                    50)),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight:
+                                        Radius.circular(
+                                            25),
+                                        bottomLeft:
+                                        Radius.circular(
+                                            25)))),
+                            backgroundColor:
+                            MaterialStateProperty.all(
+                                Color(0xffEF505F))),
+                        onPressed: () {
+                          pizzaController.getPizzaData();
+                        },
+                        child: Text(
+                          "Okay",
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white),
+                        )),
                     SizedBox(
                       height: 20,
                     ),
@@ -284,8 +316,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                             options: CarouselOptions(
-                              onPageChanged: (index, reason) {
-                                setState(() {
+                              onPageChanged: (index, reason){
+                                setState((){
                                   sliderindex = index;
                                 });
                               },
@@ -907,7 +939,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     child: Image(
                                       image:
-                                          AssetImage("images/pizzanight.png"),
+                                          AssetImage("images/pizzanight.webp"),
                                       width: double.infinity,
                                       height: 300,
                                       fit: BoxFit.cover,
@@ -1009,7 +1041,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 .all(5),
                                                         child: Image(
                                                             image: AssetImage(
-                                                                "images/bowl.png"),
+                                                                "images/bowl.webp"),
                                                             color:
                                                                 Colors.white),
                                                       ),
@@ -1075,7 +1107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Row(
                                       children: [
                                         Image(
-                                          image: AssetImage("images/order.png"),
+                                          image: AssetImage("images/order.webp"),
                                           color: Color(0xff40495D),
                                           width: 20,
                                           height: 20,
@@ -1131,7 +1163,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             fontSize: 16, color: Colors.white),
                                       )),
                                 ),
-                              )
+                              ),
+
+
                             ],
                           ),
                         ),

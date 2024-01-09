@@ -272,7 +272,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 children: [
                                   Spacer(),
                                   Image(
-                                    image: AssetImage("images/like.png"),
+                                    image: AssetImage("images/like.webp"),
                                     width: 28,
                                     height: 28,
                                   ),
@@ -319,7 +319,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 children: [
                                   Spacer(),
                                   Image(
-                                    image: AssetImage("images/payment.png"),
+                                    image: AssetImage("images/payment.webp"),
                                     width: 29,
                                     height: 29,
                                   ),
@@ -357,7 +357,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               children: [
                                 Spacer(),
                                 Image(
-                                  image: AssetImage("images/setting.png"),
+                                  image: AssetImage("images/setting.webp"),
                                   width: 25,
                                   height: 25,
                                 ),
@@ -407,7 +407,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(9),
                                 child: Image(
-                                    image: AssetImage("images/sync.png"),
+                                    image: AssetImage("images/sync.webp"),
                                     color: Color(0xff787E91)),
                               ),
                             ),
@@ -604,7 +604,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           padding: const EdgeInsets.all(9),
                                           child: Image(
                                               image:
-                                                  AssetImage("images/order.png"),
+                                                  AssetImage("images/order.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),
@@ -664,7 +664,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                         padding: const EdgeInsets.all(9),
                                         child: Image(
                                             image:
-                                                AssetImage("images/like.png"),
+                                                AssetImage("images/like.webp"),
                                             color: Color(0xff787E91)),
                                       ),
                                     ),
@@ -733,7 +733,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           padding: const EdgeInsets.all(9),
                                           child: Image(
                                               image: AssetImage(
-                                                  "images/address.png"),
+                                                  "images/address.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),
@@ -853,7 +853,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           padding: const EdgeInsets.all(8),
                                           child: Image(
                                               image: AssetImage(
-                                                  "images/discount.png"),
+                                                  "images/discount.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),
@@ -970,7 +970,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           padding: const EdgeInsets.all(8),
                                           child: Image(
                                               image: AssetImage(
-                                                  "images/share.png"),
+                                                  "images/share.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),
@@ -1045,7 +1045,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           padding: const EdgeInsets.all(8),
                                           child: Image(
                                               image: AssetImage(
-                                                  "images/about.png"),
+                                                  "images/about.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),
@@ -1112,7 +1112,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                           padding: const EdgeInsets.all(8.5),
                                           child: Image(
                                               image: AssetImage(
-                                                  "images/logout.png"),
+                                                  "images/logout.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),

@@ -223,7 +223,7 @@ class _LikesScreenState extends State<LikesScreen> {
                                                                       width: 5,
                                                                     ),
                                                                     Image(
-                                                                      image: AssetImage("images/rupee.png"),
+                                                                      image: AssetImage("images/rupee.webp"),
                                                                       color: Colors.white,
                                                                       width: 16,
                                                                       height: 16,
@@ -255,13 +255,13 @@ class _LikesScreenState extends State<LikesScreen> {
                                                               },
                                                               child:!pizzaController
                                                                   .likelist[index].checklike?Image(
-                                                                image: AssetImage("images/like.png"),
+                                                                image: AssetImage("images/like.webp"),
                                                                 width: 29,
                                                                 height: 29,
                                                                 fit: BoxFit.cover,
                                                                 color: Colors.white,
                                                               ):Image(
-                                                                image: AssetImage("images/fill_like.png"),
+                                                                image: AssetImage("images/fill_like.webp"),
                                                                 width: 29,
                                                                 height: 29,
                                                                 fit: BoxFit.cover,

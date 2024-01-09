@@ -18,7 +18,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 4),()=>Get.off(()=>BottomNavigation()));
+    Timer(Duration(seconds: 1),()=>Get.off(()=>BottomNavigation()));
   }
   @override
   Widget build(BuildContext context) {

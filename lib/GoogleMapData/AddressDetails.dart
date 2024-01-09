@@ -80,7 +80,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                     setState(() {});
                   },
                   child: Image(
-                    image: AssetImage("images/close.png"),
+                    image: AssetImage("images/close.webp"),
                     width: 27,
                     height: 27,
                   ))

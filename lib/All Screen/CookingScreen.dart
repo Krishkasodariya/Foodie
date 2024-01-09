@@ -21,7 +21,7 @@ class _SuccessScreenState extends State<CookingScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 4),()=>Get.off(()=>PizzaDeliveryScreen()));
+    Timer(Duration(seconds: 1),()=>Get.off(()=>PizzaDeliveryScreen()));
   }
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _SuccessScreenState extends State<CookingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image: AssetImage("images/rupee.png"),
+                image: AssetImage("images/rupee.webp"),
                 width: 30,
                 height: 30,
                 color: Color(0xff1F1F1F),

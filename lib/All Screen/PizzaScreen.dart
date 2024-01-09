@@ -120,7 +120,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image(
-                            image: AssetImage("images/leaves.png"),
+                            image: AssetImage("images/leaves.webp"),
                             width: 17,
                             height: 17,
                           ),
@@ -472,7 +472,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             child: Image(
-                              image: AssetImage("images/bg1.jpg"),
+                              image: AssetImage("images/bg1.webp"),
                               fit: BoxFit.cover,
                               width: double.infinity,
                               height: 160,
@@ -555,7 +555,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                             ),
                             Spacer(),
                             Image(
-                              image: AssetImage("images/pizza_vactor.png"),
+                              image: AssetImage("images/pizza_vactor.webp"),
                               width: 155,
                               height: 155,
                             )
@@ -716,7 +716,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                             children: [
                                               Image(
                                                 image: AssetImage(
-                                                    "images/rupee.png"),
+                                                    "images/rupee.webp"),
                                                 width: 16,
                                                 height: 16,
                                                 color: Color(0xff1F1F1F),
@@ -956,7 +956,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                   child: Row(
                                     children: [
                                       Image(
-                                        image: AssetImage("images/order.png"),
+                                        image: AssetImage("images/order.webp"),
                                         color: Color(0xff40495D),
                                         width: 20,
                                         height: 20,

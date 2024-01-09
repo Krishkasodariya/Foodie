@@ -73,7 +73,7 @@ class _GstInformationDialogState extends State<GstInformationDialog> {
                   child: Row(
                     children: [
                       Image(
-                        image: AssetImage("images/rupee.png"),
+                        image: AssetImage("images/rupee.webp"),
                         width: 16,
                         height: 16,
                         color: Color(0xff1F1F1F),
@@ -110,7 +110,7 @@ class _GstInformationDialogState extends State<GstInformationDialog> {
                   child: Row(
                     children: [
                       Image(
-                        image: AssetImage("images/rupee.png"),
+                        image: AssetImage("images/rupee.webp"),
                         width: 16,
                         height: 16,
                         color: Color(0xff1F1F1F),
@@ -147,7 +147,7 @@ class _GstInformationDialogState extends State<GstInformationDialog> {
                   child: Row(
                     children: [
                       Image(
-                        image: AssetImage("images/rupee.png"),
+                        image: AssetImage("images/rupee.webp"),
                         width: 16,
                         height: 16,
                         color: Color(0xff1F1F1F),
@@ -202,7 +202,7 @@ class _GstInformationDialogState extends State<GstInformationDialog> {
                   child: Row(
                     children: [
                       Image(
-                        image: AssetImage("images/rupee.png"),
+                        image: AssetImage("images/rupee.webp"),
                         width: 16,
                         height: 16,
                         color: Color(0xff1F1F1F),

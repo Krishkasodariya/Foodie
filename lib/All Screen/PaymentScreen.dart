@@ -69,7 +69,7 @@ class _PaymentScreenState extends State<PaymentScreen>{
                   });
                 },
                 child:Image(
-                  image: AssetImage("images/close.png"),
+                  image: AssetImage("images/close.webp"),
                   width: 23,
                   height: 23,
                   color: Color(0xff313848),
@@ -105,7 +105,7 @@ class _PaymentScreenState extends State<PaymentScreen>{
                 cursorColor: Color(0xff7E8286),
                 decoration: InputDecoration(
                   icon:Image(
-                    image: AssetImage("images/payment.png"),
+                    image: AssetImage("images/payment.webp"),
                     width: 27,
                     height: 27,
                     color: Color(0xffEF505F),
@@ -158,7 +158,8 @@ class _PaymentScreenState extends State<PaymentScreen>{
       'prefill': {
         'contact': loginController.addphonenumber.text,
         'email': loginController.addemail.text
-      }
+      },
+      'theme': {'color': '#EF505F'},
     };
     razorpay.open(options);
   }

@@ -40,7 +40,7 @@ class _GoldBottomSheetDialogState extends State<GoldBottomSheetDialog> {
                             20)),
                     child: Image(
                         image: AssetImage(
-                            "images/gold_bk2.jpg"),
+                            "images/gold_bk2.webp"),
                         width: double
                             .infinity,
                         height:
@@ -225,7 +225,7 @@ class _GoldBottomSheetDialogState extends State<GoldBottomSheetDialog> {
                         padding: const EdgeInsets.all(6),
                         child: Image(
                           image: AssetImage(
-                              "images/gold_scooter.png"),
+                              "images/gold_scooter.webp"),
                           fit: BoxFit
                               .cover,
                         ),
@@ -305,7 +305,7 @@ class _GoldBottomSheetDialogState extends State<GoldBottomSheetDialog> {
                         padding: const EdgeInsets.all(6),
                         child: Image(
                           image: AssetImage(
-                              "images/gold_scooter.png"),
+                              "images/gold_scooter.webp"),
                           fit: BoxFit
                               .cover,
                         ),
@@ -385,7 +385,7 @@ class _GoldBottomSheetDialogState extends State<GoldBottomSheetDialog> {
                         padding: const EdgeInsets.all(6),
                         child: Image(
                           image: AssetImage(
-                              "images/gold_scooter.png"),
+                              "images/gold_scooter.webp"),
                           fit: BoxFit
                               .cover,
                         ),

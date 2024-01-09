@@ -110,7 +110,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
             child: Container(
               color: Color(0xffFFF6F7),
               child: Image(
-                image: AssetImage("images/bg1.jpg"),
+                image: AssetImage("images/bg1.webp"),
                 fit: BoxFit.cover,
                 width: MediaQuery.of(context).size.width,
                 height: 230,
@@ -143,7 +143,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                       padding: const EdgeInsets.all(10),
                       child: Center(
                         child: Image(
-                          image: AssetImage("images/cart.png"),
+                          image: AssetImage("images/cart.webp"),
                           color: Color(0xffB1BBDA),
                         ),
                       ),
@@ -165,7 +165,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                       child: Opacity(
                         opacity: 0.2,
                         child: Image(
-                          image: AssetImage("images/bg1.jpg"),
+                          image: AssetImage("images/bg1.webp"),
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width,
                           height: 230,
@@ -236,7 +236,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Image(
-                                          image: AssetImage("images/rupee.png"),
+                                          image: AssetImage("images/rupee.webp"),
                                           width: 19,
                                           height: 19,
                                           color: Color(0xff1F1F1F),
@@ -482,7 +482,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                       children: [
                                                         Image(
                                                           image: AssetImage(
-                                                              "images/dish.png"),
+                                                              "images/dish.webp"),
                                                           width: valueNotifier
                                                                   .value
                                                               ? Width.maxWidth
@@ -497,7 +497,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                         ),
                                                         Image(
                                                           image: AssetImage(
-                                                              "images/pizza.png"),
+                                                              "images/pizza.webp"),
                                                           width: valueNotifier
                                                                   .value
                                                               ? Width.maxWidth
@@ -758,7 +758,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                       ..setEntry(3, 2, 0.0045)
                       ..rotateX(degreesToReds(-45.0)),
                     child: Image(
-                      image: AssetImage("images/box_inside.png"),
+                      image: AssetImage("images/box_inside.webp"),
                       width: boxwidth,
                       height: boxheight,
                     ),
@@ -772,7 +772,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                         ..setEntry(3, 2, 0.0045)
                         ..rotateX(degreesToReds(boxClosingvalue)),
                       child: Image(
-                        image: AssetImage("images/pizza_box.png"),
+                        image: AssetImage("images/pizza_box.webp"),
                         width: boxwidth,
                         height: boxheight,
                       ),

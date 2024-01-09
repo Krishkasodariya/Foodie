@@ -43,39 +43,39 @@ class FoodItemModel {
 
 
 
-}
-/* Map<String, dynamic> toJson() {
-     return {
 
-       "Id": id,
-       "Food": food,
-       "Image": image,
-       "Name": name,
-       "Rating": rating,
-       "Size": pizzasizelist,
-       "Ingredients": ingredients,
-       "Pizzametalist": pizzametalist,
-       "Price": price,
-       "Selectitem": selectitem,
-       "Foodbill": foodbill,
-       "Foodtotal": foodtotal
+ Map<String, dynamic> toJson() {
+     return {
+       "id": id,
+       "food": food,
+       "checkadd": checkadd,
+       "image": image,
+       "name": name,
+       "rating": rating,
+       "size": pizzasizelist,
+       "ingredients": ingredients,
+       "pizzametalist": pizzametalist,
+       "price": price,
+       "selectitem": selectitem,
+       "foodbill": foodbill,
+       "foodtotal": foodtotal
      };
    }
 
    factory FoodItemModel.fromJson(Map<String, dynamic> data) {
      return FoodItemModel(
-        image:data["Image"],
-     price:data["Price"] ,
-     id: data["Id"],
-     food: data["Food"],
-      checkadd: data[""],
-     selectitem: data["Selectitem"],
-     foodbill: data["Foodbill"],
-     foodtotal: data["Foodtotal"],
-     pizzametalist: data["Pizzametalist"],
-     ingredients: data["Ingredients"],
-     pizzasizelist: data["Size"],
-     rating: data["Rating"],
-     name:  data["Name"]);
+        image:data["image"],
+     price:data["price"] ,
+     id: data["id"],
+     food: data["food"],
+      checkadd: data["checkadd"],
+     selectitem: data["selectitem"],
+     foodbill: data["foodbill"],
+     foodtotal: data["foodtotal"],
+     pizzametalist: data["pizzametalist"],
+     ingredients: data["ingredients"],
+     pizzasizelist: data["size"],
+     rating: data["rating"],
+     name:  data["name"]);
    }
-*/
+}

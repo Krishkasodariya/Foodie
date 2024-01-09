@@ -32,25 +32,25 @@ class _DinnerScreenState extends State<DinnerScreen> {
   BottomController bottomController = Get.find();
   List<FoodImageSlider> dinnerimagelist = [
     FoodImageSlider(
-        image: "images/b1.jpg",
+        image: "images/b1.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
         tital: "aa"),
     FoodImageSlider(
-        image: "images/b2.jpg",
+        image: "images/b2.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
         tital: "aa"),
     FoodImageSlider(
-        image: "images/b12.jpg",
+        image: "images/b12.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
         tital: "aa"),
     FoodImageSlider(
-        image: "images/b3.jpg",
+        image: "images/b3.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
@@ -125,7 +125,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                 cursorColor: Color(0xff7E8286),
                                 decoration: InputDecoration(
                                   icon: Image(
-                                    image: AssetImage("images/search.png"),
+                                    image: AssetImage("images/search.webp"),
                                     width: 25,
                                     height: 25,
                                     color: Color(0xffEF4F5F),
@@ -495,7 +495,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                   ),
                                                                   Image(
                                                                     image: AssetImage(
-                                                                        "images/rupee.png"),
+                                                                        "images/rupee.webp"),
                                                                     color: Colors
                                                                         .white,
                                                                     width: 16,
@@ -538,7 +538,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                       .checklike
                                                                       ? Image(
                                                                     image: AssetImage(
-                                                                        "images/like.png"),
+                                                                        "images/like.webp"),
                                                                     width: 29,
                                                                     height: 29,
                                                                     fit: BoxFit
@@ -548,7 +548,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                   )
                                                                       : Image(
                                                                     image: AssetImage(
-                                                                        "images/fill_like.png"),
+                                                                        "images/fill_like.webp"),
                                                                     width: 29,
                                                                     height: 29,
                                                                     fit: BoxFit
@@ -799,7 +799,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                   child: Row(
                                     children: [
                                       Image(
-                                        image: AssetImage("images/order.png"),
+                                        image: AssetImage("images/order.webp"),
                                         color: Color(0xff40495D),
                                         width: 20,
                                         height: 20,

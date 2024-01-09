@@ -1,11 +1,9 @@
-import 'dart:convert';
 
 
 import 'package:Pizza/ModelClass/AiChatbot.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 
 class AiFood extends StatefulWidget {
@@ -113,7 +111,7 @@ class _AiFoodState extends State<AiFood> {
                         cursorColor: Color(0xff7E8286),
                         decoration: InputDecoration(
                           icon: Image(
-                            image: AssetImage("images/search.png"),
+                            image: AssetImage("images/search.webp"),
                             width: 25,
                             height: 25,
                             color: Color(0xffEF4F5F),

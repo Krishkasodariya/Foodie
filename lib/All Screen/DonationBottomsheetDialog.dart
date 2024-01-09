@@ -82,7 +82,7 @@ class _DonationBottomsheetDialogState extends State<DonationBottomsheetDialog> {
                 Spacer(),
                 Image(
                     image: AssetImage(
-                        "images/donation.jpeg")),
+                        "images/donation.webp")),
               ],
             ),
           ),

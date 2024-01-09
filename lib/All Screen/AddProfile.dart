@@ -1,10 +1,6 @@
-import 'dart:io';
 import 'package:Pizza/BottomNavigation/BottomNavigation.dart';
 import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/ModelClass/UserModel.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

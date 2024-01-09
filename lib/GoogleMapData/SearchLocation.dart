@@ -52,7 +52,7 @@ class _SearchLocationState extends State<SearchLocation> {
                         setState(() {});
                       },
                       child: Image(
-                        image: AssetImage("images/close.png"),
+                        image: AssetImage("images/close.webp"),
                         width: 27,
                         height: 27,
                       ))
@@ -79,7 +79,7 @@ class _SearchLocationState extends State<SearchLocation> {
                     cursorColor: Color(0xff7E8286),
                     decoration: InputDecoration(
                       icon: Image(
-                        image: AssetImage("images/search.png"),
+                        image: AssetImage("images/search.webp"),
                         width: 25,
                         height: 25,
                         color: Color(0xffEF4F5F),

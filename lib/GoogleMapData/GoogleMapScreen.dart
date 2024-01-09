@@ -138,7 +138,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                 cursorColor: Color(0xff7E8286),
                 decoration: InputDecoration(
                   icon: Image(
-                    image: AssetImage("images/search.png"),
+                    image: AssetImage("images/search.webp"),
                     width: 25,
                     height: 25,
                     color: Color(0xffEF4F5F),

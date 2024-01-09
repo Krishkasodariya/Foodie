@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
@@ -6,7 +5,6 @@ import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 
 
 class BottomSheetDialog extends StatefulWidget {
@@ -160,7 +158,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                     Row(
                                       children: [
                                         Image(
-                                          image: AssetImage("images/rupee.png"),
+                                          image: AssetImage("images/rupee.webp"),
                                           width: 15,
                                           height: 15,
                                           color: Color(0xff1F1F1F),
@@ -251,7 +249,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                     Row(
                                       children: [
                                         Image(
-                                          image: AssetImage("images/rupee.png"),
+                                          image: AssetImage("images/rupee.webp"),
                                           width: 15,
                                           height: 15,
                                           color: Color(0xff1F1F1F),
@@ -337,7 +335,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                     Row(
                                       children: [
                                         Image(
-                                          image: AssetImage("images/rupee.png"),
+                                          image: AssetImage("images/rupee.webp"),
                                           width: 15,
                                           height: 15,
                                           color: Color(0xff1F1F1F),
@@ -407,7 +405,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                     Row(
                                       children: [
                                         Image(
-                                          image: AssetImage("images/rupee.png"),
+                                          image: AssetImage("images/rupee.webp"),
                                           width: 15,
                                           height: 15,
                                           color: Color(0xff1F1F1F),
@@ -460,7 +458,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                         child: Row(
                           children: [
                             Image(
-                              image: AssetImage("images/order.png"),
+                              image: AssetImage("images/order.webp"),
                               color: Color(0xff40495D),
                               width: 20,
                               height: 20,

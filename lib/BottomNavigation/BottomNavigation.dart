@@ -207,13 +207,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     BottomNavigationBarItem(
                         icon: bottomController.currentindex == 0
                             ? Image.asset(
-                                "images/home.png",
+                                "images/home.webp",
                                 width: 23,
                                 height: 23,
                                 color: Color(0xffEF4F5F),
                               )
                             : Image.asset(
-                                "images/home.png",
+                                "images/home.webp",
                                 width: 23,
                                 height: 23,
                                 color: Color(0xff787E91),
@@ -222,13 +222,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     BottomNavigationBarItem(
                         icon: bottomController.currentindex == 1
                             ? Image.asset(
-                                "images/food.png",
+                                "images/food.webp",
                                 width: 23,
                                 height: 23,
                                 color: Color(0xffEF4F5F),
                               )
                             : Image.asset(
-                                "images/food.png",
+                                "images/food.webp",
                                 width: 23,
                                 height: 23,
                                 color: Color(0xff787E91),
@@ -237,13 +237,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     BottomNavigationBarItem(
                         icon: bottomController.currentindex == 2
                             ? Image.asset(
-                                "images/bsoda.png",
+                                "images/bsoda.webp",
                                 width: 22,
                                 height: 22,
                                 color: Color(0xffEF4F5F),
                               )
                             : Image.asset(
-                                "images/bsoda.png",
+                                "images/bsoda.webp",
                                 width: 22,
                                 height: 22,
                                 color: Color(0xff787E91),
@@ -252,13 +252,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     BottomNavigationBarItem(
                         icon: bottomController.currentindex == 3
                             ? Image.asset(
-                                "images/cart.png",
+                                "images/cart.webp",
                                 width: 22,
                                 height: 22,
                                 color: Color(0xffEF4F5F),
                               )
                             : Image.asset(
-                                "images/cart.png",
+                                "images/cart.webp",
                                 width: 22,
                                 height: 22,
                                 color: Color(0xff787E91),

@@ -19,7 +19,7 @@ class _PizzaDeliveryScreenState extends State<PizzaDeliveryScreen> {
   void initState(){
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 4),()=>Get.off(()=>SuccessScreen()));
+    Timer(Duration(seconds: 1),()=>Get.off(()=>SuccessScreen()));
   }
   @override
   Widget build(BuildContext context) {

@@ -62,7 +62,7 @@ class _LoginScrrenState extends State<LoginScrren> {
                       bottomRight: Radius.circular(50),
                       bottomLeft: Radius.circular(50)),
                   child: Image(
-                    image: AssetImage("images/login_back.png"),
+                    image: AssetImage("images/login_back.webp"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -321,7 +321,7 @@ class _LoginScrrenState extends State<LoginScrren> {
                               child: Padding(
                                 padding: const EdgeInsets.all(13),
                                 child: Image(
-                                  image: AssetImage("images/apple.png"),
+                                  image: AssetImage("images/apple.webp"),
                                 ),
                               ),
                             ),
@@ -350,7 +350,7 @@ class _LoginScrrenState extends State<LoginScrren> {
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: Image(
-                                  image: AssetImage("images/google.png"),
+                                  image: AssetImage("images/google.webp"),
                                 ),
                               ),
                             ),

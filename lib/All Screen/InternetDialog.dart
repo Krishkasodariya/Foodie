@@ -44,7 +44,7 @@ class _InternetDialogState extends State<InternetDialog> {
                       },
                       child: Align(
                         child: Image(
-                          image: AssetImage("images/close.png"),
+                          image: AssetImage("images/close.webp"),
                           width: 25,
                           height: 25,
                           color: Color(0xff313848),
@@ -58,7 +58,7 @@ class _InternetDialogState extends State<InternetDialog> {
                 height: 25,
               ),
               Image(
-                image: AssetImage("images/internet.png"),
+                image: AssetImage("images/internet.webp"),
                 width: 150,
                 height: 150,
               ),

@@ -67,7 +67,6 @@ class LoginController extends GetxController {
     await sharedPreferences!.setString("savedata", jsonencode);
     print("setdata");
   }
-
   Future<UserModel?> getmodel() async {
     sharedPreferences = await SharedPreferences.getInstance();
     Map<String, dynamic> jsondecode =
@@ -82,7 +81,6 @@ class LoginController extends GetxController {
     print("getdata");
     return null;
   }
-
   Future addphoto() async {
     if (file == null) {
       return;

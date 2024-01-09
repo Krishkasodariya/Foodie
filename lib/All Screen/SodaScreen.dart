@@ -1,14 +1,10 @@
-import 'dart:math';
-
 import 'package:Pizza/All%20Screen/BottomSheetDialog.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
-import 'package:Pizza/ModelClass/FoodItemModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-
 
 class SodaScreen extends StatefulWidget {
   const SodaScreen({super.key});
@@ -86,7 +82,7 @@ class _SodaScreenState extends State<SodaScreen> {
                                   cursorColor: Color(0xff7E8286),
                                   decoration: InputDecoration(
                                     icon: Image(
-                                      image: AssetImage("images/search.png"),
+                                      image: AssetImage("images/search.webp"),
                                       width: 25,
                                       height: 25,
                                       color: Color(0xffEF4F5F),
@@ -171,7 +167,7 @@ class _SodaScreenState extends State<SodaScreen> {
                                                                       .all(2.0),
                                                               child: Image(
                                                                 image: AssetImage(
-                                                                    "images/arrowup.png"),
+                                                                    "images/arrowup.webp"),
                                                                 color: Color(
                                                                     0xffA45B40),
                                                               ),
@@ -238,7 +234,7 @@ class _SodaScreenState extends State<SodaScreen> {
                                                       children: [
                                                         Image(
                                                           image: AssetImage(
-                                                              "images/rupee.png"),
+                                                              "images/rupee.webp"),
                                                           width: 15,
                                                           height: 15,
                                                           color:
@@ -471,7 +467,7 @@ class _SodaScreenState extends State<SodaScreen> {
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                  "images/order.png"),
+                                                  "images/order.webp"),
                                               color: Color(0xff40495D),
                                               width: 20,
                                               height: 20,

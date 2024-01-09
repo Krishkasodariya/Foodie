@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           fontSize: 16,
                           color: Colors.white70,
                           fontWeight: FontWeight.w200)),
-                  Image(image: AssetImage("images/green_deliveries.png")),
+                  Image(image: AssetImage("images/green_deliveries.webp")),
                   Spacer(),
                   Container(
                     width: double.infinity,
@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Opacity(
                       opacity: 0.13,
                       child: Image(
-                        image: AssetImage("images/tree.png"),
+                        image: AssetImage("images/tree.webp"),
                       ),
                     ),
                   )

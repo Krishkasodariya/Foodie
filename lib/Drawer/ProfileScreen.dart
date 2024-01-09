@@ -604,7 +604,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               val=logincontroller.addphonenumber.text;
                               logincontroller.cartPhone.value=val;
                             });
-
                             Get.back();
                             Get.to(BottomNavigation());
 
