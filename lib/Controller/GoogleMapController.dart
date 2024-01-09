@@ -27,7 +27,6 @@ class GoogleMapControllerScreen extends GetxController{
   void HomeLocationupdate(Function ref){
     update1 = ref;
   }
-
   Future determineCurrentPosition() async{
     bool serviceEnabled;
     LocationPermission locationPermission;
