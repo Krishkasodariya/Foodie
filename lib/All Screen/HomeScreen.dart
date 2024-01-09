@@ -229,6 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Color(0xffEF505F))),
                         onPressed: () {
                           pizzaController.getSodaData();
+
                         },
                         child: Text(
                           "Okay",
