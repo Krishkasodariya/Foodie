@@ -23,7 +23,6 @@ class GoogleMapControllerScreen extends GetxController{
 
 
 
-
   void HomeLocationupdate(Function ref){
     update1 = ref;
   }
