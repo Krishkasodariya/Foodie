@@ -1,16 +1,4 @@
-/*import 'dart:async';
-import 'package:Pizza/All%20Screen/InternetDialog.dart';
-import 'package:Pizza/ModelClass/FoodItemModel.dart';
-import 'package:Pizza/ModelClass/Ingredient.dart';
-import 'package:Pizza/ModelClass/OfferModel.dart';
-import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
-import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
-import 'package:Pizza/ModelClass/PizzaMeta.dart';
-import 'package:Pizza/ModelClass/PizzaSize.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';*/
+
 import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
@@ -29,13 +17,120 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-class PizzaController extends GetxController{
+class PizzaController extends GetxController {
+  /*RxList<OrderFoodItemModel> yourOrderlist = <OrderFoodItemModel>[
+    OrderFoodItemModel(
+        id: 0,
+        price: 0,
+        checkadd: false,
+        selectitem: 0,
+        foodbill: 0,
+        foodtotal: 0,
+        food: "z",
+        pizzasizelist: [
+          PizzaSize(name: "S", check: false),
+          PizzaSize(name: "M", check: true),
+          PizzaSize(name: "L", check: false),
+        ],
+        ingredients: [
+          Ingredient(
+              image: "images/bolive.webp",
+              position: [
+                Offset(0.17, 0.35),
+                Offset(0.4, 0.15),
+                Offset(0.73, 0.33),
+                Offset(0.60, 0.70),
+                Offset(0.3, 0.65)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/tomato.webp",
+              position: [
+                Offset(0.20, 0.45),
+                Offset(0.5, 0.2),
+                Offset(0.55, 0.45),
+                Offset(0.75, 0.50),
+                Offset(0.3, 0.65)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/mashroom.webp",
+              position: [
+                Offset(0.17, 0.60),
+                Offset(0.5, 0.35),
+                Offset(0.3, 0.25),
+                Offset(0.70, 0.55),
+                Offset(0.45, 0.65)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/onion.webp",
+              position: [
+                Offset(0.4, 0.6),
+                Offset(0.45, 0.4),
+                Offset(0.2, 0.39),
+                Offset(0.22, 0.65),
+                Offset(0.75, 0.55)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/gcap.webp",
+              position: [
+                Offset(0.5, 0.75),
+                Offset(0.4, 0.2),
+                Offset(0.45, 0.45),
+                Offset(0.65, 0.45),
+                Offset(0.3, 0.55)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/potato.webp",
+              position: [
+                Offset(0.5, 0.7),
+                Offset(0.17, 0.5),
+                Offset(0.4, 0.20),
+                Offset(0.7, 0.4),
+                Offset(0.35, 0.55)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/rigan.webp",
+              position: [
+                Offset(0.65, 0.65),
+                Offset(0.5, 0.15),
+                Offset(0.3, 0.25),
+                Offset(0.65, 0.35),
+                Offset(0.4, 0.70)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/rcap.webp",
+              position: [
+                Offset(0.55, 0.75),
+                Offset(0.45, 0.25),
+                Offset(0.35, 0.30),
+                Offset(0.65, 0.30),
+                Offset(0.35, 0.60)
+              ],
+              checkIngredient: false),
+          Ingredient(
+              image: "images/kakadi.webp",
+              position: [
+                Offset(0.60, 0.60),
+                Offset(0.5, 0.2),
+                Offset(0.3, 0.25),
+                Offset(0.65, 0.4),
+                Offset(0.3, 0.65)
+              ],
+              checkIngredient: false),
+        ],
+        pizzametalist: [])
+  ].obs;*/
 
-  RxList<OrderFoodItemModel> yourOrderlist = <OrderFoodItemModel>[].obs;
-  RxList<OrderFoodItemModel> orderHistory = <OrderFoodItemModel>[].obs;
   RxDouble offer = 0.0.obs;
   RxBool isalertset = false.obs;
   RxBool isdeviceconnected = false.obs;
+
   late StreamSubscription subscription;
   RxList<FoodItemModel> yourOrderBottomList = <FoodItemModel>[].obs;
   RxList<PizzaItemModel> likelist = <PizzaItemModel>[].obs;
@@ -254,6 +349,8 @@ class PizzaController extends GetxController{
             foodimagelist: food,
           );
 
+          // pizzalist.clear();
+          // pizzalist.value=[];
           pizzalist.add(pizzaItem);
           print("--pizzalist-length---)${pizzalist.length}");
         });
@@ -1040,22 +1137,19 @@ class PizzaController extends GetxController{
     addsizelist!.clear();
     iscountfoodtotal.value = 0;
 
-    print(
-        "------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
-    print(
-        "------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
-    print(
-        "------------pizzabottomlist-------------------)${addsizelist!.length}");
+    print("------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
+    print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
+    print("------------pizzabottomlist-------------------)${addsizelist!.length}");
 
     Navigator.pop(context);
   }
 
-  void Pizzatotalprice() {
+  void Pizzatotalprice(){
     grandtotal.value = 0;
     Customfoodtotal.value = 0;
     iscountfoodtotal.value = 0;
 
-    for (int i = 0; i < pizzabottomlist.length; i++) {
+    for (int i = 0; i < pizzabottomlist.length; i++){
       if (pizzabottomlist.isNotEmpty ||
           customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
@@ -1386,27 +1480,15 @@ class PizzaController extends GetxController{
         foodbill: 40),
   ].obs;*/
 
-  Future<List<FoodItemModel>> getSodaData() async {
+  Future<List<FoodItemModel>> getSodaData()async{
     await FirebaseFirestore.instance
         .collection("coldDrink")
         .get()
-        .then((QuerySnapshot querySnapshot) {
+        .then((QuerySnapshot querySnapshot){
       querySnapshot.docs.forEach((element) {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+        Map<String,dynamic>data=element.data() as Map<String, dynamic>;
+
         log("${data}");
-/*
-        FoodItemModel foodItemModel = FoodItemModel(
-          id: data["id"],
-          food: data["food"],
-          price: data["price"],
-          checkadd: data["checkadd"],
-          selectitem: data["selectitem"],
-          foodbill: data["foodbill"],
-          foodtotal: data["foodtotal"],
-          name: data["name"],
-          image: data["image"],
-          rating: data["rating"],
-        );*/
         sodalist.add(FoodItemModel.fromJson(data));
 
       });
@@ -1465,7 +1547,7 @@ class PizzaController extends GetxController{
     update();
   }
 
-  void Sodaplus(int index) {
+  void Sodaplus(int index){
     grandtotal.value = 0;
     Customfoodtotal.value = 0;
     iscountfoodtotal.value = 0;

@@ -31,7 +31,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
   Animation<double>? pizzaBoxEnterScaleAnimation;
   Animation<double>? pizzaBoxExitScaleAnimation;
   Animation<double>? pizzaBoxGoToCartAnimation;
-  
+
   BoxConstraints Width = new BoxConstraints(maxWidth: 240);
   BoxConstraints Height = new BoxConstraints(maxHeight: 240);
 
@@ -43,7 +43,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
   double IngredientHeight = 35;
 
   GlobalKey keyPizza = GlobalKey();
-  
+
   ValueNotifier valueNotifier = new ValueNotifier(false);
   OverlayEntry? overlayEntry;
 
@@ -221,9 +221,9 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                               height: 1,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
-                                                color: Color(0xffd5d5d5),
-                                                width: 1,
-                                              )),
+                                                    color: Color(0xffd5d5d5),
+                                                    width: 1,
+                                                  )),
                                             ),
                                           ),
                                         )
@@ -270,30 +270,30 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                   height: 40,
                                                   decoration: pizzaController.sizeindex == index
                                                       ? BoxDecoration(
-                                                          color:
-                                                              Color(0xffececec),
-                                                          shape: BoxShape.circle)
+                                                      color:
+                                                      Color(0xffececec),
+                                                      shape: BoxShape.circle)
                                                       : BoxDecoration(
-                                                          shape: BoxShape.circle),
+                                                      shape: BoxShape.circle),
                                                   child: Center(
                                                       child: Text(
-                                                    pizzaController
-                                                        .customizepizzalist[0]
-                                                        .pizzasizelist![index]
-                                                        .name,
-                                                    style: TextStyle(
-                                                        color: pizzaController.sizeindex == index
-                                                            ? Colors.brown
-                                                            : Colors.black,
-                                                        fontWeight:
+                                                        pizzaController
+                                                            .customizepizzalist[0]
+                                                            .pizzasizelist![index]
+                                                            .name,
+                                                        style: TextStyle(
+                                                            color: pizzaController.sizeindex == index
+                                                                ? Colors.brown
+                                                                : Colors.black,
+                                                            fontWeight:
                                                             pizzaController.sizeindex == index
                                                                 ? FontWeight.w500
                                                                 : FontWeight.w100,
-                                                        fontSize:
+                                                            fontSize:
                                                             pizzaController.sizeindex == index
                                                                 ? 16
                                                                 : 14),
-                                                  )),
+                                                      )),
                                                 ),
                                               );
                                             },
@@ -328,20 +328,20 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                     color: Color(0xfff5eed3),
                                                     shape: BoxShape.circle,
                                                     border: pizzaController
-                                                            .customizepizzalist[0]
-                                                            .ingredients![index]
-                                                            .checkIngredient
+                                                        .customizepizzalist[0]
+                                                        .ingredients![index]
+                                                        .checkIngredient
                                                         ? Border.all(
-                                                            color: Colors.red,
-                                                            width: 2)
+                                                        color: Colors.red,
+                                                        width: 2)
                                                         : Border.all(
-                                                            color:
-                                                                Color(0xfff5eed3),
-                                                            width: 2)),
+                                                        color:
+                                                        Color(0xfff5eed3),
+                                                        width: 2)),
                                                 child: Center(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsets.all(4.0),
+                                                    const EdgeInsets.all(4.0),
                                                     child: Image(
                                                       image: AssetImage(
                                                           "${pizzaController.customizepizzalist[0].ingredients![index].image}"),
@@ -381,12 +381,12 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                               shape: MaterialStateProperty.all(
                                                   RoundedRectangleBorder(
                                                       borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  25)))),
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              25)))),
                                               backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Color(0xffEF505F))),
+                                              MaterialStateProperty.all(
+                                                  Color(0xffEF505F))),
                                           onPressed: checkEnabled?null:FunctionAddToCraft,
                                           child: Text(
                                             "Add to Cart",
@@ -474,9 +474,9 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                   return RotationTransition(
                                                     turns: CurvedAnimation(
                                                         parent:
-                                                            RotationPizzaAnimationController!,
+                                                        RotationPizzaAnimationController!,
                                                         curve:
-                                                            Curves.fastOutSlowIn),
+                                                        Curves.fastOutSlowIn),
                                                     child: Stack(
                                                       alignment: Alignment.center,
                                                       children: [
@@ -484,30 +484,30 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                           image: AssetImage(
                                                               "images/dish.webp"),
                                                           width: valueNotifier
-                                                                  .value
+                                                              .value
                                                               ? Width.maxWidth
                                                               : Width.maxWidth -
-                                                                  10,
+                                                              10,
                                                           height: valueNotifier
-                                                                  .value
+                                                              .value
                                                               ? Height.maxHeight
                                                               : Height.maxHeight -
-                                                                  10,
+                                                              10,
                                                           fit: BoxFit.cover,
                                                         ),
                                                         Image(
                                                           image: AssetImage(
                                                               "images/pizza.webp"),
                                                           width: valueNotifier
-                                                                  .value
+                                                              .value
                                                               ? Width.maxWidth
                                                               : Width.maxWidth -
-                                                                  10,
+                                                              10,
                                                           height: valueNotifier
-                                                                  .value
+                                                              .value
                                                               ? Height.maxHeight
                                                               : Height.maxHeight -
-                                                                  10,
+                                                              10,
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ],
@@ -675,13 +675,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
                     final moveTox = pizzaBoxGoToCartAnimation!.value > 0
                         ? pizzaController.pizzaMeta!.customPizzametaPosition.dx +
                         pizzaController. pizzaMeta!.customPizzametaSize.width /
-                                2 *
+                            2 *
                             pizzaBoxGoToCartAnimation!.value
                         : 0.0;
                     final moveToy = pizzaBoxGoToCartAnimation!.value > 0
                         ? -pizzaController.pizzaMeta!.customPizzametaSize.height /
-                            1.5 *
-                            pizzaBoxGoToCartAnimation!.value
+                        1.5 *
+                        pizzaBoxGoToCartAnimation!.value
                         : 0.0;
                     return Opacity(
                       opacity: 1 - pizzaBoxGoToCartAnimation!.value,
@@ -743,7 +743,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
         final boxwidth = constraints.maxWidth / 2;
         final boxheight = constraints.maxHeight / 2;
         final boxClosingvalue =
-            ui.lerpDouble(-45.0, -125.0, 1 - pizzaOpacityAnimation!.value);
+        ui.lerpDouble(-45.0, -125.0, 1 - pizzaOpacityAnimation!.value);
 
         return Opacity(
           opacity: pizzaBoxEnterScaleAnimation!.value,
@@ -814,65 +814,66 @@ class _CustomizePizzaState extends State<CustomizePizza>
 
     checkEnabled=true;
 
-      setState(() {
-        PizzaBoxAnimationController =
-            AnimationController(
-                vsync: this,
-                duration: Duration(
-                    milliseconds: 4000));
+    setState(() {
+      PizzaBoxAnimationController =
+          AnimationController(
+              vsync: this,
+              duration: Duration(
+                  milliseconds: 4000));
 
-        pizzaScaleAnimation = Tween(
-            begin: 1.0, end: 0.5)
-            .animate(CurvedAnimation(
-            parent:
-            PizzaBoxAnimationController!,
-            curve: Interval(0.0, 0.2)));
+      pizzaScaleAnimation = Tween(
+          begin: 1.0, end: 0.5)
+          .animate(CurvedAnimation(
+          parent:
+          PizzaBoxAnimationController!,
+          curve: Interval(0.0, 0.2)));
 
-        pizzaBoxEnterScaleAnimation =
-            CurvedAnimation(
-                parent:
-                PizzaBoxAnimationController!,
-                curve: Interval(0.0, 0.2));
+      pizzaBoxEnterScaleAnimation =
+          CurvedAnimation(
+              parent:
+              PizzaBoxAnimationController!,
+              curve: Interval(0.0, 0.2));
 
-        pizzaOpacityAnimation = CurvedAnimation(
-            parent:
-            PizzaBoxAnimationController!,
-            curve: Interval(0.2, 0.4));
+      pizzaOpacityAnimation = CurvedAnimation(
+          parent:
+          PizzaBoxAnimationController!,
+          curve: Interval(0.2, 0.4));
 
-        pizzaBoxExitScaleAnimation = Tween(
-            begin: 1.0, end: 1.3)
-            .animate(CurvedAnimation(
-            parent:
-            PizzaBoxAnimationController!,
-            curve: Interval(0.5, 0.7)));
+      pizzaBoxExitScaleAnimation = Tween(
+          begin: 1.0, end: 1.3)
+          .animate(CurvedAnimation(
+          parent:
+          PizzaBoxAnimationController!,
+          curve: Interval(0.5, 0.7)));
 
-        pizzaBoxGoToCartAnimation =
-            CurvedAnimation(
-                parent:
-                PizzaBoxAnimationController!,
-                curve: Interval(0.8, 1.0));
-
-        PizzaBoxAnimationController!
-            .forward();
-      });
-
-      await pizzaBoxAnimationFunction();
-
-      pizzaController.isBootomSheet.value=true;
+      pizzaBoxGoToCartAnimation =
+          CurvedAnimation(
+              parent:
+              PizzaBoxAnimationController!,
+              curve: Interval(0.8, 1.0));
 
       PizzaBoxAnimationController!
-          .addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          setState(() {
-            resetdata();
-            checkEnabled=false;
-          });
-        }
-      });
+          .forward();
+    });
+
+    await pizzaBoxAnimationFunction();
+
+    pizzaController.isBootomSheet.value=true;
+
+    PizzaBoxAnimationController!
+        .addStatusListener((status) {
+      if (status ==
+          AnimationStatus.completed) {
+        setState(() {
+          resetdata();
+          checkEnabled=false;
+        });
+      }
+    });
 
   }
 
-   FunctionIngredient(int index) {
+  FunctionIngredient(int index) {
 
     checkEnabled=true;
 
@@ -911,13 +912,17 @@ class _CustomizePizzaState extends State<CustomizePizza>
   }
 
   FunctionSize(int index){
+
     checkEnabled=true;
+
     setState(() {
       pizzaController.sizeindex.value = index;
     });
     if (index == 0) {
-      Width = BoxConstraints(maxWidth: 200);
-      Height = BoxConstraints(maxHeight: 200);
+      Width = BoxConstraints(
+          maxWidth: 200);
+      Height = BoxConstraints(
+          maxHeight: 200);
       IngredientWidth = 25;
       IngredientHeight = 25;
       RotationPizzaAnimationController!
@@ -925,8 +930,10 @@ class _CustomizePizzaState extends State<CustomizePizza>
       pizzaController.total.value = 150 + 10 * listofingredient.length;
     }
     else if (index == 1) {
-      Width = BoxConstraints(maxWidth: 240);
-      Height = BoxConstraints(maxHeight: 240);
+      Width = BoxConstraints(
+          maxWidth: 240);
+      Height = BoxConstraints(
+          maxHeight: 240);
       IngredientWidth = 30;
       IngredientHeight = 30;
       RotationPizzaAnimationController!
@@ -951,7 +958,9 @@ class _CustomizePizzaState extends State<CustomizePizza>
               listofingredient
                   .length;
     }
+
     checkEnabled=false;
+
   }
 
 

@@ -122,7 +122,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                             children: [
                               ClipRRect(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(15)),
                                   child: Image(
                                     image: AssetImage(
                                         "${pizzaController.pizzabottomlist[index].image}"),
@@ -132,7 +132,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                   )),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
+                                const EdgeInsets.only(left: 10, right: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +176,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                               ),
                               Spacer(),
                               Obx(
-                                () => Column(
+                                    () => Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
@@ -191,7 +191,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                         children: [
                                           GestureDetector(
                                             onTap: () {
@@ -201,9 +201,9 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                               } else {
                                                 pizzaController
                                                     .Pizzabottomremove(
-                                                        pizzaindex,
-                                                        index,
-                                                        context);
+                                                    pizzaindex,
+                                                    index,
+                                                    context);
 
                                                 print("pizza");
                                               }
@@ -221,7 +221,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                                     color: Colors.white,
                                                     fontSize: 17,
                                                     fontWeight:
-                                                        FontWeight.w500)),
+                                                    FontWeight.w500)),
                                           ),
                                           GestureDetector(
                                             onTap: () {
@@ -255,7 +255,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                           color: Color(0xff1F1F1F),
                                         ),
                                         Obx(
-                                          () => Text(
+                                              () => Text(
                                               "${pizzaController.pizzabottomlist[index].foodbill}",
                                               style: GoogleFonts.nunito(
                                                   color: Color(0xff1F1F1F),
@@ -295,7 +295,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                             children: [
                               ClipRRect(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                BorderRadius.all(Radius.circular(15)),
                                 child: Image(
                                   image: MemoryImage(pizzaController
                                       .customizepizzalist[0]
@@ -308,7 +308,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
+                                const EdgeInsets.only(left: 10, right: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -354,7 +354,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                               ),
                               Spacer(),
                               Obx(
-                                () => Column(
+                                    () => Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
@@ -369,7 +369,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                         children: [
                                           GestureDetector(
                                             onTap: () {
@@ -387,7 +387,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                                     color: Colors.white,
                                                     fontSize: 17,
                                                     fontWeight:
-                                                        FontWeight.w500)),
+                                                    FontWeight.w500)),
                                           ),
                                           GestureDetector(
                                             onTap: () {
@@ -497,9 +497,9 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10)))),
+                                    BorderRadius.all(Radius.circular(10)))),
                             backgroundColor:
-                                MaterialStateProperty.all(Color(0xffEF4F5F))),
+                            MaterialStateProperty.all(Color(0xffEF4F5F))),
                         onPressed: () {
 
                           Navigator.pop(context);
