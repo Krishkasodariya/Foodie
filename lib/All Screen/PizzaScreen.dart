@@ -1028,9 +1028,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
   void ref() {
     setState(() {});
   }
-
   Future<void> loaded() async {
-
     await InterstitialAd.load(
         adUnitId: "ca-app-pub-3940256099942544/1033173712",
         request: AdRequest(),
@@ -1043,10 +1041,8 @@ class _PizzaScreenState extends State<PizzaScreen> {
             });
             ad.fullScreenContentCallback=FullScreenContentCallback(
               onAdClicked: (ad) {
-
               },
               onAdDismissedFullScreenContent: (ad) {
-
                 setState(() {
                   Navigator.push(
                       context,
@@ -1054,22 +1050,16 @@ class _PizzaScreenState extends State<PizzaScreen> {
                           type:
                           PageTransitionType.rightToLeft,
                           child: CustomizePizza()));
-
                   ad.dispose();
-
                 });
               },
               onAdWillDismissFullScreenContent: (ad) {
-
               },
             );
             setState(() {
               interstitialAd!.show();
             });
-
-
           },
-
 
           onAdFailedToLoad: (error) {
             print("-OpenAd-$error----------ad is failed--------");

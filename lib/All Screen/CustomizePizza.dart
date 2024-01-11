@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -21,7 +22,7 @@ class CustomizePizza extends StatefulWidget {
 
 class _CustomizePizzaState extends State<CustomizePizza>
     with TickerProviderStateMixin {
-  bool checkEnabled=false;
+  bool checkEnabled = false;
   List<Ingredient> listofingredient = [];
   PizzaController pizzaController = Get.find();
   List<Animation> animationlist = [];
@@ -52,7 +53,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
     // TODO: implement initState
     super.initState();
 
-    IngredientAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 900));
+    IngredientAnimationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 900));
     RotationPizzaAnimationController = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: 900),
@@ -66,36 +68,34 @@ class _CustomizePizzaState extends State<CustomizePizza>
     IngredientAnimationController!.dispose();
     RotationPizzaAnimationController!.dispose();
     PizzaBoxAnimationController!.dispose();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        if(checkEnabled){
+        if (checkEnabled) {
 
-        }else{
-          checkEnabled=true;
+        } else {
+          checkEnabled = true;
           Navigator.pop(context);
           Navigator.pop(context);
-          checkEnabled=false;
+          checkEnabled = false;
         }
         return null!;
       },
       child: Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
-            onTap: (){
-              if(checkEnabled){
+            onTap: () {
+              if (checkEnabled) {
 
-              }else{
-                checkEnabled=true;
+              } else {
+                checkEnabled = true;
                 Navigator.pop(context,);
                 Navigator.pop(context);
-                checkEnabled=false;
+                checkEnabled = false;
               }
-
             },
             child: Icon(
               Icons.arrow_back_rounded,
@@ -112,7 +112,10 @@ class _CustomizePizzaState extends State<CustomizePizza>
               child: Image(
                 image: AssetImage("images/bg1.webp"),
                 fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 height: 230,
               ),
             ),
@@ -124,13 +127,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: GestureDetector(
-                onTap: (){
-
-                  if(checkEnabled){
-                  }else{
-                    checkEnabled=true;
-                    Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft,child: CartScreen()));
-                    checkEnabled=false;
+                onTap: () {
+                  if (checkEnabled) {} else {
+                    checkEnabled = true;
+                    Navigator.push(context, PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: CartScreen()));
+                    checkEnabled = false;
                   }
                   setState(() {});
                 },
@@ -156,8 +159,14 @@ class _CustomizePizzaState extends State<CustomizePizza>
           alignment: Alignment.center,
           children: [
             Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height,
                 child: Stack(
                   children: [
                     Container(
@@ -167,7 +176,10 @@ class _CustomizePizzaState extends State<CustomizePizza>
                         child: Image(
                           image: AssetImage("images/bg1.webp"),
                           fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
                           height: 230,
                         ),
                       ),
@@ -175,12 +187,21 @@ class _CustomizePizzaState extends State<CustomizePizza>
                     Column(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height / 5,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 5,
                         ),
                         Expanded(
                           child: Container(
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
@@ -233,10 +254,12 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                       height: 15,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center,
                                       children: [
                                         Image(
-                                          image: AssetImage("images/rupee.webp"),
+                                          image: AssetImage(
+                                              "images/rupee.webp"),
                                           width: 19,
                                           height: 19,
                                           color: Color(0xff1F1F1F),
@@ -264,11 +287,15 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                             scrollDirection: Axis.horizontal,
                                             itemBuilder: (context, index) {
                                               return GestureDetector(
-                                                onTap: ()=>checkEnabled?null:FunctionSize(index),
+                                                onTap: () =>
+                                                checkEnabled
+                                                    ? null
+                                                    : FunctionSize(index),
                                                 child: Container(
                                                   width: 40,
                                                   height: 40,
-                                                  decoration: pizzaController.sizeindex == index
+                                                  decoration: pizzaController
+                                                      .sizeindex == index
                                                       ? BoxDecoration(
                                                       color:
                                                       Color(0xffececec),
@@ -282,15 +309,23 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                             .pizzasizelist![index]
                                                             .name,
                                                         style: TextStyle(
-                                                            color: pizzaController.sizeindex == index
+                                                            color: pizzaController
+                                                                .sizeindex ==
+                                                                index
                                                                 ? Colors.brown
                                                                 : Colors.black,
                                                             fontWeight:
-                                                            pizzaController.sizeindex == index
-                                                                ? FontWeight.w500
-                                                                : FontWeight.w100,
+                                                            pizzaController
+                                                                .sizeindex ==
+                                                                index
+                                                                ? FontWeight
+                                                                .w500
+                                                                : FontWeight
+                                                                .w100,
                                                             fontSize:
-                                                            pizzaController.sizeindex == index
+                                                            pizzaController
+                                                                .sizeindex ==
+                                                                index
                                                                 ? 16
                                                                 : 14),
                                                       )),
@@ -316,11 +351,16 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                         width: double.infinity,
                                         height: 60,
                                         child: ListView.separated(
-                                          itemCount: pizzaController.customizepizzalist[0].ingredients!.length,
+                                          itemCount: pizzaController
+                                              .customizepizzalist[0]
+                                              .ingredients!.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
                                             final child = GestureDetector(
-                                              onTap: ()=> checkEnabled?null:FunctionIngredient(index),
+                                              onTap: () =>
+                                              checkEnabled
+                                                  ? null
+                                                  : FunctionIngredient(index),
                                               child: Container(
                                                 width: 50,
                                                 height: 50,
@@ -344,7 +384,10 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                     const EdgeInsets.all(4.0),
                                                     child: Image(
                                                       image: AssetImage(
-                                                          "${pizzaController.customizepizzalist[0].ingredients![index].image}"),
+                                                          "${pizzaController
+                                                              .customizepizzalist[0]
+                                                              .ingredients![index]
+                                                              .image}"),
                                                       width: 50,
                                                       height: 50,
                                                     ),
@@ -361,7 +404,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                     .ingredients![index]);
                                           },
                                           separatorBuilder:
-                                              (BuildContext context, int index) {
+                                              (BuildContext context,
+                                              int index) {
                                             return SizedBox(
                                               width: 12,
                                             );
@@ -377,7 +421,9 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                           left: 10, right: 10),
                                       child: ElevatedButton(
                                           style: ButtonStyle(
-                                              minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
+                                              minimumSize: MaterialStateProperty
+                                                  .all(
+                                                  Size(double.infinity, 50)),
                                               shape: MaterialStateProperty.all(
                                                   RoundedRectangleBorder(
                                                       borderRadius:
@@ -387,10 +433,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                               backgroundColor:
                                               MaterialStateProperty.all(
                                                   Color(0xffEF505F))),
-                                          onPressed: checkEnabled?null:FunctionAddToCraft,
+                                          onPressed: checkEnabled
+                                              ? null
+                                              : FunctionAddToCraft,
                                           child: Text(
                                             "Add to Cart",
-                                            style: TextStyle(fontSize: 16,color: Colors.white),
+                                            style: TextStyle(fontSize: 16,
+                                                color: Colors.white),
                                           )),
                                     ),
                                     SizedBox(
@@ -436,13 +485,16 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                             valueNotifier.value = true;
                                             addIngredient(value);
                                             value.checkIngredient = true;
-                                            print("===============)${value.checkIngredient}}");
+                                            print("===============)${value
+                                                .checkIngredient}}");
                                             //  print(listofingredient.length);
-                                            Future.delayed(Duration(milliseconds: 1000));
+                                            Future.delayed(
+                                                Duration(milliseconds: 1000));
                                             valueNotifier.value = false;
                                             print("===)onAccept");
                                             addpizzaAnimation();
-                                            IngredientAnimationController!.forward(from: 0.0);
+                                            IngredientAnimationController!
+                                                .forward(from: 0.0);
                                           });
                                         },
                                         onWillAccept: (value) {
@@ -468,7 +520,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                             valueListenable: valueNotifier,
                                             builder: (context, value, child) {
                                               return LayoutBuilder(
-                                                builder: (context, constraints) {
+                                                builder: (context,
+                                                    constraints) {
                                                   Width = constraints;
                                                   Height = constraints;
                                                   return RotationTransition(
@@ -478,7 +531,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                         curve:
                                                         Curves.fastOutSlowIn),
                                                     child: Stack(
-                                                      alignment: Alignment.center,
+                                                      alignment: Alignment
+                                                          .center,
                                                       children: [
                                                         Image(
                                                           image: AssetImage(
@@ -491,7 +545,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                           height: valueNotifier
                                                               .value
                                                               ? Height.maxHeight
-                                                              : Height.maxHeight -
+                                                              : Height
+                                                              .maxHeight -
                                                               10,
                                                           fit: BoxFit.cover,
                                                         ),
@@ -506,7 +561,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                           height: valueNotifier
                                                               .value
                                                               ? Height.maxHeight
-                                                              : Height.maxHeight -
+                                                              : Height
+                                                              .maxHeight -
                                                               10,
                                                           fit: BoxFit.cover,
                                                         ),
@@ -523,7 +579,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                     AnimatedBuilder(
                                       animation: IngredientAnimationController!,
                                       builder:
-                                          (BuildContext context, Widget? child) {
+                                          (BuildContext context,
+                                          Widget? child) {
                                         return buidPizza();
                                       },
                                     )
@@ -563,7 +620,8 @@ class _CustomizePizzaState extends State<CustomizePizza>
 
           if (i == listofingredient.length - 1 &&
               IngredientAnimationController!.isAnimating) {
-            double fromx = 0.0, fromy = 0.0;
+            double fromx = 0.0,
+                fromy = 0.0;
             if (j < 1) {
               fromx = -Width.maxWidth * (1 - animation.value);
             } else if (j < 2) {
@@ -607,7 +665,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
     return SizedBox.fromSize();
   }
 
-  void addpizzaAnimation(){
+  void addpizzaAnimation() {
     animationlist.clear();
     animationlist.add(CurvedAnimation(
         parent: IngredientAnimationController!,
@@ -629,7 +687,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
   void addIngredient(Ingredient ingredient) {
     setState(() {
       listofingredient.add(ingredient);
-      pizzaController.total.value+= 10;
+      pizzaController.total.value += 10;
     });
   }
 
@@ -640,20 +698,35 @@ class _CustomizePizzaState extends State<CustomizePizza>
     });
   }
 
-  Future<void>pizzaBoxAnimationFunction() async{
+  Future<void> pizzaBoxAnimationFunction() async {
     RenderRepaintBoundary boundary = await keyPizza.currentContext!
         .findRenderObject() as RenderRepaintBoundary;
     ui.Image image = await boundary.toImage(pixelRatio: 3.0);
     ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    setState((){
-
+    setState(() {
       pizzaController.position = boundary.localToGlobal(Offset.zero);
       pizzaController.size = boundary.size;
       pizzaController.imagedata = byteData!.buffer.asUint8List();
-      pizzaController.pizzaMeta = PizzaMeta(customPizzametaSize: pizzaController.size, customPizzametaUint8list: pizzaController.imagedata, customPizzametaPosition: pizzaController.position,customPizzametaPrice: pizzaController.customizepizzatotal.value, customPizzametaSelectitem: 1, customPizzametaTotal: 0, customPizzametaBill: pizzaController.customizepizzatotal.value  );
+
+      print("------pizzaController.imagedata-----${pizzaController.imagedata}");
+
+      pizzaController.pizzaSize = pizzaController.customizepizzalist[0].pizzasizelist![pizzaController.sizeindex.value].name;
+      pizzaController.base64=base64Encode(pizzaController.imagedata);
+
+
+      pizzaController.pizzaMeta = PizzaMeta(
+          pizzaSize: pizzaController.pizzaSize,
+          customPizzametaSize: pizzaController.size,
+          customPizzametaUint8list: pizzaController.imagedata,
+          customPizzametaPosition: pizzaController.position,
+          customPizzametaPrice: pizzaController.customizepizzatotal.value,
+          customPizzametaSelectitem: 1,
+          customPizzametaTotal: 0,
+          base64:pizzaController.base64,
+          customPizzametaBill: pizzaController.customizepizzatotal.value);
 
       pizzaController.custompizzaAdd();
-
+      print("------ pizzaController.base64-----${ pizzaController.base64}");
     });
 
     print("=====getimagebytedata=====");
@@ -663,23 +736,25 @@ class _CustomizePizzaState extends State<CustomizePizza>
         overlayEntry = OverlayEntry(
           builder: (context) {
             //final pizzaMeta = this.pizzaController.pizzaMeta;
-            if (pizzaController.pizzaMeta != null){
+            if (pizzaController.pizzaMeta != null) {
               return Positioned(
-                width: pizzaController.pizzaMeta!.customPizzametaSize.width,
-                height:pizzaController.pizzaMeta!.customPizzametaSize.height,
-                left: pizzaController.pizzaMeta!.customPizzametaPosition.dx,
-                top: pizzaController.pizzaMeta!.customPizzametaPosition.dy,
+                width: pizzaController.pizzaMeta!.customPizzametaSize!.width,
+                height: pizzaController.pizzaMeta!.customPizzametaSize!.height,
+                left: pizzaController.pizzaMeta!.customPizzametaPosition!.dx,
+                top: pizzaController.pizzaMeta!.customPizzametaPosition!.dy,
                 child: AnimatedBuilder(
                   animation: PizzaBoxAnimationController!,
                   builder: (context, child) {
                     final moveTox = pizzaBoxGoToCartAnimation!.value > 0
-                        ? pizzaController.pizzaMeta!.customPizzametaPosition.dx +
-                        pizzaController. pizzaMeta!.customPizzametaSize.width /
+                        ? pizzaController.pizzaMeta!.customPizzametaPosition
+                        !.dx +
+                        pizzaController.pizzaMeta!.customPizzametaSize!.width /
                             2 *
                             pizzaBoxGoToCartAnimation!.value
                         : 0.0;
                     final moveToy = pizzaBoxGoToCartAnimation!.value > 0
-                        ? -pizzaController.pizzaMeta!.customPizzametaSize.height /
+                        ? -pizzaController.pizzaMeta!.customPizzametaSize
+                        !.height /
                         1.5 *
                         pizzaBoxGoToCartAnimation!.value
                         : 0.0;
@@ -708,7 +783,9 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                             (1 - pizzaOpacityAnimation!.value)),
                                   alignment: Alignment.center,
                                   child: Image(
-                                    image: MemoryImage(pizzaController.pizzaMeta!.customPizzametaUint8list),
+                                    image: MemoryImage(
+                                        pizzaController.pizzaMeta!
+                                            .customPizzametaUint8list!),
                                     width: 260,
                                     height: 260,
                                     fit: BoxFit.cover,
@@ -787,10 +864,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
   }
 
   void resetdata() {
-    for (int i = 0; i < pizzaController.customizepizzalist[0].ingredients!.length; i++) {
-      if (pizzaController.customizepizzalist[0].ingredients![i].checkIngredient) {
+    for (int i = 0; i <
+        pizzaController.customizepizzalist[0].ingredients!.length; i++) {
+      if (pizzaController.customizepizzalist[0].ingredients![i]
+          .checkIngredient) {
         setState(() {
-          pizzaController.customizepizzalist[0].ingredients![i].checkIngredient = false;
+          pizzaController.customizepizzalist[0].ingredients![i]
+              .checkIngredient = false;
         });
       }
     }
@@ -799,20 +879,19 @@ class _CustomizePizzaState extends State<CustomizePizza>
         overlayEntry!.remove();
       }
 
-      pizzaController.total.value= 180;
+      pizzaController.sizeindex.value=1;
+      pizzaController.total.value = 180;
       Width = BoxConstraints(maxWidth: 240);
       Height = BoxConstraints(maxHeight: 240);
       overlayEntry = null;
       pizzaController.pizzaMeta = null;
       listofingredient.clear();
-
     });
     print("=======resetdata========");
   }
 
-  void FunctionAddToCraft()async{
-
-    checkEnabled=true;
+  void FunctionAddToCraft() async {
+    checkEnabled = true;
 
     setState(() {
       PizzaBoxAnimationController =
@@ -858,7 +937,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
 
     await pizzaBoxAnimationFunction();
 
-    pizzaController.isBootomSheet.value=true;
+    pizzaController.isBootomSheet.value = true;
 
     PizzaBoxAnimationController!
         .addStatusListener((status) {
@@ -866,22 +945,21 @@ class _CustomizePizzaState extends State<CustomizePizza>
           AnimationStatus.completed) {
         setState(() {
           resetdata();
-          checkEnabled=false;
+          checkEnabled = false;
         });
       }
     });
-
   }
 
   FunctionIngredient(int index) {
-
-    checkEnabled=true;
+    checkEnabled = true;
 
     setState(() {
-      pizzaController.ingredientindex.value=index;
+      pizzaController.ingredientindex.value = index;
     });
 
-    if (pizzaController.customizepizzalist[0].ingredients![index].checkIngredient) {
+    if (pizzaController.customizepizzalist[0].ingredients![index]
+        .checkIngredient) {
       setState(() {
         addpizzaAnimation();
         IngredientAnimationController!.reverse(from: 0.0);
@@ -894,26 +972,26 @@ class _CustomizePizzaState extends State<CustomizePizza>
             .checkIngredient = false;
       });
       print(
-          "==========)${pizzaController.customizepizzalist[0].ingredients![index].image}");
+          "==========)${pizzaController.customizepizzalist[0]
+              .ingredients![index].image}");
     }
     else {
       setState(() {
         addpizzaAnimation();
         IngredientAnimationController!.forward(from: 0.0);
-        addIngredient(pizzaController.customizepizzalist[0].ingredients![index]);
-        pizzaController.customizepizzalist[0].ingredients![index].checkIngredient = true;
+        addIngredient(
+            pizzaController.customizepizzalist[0].ingredients![index]);
+        pizzaController.customizepizzalist[0].ingredients![index]
+            .checkIngredient = true;
       });
     }
 
 
-    checkEnabled=false;
-
-
+    checkEnabled = false;
   }
 
-  FunctionSize(int index){
-
-    checkEnabled=true;
+  FunctionSize(int index) {
+    checkEnabled = true;
 
     setState(() {
       pizzaController.sizeindex.value = index;
@@ -939,7 +1017,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
       RotationPizzaAnimationController!
           .forward(from: 0.0);
 
-      pizzaController.total.value= 180 +
+      pizzaController.total.value = 180 +
           10 *
               listofingredient
                   .length;
@@ -953,16 +1031,14 @@ class _CustomizePizzaState extends State<CustomizePizza>
       IngredientHeight = 33;
       RotationPizzaAnimationController!
           .forward(from: 0.0);
-      pizzaController.total.value= 210 +
+      pizzaController.total.value = 210 +
           10 *
               listofingredient
                   .length;
     }
 
-    checkEnabled=false;
-
+    checkEnabled = false;
   }
-
 
 
 }

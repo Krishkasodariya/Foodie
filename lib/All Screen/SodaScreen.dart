@@ -8,23 +8,22 @@ import 'package:lottie/lottie.dart';
 
 class SodaScreen extends StatefulWidget {
   const SodaScreen({super.key});
-
   @override
   State<SodaScreen> createState() => _SodaScreenState();
 }
-
 class _SodaScreenState extends State<SodaScreen> {
   var sodasearchContoller = new TextEditingController();
   PizzaController pizzaController = Get.find();
   BottomController bottomController = Get.find();
 
-
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
-    pizzaController.sodalist.clear();
-    pizzaController.getSodaData();
+
+    if(pizzaController.sodalist.isEmpty){
+      pizzaController.getSodaData();
+    }
 
     pizzaController.Allupdate(ref);
     pizzaController.Searchupdate(ref);
@@ -35,16 +34,16 @@ class _SodaScreenState extends State<SodaScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: WillPopScope(
-          onWillPop: () {
+          onWillPop:(){
             bottomController.currentindex.value = 0;
             return null!;
           },
           child: Stack(
             children: [
-
               CustomScrollView(
                 physics: BouncingScrollPhysics(),
                 slivers: [
+
                   SliverPadding(padding: EdgeInsets.only(top: 10)),
                   /*SliverAppBar(
                     backgroundColor: Colors.white,

@@ -63,8 +63,9 @@ class _DinnerScreenState extends State<DinnerScreen> {
     super.initState();
     loaded();
     pizzaController.UpdateLike(ref);
-    pizzaController.pizzalist.clear();
-    pizzaController.getPizzaData();
+    if(pizzaController.pizzalist.isEmpty){
+      pizzaController.getPizzaData();
+    }
   }
 
   @override
@@ -869,7 +870,6 @@ class _DinnerScreenState extends State<DinnerScreen> {
       ),
     );
   }
-
    loaded() {
     nativeAd = NativeAd(adUnitId: "ca-app-pub-3940256099942544/2247696110",
 

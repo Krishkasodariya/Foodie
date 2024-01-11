@@ -145,11 +145,15 @@ class PizzaController extends GetxController {
   RxInt customizepizzatotal = 180.obs;
   RxInt sizeindex = 1.obs;
   var position, size, imagedata;
+  String pizzaSize="";
+  String base64="";
+
   PizzaMeta? pizzaMeta;
 
   PizzaMeta? pizzaMetadata;
 
-  List<PizzaSize>? addsizelist = [];
+ /* List<PizzaSize>? addsizelist = [];*/
+
   List<Ingredient> addlistofingredient = [];
 
   RxList<FoodItemModel> pizzabottomlist = <FoodItemModel>[].obs;
@@ -318,7 +322,7 @@ class PizzaController extends GetxController {
         print(changePhoneNumber);
         updateData!();*/
 
-  Future<List<PizzaItemModel>> getPizzaData() async {
+  Future<List<PizzaItemModel>> getPizzaData()async {
     try {
       await FirebaseFirestore.instance
           .collection("pizza")
@@ -334,6 +338,7 @@ class PizzaController extends GetxController {
 
           dynamicList.forEach((element) {
             print("------)${element["name"]}");
+
             food.add(FoodItemModel.fromJson(element));
             // print("---food.length----)${food.length}");
           });
@@ -1134,12 +1139,12 @@ class PizzaController extends GetxController {
     isBootomSheet.value = false;
     pizzabottomlist.clear();
     customizepizzalist[0].pizzametalist!.clear();
-    addsizelist!.clear();
+    /*addsizelist!.clear();*/
     iscountfoodtotal.value = 0;
 
     print("------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
     print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
-    print("------------pizzabottomlist-------------------)${addsizelist!.length}");
+    //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
 
     Navigator.pop(context);
   }
@@ -1780,15 +1785,14 @@ class PizzaController extends GetxController {
     pizzabottomlist.clear();
     customizepizzalist[0].pizzametalist!.clear();
 
-    addsizelist!.clear();
+    //addsizelist!.clear();
     iscountfoodtotal.value = 0;
 
     print(
         "------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
     print(
         "------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
-    print(
-        "------------pizzabottomlist-------------------)${addsizelist!.length}");
+    //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
     reference!();
     Navigator.pop(context);
     update();
@@ -1844,8 +1848,8 @@ class PizzaController extends GetxController {
         customPizzametaPrice: customizepizzatotal.value,
         customPizzametaSelectitem: 1,
         customPizzametaTotal: 0,
-        customPizzametaBill: customizepizzatotal.value));
-    addsizelist?.add(customizepizzalist[0].pizzasizelist![sizeindex.value]);
+        customPizzametaBill: customizepizzatotal.value, pizzaSize: pizzaSize));
+    //addsizelist?.add(customizepizzalist[0].pizzasizelist![sizeindex.value]);
     //addlistofingredient.add(customizepizzalist[0].ingredients![ingredientindex.value]);
 
     for (int j = 0; j < customizepizzalist[0].pizzametalist!.length; j++) {
@@ -1936,7 +1940,7 @@ class PizzaController extends GetxController {
       customizepizzalist[0]
           .pizzametalist!
           .remove(customizepizzalist[0].pizzametalist![index]);
-      addsizelist!.remove(addsizelist![index]);
+      //addsizelist!.remove(addsizelist![index]);
     }
 
     if (pizzabottomlist.isNotEmpty ||
@@ -2070,15 +2074,14 @@ class PizzaController extends GetxController {
     pizzabottomlist.clear();
     customizepizzalist[0].pizzametalist!.clear();
 
-    addsizelist!.clear();
+    //addsizelist!.clear();
     iscountfoodtotal.value = 0;
 
     print(
         "------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
     print(
         "------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
-    print(
-        "------------pizzabottomlist-------------------)${addsizelist!.length}");
+    //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
 
     reference!();
     update();

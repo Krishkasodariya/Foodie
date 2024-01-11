@@ -1,61 +1,90 @@
-import 'dart:typed_data';
 
-import 'PizzaSize.dart';
 
 class OrderFoodItemModel {
-  int ?uid;
-  String ?food;
+
   String ?image;
+  String ?rating;
   String ?name;
   int ?price;
+  int ?id;
+  String ?food;
   bool ?checkadd = false;
   int ?selectitem = 1;
   int ?foodbill;
-  String ?rating;
-  Uint8List ?imagebyte;
-  String ?pizzasize;
+  int ?foodtotal;
+  String ?pizzaSize;
+  String ?base64;
+  int ?customPizzametaPrice;
+  int ?customPizzametaSelectitem;
+  int ?customPizzametaTotal;
+  int ?customPizzametaBill;
+
 
   OrderFoodItemModel({
-      this.uid,
       this.food,
       this.name,
       this.image,
       this.rating,
-      this.imagebyte,
       this.price,
       this.checkadd,
       this.selectitem,
       this.foodbill,
-      this.pizzasize});
 
-  Map<String, dynamic> toJson() {
+    this.base64,
+    this.pizzaSize,
+    this.customPizzametaBill,
+    this.customPizzametaPrice,
+    this.customPizzametaSelectitem,
+    this.customPizzametaTotal,
+    this.foodtotal,
+    this.id
+    });
+
+  Map<String, dynamic> toJson(){
     return {
-      "uid": uid,
+
       "food": food,
       "name": name,
       "image": image,
       "rating": rating,
-      "imagebyte": imagebyte,
       "price": price,
       "checkadd": checkadd,
       "selectitem": selectitem,
       "foodbill": foodbill,
-      "pizzasize": pizzasize,
+
+      "base64": base64,
+      "pizzaSize": pizzaSize,
+      "customPizzametaBill": customPizzametaBill,
+      "customPizzametaPrice": customPizzametaPrice,
+      "customPizzametaSelectitem": customPizzametaSelectitem,
+      "customPizzametaTotal": customPizzametaTotal,
+      "foodtotal": foodtotal,
+      "id": id,
+
     };
   }
 
   factory OrderFoodItemModel.fromJson(Map<String, dynamic> data) {
     return OrderFoodItemModel(
-        uid: data["uid"],
+
         food: data["food"],
         name: data["name"],
         image: data["image"],
         rating: data["rating"],
-        imagebyte: data["imagebyte"],
         price: data["price"],
         checkadd: data["checkadd"],
         selectitem: data["selectitem"],
         foodbill: data["foodbill"],
-        pizzasize: data["pizzasize"],);
+      base64: data["base64"],
+      pizzaSize: data["pizzaSize"],
+      customPizzametaBill: data["customPizzametaBill"],
+      customPizzametaPrice: data["customPizzametaPrice"],
+      customPizzametaSelectitem: data["customPizzametaSelectitem"],
+      customPizzametaTotal: data["customPizzametaTotal"],
+      foodtotal: data["foodtotal"],
+      id: data["id"],
+
+
+       );
   }
 }

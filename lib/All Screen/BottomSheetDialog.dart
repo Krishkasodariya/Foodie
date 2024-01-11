@@ -300,7 +300,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                   image: MemoryImage(pizzaController
                                       .customizepizzalist[0]
                                       .pizzametalist![index]
-                                      .customPizzametaUint8list),
+                                      .customPizzametaUint8list!),
                                   width: 80,
                                   height: 80,
                                   fit: BoxFit.cover,
@@ -327,7 +327,12 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                       ),
                                     ),
                                     Text(
-                                        "Size : ${pizzaController.addsizelist![index].name}",
+                                        "Size : ${ pizzaController
+                                            .customizepizzalist[
+                                        0]
+                                            .pizzametalist![
+                                        index]
+                                        .pizzaSize}",
                                         style: GoogleFonts.nunito(
                                             color: Color(0xff535B6D),
                                             fontSize: 16,
