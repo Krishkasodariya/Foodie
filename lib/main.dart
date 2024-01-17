@@ -1,3 +1,4 @@
+import 'package:Pizza/Controller/AdminController.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/OrderController.dart';
 import 'package:Pizza/DynamicLink/Route_Services.dart';
@@ -33,6 +34,7 @@ Future main() async {
   Get.put(SodaController());
   Get.put(GoogleMapControllerScreen());
   Get.put(OrderController());
+  Get.put(AdminController());
 
   configLoading();
   runApp(GetMaterialApp(
@@ -82,7 +84,7 @@ class _MyappState extends State<Myapp> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
       builder: (context, child) {
         return FutureBuilder(
@@ -94,6 +96,7 @@ class _MyappState extends State<Myapp> {
       },
     );
   }
+
   Future chekedfirsttime() async {
     loginController.sharedPreferences = await SharedPreferences.getInstance();
     bool check = (loginController.sharedPreferences!.getBool("check") ?? false);

@@ -25,7 +25,7 @@ class _AddressBookState extends State<AddressBook> {
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: googleMapControllerScreen.changeAddressHeight.value
           ? Colors.transparent

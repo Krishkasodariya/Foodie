@@ -125,7 +125,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                     borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                     child: Image(
-                                      image: AssetImage(
+                                      image: NetworkImage(
                                           "${pizzaController.pizzabottomlist[index].image}"),
                                       width: 80,
                                       height: 80,

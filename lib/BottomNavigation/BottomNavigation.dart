@@ -27,7 +27,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   //bool isLoaded = false;
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     //loaded();
     super.initState();
@@ -148,7 +148,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: GestureDetector(
-              onTap: () {
+              onTap: (){
                 Navigator.push(
                     context,
                     PageTransition(
@@ -272,8 +272,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         () => Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child:
-              bottomController.page.value[bottomController.currentindex.value],
+          child: bottomController.page.value[bottomController.currentindex.value],
         ),
       ),
     );

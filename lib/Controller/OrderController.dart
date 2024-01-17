@@ -93,9 +93,7 @@ class OrderController extends GetxController {
     } catch (e) {
       print('Error: $e');
     }
-
   }
-
   Future<List<MainOrderFoodItemModel>> getUserOrderData() async{
 
     CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
@@ -106,13 +104,16 @@ class OrderController extends GetxController {
             .get()
             .then((QuerySnapshot querySnapshot){
               querySnapshot.docs.forEach((element){
+
                 Map<String,dynamic> data = element.data() as Map<String, dynamic>;
                 RxList<OrderFoodItemModel> orderdata = <OrderFoodItemModel>[].obs;
+
                 List<dynamic> dynamicList = data['orderData'];
 
                 dynamicList.forEach((element){
                   orderdata.add(OrderFoodItemModel.fromJson(element));
                 });
+
                 MainOrderFoodItemModel mainOrderFoodItemModel=MainOrderFoodItemModel(
                   milliseconds: data['milliseconds'],
                   datalist:orderdata,

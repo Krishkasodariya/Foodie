@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -188,7 +189,7 @@ class _SodaAddViewState extends State<SodaAddView> {
       String docId = categoryCollectionReference.doc().id;
 
       Map<String, dynamic> coldDrink = {
-        "id": docId,
+        "id": 1,
         "image": downloadImageUrl,
         "price": int.parse(priceController.text),
         "name": coldDrinkController.text,
@@ -201,6 +202,7 @@ class _SodaAddViewState extends State<SodaAddView> {
       };
 
       await categoryCollectionReference.doc(docId).set(coldDrink);
+      
       EasyLoading.dismiss();
     } catch (e) {
       print("ADD PIZZA ERROR : $e");

@@ -333,7 +333,6 @@ class PizzaController extends GetxController {
           .then((QuerySnapshot querySnapshot) {
         querySnapshot.docs.forEach((element) {
           Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-
           log("${data}");
 
           RxList<FoodItemModel> food = <FoodItemModel>[].obs;

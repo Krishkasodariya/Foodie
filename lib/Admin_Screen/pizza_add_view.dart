@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -7,11 +8,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'custom_text_field_widget.dart';
 
 class PizzaAddView extends StatefulWidget {
-  const PizzaAddView({super.key});
+  String ?name;
+   PizzaAddView({super.key,this.name});
 
   @override
   State<PizzaAddView> createState() => _PizzaAddViewState();
@@ -33,6 +36,8 @@ class _PizzaAddViewState extends State<PizzaAddView> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+
+  PizzaController pizzaController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +219,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
       ),
     );
   }
-
-  pickAttachment() async {
+  pickAttachment() async{
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null && image.path.isNotEmpty) {
@@ -249,17 +253,14 @@ class _PizzaAddViewState extends State<PizzaAddView> {
     setState(() {});
   }
 
-  addDataFirebase() async {
+  addDataFirebase()async{
     try {
-      final CollectionReference categoryCollectionReference =
-          FirebaseFirestore.instance.collection('pizza');
-
+      final CollectionReference categoryCollectionReference = FirebaseFirestore.instance.collection('pizza');
       EasyLoading.show();
-      await categoryCollectionReference.doc(selectedValue).get().then(
-        (documentSnapshot) async {
-          if (documentSnapshot.exists) {
+      await categoryCollectionReference.doc("${widget.name}").get().then(
+        (documentSnapshot)async {
+          if (documentSnapshot.exists){
             List pizzaList = documentSnapshot["foodimagelist"];
-
             pizzaList.add({
               "checkadd": false,
               "food": "Pizza",
@@ -269,15 +270,15 @@ class _PizzaAddViewState extends State<PizzaAddView> {
               "image": downloadImageUrl,
               "name": nameController.text,
               "price": int.parse(priceController.text),
-              "rating": 3.1,
+              "rating": "3.1",
               "selectitem": 1,
             });
+            print("11111111111111");
+            print(widget.name);
 
-            await categoryCollectionReference.doc(selectedValue).update(
-              {"foodimagelist": FieldValue.arrayUnion(pizzaList)},
+            await categoryCollectionReference.doc("${widget.name}").update(
+              {"foodimagelist": FieldValue.arrayUnion(pizzaList)},);
 
-
-            );
           }
         },
       );
@@ -294,9 +295,7 @@ String getRandomId() {
   for (var i = 0; i < 5; i++) {
     id += random.nextInt(10).toString();
   }
-
   DateTime dateTime = DateTime.now();
-
   return "${id}_${dateTime.millisecondsSinceEpoch}";
 }
 Widget createClubAppbar() {

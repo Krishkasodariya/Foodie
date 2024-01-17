@@ -14,6 +14,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:Pizza/All%20Screen/BottomSheetDialog.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../Controller/AdminController.dart';
+
 class DinnerScreen extends StatefulWidget {
   const DinnerScreen({super.key});
   @override
@@ -56,12 +58,13 @@ class _DinnerScreenState extends State<DinnerScreen> {
         order: "aa",
         tital: "aa"),
   ];
+  AdminController adminController=Get.find();
 
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
-    loaded();
+    //loaded();
     pizzaController.UpdateLike(ref);
     if(pizzaController.pizzalist.isEmpty){
       pizzaController.getPizzaData();
@@ -75,11 +78,11 @@ class _DinnerScreenState extends State<DinnerScreen> {
     nativeAd!.dispose();
   }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Colors.white,
       body: WillPopScope(
-        onWillPop: () {
+        onWillPop: (){
           bottomController.currentindex.value = 0;
           return null!;
         },
@@ -88,7 +91,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
             CustomScrollView(
               physics: BouncingScrollPhysics(),
               slivers: [
-                SliverPadding(padding: EdgeInsets.only(top: 10)),
+                SliverPadding(padding: EdgeInsets.only(top:  adminController.isAdmin.value?0: 10)),
                 /*SliverAppBar(
                   backgroundColor: Colors.white,
                   pinned: false,
@@ -152,13 +155,16 @@ class _DinnerScreenState extends State<DinnerScreen> {
                     ),
                   ),
                 ),*/
-                SliverAppBar(
+
+               adminController.isAdmin.value ?
+               SliverAppBar(leading: Container(),):
+               SliverAppBar(
                   backgroundColor: Colors.white,
                   pinned: false,
                   automaticallyImplyLeading: false,
                   snap: false,
                   stretch: true,
-                  expandedHeight: 285,
+                  expandedHeight:  285,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Column(
                       children: [
@@ -308,7 +314,9 @@ class _DinnerScreenState extends State<DinnerScreen> {
                     ),
                   ),
                 ),
-                SliverPadding(padding: EdgeInsets.only(top: 15)),
+
+                SliverPadding(padding: EdgeInsets.only(top:  adminController.isAdmin.value?0: 15)),
+
                 SliverToBoxAdapter(
                   child: Row(
                     children: [
@@ -349,6 +357,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                   ),
                 ),
                 SliverPadding(padding: EdgeInsets.only(top: 15)),
+
                 SliverList.separated(
                   itemCount: pizzaController.pizzalist.length,
                   itemBuilder: (context, index) {
@@ -423,7 +432,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                             return Stack(
                                               children: [
                                                 Image(
-                                                 image: AssetImage(
+                                                 image: NetworkImage(
                                                         "${pizzaController
                                                             .pizzalist[index]
                                                             .foodimagelist[iindex]
@@ -763,11 +772,12 @@ class _DinnerScreenState extends State<DinnerScreen> {
                 SliverPadding(padding: EdgeInsets.only(top: 20)),
               ],
             ),
-            Obx(
-                  () =>
+            Obx(() =>
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: pizzaController.isBootomSheet.value
+                    child: adminController.isAdmin.value?
+                        Container():
+                    pizzaController.isBootomSheet.value
                         ? Container(
                       width: double.infinity,
                       height: 60,
@@ -778,7 +788,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                           children: [
                             Expanded(
                               child: GestureDetector(
-                                onTap: () {
+                                onTap: (){
                                   showModalBottomSheet(
                                     backgroundColor: Colors.white,
                                     isScrollControlled: true,

@@ -1,5 +1,7 @@
+import 'package:Pizza/Admin_Screen/AdminBottomNavigation.dart';
 import 'package:Pizza/All%20Screen/AboutScreen.dart';
 import 'package:Pizza/All%20Screen/LoginScreen.dart';
+import 'package:Pizza/Controller/AdminController.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
@@ -31,6 +33,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   LoginController logincontroller = Get.find();
   PizzaController pizzaController = Get.find();
   BottomController bottomController = Get.find();
+  AdminController adminController=Get.find();
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
 
   String? linkMessage;
@@ -345,12 +348,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      child: AllOrderHistory(),
-                                      type: PageTransitionType
-                                          .rightToLeft));
+
                             },
                             child: Container(
                               height: 80,
@@ -874,6 +872,193 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                       ),
                                       Text(
                                         "Coupons",
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 18,
+                                            color: Color(0xff313848),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Color(0xff313848),
+                                        size: 17,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 60),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 1,
+                                      decoration: BoxDecoration(
+                                          border: Border.symmetric(
+                                              horizontal: BorderSide(
+                                                  color: Color(0xffEAEDF3),
+                                                  width: 1.5))),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color(0xffE9E9F7),
+                                blurRadius: 10,
+                                spreadRadius: 4)
+                          ]),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: 4,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    color: Color(0xffEF4F5F),
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Center(
+                                child: Text(
+                                  "Admin",
+                                  style: GoogleFonts.lexend(
+                                      color: Colors.black,
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: GestureDetector(
+                              onTap: (){
+
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: AdminBottomNavigation(),
+                                        type: PageTransitionType.rightToLeft));
+                                adminController.isAdmin.value=true;
+
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF2F4F7),
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Image(
+                                              image: AssetImage(
+                                                  "images/discount.webp"),
+                                              color: Color(0xff787E91)),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Any changes",
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 18,
+                                            color: Color(0xff313848),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Color(0xff313848),
+                                        size: 17,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 60),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 1,
+                                      decoration: BoxDecoration(
+                                          border: Border.symmetric(
+                                              horizontal: BorderSide(
+                                                  color: Color(0xffEAEDF3),
+                                                  width: 1.5))),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, PageTransition(child: AllOrderHistory(), type: PageTransitionType.rightToLeft));
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF2F4F7),
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(9),
+                                          child: Image(
+                                              image:
+                                              AssetImage("images/order.webp"),
+                                              color: Color(0xff787E91)),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Customer orders",
                                         style: GoogleFonts.nunito(
                                             fontSize: 18,
                                             color: Color(0xff313848),

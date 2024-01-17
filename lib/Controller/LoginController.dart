@@ -88,6 +88,7 @@ class LoginController extends GetxController {
     Reference storage = FirebaseStorage.instance.ref();
     Reference imagedir = storage.child("images");
     Reference upload = imagedir.child(filename);
+
     try {
       await upload.putFile(File(file!.path));
       print("111111111111${file!.path}");

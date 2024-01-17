@@ -2543,9 +2543,8 @@ class _CartScreenState extends State<CartScreen> {
                                           .visibleAddress.value = false;
                                       pizzaController.resetOffer();
                                       pizzaController.functionCartClear();
-                                    } else if (pizzaController
-                                            .orderMethod.value ==
-                                        "Online") {
+                                    }
+                                    else if (pizzaController.orderMethod.value == "Online") {
                                       showModalBottomSheet(
                                         backgroundColor: Colors.white,
                                         isScrollControlled: true,
@@ -2560,7 +2559,8 @@ class _CartScreenState extends State<CartScreen> {
                                         },
                                       );
                                     }
-                                  } else {
+                                  }
+                                  else {
                                     showModalBottomSheet(
                                       backgroundColor: Colors.white,
                                       shape: RoundedRectangleBorder(
