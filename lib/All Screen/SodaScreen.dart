@@ -20,11 +20,9 @@ class _SodaScreenState extends State<SodaScreen> {
   void initState(){
     // TODO: implement initState
     super.initState();
-
     if(pizzaController.sodalist.isEmpty){
       pizzaController.getSodaData();
     }
-
     pizzaController.Allupdate(ref);
     pizzaController.Searchupdate(ref);
   }

@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:Pizza/All%20Screen/InternetDialog.dart';
 import 'package:Pizza/ModelClass/FoodItemModel.dart';
 import 'package:Pizza/ModelClass/Ingredient.dart';
+import 'package:Pizza/ModelClass/MainOrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/OfferModel.dart';
 import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
@@ -132,7 +133,9 @@ class PizzaController extends GetxController {
   RxBool isdeviceconnected = false.obs;
 
   late StreamSubscription subscription;
-  RxList<FoodItemModel> yourOrderBottomList = <FoodItemModel>[].obs;
+
+
+
   RxList<PizzaItemModel> likelist = <PizzaItemModel>[].obs;
   RxList<PizzaItemModel> pizzalist = <PizzaItemModel>[].obs;
 
@@ -337,12 +340,8 @@ class PizzaController extends GetxController {
           List<dynamic> dynamicList = data['foodimagelist'];
 
           dynamicList.forEach((element) {
-            print("------)${element["name"]}");
-
             food.add(FoodItemModel.fromJson(element));
-            // print("---food.length----)${food.length}");
           });
-
           PizzaItemModel pizzaItem = PizzaItemModel(
             checklike: data['checklike'],
             name: data['name'],
@@ -354,8 +353,6 @@ class PizzaController extends GetxController {
             foodimagelist: food,
           );
 
-          // pizzalist.clear();
-          // pizzalist.value=[];
           pizzalist.add(pizzaItem);
           print("--pizzalist-length---)${pizzalist.length}");
         });
@@ -792,22 +789,17 @@ class PizzaController extends GetxController {
       pizzabottomlist.add(pizzalist[pizzaindex].foodimagelist[index]);
 
       print("------------------------------)${pizzabottomlist.length}");
-      print(
-          "==============PizzaAdd=====id========)${pizzalist[pizzaindex].foodimagelist[index].id}");
-      print(
-          "==============PizzaAdd=====name========)${pizzalist[pizzaindex].foodimagelist[index].name}");
-      print(
-          "==============PizzaAdd=====price========)${pizzalist[pizzaindex].foodimagelist[index].price}");
-      print(
-          "==============PizzaAdd=====selectitem========)${pizzalist[pizzaindex].foodimagelist[index].selectitem}");
-      print(
-          "==============PizzaAdd=====foodbill========)${pizzalist[pizzaindex].foodimagelist[index].foodbill}");
+      print("==============PizzaAdd=====id========)${pizzalist[pizzaindex].foodimagelist[index].id}");
+      print("==============PizzaAdd=====name========)${pizzalist[pizzaindex].foodimagelist[index].name}");
+      print("==============PizzaAdd=====price========)${pizzalist[pizzaindex].foodimagelist[index].price}");
+      print("==============PizzaAdd=====selectitem========)${pizzalist[pizzaindex].foodimagelist[index].selectitem}");
+      print("==============PizzaAdd=====foodbill========)${pizzalist[pizzaindex].foodimagelist[index].foodbill}");
     }
     if (pizzalist[pizzaindex].foodimagelist[index].selectitem == 0) {
       pizzalist[pizzaindex].foodimagelist[index].checkadd = false;
       pizzalist[pizzaindex].foodimagelist[index].selectitem = 1;
     }
-    for (int i = 0; i < pizzabottomlist.length - 1; i++) {
+    for(int i = 0; i < pizzabottomlist.length - 1; i++){
       if (pizzalist[pizzaindex].foodimagelist[index].id ==
           pizzabottomlist[i].id) {
         pizzabottomlist.remove(pizzabottomlist[i]);
@@ -844,7 +836,7 @@ class PizzaController extends GetxController {
     print("add");
   }
 
-  void Pizzaremove(int pizzaindex, int index) {
+  void Pizzaremove(int pizzaindex, int index){
     grandtotal.value = 0;
     Customfoodtotal.value = 0;
     iscountfoodtotal.value = 0;
@@ -853,8 +845,7 @@ class PizzaController extends GetxController {
     isBootomSheet.value = false;
 
     for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzalist[pizzaindex].foodimagelist[index].id ==
-          pizzabottomlist[i].id) {
+      if (pizzalist[pizzaindex].foodimagelist[index].id == pizzabottomlist[i].id){
         pizzabottomlist[i].foodtotal -= pizzabottomlist[i].price;
         pizzabottomlist[i].foodbill = pizzabottomlist[i].foodtotal;
       }

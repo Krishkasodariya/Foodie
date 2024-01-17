@@ -1,8 +1,8 @@
 import 'package:Pizza/All%20Screen/AiFood.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
+import 'package:Pizza/Controller/OrderController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gradient_animation_text/flutter_gradient_animation_text.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +10,6 @@ import 'package:Pizza/All%20Screen/BottomSheetDialog.dart';
 import 'package:Pizza/All%20Screen/CartScreen.dart';
 import 'package:Pizza/All%20Screen/DinnerScreen.dart';
 import 'package:Pizza/All%20Screen/ExitDialog.dart';
-import 'package:Pizza/All%20Screen/AboutScreen.dart';
 import 'package:Pizza/All%20Screen/SodaScreen.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
@@ -20,20 +19,18 @@ import 'package:Pizza/ModelClass/EatingPizzaTwo.dart';
 import 'package:Pizza/ModelClass/HomeCetegoriesModel.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
   var homesearchContoller = TextEditingController();
   BottomController bottomController = Get.find();
   CarouselController carouselController = CarouselController();
   int sliderindex = 0;
   PizzaController pizzaController = Get.find();
+  OrderController orderController=Get.find();
 
   List<HomeCetegorieModel> categorieslist = [
     HomeCetegorieModel(
@@ -126,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
     googleMapControllerScreen.HomeLocationupdate(ref);
@@ -204,39 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            minimumSize:
-                            MaterialStateProperty.all(
-                                Size(
-                                    double
-                                        .infinity,
-                                    50)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        bottomRight:
-                                        Radius.circular(
-                                            25),
-                                        bottomLeft:
-                                        Radius.circular(
-                                            25)))),
-                            backgroundColor:
-                            MaterialStateProperty.all(
-                                Color(0xffEF505F))),
-                        onPressed: () {
-                          pizzaController.getSodaData();
 
-                        },
-                        child: Text(
-                          "Okay",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white),
-                        )),
                     SizedBox(
                       height: 20,
                     ),

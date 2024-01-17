@@ -5,10 +5,12 @@ import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:Pizza/Drawer/AddressBook.dart';
+import 'package:Pizza/Drawer/AllOrderHistory.dart';
 import 'package:Pizza/Drawer/LikesScreen.dart';
 import 'package:Pizza/Drawer/OfferScreen.dart';
 import 'package:Pizza/Drawer/ProfileScreen.dart';
 import 'package:Pizza/Drawer/RatingScreen.dart';
+import 'package:Pizza/Drawer/YourOrderScreen.dart';
 import 'package:Pizza/DynamicLink/Path_Constant.dart';
 import 'package:Pizza/ModelClass/UserModel.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -341,36 +343,46 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           width: 10,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 80,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0xffE9E9F7),
-                                      blurRadius: 10,
-                                      spreadRadius: 2)
-                                ]),
-                            child: Column(
-                              children: [
-                                Spacer(),
-                                Image(
-                                  image: AssetImage("images/setting.webp"),
-                                  width: 25,
-                                  height: 25,
-                                ),
-                                Spacer(),
-                                Text(
-                                  "Settings",
-                                  style: GoogleFonts.nunito(
-                                      fontSize: 17,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Spacer(),
-                              ],
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: AllOrderHistory(),
+                                      type: PageTransitionType
+                                          .rightToLeft));
+                            },
+                            child: Container(
+                              height: 80,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffE9E9F7),
+                                        blurRadius: 10,
+                                        spreadRadius: 2)
+                                  ]),
+                              child: Column(
+                                children: [
+                                  Spacer(),
+                                  Image(
+                                    image: AssetImage("images/setting.webp"),
+                                    width: 25,
+                                    height: 25,
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    "Settings",
+                                    style: GoogleFonts.nunito(
+                                        fontSize: 17,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Spacer(),
+                                ],
+                              ),
                             ),
                           ),
                         )
@@ -581,7 +593,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             ],
                           ),
 
-                          /*   SizedBox(
+                             SizedBox(
                             height: 20,
                           ),
                           Padding(
@@ -703,7 +715,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 ),
                               ],
                             ),
-                          ),*/
+                          ),
 
                           SizedBox(
                             height: 20,

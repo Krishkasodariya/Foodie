@@ -107,7 +107,7 @@ class LoginController extends GetxController {
     reference!();
   }
 
-  Future profileData() async {
+  Future profileData() async{
     FirebaseFirestore.instance
         .collection('user')
         .where("Uid", isEqualTo: "${userid}")

@@ -109,172 +109,174 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 12, left: 12),
-                    child: Container(
-                      width: double.infinity,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.only(bottom: 20),
-                        itemCount: pizzaController.pizzabottomlist.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              ClipRRect(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                                  child: Image(
-                                    image: AssetImage(
-                                        "${pizzaController.pizzabottomlist[index].image}"),
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                  )),
-                              Padding(
-                                padding:
-                                const EdgeInsets.only(left: 10, right: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 150,
-                                      child: Text(
-                                        "${pizzaController.pizzabottomlist[index].name}",
-                                        maxLines: 1,
-                                        style: GoogleFonts.nunito(
-                                          color: Color(0xff373D4D),
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                    Text("4.3 ratings",
-                                        style: GoogleFonts.nunito(
-                                            color: Color(0xff535B6D),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage("images/rupee.webp"),
-                                          width: 15,
-                                          height: 15,
-                                          color: Color(0xff1F1F1F),
-                                        ),
-                                        Text(
-                                            "${pizzaController.pizzabottomlist[index].price}",
-                                            style: GoogleFonts.nunito(
-                                                color: Color(0xff1F1F1F),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500))
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Spacer(),
-                              Obx(
-                                    () => Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
+                    child: Obx(()=>
+                       Container(
+                        width: double.infinity,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(bottom: 20),
+                          itemCount: pizzaController.pizzabottomlist.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                ClipRRect(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                    child: Image(
+                                      image: AssetImage(
+                                          "${pizzaController.pizzabottomlist[index].image}"),
                                       width: 80,
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffEF4F5F),
-                                        border: Border.all(
-                                            color: Color(0xffEF4F5F)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (pizzaController.pizzabottomlist[index].food.contains("soda")) {
-                                                pizzaController.Sodabottomremove(index, context);
-                                                print("soda");
-                                              } else {
-                                                pizzaController
-                                                    .Pizzabottomremove(
-                                                    pizzaindex,
-                                                    index,
-                                                    context);
-
-                                                print("pizza");
-                                              }
-                                              setState(() {});
-                                              pizzaController.update();
-                                              pizzaController.refresh();
-                                            },
-                                            child: Icon(Icons.remove,
-                                                color: Colors.white, size: 20),
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    )),
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 150,
+                                        child: Text(
+                                          "${pizzaController.pizzabottomlist[index].name}",
+                                          maxLines: 1,
+                                          style: GoogleFonts.nunito(
+                                            color: Color(0xff373D4D),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
                                           ),
-                                          Center(
-                                            child: Text(
-                                                "${pizzaController.pizzabottomlist[index].selectitem}",
-                                                style: GoogleFonts.nunito(
-                                                    color: Colors.white,
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                    FontWeight.w500)),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (pizzaController
-                                                  .pizzabottomlist[index].food
-                                                  .contains("soda")) {
-                                                pizzaController.Sodabottompluse(
-                                                    index);
-                                                print("soda");
-                                              } else {
-                                                pizzaController.Pizzabottomplus(
-                                                    index);
-                                                print("pizza");
-                                              }
-                                              setState(() {});
-                                              pizzaController.update();
-                                              pizzaController.refresh();
-                                            },
-                                            child: Icon(Icons.add,
-                                                color: Colors.white, size: 20),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage("images/rupee.webp"),
-                                          width: 15,
-                                          height: 15,
-                                          color: Color(0xff1F1F1F),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        Obx(
-                                              () => Text(
-                                              "${pizzaController.pizzabottomlist[index].foodbill}",
+                                      ),
+                                      Text("4.3 ratings",
+                                          style: GoogleFonts.nunito(
+                                              color: Color(0xff535B6D),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      Row(
+                                        children: [
+                                          Image(
+                                            image: AssetImage("images/rupee.webp"),
+                                            width: 15,
+                                            height: 15,
+                                            color: Color(0xff1F1F1F),
+                                          ),
+                                          Text(
+                                              "${pizzaController.pizzabottomlist[index].price}",
                                               style: GoogleFonts.nunito(
                                                   color: Color(0xff1F1F1F),
                                                   fontSize: 15,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                                  fontWeight: FontWeight.w500))
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            height: 20,
-                          );
-                        },
+                                Spacer(),
+                                Obx(
+                                      () => Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 80,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffEF4F5F),
+                                          border: Border.all(
+                                              color: Color(0xffEF4F5F)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (pizzaController.pizzabottomlist[index].food.contains("soda")) {
+                                                  pizzaController.Sodabottomremove(index, context);
+                                                  print("soda");
+                                                } else {
+                                                  pizzaController
+                                                      .Pizzabottomremove(
+                                                      pizzaindex,
+                                                      index,
+                                                      context);
+
+                                                  print("pizza");
+                                                }
+                                                setState(() {});
+                                                pizzaController.update();
+                                                pizzaController.refresh();
+                                              },
+                                              child: Icon(Icons.remove,
+                                                  color: Colors.white, size: 20),
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                  "${pizzaController.pizzabottomlist[index].selectitem}",
+                                                  style: GoogleFonts.nunito(
+                                                      color: Colors.white,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                      FontWeight.w500)),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (pizzaController
+                                                    .pizzabottomlist[index].food
+                                                    .contains("soda")) {
+                                                  pizzaController.Sodabottompluse(
+                                                      index);
+                                                  print("soda");
+                                                } else {
+                                                  pizzaController.Pizzabottomplus(
+                                                      index);
+                                                  print("pizza");
+                                                }
+                                                setState(() {});
+                                                pizzaController.update();
+                                                pizzaController.refresh();
+                                              },
+                                              child: Icon(Icons.add,
+                                                  color: Colors.white, size: 20),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Image(
+                                            image: AssetImage("images/rupee.webp"),
+                                            width: 15,
+                                            height: 15,
+                                            color: Color(0xff1F1F1F),
+                                          ),
+                                          Obx(
+                                                () => Text(
+                                                "${pizzaController.pizzabottomlist[index].foodbill}",
+                                                style: GoogleFonts.nunito(
+                                                    color: Color(0xff1F1F1F),
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500)),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: 20,
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -282,158 +284,159 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
 
                   Padding(
                     padding: const EdgeInsets.only(right: 12, left: 12),
-                    child: Container(
-                      width: double.infinity,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.only(bottom: 20),
-                        itemCount: pizzaController.customizepizzalist[0].pizzametalist!.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
-                                child: Image(
-                                  image: MemoryImage(pizzaController
-                                      .customizepizzalist[0]
-                                      .pizzametalist![index]
-                                      .customPizzametaUint8list!),
-                                  width: 80,
-                                  height: 80,
-                                  fit: BoxFit.cover,
+                    child: Obx(()=> Container(
+                        width: double.infinity,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(bottom: 20),
+                          itemCount: pizzaController.customizepizzalist[0].pizzametalist!.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                  child: Image(
+                                    image: MemoryImage(pizzaController
+                                        .customizepizzalist[0]
+                                        .pizzametalist![index]
+                                        .customPizzametaUint8list!),
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                const EdgeInsets.only(left: 10, right: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 150,
-                                      child: Text(
-                                        "Customize Pizza",
-                                        maxLines: 1,
-                                        style: GoogleFonts.nunito(
-                                          color: Color(0xff373D4D),
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w700,
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 150,
+                                        child: Text(
+                                          "Customize Pizza",
+                                          maxLines: 1,
+                                          style: GoogleFonts.nunito(
+                                            color: Color(0xff373D4D),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ),
-                                    Text(
-                                        "Size : ${ pizzaController
-                                            .customizepizzalist[
-                                        0]
-                                            .pizzametalist![
-                                        index]
-                                        .pizzaSize}",
-                                        style: GoogleFonts.nunito(
-                                            color: Color(0xff535B6D),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage("images/rupee.webp"),
-                                          width: 15,
-                                          height: 15,
-                                          color: Color(0xff1F1F1F),
-                                        ),
-                                        Text(
-                                            "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaPrice}",
-                                            style: GoogleFonts.nunito(
-                                                color: Color(0xff1F1F1F),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500)),
-
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Spacer(),
-                              Obx(
-                                    () => Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffEF4F5F),
-                                        border: Border.all(
-                                            color: Color(0xffEF4F5F)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                      Text(
+                                          "Size : ${ pizzaController
+                                              .customizepizzalist[
+                                          0]
+                                              .pizzametalist![
+                                          index]
+                                          .pizzaSize}",
+                                          style: GoogleFonts.nunito(
+                                              color: Color(0xff535B6D),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      Row(
                                         children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              setState((){
-                                                pizzaController.custompizzaRemove(index);
-                                              });
-                                            },
-                                            child: Icon(Icons.remove,
-                                                color: Colors.white, size: 20),
+                                          Image(
+                                            image: AssetImage("images/rupee.webp"),
+                                            width: 15,
+                                            height: 15,
+                                            color: Color(0xff1F1F1F),
                                           ),
-                                          Center(
-                                            child: Text(
-                                                "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaSelectitem}",
-                                                style: GoogleFonts.nunito(
-                                                    color: Colors.white,
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                    FontWeight.w500)),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                pizzaController.custompizzaPlus(index);
-                                              });
+                                          Text(
+                                              "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaPrice}",
+                                              style: GoogleFonts.nunito(
+                                                  color: Color(0xff1F1F1F),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500)),
 
-                                            },
-                                            child: Icon(Icons.add,
-                                                color: Colors.white, size: 20),
-                                          ),
                                         ],
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image(
-                                          image: AssetImage("images/rupee.webp"),
-                                          width: 15,
-                                          height: 15,
-                                          color: Color(0xff1F1F1F),
-                                        ),
-                                        Text(
-                                            "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaBill}",
-                                            style: GoogleFonts.nunito(
-                                                color: Color(0xff1F1F1F),
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500)),
-                                      ],
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            height: 20,
-                          );
-                        },
+                                Spacer(),
+                                Obx(
+                                      () => Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 80,
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffEF4F5F),
+                                          border: Border.all(
+                                              color: Color(0xffEF4F5F)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState((){
+                                                  pizzaController.custompizzaRemove(index);
+                                                });
+                                              },
+                                              child: Icon(Icons.remove,
+                                                  color: Colors.white, size: 20),
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                  "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaSelectitem}",
+                                                  style: GoogleFonts.nunito(
+                                                      color: Colors.white,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                      FontWeight.w500)),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  pizzaController.custompizzaPlus(index);
+                                                });
+
+                                              },
+                                              child: Icon(Icons.add,
+                                                  color: Colors.white, size: 20),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Image(
+                                            image: AssetImage("images/rupee.webp"),
+                                            width: 15,
+                                            height: 15,
+                                            color: Color(0xff1F1F1F),
+                                          ),
+                                          Text(
+                                              "${pizzaController.customizepizzalist[0].pizzametalist![index].customPizzametaBill}",
+                                              style: GoogleFonts.nunito(
+                                                  color: Color(0xff1F1F1F),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: 20,
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),

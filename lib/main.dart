@@ -1,4 +1,5 @@
 import 'package:Pizza/Controller/GoogleMapController.dart';
+import 'package:Pizza/Controller/OrderController.dart';
 import 'package:Pizza/DynamicLink/Route_Services.dart';
 import 'package:Pizza/Notification/FirebaseApiScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,7 @@ Future main() async {
   Get.put(PizzaController());
   Get.put(SodaController());
   Get.put(GoogleMapControllerScreen());
+  Get.put(OrderController());
 
   configLoading();
   runApp(GetMaterialApp(

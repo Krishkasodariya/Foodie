@@ -193,8 +193,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                                     .offerlist[index].check;
                                           });
                                         },
-                                        child: pizzaController
-                                                .offerlist[index].check
+                                        child: pizzaController.offerlist[index].check
                                             ? Row(
                                                 children: [
                                                   Text(

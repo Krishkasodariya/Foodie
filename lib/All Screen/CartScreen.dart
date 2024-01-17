@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:Pizza/All%20Screen/DonationBottomsheetDialog.dart';
 import 'package:Pizza/All%20Screen/PaymentScreen.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
+import 'package:Pizza/Controller/OrderController.dart';
 import 'package:Pizza/Drawer/AddressBook.dart';
 import 'package:Pizza/Drawer/ProfileScreen.dart';
 import 'package:Pizza/ModelClass/FoodItemModel.dart';
@@ -36,12 +37,8 @@ class _CartScreenState extends State<CartScreen> {
   PizzaController pizzaController = Get.find();
   LoginController loginController = Get.find();
   BottomController bottomController = Get.find();
+  OrderController orderController=Get.find();
   int ordertotal = 0;
-
-
-
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -2418,7 +2415,7 @@ class _CartScreenState extends State<CartScreen> {
                       ))
                   : Center(
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: (){
                           setState(() {
                             bottomController.currentindex.value = 1;
                           });
@@ -2529,10 +2526,8 @@ class _CartScreenState extends State<CartScreen> {
                                     backgroundColor: MaterialStateProperty.all(
                                         Color(0xffEF505F))),
                                 onPressed: () async {
-                                  if (googleMapControllerScreen
-                                      .selectAddress.value) {
-                                    if (pizzaController.orderMethod.value ==
-                                        "Cash") {
+                                  if (googleMapControllerScreen.selectAddress.value) {
+                                    if (pizzaController.orderMethod.value == "Cash") {
                                       print("cash");
                                       Navigator.push(
                                           context,
@@ -2578,8 +2573,8 @@ class _CartScreenState extends State<CartScreen> {
                                         return AddressBook();
                                       },
                                     );
-
-                                    addCartData();
+                                    orderController.addUserOrderData();
+                                    orderController.addAllUserOrderData();
                                     setState(() {
                                       googleMapControllerScreen
                                           .changeAddressHeight.value = true;
@@ -2626,82 +2621,8 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  void addCartData() async {
-    try {
-      DateTime orderdate = DateTime.now();
-      String formattedTime  = DateFormat('hh:mm a').format(orderdate);
 
-
-      CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("orderHistory");
-      DocumentReference userDocumentReference =await userCollectionReference.doc(loginController.userid);
-
-      CollectionReference orderCollectionReference =await userDocumentReference.collection("order");
-      DocumentReference orderDocumentReference =await orderCollectionReference.doc();
-
-
-
-      final pizzaBottomListData =
-          pizzaController.pizzabottomlist.map((element) {
-
-        FoodItemModel foodItem = FoodItemModel(
-          image: element.image,
-          rating: element.rating,
-          name: element.name,
-          price: element.price,
-          id: element.id,
-          food: element.food,
-          checkadd: element.checkadd,
-          selectitem: element.selectitem,
-          foodbill: element.foodbill,
-          foodtotal: element.foodtotal,
-        );
-        setState(() {});
-        return foodItem.toJson();
-
-      });
-
-      final pizzaMetaListData =
-          pizzaController.customizepizzalist[0].pizzametalist!.map((element) {
-        String base64Image = base64Encode(element.customPizzametaUint8list!);
-
-        PizzaMeta foodItem = PizzaMeta(
-          pizzaSize: element.pizzaSize,
-          base64: base64Image,
-          customPizzametaPrice: element.customPizzametaPrice,
-          customPizzametaSelectitem: element.customPizzametaSelectitem,
-          customPizzametaTotal: element.customPizzametaTotal,
-          customPizzametaBill: element.customPizzametaBill,
-        );
-
-        return foodItem.toJson();
-
-      });
-
-      final docData = {
-        "uid": loginController.userid,
-        "subTotal": pizzaController.finalfoodtotal.value,
-        "gst": 13,
-        "deliveryFee": 18,
-        "grandTotal": pizzaController.grandtotal.value,
-        "date": "${orderdate.day}-${orderdate.month}-${orderdate.year}",
-        "time": "${formattedTime}",
-        "orderData": [...pizzaBottomListData, ...pizzaMetaListData],
-      };
-
-      print( pizzaController.finalfoodtotal.value);
-      print(pizzaController.grandtotal.value);
-      print("${orderdate.day}-${orderdate.month}-${orderdate.year}");
-
-      print( "${formattedTime}");
-
-      orderDocumentReference
-          .set(docData)
-          .then((value) => print("okkkkkkkkkkkkkkkkkkk"));
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-  void ref() {
-    setState(() {});
+  void ref(){
+    setState((){});
   }
 }
