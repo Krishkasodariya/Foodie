@@ -1,6 +1,7 @@
-import 'package:Pizza/Admin_Screen/pizza_add_view.dart';
+import 'package:Pizza/Admin_Screen/Add_Pizza.dart';
 import 'package:Pizza/All%20Screen/AdDialogScreen.dart';
 import 'package:Pizza/Controller/AdminController.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import 'package:Pizza/All%20Screen/CustomizePizza.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PizzaScreen extends StatefulWidget {
@@ -41,12 +43,10 @@ class _PizzaScreenState extends State<PizzaScreen>{
   void initState() {
     // TODO: implement initState
     super.initState();
-
     pizzalist = widget.data;
     pizzaindex = widget.pizzaindex;
     pizzaController.Allupdate(ref);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -560,10 +560,9 @@ class _PizzaScreenState extends State<PizzaScreen>{
                                         Color(0xffEF4F5F),
                                       ),
                                       elevation: MaterialStatePropertyAll(0)),
-                                  onPressed: () {
-                                    setState(() {
-                                      loaded();
-                                    });
+                                  onPressed: (){
+                                    isLoaded=true;
+                                    loaded();
                                     if(isLoaded){
                                       setState(() {
                                         showDialog(context: context, builder: (context) {
@@ -571,6 +570,7 @@ class _PizzaScreenState extends State<PizzaScreen>{
                                         },);
                                       });
                                     }
+
                                   },
                                   child: Text("Order Now",
                                       style: GoogleFonts.nunito(
@@ -799,13 +799,29 @@ class _PizzaScreenState extends State<PizzaScreen>{
                                                       BorderRadius.all(
                                                           Radius.circular(
                                                               10)),
-                                                      child: Image(
-                                                        image: NetworkImage(
-                                                            "${pizzalist[pizzaindex].foodimagelist[index].image}"),
-                                                        width: 150,
-                                                        height: 120,
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                                      child:  CachedNetworkImage(
+                                                          imageUrl:
+                                                          "${pizzalist[pizzaindex].foodimagelist[index].image}",
+                                                          placeholder: (context,
+                                                              url) =>
+                                                              Shimmer.fromColors(
+                                                                  direction: ShimmerDirection.ltr,
+                                                                  enabled: true,
+                                                                  baseColor: Colors
+                                                                      .grey
+                                                                      .shade300,
+                                                                  highlightColor:
+                                                                  Colors.grey
+                                                                      .shade100,
+                                                                  child:
+                                                                  Container(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  )),
+                                                          width:150,
+                                                          height: 120,
+                                                          fit: BoxFit.cover),
+
                                                     ),
                                                   ),
                                                   Positioned(
@@ -818,9 +834,7 @@ class _PizzaScreenState extends State<PizzaScreen>{
                                                         ? GestureDetector(
                                                       onTap: () {
                                                         setState(() =>
-                                                            pizzaController.Pizzaadd(
-                                                                pizzaindex,
-                                                                index));
+                                                            pizzaController.Pizzaadd(pizzaindex, index));
                                                       },
                                                       child: Container(
                                                         width: 80,
@@ -1070,7 +1084,7 @@ class _PizzaScreenState extends State<PizzaScreen>{
             ad.fullScreenContentCallback=FullScreenContentCallback(
               onAdClicked: (ad) {
               },
-              onAdDismissedFullScreenContent: (ad) {
+              onAdDismissedFullScreenContent: (ad){
                 setState(() {
                   Navigator.push(
                       context,
@@ -1079,9 +1093,14 @@ class _PizzaScreenState extends State<PizzaScreen>{
                           PageTransitionType.rightToLeft,
                           child: CustomizePizza()));
                   ad.dispose();
+                  isLoaded = false;
+                  print("122222");
                 });
               },
               onAdWillDismissFullScreenContent: (ad) {
+                print("1111111111");
+                ad.dispose();
+                isLoaded = false;
               },
             );
             setState(() {

@@ -6,7 +6,7 @@ class OrderFoodItemModel {
   String ?rating;
   String ?name;
   int ?price;
-  int ?id;
+  String ?id;
   String ?food;
   bool ?checkadd = false;
   int ?selectitem = 1;
@@ -51,7 +51,6 @@ class OrderFoodItemModel {
       "checkadd": checkadd,
       "selectitem": selectitem,
       "foodbill": foodbill,
-
       "base64": base64,
       "pizzaSize": pizzaSize,
       "customPizzametaBill": customPizzametaBill,

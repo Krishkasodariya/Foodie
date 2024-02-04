@@ -81,6 +81,14 @@ class LoginController extends GetxController {
     print("getdata");
     return null;
   }
+
+  Future takephoto(ImageSource source) async {
+    file = await picker.pickImage(source: source);
+    print("-----file!.path------${file!.path}");
+    addphoto();
+    reference!();
+  }
+
   Future addphoto() async {
     if (file == null) {
       return;
@@ -101,12 +109,7 @@ class LoginController extends GetxController {
     }
   }
 
-  Future takephoto(ImageSource source) async {
-    file = await picker.pickImage(source: source);
-    print("-----file!.path------${file!.path}");
-    addphoto();
-    reference!();
-  }
+
 
   Future profileData() async{
     FirebaseFirestore.instance

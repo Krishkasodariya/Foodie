@@ -30,11 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     loadAd();
-    Future.delayed(Duration(seconds: 8)).then((value) {
-     // showAdIfAvailable();
-      chekedfirsttime();
-    });
-    googleMapControllerScreen.gotoUserCurrentPosition();
+
+    googleMapControllerScreen.defaultLocation();
     loginController.Getuid();
     loginController.profileData();
     googleMapControllerScreen.GetLocationData();
@@ -137,16 +134,31 @@ class _SplashScreenState extends State<SplashScreen> {
         request: AdRequest(),
         adLoadCallback: AppOpenAdLoadCallback(
           onAdLoaded: (ad) {
-            print("-OpenAd--$ad-------ad is loaded----------");
-            openad = ad;
-            openad!.show();
-            if(openad!=null){
-              setState((){
-                isLoaded = true;
-              });
-            }else{
-              isLoaded = false;
-            }
+            setState(() {
+              openad = ad;
+              isLoaded = true;
+            });
+
+            ad.fullScreenContentCallback=FullScreenContentCallback(
+              onAdClicked: (ad) {
+              },
+              onAdDismissedFullScreenContent: (ad){
+                setState(() {
+                  chekedfirsttime();
+                  ad.dispose();
+                  isLoaded = false;
+                  print("122222");
+                });
+              },
+              onAdWillDismissFullScreenContent: (ad) {
+                print("1111111111");
+                ad.dispose();
+                isLoaded = false;
+              },
+            );
+            setState(() {
+              openad!.show();
+            });
           },
           onAdFailedToLoad: (error) {
             print("-OpenAd-$error----------ad is failed--------");
@@ -155,38 +167,5 @@ class _SplashScreenState extends State<SplashScreen> {
         orientation: AppOpenAd.orientationPortrait);
   }
 
- /* void showAdIfAvailable() {
-    if (openad == null) {
-      print('------OpenAd------Tried to show ad before available.---------');
-      loadAd();
-      return;
-    }
 
-    if (isShowingAd) {
-      print('----OpenAd-------Tried to show ad while already showing an ad.-------');
-      return;
-    }
-
-    openad!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdClicked: (ad) {
-        print("--OpenAd---$ad--------AdClick------------------)");
-
-      },
-      onAdShowedFullScreenContent: (ad) {
-        isShowingAd = true;
-        print('$ad---OpenAd---- onAdShowedFullScreenContent---------');
-      },
-      onAdFailedToShowFullScreenContent: (ad, error) {
-        isShowingAd = false;
-        print('$ad---OpenAd---- onAdFailedToShowFullScreenContent-----$error----');
-      },
-      onAdDismissedFullScreenContent: (ad) {
-        print('$ad -----OpenAd------onAdDismissedFullScreenContent----------');
-        isShowingAd = false;
-        ad.dispose();
-        openad = null;
-        loadAd();
-      },
-    );
-  }*/
 }

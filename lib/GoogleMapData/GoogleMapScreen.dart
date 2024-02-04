@@ -3,11 +3,6 @@ import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/GoogleMapData/AddressDetails.dart';
 import 'package:Pizza/GoogleMapData/SearchLocation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
-
-//import 'package:google_maps_webservice/places.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -23,12 +18,6 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
-  late Set<Lottie>ee;
-
-
-  late LatLng draggedLatlng;
-  late LatLng defaultLatlng;
-  CameraPosition? cameraPosition;
 
   GoogleMapControllerScreen googleMapControllerscreen=Get.find();
 
@@ -36,17 +25,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _init();
+    googleMapControllerscreen.defaultLocation();
     googleMapControllerscreen.Allupdate(ref);
   }
 
-  _init() {
-    defaultLatlng = LatLng(10, 10);
-    draggedLatlng = defaultLatlng;
-    cameraPosition = CameraPosition(target: defaultLatlng, zoom: 18);
-    googleMapControllerscreen.gotoUserCurrentPosition();
 
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,11 +74,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
               });
             },
             onCameraMove: (position) {
-              draggedLatlng = position.target;
-              print("----****${draggedLatlng}");
+              googleMapControllerscreen.draggedLatlng = position.target;
+              print("----****${googleMapControllerscreen.draggedLatlng}");
             },
             onCameraIdle: () {
-              googleMapControllerscreen.getplacemark(draggedLatlng);
+              googleMapControllerscreen.getplacemark(googleMapControllerscreen.draggedLatlng);
             },
 
 

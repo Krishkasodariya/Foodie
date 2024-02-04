@@ -77,12 +77,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
         if (checkEnabled) {
 
         } else {
-          checkEnabled = true;
+          checkEnabled=true;
           Navigator.pop(context);
           Navigator.pop(context);
-          checkEnabled = false;
+          resetdata();
+          checkEnabled=false;
         }
-        return null!;
+        return Future.value(false);
       },
       child: Scaffold(
         appBar: AppBar(
@@ -94,6 +95,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                 checkEnabled = true;
                 Navigator.pop(context,);
                 Navigator.pop(context);
+                resetdata();
                 checkEnabled = false;
               }
             },
@@ -866,11 +868,9 @@ class _CustomizePizzaState extends State<CustomizePizza>
   void resetdata() {
     for (int i = 0; i <
         pizzaController.customizepizzalist[0].ingredients!.length; i++) {
-      if (pizzaController.customizepizzalist[0].ingredients![i]
-          .checkIngredient) {
+      if (pizzaController.customizepizzalist[0].ingredients![i].checkIngredient) {
         setState(() {
-          pizzaController.customizepizzalist[0].ingredients![i]
-              .checkIngredient = false;
+          pizzaController.customizepizzalist[0].ingredients![i].checkIngredient = false;
         });
       }
     }

@@ -79,14 +79,12 @@ class _AddressBookState extends State<AddressBook> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: googleMapControllerScreen
-                                  .changeAddressHeight.value
+                          padding: googleMapControllerScreen.changeAddressHeight.value
                               ? EdgeInsets.only(left: 20, top: 15, bottom: 15)
                               : EdgeInsets.all(0),
                           child: Align(
                             alignment: AlignmentDirectional.centerStart,
-                            child: googleMapControllerScreen
-                                    .changeAddressHeight.value
+                            child: googleMapControllerScreen.changeAddressHeight.value
                                 ? Text(
                                     "Select Address  ",
                                     style: GoogleFonts.lexend(

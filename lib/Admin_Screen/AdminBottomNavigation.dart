@@ -1,5 +1,5 @@
 import 'package:Pizza/Admin_Screen/Add_Restaurants.dart';
-import 'package:Pizza/Admin_Screen/soda_add_view.dart';
+import 'package:Pizza/Admin_Screen/Add_Soda.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -125,12 +125,14 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                     PageTransition(
                         type: PageTransitionType.rightToLeft,
                         child: AddRestaurants()));
+                    print("11111");
                 }else if(bottomController.adminCurrentindex==1){
                   Navigator.push(
                       context,
                       PageTransition(
                           type: PageTransitionType.rightToLeft,
                           child:SodaAddView()));
+                  print("2222");
                 }
               },
               child: Container(

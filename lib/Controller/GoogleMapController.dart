@@ -15,16 +15,20 @@ class GoogleMapControllerScreen extends GetxController{
   RxBool changeAddressHeight=false.obs;
   RxBool changeProfileHeight=false.obs;
 
+  late LatLng draggedLatlng;
+  late LatLng defaultLatlng;
+  CameraPosition? cameraPosition;
+
   Placemark place = Placemark();
   late GoogleMapController googleMapController;
   void Allupdate(Function ref){
     reference = ref;
   }
 
-
   void HomeLocationupdate(Function ref){
     update1 = ref;
   }
+
   Future determineCurrentPosition() async{
     bool serviceEnabled;
     LocationPermission locationPermission;
@@ -48,22 +52,21 @@ class GoogleMapControllerScreen extends GetxController{
       return Future.error("Location permission is disable forever");
     }
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     return position;
   }
 
   Future gotoUserCurrentPosition() async {
     Position currentposition = await determineCurrentPosition();
-    gotoSpecificPosition(
-        LatLng(currentposition.latitude, currentposition.longitude));
+    gotoSpecificPosition(LatLng(currentposition.latitude, currentposition.longitude));
   }
 
   Future gotoSpecificPosition(LatLng position) async {
+
     googleMapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: position, zoom: 18)));
-
     await getplacemark(position);
+    print("222222222222");
   }
 
   Future getplacemark(LatLng position) async {
@@ -72,12 +75,19 @@ class GoogleMapControllerScreen extends GetxController{
 
     place = placemark[0];
 
-      String currentAddress =
-          "name:-- ${place.name},locality:--  ${place.locality},postalCode:--  ${place.postalCode},country:--  ${place.country},street:-- ${place.street},subLocality:-- ${place.subLocality},administrativeArea:-- ${place.administrativeArea},subAdministrativeArea:-- ${place.subAdministrativeArea}";
+      String currentAddress = "name:-- ${place.name},locality:--  ${place.locality},postalCode:--  ${place.postalCode},country:--  ${place.country},street:-- ${place.street},subLocality:-- ${place.subLocality},administrativeArea:-- ${place.administrativeArea},subAdministrativeArea:-- ${place.subAdministrativeArea}";
       print("--------------------)$currentAddress");
-
       draggedAddress.value = currentAddress;
     reference!();
+    print("33333333333333");
+  }
+
+  void defaultLocation(){
+    defaultLatlng = LatLng(10, 10);
+    draggedLatlng = defaultLatlng;
+    cameraPosition = CameraPosition(target: defaultLatlng, zoom: 18);
+    gotoUserCurrentPosition();
+    print("000000000000000000000000${place.subLocality}");
   }
 
   Future SetLocationData(String sector,String locality)async{

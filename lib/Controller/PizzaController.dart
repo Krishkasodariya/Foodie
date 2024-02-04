@@ -2,11 +2,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
-
 import 'package:Pizza/All%20Screen/InternetDialog.dart';
+import 'package:Pizza/Controller/AdminController.dart';
 import 'package:Pizza/ModelClass/FoodItemModel.dart';
 import 'package:Pizza/ModelClass/Ingredient.dart';
-import 'package:Pizza/ModelClass/MainOrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/OfferModel.dart';
 import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
@@ -134,8 +133,6 @@ class PizzaController extends GetxController {
 
   late StreamSubscription subscription;
 
-
-
   RxList<PizzaItemModel> likelist = <PizzaItemModel>[].obs;
   RxList<PizzaItemModel> pizzalist = <PizzaItemModel>[].obs;
 
@@ -163,7 +160,7 @@ class PizzaController extends GetxController {
 
   RxList<FoodItemModel> customizepizzalist = <FoodItemModel>[
     FoodItemModel(
-        id: 0,
+        id: "",
         price: 0,
         checkadd: false,
         selectitem: 0,
@@ -327,6 +324,7 @@ class PizzaController extends GetxController {
 
   Future<List<PizzaItemModel>> getPizzaData()async {
     try {
+      pizzalist.clear();
       await FirebaseFirestore.instance
           .collection("pizza")
           .get()
@@ -338,7 +336,7 @@ class PizzaController extends GetxController {
           RxList<FoodItemModel> food = <FoodItemModel>[].obs;
           List<dynamic> dynamicList = data['foodimagelist'];
 
-          dynamicList.forEach((element) {
+          dynamicList.forEach((element){
             food.add(FoodItemModel.fromJson(element));
           });
           PizzaItemModel pizzaItem = PizzaItemModel(
@@ -356,6 +354,23 @@ class PizzaController extends GetxController {
           print("--pizzalist-length---)${pizzalist.length}");
         });
       });
+      for(int i=0;i<pizzabottomlist.length;i++){
+        for(int j=0;j<pizzalist.length;j++){
+          for(int k=0;k<pizzalist[j].foodimagelist.length;k++){
+            if(pizzabottomlist[i].id== pizzalist[j].foodimagelist[k].id){
+              pizzalist[j].foodimagelist[k].checkadd = true;
+              pizzalist[j].foodimagelist[k].selectitem=pizzabottomlist[i].selectitem;
+              pizzalist[j].foodimagelist[k].price=pizzabottomlist[i].price;
+              pizzalist[j].foodimagelist[k].foodbill=pizzabottomlist[i].foodbill;
+
+
+            }
+
+          }
+
+        }
+
+      }
     } catch (e) {
       print("----444444---------${e}");
     }
@@ -776,6 +791,11 @@ class PizzaController extends GetxController {
         subname: "Pizza"),
   ].obs;*/
 
+
+  /*void refreshPizza(){
+
+  }*/
+
   void Pizzaadd(int pizzaindex, int index) {
     pizzalist[pizzaindex].foodimagelist[index].checkadd = true;
     isBootomSheet.value = true;
@@ -797,17 +817,22 @@ class PizzaController extends GetxController {
     if (pizzalist[pizzaindex].foodimagelist[index].selectitem == 0) {
       pizzalist[pizzaindex].foodimagelist[index].checkadd = false;
       pizzalist[pizzaindex].foodimagelist[index].selectitem = 1;
+
     }
     for(int i = 0; i < pizzabottomlist.length - 1; i++){
-      if (pizzalist[pizzaindex].foodimagelist[index].id ==
-          pizzabottomlist[i].id) {
+      if (pizzalist[pizzaindex].foodimagelist[index].id == pizzabottomlist[i].id) {
         pizzabottomlist.remove(pizzabottomlist[i]);
       }
     }
 
     for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      if (pizzalist[pizzaindex].foodimagelist[index].id == pizzabottomlist[i].id) {
+        pizzabottomlist[i].selectitem=pizzalist[pizzaindex].foodimagelist[index].selectitem;
+        pizzabottomlist[i].foodbill=pizzalist[pizzaindex].foodimagelist[index].price;
+
+      }
+
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
         print(iscountfoodtotal.value);
       }
@@ -843,8 +868,9 @@ class PizzaController extends GetxController {
     pizzalist[pizzaindex].foodimagelist[index].selectitem--;
     isBootomSheet.value = false;
 
-    for (int i = 0; i < pizzabottomlist.length; i++) {
+    for (int i = 0; i < pizzabottomlist.length; i++){
       if (pizzalist[pizzaindex].foodimagelist[index].id == pizzabottomlist[i].id){
+        pizzabottomlist[i].selectitem=pizzalist[pizzaindex].foodimagelist[index].selectitem;
         pizzabottomlist[i].foodtotal -= pizzabottomlist[i].price;
         pizzabottomlist[i].foodbill = pizzabottomlist[i].foodtotal;
       }
@@ -855,10 +881,9 @@ class PizzaController extends GetxController {
       pizzalist[pizzaindex].foodimagelist[index].checkadd = false;
 
       for (int i = 0; i < pizzabottomlist.length; i++) {
-        if (pizzalist[pizzaindex].foodimagelist[index].id ==
-            pizzabottomlist[i].id) {
+        if (pizzalist[pizzaindex].foodimagelist[index].id == pizzabottomlist[i].id) {
           pizzabottomlist[i].foodbill = pizzabottomlist[i].price;
-          pizzabottomlist.remove(pizzalist[pizzaindex].foodimagelist[index]);
+          pizzabottomlist.remove(pizzabottomlist[i]);
         }
       }
     }
@@ -870,8 +895,7 @@ class PizzaController extends GetxController {
       }
     }
 
-    if (pizzabottomlist.isNotEmpty ||
-        customizepizzalist[0].pizzametalist!.isNotEmpty) {
+    if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
       isBootomSheet.value = true;
     }
 
@@ -929,14 +953,12 @@ class PizzaController extends GetxController {
     }
 
     for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzalist[pizzaindex].foodimagelist[index].id ==
-          pizzabottomlist[i].id) {
-        pizzabottomlist[i].foodtotal =
-            pizzabottomlist[i].selectitem * pizzabottomlist[i].price;
+      if (pizzalist[pizzaindex].foodimagelist[index].id == pizzabottomlist[i].id) {
+        pizzabottomlist[i].selectitem=pizzalist[pizzaindex].foodimagelist[index].selectitem;
+        pizzabottomlist[i].foodtotal = pizzabottomlist[i].selectitem * pizzabottomlist[i].price;
         pizzabottomlist[i].foodbill = pizzabottomlist[i].foodtotal;
       }
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
       }
     }
@@ -953,19 +975,13 @@ class PizzaController extends GetxController {
     print("-------- finalfoodtotal.value---------)${finalfoodtotal.value}");
 
     print("plus");
-    print(
-        "==============Pizzaplus=====id========${pizzalist[pizzaindex].foodimagelist[index].id}");
-    print(
-        "==============Pizzaplus=====name========${pizzalist[pizzaindex].foodimagelist[index].name}");
-    print(
-        "==============Pizzaplus=====selectitem========${pizzalist[pizzaindex].foodimagelist[index].selectitem}");
+    print("==============Pizzaplus=====id========${pizzalist[pizzaindex].foodimagelist[index].id}");
+    print("==============Pizzaplus=====name========${pizzalist[pizzaindex].foodimagelist[index].name}");
+    print("==============Pizzaplus=====selectitem========${pizzalist[pizzaindex].foodimagelist[index].selectitem}");
     print("==============Pizzaplus=====index========${index}");
-    print(
-        "==============Pizzaplus=====price========${pizzalist[pizzaindex].foodimagelist[index].price}");
-    print(
-        "==============Pizzaplus=====foodbill========)${pizzalist[pizzaindex].foodimagelist[index].foodbill}");
-    print(
-        "==============Pizzaplus=====foodtotal========${pizzalist[pizzaindex].foodimagelist[index].foodtotal}");
+    print("==============Pizzaplus=====price========${pizzalist[pizzaindex].foodimagelist[index].price}");
+    print("==============Pizzaplus=====foodbill========)${pizzalist[pizzaindex].foodimagelist[index].foodbill}");
+    print("==============Pizzaplus=====foodtotal========${pizzalist[pizzaindex].foodimagelist[index].foodtotal}");
 
     grandtotal.value = finalfoodtotal.value +
         gst.value +
@@ -985,27 +1001,29 @@ class PizzaController extends GetxController {
     pizzabottomlist[index].foodtotal -= pizzabottomlist[index].price;
     pizzabottomlist[index].foodbill = pizzabottomlist[index].foodtotal;
 
-    print(
-        "========bottom======Pizzaremove=====id========${pizzabottomlist[index].id}");
-    print(
-        "========bottom======Pizzaremove=====name========${pizzabottomlist[index].name}");
-    print(
-        "=======bottom=======Pizzaremove=====selectitem========${pizzabottomlist[index].selectitem}");
+    for (int i = 0; i < pizzalist.value.length; i++) {
+      for (int j = 0; j < pizzalist[i].foodimagelist.value.length; j++) {
+        if (pizzabottomlist.value[index].id == pizzalist[i].foodimagelist[j].id) {
+          pizzalist[i].foodimagelist[j].selectitem =pizzabottomlist.value[index].selectitem;
+
+        }
+      }
+    }
+
+    print("========bottom======Pizzaremove=====id========${pizzabottomlist[index].id}");
+    print("========bottom======Pizzaremove=====name========${pizzabottomlist[index].name}");
+    print("=======bottom=======Pizzaremove=====selectitem========${pizzabottomlist[index].selectitem}");
     print("=====bottom=========Pizzaremove=====index========${index}");
-    print(
-        "=======bottom=======Pizzaremove=====price========${pizzabottomlist[index].price}");
-    print(
-        "========bottom======Pizzaremove=====foodbill========)${pizzabottomlist[index].foodbill}");
-    print(
-        "========bottom======Pizzaremove=====foodtotal========${pizzabottomlist[index].foodtotal}");
+    print("=======bottom=======Pizzaremove=====price========${pizzabottomlist[index].price}");
+    print("========bottom======Pizzaremove=====foodbill========)${pizzabottomlist[index].foodbill}");
+    print("========bottom======Pizzaremove=====foodtotal========${pizzabottomlist[index].foodtotal}");
 
     if (pizzabottomlist[index].selectitem == 0) {
       pizzabottomlist[index].foodbill = pizzabottomlist[index].price;
 
       for (int i = 0; i < pizzalist.value.length; i++) {
         for (int j = 0; j < pizzalist[i].foodimagelist.value.length; j++) {
-          if (pizzabottomlist.value[index].id ==
-              pizzalist[i].foodimagelist[j].id) {
+          if (pizzabottomlist.value[index].id == pizzalist[i].foodimagelist[j].id) {
             pizzalist[i].foodimagelist[j].selectitem = 1;
             pizzalist[i].foodimagelist[j].checkadd = false;
           }
@@ -1014,26 +1032,23 @@ class PizzaController extends GetxController {
       pizzabottomlist.remove(pizzabottomlist[index]);
     }
 
-    if (pizzabottomlist.isNotEmpty ||
-        customizepizzalist[0].pizzametalist!.isNotEmpty) {
+    if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
       isBootomSheet.value = true;
       iscountfoodtotal.value = 0;
     }
 
     for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
       }
     }
 
     for (int j = 0; j < customizepizzalist[0].pizzametalist!.length; j++) {
-      if (customizepizzalist[0].pizzametalist!.isNotEmpty ||
-          pizzabottomlist.isNotEmpty) {
-        Customfoodtotal.value +=
-            customizepizzalist[0].pizzametalist![j].customPizzametaBill;
+      if (customizepizzalist[0].pizzametalist!.isNotEmpty || pizzabottomlist.isNotEmpty) {
+        Customfoodtotal.value += customizepizzalist[0].pizzametalist![j].customPizzametaBill;
       }
     }
+
     finalfoodtotal.value = Customfoodtotal.value + iscountfoodtotal.value;
     print("-------- finalfoodtotal.value---------)${finalfoodtotal.value}");
 
@@ -1059,22 +1074,27 @@ class PizzaController extends GetxController {
       pizzabottomlist[index].selectitem = 1;
     }
 
-    pizzabottomlist[index].foodtotal =
-        pizzabottomlist[index].selectitem * pizzabottomlist[index].price;
+    pizzabottomlist[index].foodtotal = pizzabottomlist[index].selectitem * pizzabottomlist[index].price;
     pizzabottomlist[index].foodbill = pizzabottomlist[index].foodtotal;
 
+    for (int i = 0; i < pizzalist.value.length; i++) {
+      for (int j = 0; j < pizzalist[i].foodimagelist.value.length; j++) {
+        if (pizzabottomlist.value[index].id == pizzalist[i].foodimagelist[j].id) {
+          pizzalist[i].foodimagelist[j].selectitem =pizzabottomlist.value[index].selectitem;
+
+        }
+      }
+    }
+
     for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
       }
     }
 
     for (int j = 0; j < customizepizzalist[0].pizzametalist!.length; j++) {
-      if (customizepizzalist[0].pizzametalist!.isNotEmpty ||
-          pizzabottomlist.isNotEmpty) {
-        Customfoodtotal.value +=
-            customizepizzalist[0].pizzametalist![j].customPizzametaBill;
+      if (customizepizzalist[0].pizzametalist!.isNotEmpty || pizzabottomlist.isNotEmpty) {
+        Customfoodtotal.value += customizepizzalist[0].pizzametalist![j].customPizzametaBill;
       }
     }
     resetOffer();
@@ -1115,8 +1135,7 @@ class PizzaController extends GetxController {
         pizzalist[i].foodimagelist[j].selectitem = 1;
 
         for (int k = 0; k < pizzabottomlist.length; k++) {
-          if (pizzabottomlist.isNotEmpty ||
-              customizepizzalist[0].pizzametalist!.isNotEmpty) {
+          if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
             pizzabottomlist[k].foodbill = pizzabottomlist[k].price;
           }
         }
@@ -1476,18 +1495,38 @@ class PizzaController extends GetxController {
   ].obs;*/
 
   Future<List<FoodItemModel>> getSodaData()async{
-    await FirebaseFirestore.instance
-        .collection("coldDrink")
-        .get()
-        .then((QuerySnapshot querySnapshot){
-      querySnapshot.docs.forEach((element) {
-        Map<String,dynamic>data=element.data() as Map<String, dynamic>;
+    try{
 
-        log("${data}");
-        sodalist.add(FoodItemModel.fromJson(data));
+      sodalist.clear();
 
+      await FirebaseFirestore.instance
+          .collection("coldDrink")
+          .get()
+          .then((QuerySnapshot querySnapshot){
+        querySnapshot.docs.forEach((element) {
+          Map<String,dynamic>data=element.data() as Map<String, dynamic>;
+
+          log("${data}");
+          sodalist.add(FoodItemModel.fromJson(data));
+        });
       });
-    });
+
+      for(int i=0;i<pizzabottomlist.length;i++){
+        for(int j=0;j<sodalist.length;j++){
+          if(pizzabottomlist[i].id== sodalist[j].id){
+            sodalist[j].checkadd = true;
+            sodalist[j].selectitem=pizzabottomlist[i].selectitem;
+            sodalist[j].price=pizzabottomlist[i].price;
+            sodalist[j].foodbill=pizzabottomlist[i].foodbill;
+
+          }
+        }
+      }
+
+    }catch(e){
+      print(e);
+    }
+
 
     return sodalist;
   }
@@ -1553,14 +1592,14 @@ class PizzaController extends GetxController {
       sodalist.value[index].checkadd = false;
       sodalist.value[index].selectitem = 1;
     }
+
     for (int i = 0; i < pizzabottomlist.length; i++) {
       if (sodalist.value[index].id == pizzabottomlist[i].id) {
-        pizzabottomlist[i].foodtotal =
-            pizzabottomlist[i].selectitem * pizzabottomlist[i].price;
+        pizzabottomlist[i].selectitem=sodalist.value[index].selectitem;
+        pizzabottomlist[i].foodtotal = pizzabottomlist[i].selectitem * pizzabottomlist[i].price;
         pizzabottomlist[i].foodbill = pizzabottomlist[i].foodtotal;
       }
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
         print(iscountfoodtotal.value);
       }
@@ -1593,21 +1632,28 @@ class PizzaController extends GetxController {
     sodalist.value[index].selectitem--;
     isBootomSheet.value = false;
 
+
+    if (sodalist.value[index].selectitem == 0) {
+      sodalist.value[index].checkadd = false;
+      sodalist.value[index].selectitem = 1;
+
+      for (int i = 0; i < pizzabottomlist.value.length; i++){
+        if (sodalist.value[index].id == pizzabottomlist.value[i].id) {
+          pizzabottomlist[i].foodbill = pizzabottomlist[i].price;
+          pizzabottomlist.value.remove( pizzabottomlist.value[i]);
+          print("999999");
+        }
+      }
+    }
+
     for (int i = 0; i < pizzabottomlist.length; i++) {
       if (sodalist.value[index].id == pizzabottomlist[i].id) {
+        pizzabottomlist[i].selectitem=sodalist.value[index].selectitem;
         pizzabottomlist[i].foodtotal -= pizzabottomlist[i].price;
         pizzabottomlist[i].foodbill = pizzabottomlist[i].foodtotal;
       }
     }
-    if (sodalist.value[index].selectitem == 0) {
-      sodalist.value[index].checkadd = false;
-      sodalist.value[index].selectitem = 1;
-      for (int i = 0; i < pizzabottomlist.value.length; i++) {
-        if (sodalist.value[index].id == pizzabottomlist.value[i].id) {
-          pizzabottomlist.value.remove(sodalist.value[index]);
-        }
-      }
-    }
+
     for (int i = 0; i < sodalist.value.length; i++) {
       if (!sodalist.value[index].checkadd == sodalist.value[i].checkadd) {
         isBootomSheet.value = true;
@@ -1654,13 +1700,18 @@ class PizzaController extends GetxController {
     if (pizzabottomlist[index].selectitem == 0) {
       pizzabottomlist[index].selectitem = 1;
     }
-    pizzabottomlist[index].foodtotal =
-        pizzabottomlist[index].selectitem * pizzabottomlist[index].price;
+    pizzabottomlist[index].foodtotal = pizzabottomlist[index].selectitem * pizzabottomlist[index].price;
     pizzabottomlist[index].foodbill = pizzabottomlist[index].foodtotal;
 
-    for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+    for (int i = 0; i < sodalist.value.length; i++) {
+        if (pizzabottomlist.value[index].id ==sodalist[i].id) {
+          sodalist[i].selectitem =pizzabottomlist.value[index].selectitem;
+
+      }
+    }
+
+    for (int i = 0; i < pizzabottomlist.length; i++){
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
       }
     }
@@ -1668,8 +1719,7 @@ class PizzaController extends GetxController {
     for (int j = 0; j < customizepizzalist[0].pizzametalist!.length; j++) {
       if (customizepizzalist[0].pizzametalist!.isNotEmpty ||
           pizzabottomlist.isNotEmpty) {
-        Customfoodtotal.value +=
-            customizepizzalist[0].pizzametalist![j].customPizzametaBill;
+        Customfoodtotal.value += customizepizzalist[0].pizzametalist![j].customPizzametaBill;
       }
     }
     resetOffer();
@@ -1697,16 +1747,14 @@ class PizzaController extends GetxController {
     pizzabottomlist[index].foodtotal -= pizzabottomlist[index].price;
     pizzabottomlist[index].foodbill = pizzabottomlist[index].foodtotal;
 
+    for (int i = 0; i < sodalist.value.length; i++) {
+      if (pizzabottomlist.value[index].id ==sodalist[i].id) {
+        sodalist[i].selectitem =pizzabottomlist.value[index].selectitem;
+
+      }
+    }
+
     if (pizzabottomlist.value[index].selectitem == 0) {
-      /* for (int i = 0; i < pizzalist.length; i++) {
-        for (int j = 0; j < pizzalist[i].foodimagelist.length; j++) {
-          if (pizzabottomlist.value[index].id == pizzalist[i].foodimagelist[j].id) {
-            pizzalist[i].foodimagelist[j].checkadd = false;
-            pizzalist[i].foodimagelist[j].selectitem = 1;
-            pizzabottomlist[index].foodbill = pizzabottomlist[index].price;
-          }
-        }
-      }*/
 
       for (int i = 0; i < sodalist.value.length; i++) {
         if (pizzabottomlist.value[index].id == sodalist.value[i].id) {
@@ -1718,15 +1766,13 @@ class PizzaController extends GetxController {
       pizzabottomlist.value.remove(pizzabottomlist.value[index]);
     }
 
-    if (pizzabottomlist.isEmpty) {
-      // Navigator.pop(context);
-      isBootomSheet.value = false;
+    if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      isBootomSheet.value = true;
       iscountfoodtotal.value = 0;
     }
 
     for (int i = 0; i < pizzabottomlist.length; i++) {
-      if (pizzabottomlist.isNotEmpty ||
-          customizepizzalist[0].pizzametalist!.isNotEmpty) {
+      if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
         iscountfoodtotal.value += pizzabottomlist[i].foodbill;
       }
     }

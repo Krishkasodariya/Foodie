@@ -2,9 +2,11 @@
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class BottomSheetDialog extends StatefulWidget {
@@ -124,13 +126,28 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                                 ClipRRect(
                                     borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
-                                    child: Image(
-                                      image: NetworkImage(
-                                          "${pizzaController.pizzabottomlist[index].image}"),
-                                      width: 80,
-                                      height: 80,
-                                      fit: BoxFit.cover,
-                                    )),
+                                    child:  CachedNetworkImage(
+                                        imageUrl:
+                                        "${pizzaController.pizzabottomlist[index].image}",
+                                        placeholder: (context,
+                                            url) =>
+                                            Shimmer.fromColors(
+                                                direction: ShimmerDirection.ltr,
+                                                enabled: true,
+                                                baseColor: Colors
+                                                    .grey
+                                                    .shade300,
+                                                highlightColor:
+                                                Colors.grey
+                                                    .shade100,
+                                                child:
+                                                Container(
+                                                  color: Colors
+                                                      .grey,
+                                                )),
+                                        width: 70,
+                                        height: 70,
+                                        fit: BoxFit.cover)),
                                 Padding(
                                   padding:
                                   const EdgeInsets.only(left: 10, right: 10),

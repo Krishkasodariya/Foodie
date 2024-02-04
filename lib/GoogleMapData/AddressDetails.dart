@@ -37,12 +37,13 @@ class _AddressDetailsState extends State<AddressDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    print("1111");
     data = widget.palce;
 
     flatController.text = "${data.name}";
     areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
     nearController.text = "${data.thoroughfare}";
+
   }
 
   @override
@@ -324,6 +325,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                       backgroundColor:
                       MaterialStateProperty.all(Color(0xffEF505F))),
                   onPressed: () async {
+                    print("AAAAAAAAA");
                     _adddata();
                     Navigator.pop(context);
 
@@ -342,12 +344,14 @@ class _AddressDetailsState extends State<AddressDetails> {
   }
 
   void _adddata() async {
+
     await detaildao.adddetail(Detail_table(
         order,
         addresstype[currentindex].name,
         flatController.text,
         areaController.text,
         nearController.text));
+
   }
 }
 

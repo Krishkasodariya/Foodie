@@ -3,7 +3,6 @@ import 'package:Pizza/Drawer/AddressBook.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
@@ -31,7 +30,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
     // TODO: implement initState
     //loaded();
     super.initState();
-    googleMapControllerScreen.gotoUserCurrentPosition();
+    googleMapControllerScreen.defaultLocation();
+    print("1111111111111111111${googleMapControllerScreen.place.subLocality}");
     pizzaController.getconnectivity(context);
     googleMapControllerScreen.GetLocationData();
     logincontroller.Getuid();
@@ -65,82 +65,74 @@ class _BottomNavigationState extends State<BottomNavigation> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 12, right: 10),
-              child: Container(
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: AddressBook()));
-                      },
-                      child: Icon(
-                        Icons.location_on_rounded,
-                        color: Color(0xffEF505F),
-                        size: 28,
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: /*googleMapControllerScreen.addresstype == null
-                                ? Text(
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    "${googleMapControllerScreen.place.subLocality}",
-                                    style: GoogleFonts.nunito(
-                                        fontSize: 20,
-                                        color: Color(0xff313848),
-                                        fontWeight: FontWeight.w700),
-                                  )
-                                :*/ Obx(()=>
-                                Text(
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      "${googleMapControllerScreen.addresstype}",
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 20,
-                                          color: Color(0xff313848),
-                                          fontWeight: FontWeight.w700),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: AddressBook()));
+                },
+                child: Obx(()=> Container(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_rounded,
+                          color: Color(0xffEF505F),
+                          size: 28,
+                        ),
+                        googleMapControllerScreen.addresstype.isEmpty
+                            ?
+                            Text(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              "Select Address",
+                              style: GoogleFonts.nunito(
+                                  fontSize: 20,
+                                  color: Color(0xff313848),
+                                 ),
+                            )
+                        :  Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Obx(()=>
+                                    Text(
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          "${googleMapControllerScreen.addresstype}",
+                                          style: GoogleFonts.nunito(
+                                              fontSize: 20,
+                                              color: Color(0xff313848),
+                                              fontWeight: FontWeight.w700),
+                                        ),
                                     ),
-                                ),
-                          ),
-                          Container(
-                            width: 220,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child:/* googleMapControllerScreen.area == null
-                                  ? Text(
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      "${googleMapControllerScreen.place.locality}",
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 15,
-                                          color: Color(0xff737373),
-                                          fontWeight: FontWeight.w700),
-                                    )
-                                  :*/ Obx(()=>
-                                  Text(
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        "${googleMapControllerScreen.area}",
-                                        style: GoogleFonts.nunito(
-                                            fontSize: 15,
-                                            color: Color(0xff737373),
-                                            fontWeight: FontWeight.w700),
+                              ),
+                              Container(
+                                width: 220,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Obx(()=>
+                                      Text(
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            "${googleMapControllerScreen.area}",
+                                            style: GoogleFonts.nunito(
+                                                fontSize: 15,
+                                                color: Color(0xff737373),
+                                                fontWeight: FontWeight.w700),
+                                          ),
                                       ),
-                                  ),
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

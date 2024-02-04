@@ -19,15 +19,19 @@ import 'package:Pizza/ModelClass/EatingPizzaTwo.dart';
 import 'package:Pizza/ModelClass/HomeCetegoriesModel.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen>{
   var homesearchContoller = TextEditingController();
+
   BottomController bottomController = Get.find();
   CarouselController carouselController = CarouselController();
+
   int sliderindex = 0;
   PizzaController pizzaController = Get.find();
   OrderController orderController=Get.find();

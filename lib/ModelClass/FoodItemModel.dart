@@ -3,7 +3,7 @@ import 'package:Pizza/ModelClass/PizzaMeta.dart';
 import 'package:Pizza/ModelClass/PizzaSize.dart';
 
 class FoodItemModel{
-  int id;
+  String id;
   String food;
   String? image;
   String? name;
