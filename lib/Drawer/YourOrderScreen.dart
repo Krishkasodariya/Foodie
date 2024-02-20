@@ -1,14 +1,24 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:Pizza/All%20Screen/GstInformationDialog.dart';
+import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/Controller/OrderController.dart';
 import 'package:Pizza/ModelClass/FoodItemModel.dart';
+import 'package:Pizza/ModelClass/PizzaMeta.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
+import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../BottomNavigation/BottomNavigation.dart';
+import '../Controller/BottomController.dart';
+import '../ModelClass/MainOrderFoodItemModel.dart';
+import '../ModelClass/OrderFoodItemModel.dart';
 
 class YourOrderScreen extends StatefulWidget {
   const YourOrderScreen({super.key});
@@ -20,6 +30,8 @@ class YourOrderScreen extends StatefulWidget {
 class _YourOrderScreenState extends State<YourOrderScreen> {
   PizzaController pizzaController = Get.find();
   OrderController orderController = Get.find();
+  LoginController loginController = Get.find();
+
 
   @override
   void initState() {
@@ -162,12 +174,33 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                     Spacer(),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10),
-                                      child: Image(
-                                        image:
-                                            AssetImage("images/fill_like.webp"),
-                                        width: 29,
-                                        height: 29,
-                                        fit: BoxFit.cover,
+                                      child:GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            orderController.orderDatalist[index].favouriteOrder=!orderController.orderDatalist[index].favouriteOrder;
+                                            if( orderController.orderDatalist[index].favouriteOrder){
+                                              orderController.add_Favourite_User_OrderData(index);
+                                              orderController.order_Fill_Like_OrderData(index);
+                                            }else{
+                                              orderController.order_Remove_Like_OrderData(index);
+                                              orderController.remove_Favourite_User_OrderData(index);
+                                            }
+                                          });
+                                        },
+                                        child: orderController.orderDatalist[index].favouriteOrder?
+                                        Image(
+                                          image:
+                                              AssetImage("images/fill_like.webp"),
+                                          width: 29,
+                                          height: 29,
+                                          fit: BoxFit.cover,
+                                        ):Image(
+                                          image:
+                                          AssetImage("images/like.webp"),
+                                          width: 29,
+                                          height: 29,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     )
                                   ],
@@ -794,26 +827,99 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                                         Radius.circular(25),
                                                     bottomLeft:
                                                         Radius.circular(25)))),
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
+                                        backgroundColor: MaterialStateProperty.all(
                                                 Color(0xffEF505F))),
                                     onPressed: () {
-                                     //for (int i = 0; i < orderController.orderDatalist.length; i++) {
-                                        for (int j = 0; j < orderController.orderDatalist[index].datalist!.length; j++) {
-                                          pizzaController.pizzabottomlist.add(
-                                              FoodItemModel(
-                                                  id: "${orderController.orderDatalist[index].datalist![j].id}",
-                                                  food: "${orderController.orderDatalist[index].datalist![j].food}",
-                                                  price: orderController.orderDatalist[index].datalist![j].price!,
-                                                  checkadd: orderController.orderDatalist[index].datalist![j].checkadd!,
-                                                  selectitem: orderController.orderDatalist[index].datalist![j].selectitem!,
-                                                  foodbill:  orderController.orderDatalist[index].datalist![j].foodbill!,
-                                                  foodtotal:orderController.orderDatalist[index].datalist![j].foodtotal!,
-                                              image: orderController.orderDatalist[index].datalist![j].image!,
-                                              name: orderController.orderDatalist[index].datalist![j].name!,
-                                              rating: orderController.orderDatalist[index].datalist![j].rating! ));
+
+                                      setState(() {
+                                        for (int j = 0; j < orderController.orderDatalist[index].datalist!.length; j++){
+                                          pizzaController.isBootomSheet.value = true;
+
+                                          var dataList = orderController.orderDatalist[index]?.datalist;
+                                          if (dataList != null && j < dataList.length) {
+                                            var pizzaSize = dataList[j]?.pizzaSize;
+                                            var base64String = dataList[j]?.base64;
+                                            var customPizzametaPrice = dataList[j]?.customPizzametaPrice;
+                                            var customPizzametaSelectitem = dataList[j]?.customPizzametaSelectitem;
+                                            var customPizzametaTotal = dataList[j]?.customPizzametaTotal;
+                                            var customPizzametaBill = dataList[j]?.customPizzametaBill;
+
+                                            if (pizzaSize != null && base64String != null && customPizzametaPrice != null &&
+                                                customPizzametaSelectitem != null && customPizzametaTotal != null &&
+                                                customPizzametaBill != null) {
+
+                                              pizzaController.customizepizzalist[0]?.pizzametalist?.add(
+                                                PizzaMeta(
+                                                  pizzaSize: pizzaSize,
+                                                  customPizzametaUint8list: base64Decode(base64String),
+                                                  customPizzametaPrice: customPizzametaPrice,
+                                                  customPizzametaSelectitem: customPizzametaSelectitem,
+                                                  customPizzametaTotal: customPizzametaTotal,
+                                                  customPizzametaBill: customPizzametaBill,
+                                                ),
+                                              );
+                                            }
+                                          }
+                                          if (dataList != null && j < dataList.length) {
+                                            var id = dataList[j]?.id;
+                                            var food = dataList[j]?.food;
+                                            var price = dataList[j]?.price;
+                                            var checkadd = dataList[j]?.checkadd;
+                                            var selectitem = dataList[j]?.selectitem;
+                                            var foodbill = dataList[j]?.foodbill;
+                                            var foodtotal = dataList[j]?.foodtotal;
+                                            var image = dataList[j]?.image;
+                                            var name = dataList[j]?.name;
+                                            var rating = dataList[j]?.rating;
+
+                                            if (id != null && food != null && price != null && checkadd != null &&
+                                                selectitem != null && foodbill != null && foodtotal != null &&
+                                                image != null && name != null && rating != null) {
+
+                                              pizzaController.pizzabottomlist.add(FoodItemModel(
+                                                id: "$id",
+                                                food: "$food",
+                                                price: price,
+                                                checkadd: checkadd,
+                                                selectitem: selectitem,
+                                                foodbill: foodbill,
+                                                foodtotal: foodtotal,
+                                                image: image,
+                                                name: name,
+                                                rating: rating,
+                                              ));
+                                            }
+                                          }
+
+                                          for (int i = 0; i < pizzaController.pizzalist.length; i++){
+                                            for (int k = 0; k < pizzaController.pizzalist[i].foodimagelist.length; k++){
+                                              if(orderController.orderDatalist[index].datalist![j].id==pizzaController.pizzalist[i].foodimagelist[k].id){
+                                                pizzaController.pizzalist[i].foodimagelist[k].checkadd=true;
+                                                pizzaController.pizzalist[i].foodimagelist[k].selectitem=orderController.orderDatalist[index].datalist![j].selectitem!;
+                                                pizzaController.pizzalist[i].foodimagelist[k].price=orderController.orderDatalist[index].datalist![j].price!;
+                                                pizzaController.pizzalist[i].foodimagelist[k].foodbill=orderController.orderDatalist[index].datalist![j].foodbill!;
+                                              }
+                                            }
+                                          }
+
+                                          for(int i = 0; i <  pizzaController.sodalist.length; i++){
+                                            if(orderController.orderDatalist[index].datalist![j].id== pizzaController.sodalist[i].id){
+                                              pizzaController.sodalist[i].checkadd=true;
+                                              pizzaController.sodalist[i].selectitem=orderController.orderDatalist[index].datalist![j].selectitem!;
+                                              pizzaController.sodalist[i].price=orderController.orderDatalist[index].datalist![j].price!;
+                                              pizzaController.sodalist[i].foodbill=orderController.orderDatalist[index].datalist![j].foodbill!;
+                                            }
+                                          }
+
+                                          pizzaController.grandtotal.value=orderController.orderDatalist[index].grandTotal!;
+                                          pizzaController.finalfoodtotal.value=orderController.orderDatalist[index].subTotal!;
                                         }
-                                    //  }
+                                       // pizzaController.reference!();
+                                        Get.off(BottomNavigation());
+
+                                      });
+
+
                                     },
                                     child: Text(
                                       "Reorder Now",
@@ -837,5 +943,9 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
             ),
           ),
         ));
+  }
+
+  void reOrder(int index){
+
   }
 }

@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:Pizza/All%20Screen/SuccessScreen.dart';
 
+import '../Controller/PizzaController.dart';
+
 
 class PizzaDeliveryScreen extends StatefulWidget {
   const PizzaDeliveryScreen({super.key});
@@ -15,11 +17,13 @@ class PizzaDeliveryScreen extends StatefulWidget {
 }
 
 class _PizzaDeliveryScreenState extends State<PizzaDeliveryScreen> {
+
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 1),()=>Get.off(()=>SuccessScreen()));
+
+    Timer(Duration(seconds: 5),()=>Get.off(()=>SuccessScreen()));
   }
   @override
   Widget build(BuildContext context) {

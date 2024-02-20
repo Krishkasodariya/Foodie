@@ -1,6 +1,7 @@
 import 'package:Pizza/All%20Screen/CookingScreen.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
+import 'package:Pizza/Controller/OrderController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class _PaymentScreenState extends State<PaymentScreen>{
   TextEditingController paymentController = TextEditingController();
   PizzaController pizzaController=Get.find();
   LoginController loginController =Get.find();
+  OrderController orderController=Get.find();
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
 
   @override
@@ -167,6 +169,8 @@ class _PaymentScreenState extends State<PaymentScreen>{
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("------------success---------------------)${response}");
     paymentController.text = "";
+    orderController.addUserOrderData();
+    orderController.addAllUserOrderData();
     Navigator.push(
         context,
         PageTransition(
@@ -175,6 +179,7 @@ class _PaymentScreenState extends State<PaymentScreen>{
                     .grandtotal.value),
             type:
             PageTransitionType.rightToLeft));
+
     pizzaController.resetOffer();
     pizzaController.functionCartClear();
     googleMapControllerScreen.visibleAddress.value=false;

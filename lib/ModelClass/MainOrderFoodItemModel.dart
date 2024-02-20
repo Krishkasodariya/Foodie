@@ -2,6 +2,7 @@ import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
 import 'package:get/get.dart';
 
 class MainOrderFoodItemModel{
+  String ?orderId;
   bool favouriteOrder=false;
   bool viewDetail=false;
   bool apply=false;
@@ -17,6 +18,7 @@ class MainOrderFoodItemModel{
 
   MainOrderFoodItemModel(
       {
+        this.orderId,
         this.milliseconds,
         this.datalist,
         required this.viewDetail,

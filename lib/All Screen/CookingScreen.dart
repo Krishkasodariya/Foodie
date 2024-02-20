@@ -21,7 +21,7 @@ BottomController bottomController=Get.find();
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 1),()=>Get.off(()=>PizzaDeliveryScreen()));
+    Timer(Duration(seconds: 5),()=>Get.off(()=>PizzaDeliveryScreen()));
   }
   @override
   Widget build(BuildContext context) {

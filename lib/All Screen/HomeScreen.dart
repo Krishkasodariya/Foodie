@@ -130,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen>{
   void initState(){
     // TODO: implement initState
     super.initState();
+    pizzaController.Allupdate(ref);
     googleMapControllerScreen.HomeLocationupdate(ref);
     googleMapControllerScreen.GetLocationData();
     foundcategorieslist = categorieslist;

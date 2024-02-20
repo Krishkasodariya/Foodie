@@ -30,6 +30,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     // TODO: implement initState
     //loaded();
     super.initState();
+    pizzaController.Allupdate(ref);
     googleMapControllerScreen.defaultLocation();
     print("1111111111111111111${googleMapControllerScreen.place.subLocality}");
     pizzaController.getconnectivity(context);
@@ -314,4 +315,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
         request: AdRequest())
       ..load();
   }*/
+
+void ref(){
+  setState(() {
+    
+  });
+}
 }

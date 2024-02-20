@@ -127,6 +127,7 @@ class PizzaController extends GetxController {
         pizzametalist: [])
   ].obs;*/
 
+
   RxDouble offer = 0.0.obs;
   RxBool isalertset = false.obs;
   RxBool isdeviceconnected = false.obs;
@@ -283,6 +284,7 @@ class PizzaController extends GetxController {
   RxString orderMethod = "Cash".obs;
 
   //RxBool cashOnDelivery=false.obs;
+
 
   Function? reference;
   Function? likeupdate;
@@ -1058,9 +1060,9 @@ class PizzaController extends GetxController {
         deliveryfee.value +
         donation.value +
         goldprimium.value;
-
-    update();
     reference!();
+    update();
+
     print("bottomremove");
   }
 
@@ -1733,7 +1735,7 @@ class PizzaController extends GetxController {
         goldprimium.value;
 
     reference!();
-    update();
+
   }
 
 //------------check---------------)
@@ -1794,7 +1796,7 @@ class PizzaController extends GetxController {
         goldprimium.value;
 
     reference!();
-    update();
+
   }
 
   void Sodaclear(BuildContext context) {
@@ -2088,39 +2090,33 @@ class PizzaController extends GetxController {
   }
 
   void functionCartClear() {
-    for (int i = 0; i < sodalist.length; i++) {
-      sodalist[i].checkadd = false;
-      sodalist[i].selectitem = 1;
 
-      /* for (int k = 0; k < pizzabottomlist.length; k++) {
-        if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
-          pizzabottomlist[k].foodbill = pizzabottomlist[k].price;
+      Future.delayed(Duration(seconds: 10)).then((value){
+        for (int i = 0; i < sodalist.length; i++) {
+          sodalist[i].checkadd = false;
+          sodalist[i].selectitem = 1;
         }
-      }*/
-    }
 
-    for (int i = 0; i < pizzalist.length; i++) {
-      for (int j = 0; j < pizzalist[i].foodimagelist.length; j++) {
-        pizzalist[i].foodimagelist[j].checkadd = false;
-        pizzalist[i].foodimagelist[j].selectitem = 1;
-      }
-    }
+        for (int i = 0; i < pizzalist.length; i++) {
+          for (int j = 0; j < pizzalist[i].foodimagelist.length; j++) {
+            pizzalist[i].foodimagelist[j].checkadd = false;
+            pizzalist[i].foodimagelist[j].selectitem = 1;
+          }
+        }
 
-    isBootomSheet.value = false;
-    pizzabottomlist.clear();
-    customizepizzalist[0].pizzametalist!.clear();
+        isBootomSheet.value = false;
+        iscountfoodtotal.value = 0;
 
-    //addsizelist!.clear();
-    iscountfoodtotal.value = 0;
+        pizzabottomlist.clear();
+        customizepizzalist[0].pizzametalist!.clear();
 
-    print(
-        "------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
-    print(
-        "------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
-    //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
+        reference!();
 
-    reference!();
-    update();
+        print("------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
+        print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
+        //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
+      });
+
   }
 
   //----------------------------------------------------------CONNECTIVITY---------------------------------------------------------------)
@@ -2308,4 +2304,6 @@ class PizzaController extends GetxController {
     searchupdate!();
     update(foundsoda);
   }
+
+
 }

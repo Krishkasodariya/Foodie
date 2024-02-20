@@ -67,6 +67,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
     // TODO: implement initState
     super.initState();
     //loaded();
+    pizzaController.Allupdate(ref);
     pizzaController.UpdateLike(ref);
     if (pizzaController.pizzalist.isEmpty) {
       pizzaController.getPizzaData();
@@ -575,9 +576,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                   onTap: () async {
                                                                     setState(
                                                                         () {
-                                                                      pizzaController
-                                                                          .dinnerLike(
-                                                                              index);
+                                                                      pizzaController.dinnerLike(index);
                                                                     });
                                                                   },
                                                                   child: !pizzaController.pizzalist[index].checklike

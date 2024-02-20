@@ -8,6 +8,7 @@ import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:Pizza/Drawer/AddressBook.dart';
 import 'package:Pizza/Admin_Screen/AllOrderHistory.dart';
+import 'package:Pizza/Drawer/FavouriteOrderScreen.dart';
 import 'package:Pizza/Drawer/LikesScreen.dart';
 import 'package:Pizza/Drawer/OfferScreen.dart';
 import 'package:Pizza/Drawer/ProfileScreen.dart';
@@ -33,7 +34,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   LoginController logincontroller = Get.find();
   PizzaController pizzaController = Get.find();
   BottomController bottomController = Get.find();
-  AdminController adminController=Get.find();
+  AdminController adminController = Get.find();
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
 
   String? linkMessage;
@@ -45,6 +46,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     // TODO: implement initState
     super.initState();
     initDynamicLink();
+
     googleMapControllerScreen.GetLocationData();
     googleMapControllerScreen.HomeLocationupdate(ref);
     logincontroller.Getuid();
@@ -74,7 +76,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             );
             setState(() {});
           },
-          child: Icon(  
+          child: Icon(
             Icons.arrow_back_rounded,
             size: 25,
             color: Colors.black,
@@ -143,7 +145,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-
                               Navigator.push(
                                   context,
                                   PageTransition(
@@ -151,9 +152,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                       child: ProfileScreen()));
                               setState(() {
                                 logincontroller.changeColor = false;
-                                googleMapControllerScreen.changeProfileHeight.value=false;
+                                googleMapControllerScreen
+                                    .changeProfileHeight.value = false;
                               });
-
                             },
                             child: Container(
                               width: 85,
@@ -300,7 +301,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               /*Navigator.push(
                                   context,
                                   PageTransition(
@@ -347,9 +348,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-
-                            },
+                            onTap: () {},
                             child: Container(
                               height: 80,
                               decoration: BoxDecoration(
@@ -590,15 +589,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               ),
                             ],
                           ),
-
-                             SizedBox(
+                          SizedBox(
                             height: 20,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 10, left: 10),
                             child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, PageTransition(child: YourOrderScreen(), type: PageTransitionType.rightToLeft));
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: YourOrderScreen(),
+                                        type: PageTransitionType.rightToLeft));
                               },
                               child: Column(
                                 children: [
@@ -613,8 +615,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(9),
                                           child: Image(
-                                              image:
-                                                  AssetImage("images/order.webp"),
+                                              image: AssetImage(
+                                                  "images/order.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),
@@ -660,61 +662,69 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 10, left: 10),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 36,
-                                      height: 36,
-                                      decoration: BoxDecoration(
-                                          color: Color(0xffF2F4F7),
-                                          shape: BoxShape.circle),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(9),
-                                        child: Image(
-                                            image:
-                                                AssetImage("images/like.webp"),
-                                            color: Color(0xff787E91)),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: FavouriteOrderScreen(),
+                                        type: PageTransitionType.rightToLeft));
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF2F4F7),
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(9),
+                                          child: Image(
+                                              image:
+                                                  AssetImage("images/like.webp"),
+                                              color: Color(0xff787E91)),
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Favorite orders",
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 18,
-                                          color: Color(0xff313848),
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Color(0xff313848),
-                                      size: 17,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 60),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 1,
-                                    decoration: BoxDecoration(
-                                        border: Border.symmetric(
-                                            horizontal: BorderSide(
-                                                color: Color(0xffEAEDF3),
-                                                width: 1.5))),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Favorite orders",
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 18,
+                                            color: Color(0xff313848),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Color(0xff313848),
+                                        size: 17,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 60),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 1,
+                                      decoration: BoxDecoration(
+                                          border: Border.symmetric(
+                                              horizontal: BorderSide(
+                                                  color: Color(0xffEAEDF3),
+                                                  width: 1.5))),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-
                           SizedBox(
                             height: 20,
                           ),
@@ -727,7 +737,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                     PageTransition(
                                         child: AddressBook(),
                                         type: PageTransitionType.rightToLeft));
-                                googleMapControllerScreen.changeAddressHeight.value=false;
+                                googleMapControllerScreen
+                                    .changeAddressHeight.value = false;
                               },
                               child: Column(
                                 children: [
@@ -940,7 +951,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 decoration: BoxDecoration(
                                     color: Color(0xffEF4F5F),
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
+                                        BorderRadius.all(Radius.circular(5))),
                               ),
                               SizedBox(
                                 width: 15,
@@ -962,15 +973,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 10, left: 10),
                             child: GestureDetector(
-                              onTap: (){
-
+                              onTap: () {
                                 Navigator.push(
                                     context,
                                     PageTransition(
                                         child: AdminBottomNavigation(),
                                         type: PageTransitionType.rightToLeft));
-                                adminController.isAdmin.value=true;
-
+                                adminController.isAdmin.value = true;
                               },
                               child: Column(
                                 children: [
@@ -1033,8 +1042,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 10, left: 10),
                             child: GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, PageTransition(child: AllOrderHistory(), type: PageTransitionType.rightToLeft));
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: AllOrderHistory(),
+                                        type: PageTransitionType.rightToLeft));
                               },
                               child: Column(
                                 children: [
@@ -1049,8 +1062,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(9),
                                           child: Image(
-                                              image:
-                                              AssetImage("images/order.webp"),
+                                              image: AssetImage(
+                                                  "images/order.webp"),
                                               color: Color(0xff787E91)),
                                         ),
                                       ),

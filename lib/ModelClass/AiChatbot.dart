@@ -30,7 +30,8 @@ class AiChatbot {
       };
 
       final response = await http.post(Uri.parse(url),
-          headers: header, body: jsonEncode(requestBody));
+          headers: header,
+          body: jsonEncode(requestBody));
       print("---response------)${response.body}");
 
       if (response.statusCode == 200){
