@@ -68,11 +68,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
               padding: const EdgeInsets.only(left: 12, right: 10),
               child: GestureDetector(
                 onTap: () {
+                  setState(() {
+                    googleMapControllerScreen.changeAddressHeight.value = false;
+                  });
+
                   Navigator.push(
                       context,
                       PageTransition(
                           type: PageTransitionType.rightToLeft,
                           child: AddressBook()));
+
                 },
                 child: Obx(()=> Container(
                     child: Row(

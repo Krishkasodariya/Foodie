@@ -737,8 +737,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                     PageTransition(
                                         child: AddressBook(),
                                         type: PageTransitionType.rightToLeft));
-                                googleMapControllerScreen
-                                    .changeAddressHeight.value = false;
+                                googleMapControllerScreen.changeAddressHeight.value = false;
                               },
                               child: Column(
                                 children: [

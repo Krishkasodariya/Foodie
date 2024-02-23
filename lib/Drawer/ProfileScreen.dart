@@ -16,7 +16,7 @@ class ProfileScreen extends StatefulWidget{
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  PickedFile? storeimage;
+
   LoginController logincontroller = Get.find();
   var countrydata = "";
   GoogleMapControllerScreen googleMapControllerScreen=Get.find();
