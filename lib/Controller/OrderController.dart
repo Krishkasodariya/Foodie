@@ -113,7 +113,7 @@ class OrderController extends GetxController {
         loginController.userid);
 
     await userDocumentReference
-        .collection("order")
+        .collection("order").orderBy('date',descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
@@ -228,7 +228,7 @@ class OrderController extends GetxController {
         .instance.collection("allUserOrderHistory");
 
 
-    await userCollectionReference
+    await userCollectionReference.orderBy('date',descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
@@ -328,7 +328,7 @@ class OrderController extends GetxController {
         loginController.userid);
 
     await userDocumentReference
-        .collection("favouriteOrder")
+        .collection("favouriteOrder").orderBy('date',descending: true)
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
