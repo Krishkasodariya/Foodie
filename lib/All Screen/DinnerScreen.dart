@@ -5,6 +5,7 @@ import 'package:Pizza/Drawer/OfferScreen.dart';
 import 'package:Pizza/ModelClass/FoodImageSlider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -89,15 +90,12 @@ class _DinnerScreenState extends State<DinnerScreen> {
         () => RefreshIndicator(
           color: Color(0xffEF4F5F),
           onRefresh: () {
-
-
-
             pizzaController.getPizzaData();
 
             return Future.delayed(const Duration(seconds: 3));
           },
           child: WillPopScope(
-            onWillPop: (){
+            onWillPop: () {
               bottomController.currentindex.value = 0;
               return null!;
             },
@@ -222,7 +220,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                           fontWeight:
                                                               FontWeight.w600),
                                                     ),
-                                                    Spacer(),
+                                                    const Spacer(),
                                                     Lottie.asset(
                                                         "images/offer.json",
                                                         width: 30,
@@ -240,7 +238,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                             Navigator.push(
                                                 context,
                                                 PageTransition(
-                                                    child: OfferScreen(),
+                                                    child: const OfferScreen(),
                                                     type: PageTransitionType
                                                         .rightToLeft));
                                           },
@@ -249,7 +247,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                 right: 10, left: 5),
                                             child: Container(
                                               height: 50,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   color: Color(0xffF2F2F2),
                                                   borderRadius:
                                                       BorderRadius.all(
@@ -411,12 +409,14 @@ class _DinnerScreenState extends State<DinnerScreen> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.rightToLeft,
-                                      child: PizzaScreen(
-                                          pizzaindex: index,
-                                          data: pizzaController.pizzalist)));
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  child: PizzaScreen(
+                                      pizzaindex: index,
+                                      data: pizzaController.pizzalist),
+                                ),
+                              );
                             },
                             child: Container(
                               width: double.infinity,
@@ -470,7 +470,9 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                         placeholder: (context,
                                                                 url) =>
                                                             Shimmer.fromColors(
-                                                                direction: ShimmerDirection.ltr,
+                                                                direction:
+                                                                    ShimmerDirection
+                                                                        .ltr,
                                                                 enabled: true,
                                                                 baseColor: Colors
                                                                     .grey
@@ -576,7 +578,9 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                   onTap: () async {
                                                                     setState(
                                                                         () {
-                                                                      pizzaController.dinnerLike(index);
+                                                                      pizzaController
+                                                                          .dinnerLike(
+                                                                              index);
                                                                     });
                                                                   },
                                                                   child: !pizzaController.pizzalist[index].checklike
@@ -738,7 +742,8 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w600,
-                                                      color: Color(0xff8F94A4)),
+                                                      color: const Color(
+                                                          0xff8F94A4)),
                                                 ),
                                                 SizedBox(
                                                   width: 5,
@@ -751,10 +756,97 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                           FontWeight.w600,
                                                       color: Color(0xff8F94A4)),
                                                 ),
+                                                const Spacer(),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 4),
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.topRight,
+                                                    child:
+                                                        PopupMenuButton<String>(
+                                                      tooltip: "",
+                                                      splashRadius: 0,
+                                                      enabled: true,
+                                                      shape:
+                                                          ContinuousRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(35),
+                                                      ),
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onInverseSurface,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0),
+                                                      constraints:
+                                                          const BoxConstraints(
+                                                              maxWidth: 196),
+                                                      onSelected:
+                                                          (value) async {
+                                                        if (value == "Delete") {
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "pizza")
+                                                              .doc(pizzaController
+                                                                  .pizzalist[
+                                                                      index]
+                                                                  .name)
+                                                              .delete();
+
+                                                          pizzaController.pizzalist
+                                                              .removeWhere((element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  pizzaController
+                                                                      .pizzalist[
+                                                                          index]
+                                                                      .name);
+                                                        }
+                                                      },
+                                                      itemBuilder: (_) => [
+                                                        // const PopupMenuItem<String>(
+                                                        //   value: "Edit",
+                                                        //   child: Text(
+                                                        //     "Edit",
+                                                        //     style: TextStyle(
+                                                        //       color: Colors.black,
+                                                        //       fontSize: 16,
+                                                        //       fontWeight: FontWeight.w600,
+                                                        //     ),
+                                                        //   ),
+                                                        // ),
+                                                        const PopupMenuItem<
+                                                            String>(
+                                                          value: "Delete",
+                                                          child: Text(
+                                                            "Delete",
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                      child: const Icon(
+                                                        Icons.more_vert,
+                                                        size: 24,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                             SizedBox(
-                                              height: 5,
+                                              height: 2,
                                             ),
                                             Row(
                                               children: [
