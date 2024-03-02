@@ -5,7 +5,6 @@ import 'package:Pizza/Drawer/OfferScreen.dart';
 import 'package:Pizza/ModelClass/FoodImageSlider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -87,15 +86,18 @@ class _DinnerScreenState extends State<DinnerScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Obx(
-        () => RefreshIndicator(
+            () => RefreshIndicator(
           color: Color(0xffEF4F5F),
           onRefresh: () {
+
+
+
             pizzaController.getPizzaData();
 
             return Future.delayed(const Duration(seconds: 3));
           },
           child: WillPopScope(
-            onWillPop: () {
+            onWillPop: (){
               bottomController.currentindex.value = 0;
               return null!;
             },
@@ -172,175 +174,175 @@ class _DinnerScreenState extends State<DinnerScreen> {
                     ),*/
                     adminController.isAdmin.value
                         ? SliverAppBar(
-                            leading: Container(),
-                          )
+                      leading: Container(),
+                    )
                         : SliverAppBar(
-                            backgroundColor: Colors.white,
-                            pinned: false,
-                            automaticallyImplyLeading: false,
-                            snap: false,
-                            stretch: true,
-                            expandedHeight: 285,
-                            flexibleSpace: FlexibleSpaceBar(
-                              background: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                    child: OfferScreen(),
-                                                    type: PageTransitionType
-                                                        .rightToLeft));
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10, right: 5),
-                                            child: Container(
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                  color: Color(0xffF2F2F2),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(15))),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Offer Zone",
-                                                      style: GoogleFonts.nunito(
-                                                          color:
-                                                              Color(0xff404248),
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
-                                                    const Spacer(),
-                                                    Lottie.asset(
-                                                        "images/offer.json",
-                                                        width: 30,
-                                                        height: 30)
-                                                  ],
-                                                ),
+                      backgroundColor: Colors.white,
+                      pinned: false,
+                      automaticallyImplyLeading: false,
+                      snap: false,
+                      stretch: true,
+                      expandedHeight: 285,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          PageTransition(
+                                              child: OfferScreen(),
+                                              type: PageTransitionType
+                                                  .rightToLeft));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 5),
+                                      child: Container(
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF2F2F2),
+                                            borderRadius:
+                                            BorderRadius.all(
+                                                Radius.circular(15))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Offer Zone",
+                                                style: GoogleFonts.nunito(
+                                                    color:
+                                                    Color(0xff404248),
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                    FontWeight.w600),
                                               ),
-                                            ),
+                                              Spacer(),
+                                              Lottie.asset(
+                                                  "images/offer.json",
+                                                  width: 30,
+                                                  height: 30)
+                                            ],
                                           ),
                                         ),
                                       ),
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                    child: const OfferScreen(),
-                                                    type: PageTransitionType
-                                                        .rightToLeft));
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10, left: 5),
-                                            child: Container(
-                                              height: 50,
-                                              decoration: const BoxDecoration(
-                                                  color: Color(0xffF2F2F2),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(15))),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Free Delivery",
-                                                      style: GoogleFonts.nunito(
-                                                          color:
-                                                              Color(0xff404248),
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                    ),
-                                                    Spacer(),
-                                                    Lottie.asset(
-                                                        "images/freedelivery.json",
-                                                        width: 40,
-                                                        height: 40)
-                                                  ],
-                                                ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          PageTransition(
+                                              child: OfferScreen(),
+                                              type: PageTransitionType
+                                                  .rightToLeft));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 10, left: 5),
+                                      child: Container(
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF2F2F2),
+                                            borderRadius:
+                                            BorderRadius.all(
+                                                Radius.circular(15))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Free Delivery",
+                                                style: GoogleFonts.nunito(
+                                                    color:
+                                                    Color(0xff404248),
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                    FontWeight.w600),
                                               ),
-                                            ),
+                                              Spacer(),
+                                              Lottie.asset(
+                                                  "images/freedelivery.json",
+                                                  width: 40,
+                                                  height: 40)
+                                            ],
                                           ),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(padding: EdgeInsets.only(top: 20)),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 13),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 200,
-                                      child: CarouselSlider.builder(
-                                          itemCount: dinnerimagelist.length,
-                                          itemBuilder:
-                                              (context, index, realIndex) {
-                                            return Container(
-                                              padding:
-                                                  EdgeInsets.only(right: 13),
-                                              width: double.infinity,
-                                              height: 200,
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)),
-                                                child: Image(
-                                                  image: AssetImage(
-                                                      "${dinnerimagelist[index].image}"),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          options: CarouselOptions(
-                                            onPageChanged: (index, reason) {
-                                              setState(() {
-                                                sliderindex = index;
-                                              });
-                                            },
-                                            aspectRatio: 16 / 8,
-                                            autoPlay: true,
-                                            autoPlayAnimationDuration:
-                                                Duration(milliseconds: 2200),
-                                            autoPlayInterval:
-                                                Duration(milliseconds: 2200),
-                                            scrollPhysics:
-                                                BouncingScrollPhysics(),
-                                            viewportFraction: 0.93,
-                                            enableInfiniteScroll: true,
-                                            reverse: false,
-                                            autoPlayCurve: Curves.fastOutSlowIn,
-                                          )),
+                                      ),
                                     ),
                                   ),
-                                  AnimatedSmoothIndicator(
-                                    activeIndex: sliderindex,
-                                    count: dinnerimagelist.length,
-                                    effect: JumpingDotEffect(
-                                      activeDotColor: Color(0xffEF4F5F),
-                                      dotWidth: 8.5,
-                                      dotHeight: 8.5,
-                                      dotColor: Color(0xff787E91),
-                                    ),
-                                  ),
-                                ],
+                                )
+                              ],
+                            ),
+                            Padding(padding: EdgeInsets.only(top: 20)),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Container(
+                                width: double.infinity,
+                                height: 200,
+                                child: CarouselSlider.builder(
+                                    itemCount: dinnerimagelist.length,
+                                    itemBuilder:
+                                        (context, index, realIndex) {
+                                      return Container(
+                                        padding:
+                                        EdgeInsets.only(right: 13),
+                                        width: double.infinity,
+                                        height: 200,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          child: Image(
+                                            image: AssetImage(
+                                                "${dinnerimagelist[index].image}"),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    options: CarouselOptions(
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          sliderindex = index;
+                                        });
+                                      },
+                                      aspectRatio: 16 / 8,
+                                      autoPlay: true,
+                                      autoPlayAnimationDuration:
+                                      Duration(milliseconds: 2200),
+                                      autoPlayInterval:
+                                      Duration(milliseconds: 2200),
+                                      scrollPhysics:
+                                      BouncingScrollPhysics(),
+                                      viewportFraction: 0.93,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                    )),
                               ),
                             ),
-                          ),
+                            AnimatedSmoothIndicator(
+                              activeIndex: sliderindex,
+                              count: dinnerimagelist.length,
+                              effect: JumpingDotEffect(
+                                activeDotColor: Color(0xffEF4F5F),
+                                dotWidth: 8.5,
+                                dotHeight: 8.5,
+                                dotColor: Color(0xff787E91),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     SliverPadding(
                         padding: EdgeInsets.only(
                             top: adminController.isAdmin.value ? 0 : 15)),
@@ -350,14 +352,14 @@ class _DinnerScreenState extends State<DinnerScreen> {
                           Expanded(
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 20, right: 20),
+                              const EdgeInsets.only(left: 20, right: 20),
                               child: Container(
                                 height: 1,
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                  color: Color(0xffDAD9DD),
-                                  width: 1,
-                                )),
+                                      color: Color(0xffDAD9DD),
+                                      width: 1,
+                                    )),
                               ),
                             ),
                           ),
@@ -371,14 +373,14 @@ class _DinnerScreenState extends State<DinnerScreen> {
                           Expanded(
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 20, right: 20),
+                              const EdgeInsets.only(left: 20, right: 20),
                               child: Container(
                                 height: 1,
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                  color: Color(0xffDAD9DD),
-                                  width: 1,
-                                )),
+                                      color: Color(0xffDAD9DD),
+                                      width: 1,
+                                    )),
                               ),
                             ),
                           )
@@ -409,14 +411,12 @@ class _DinnerScreenState extends State<DinnerScreen> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  child: PizzaScreen(
-                                      pizzaindex: index,
-                                      data: pizzaController.pizzalist),
-                                ),
-                              );
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.rightToLeft,
+                                      child: PizzaScreen(
+                                          pizzaindex: index,
+                                          data: pizzaController.pizzalist)));
                             },
                             child: Container(
                               width: double.infinity,
@@ -424,7 +424,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
+                                  BorderRadius.all(Radius.circular(30)),
                                   boxShadow: [
                                     //    0xfff5f5f5
                                     BoxShadow(
@@ -466,22 +466,20 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   children: [
                                                     CachedNetworkImage(
                                                         imageUrl:
-                                                            "${pizzaController.pizzalist[index].foodimagelist[iindex].image}",
+                                                        "${pizzaController.pizzalist[index].foodimagelist[iindex].image}",
                                                         placeholder: (context,
-                                                                url) =>
+                                                            url) =>
                                                             Shimmer.fromColors(
-                                                                direction:
-                                                                    ShimmerDirection
-                                                                        .ltr,
+                                                                direction: ShimmerDirection.ltr,
                                                                 enabled: true,
                                                                 baseColor: Colors
                                                                     .grey
                                                                     .shade300,
                                                                 highlightColor:
-                                                                    Colors.grey
-                                                                        .shade100,
+                                                                Colors.grey
+                                                                    .shade100,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   color: Colors
                                                                       .grey,
                                                                 )),
@@ -490,25 +488,25 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                         fit: BoxFit.cover),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              top: 15,
-                                                              right: 15),
+                                                      const EdgeInsets.only(
+                                                          top: 15,
+                                                          right: 15),
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
+                                                        MainAxisAlignment
+                                                            .end,
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                         children: [
                                                           Expanded(
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      left: 10,
-                                                                      right:
-                                                                          10),
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 10,
+                                                                  right:
+                                                                  10),
                                                               child: Container(
                                                                 height: 30,
                                                                 decoration: BoxDecoration(
@@ -518,27 +516,27 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                         color: Colors
                                                                             .black54,
                                                                         width:
-                                                                            1),
+                                                                        1),
                                                                     borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(8))),
+                                                                    BorderRadius.all(
+                                                                        Radius.circular(8))),
                                                                 child: Padding(
                                                                   padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                              10,
-                                                                          right:
-                                                                              10),
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left:
+                                                                      10,
+                                                                      right:
+                                                                      10),
                                                                   child: Row(
                                                                     children: [
                                                                       Container(
                                                                         width:
-                                                                            185,
+                                                                        185,
                                                                         child: Text(
                                                                             "${pizzaController.pizzalist[index].foodimagelist[iindex].name}",
                                                                             style:
-                                                                                GoogleFonts.nunito(
+                                                                            GoogleFonts.nunito(
                                                                               color: Colors.white,
                                                                               fontSize: 16,
                                                                               fontWeight: FontWeight.w600,
@@ -548,7 +546,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                       ),
                                                                       SizedBox(
                                                                         width:
-                                                                            10,
+                                                                        10,
                                                                       ),
                                                                       Image(
                                                                         image: AssetImage(
@@ -556,9 +554,9 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                         color: Colors
                                                                             .white,
                                                                         width:
-                                                                            16,
+                                                                        16,
                                                                         height:
-                                                                            16,
+                                                                        16,
                                                                       ),
                                                                       Text(
                                                                           "${pizzaController.pizzalist[index].foodimagelist[iindex].price}",
@@ -573,39 +571,37 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                             ),
                                                           ),
                                                           Obx(
-                                                            () => Container(
+                                                                () => Container(
                                                               child: GestureDetector(
                                                                   onTap: () async {
                                                                     setState(
-                                                                        () {
-                                                                      pizzaController
-                                                                          .dinnerLike(
-                                                                              index);
-                                                                    });
+                                                                            () {
+                                                                          pizzaController.dinnerLike(index);
+                                                                        });
                                                                   },
                                                                   child: !pizzaController.pizzalist[index].checklike
                                                                       ? Image(
-                                                                          image:
-                                                                              AssetImage("images/like.webp"),
-                                                                          width:
-                                                                              29,
-                                                                          height:
-                                                                              29,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                          color:
-                                                                              Colors.white,
-                                                                        )
+                                                                    image:
+                                                                    AssetImage("images/like.webp"),
+                                                                    width:
+                                                                    29,
+                                                                    height:
+                                                                    29,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    color:
+                                                                    Colors.white,
+                                                                  )
                                                                       : Image(
-                                                                          image:
-                                                                              AssetImage("images/fill_like.webp"),
-                                                                          width:
-                                                                              29,
-                                                                          height:
-                                                                              29,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        )),
+                                                                    image:
+                                                                    AssetImage("images/fill_like.webp"),
+                                                                    width:
+                                                                    29,
+                                                                    height:
+                                                                    29,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  )),
                                                             ),
                                                           ),
                                                         ],
@@ -629,7 +625,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                               aspectRatio: 16 / 9,
                                               viewportFraction: 1,
                                               autoPlayCurve:
-                                                  Curves.fastOutSlowIn,
+                                              Curves.fastOutSlowIn,
                                             )),
                                       ),
                                     ),
@@ -640,7 +636,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                           borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(30),
                                               bottomRight:
-                                                  Radius.circular(30))),
+                                              Radius.circular(30))),
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             left: 15, right: 15, top: 5),
@@ -653,7 +649,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.lexend(
                                                       fontSize: 19,
                                                       fontWeight:
-                                                          FontWeight.w500),
+                                                      FontWeight.w500),
                                                 ),
                                                 Spacer(),
                                                 Container(
@@ -661,16 +657,16 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                     height: 23,
                                                     decoration: BoxDecoration(
                                                         color:
-                                                            Color(0xff267E3E),
+                                                        Color(0xff267E3E),
                                                         borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                5))),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5,
-                                                              right: 2),
+                                                      const EdgeInsets.only(
+                                                          left: 5,
+                                                          right: 2),
                                                       child: Row(
                                                         children: [
                                                           Center(
@@ -680,10 +676,10 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                     color: Colors
                                                                         .white,
                                                                     fontSize:
-                                                                        14,
+                                                                    14,
                                                                     fontWeight:
-                                                                        FontWeight
-                                                                            .w600)),
+                                                                    FontWeight
+                                                                        .w600)),
                                                           ),
                                                           Center(
                                                             child: Icon(
@@ -691,7 +687,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                   .star_rounded,
                                                               size: 13,
                                                               color:
-                                                                  Colors.white,
+                                                              Colors.white,
                                                             ),
                                                           )
                                                         ],
@@ -706,7 +702,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.nunito(
                                                       fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       color: Color(0xff8F94A4)),
                                                 ),
                                                 SizedBox(
@@ -718,7 +714,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                     height: 5,
                                                     decoration: BoxDecoration(
                                                         color:
-                                                            Color(0xff8F94A4),
+                                                        Color(0xff8F94A4),
                                                         shape: BoxShape.circle),
                                                   ),
                                                 ),
@@ -730,7 +726,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.nunito(
                                                       fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       color: Color(0xff8F94A4)),
                                                 ),
                                                 SizedBox(
@@ -741,9 +737,8 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.nunito(
                                                       fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.w600,
-                                                      color: const Color(
-                                                          0xff8F94A4)),
+                                                      FontWeight.w600,
+                                                      color: Color(0xff8F94A4)),
                                                 ),
                                                 SizedBox(
                                                   width: 5,
@@ -753,100 +748,13 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.nunito(
                                                       fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       color: Color(0xff8F94A4)),
-                                                ),
-                                                const Spacer(),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 4),
-                                                  child: Align(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    child:
-                                                        PopupMenuButton<String>(
-                                                      tooltip: "",
-                                                      splashRadius: 0,
-                                                      enabled: true,
-                                                      shape:
-                                                          ContinuousRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(35),
-                                                      ),
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .onInverseSurface,
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              0),
-                                                      constraints:
-                                                          const BoxConstraints(
-                                                              maxWidth: 196),
-                                                      onSelected:
-                                                          (value) async {
-                                                        if (value == "Delete") {
-                                                          FirebaseFirestore
-                                                              .instance
-                                                              .collection(
-                                                                  "pizza")
-                                                              .doc(pizzaController
-                                                                  .pizzalist[
-                                                                      index]
-                                                                  .name)
-                                                              .delete();
-
-                                                          pizzaController.pizzalist
-                                                              .removeWhere((element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  pizzaController
-                                                                      .pizzalist[
-                                                                          index]
-                                                                      .name);
-                                                        }
-                                                      },
-                                                      itemBuilder: (_) => [
-                                                        // const PopupMenuItem<String>(
-                                                        //   value: "Edit",
-                                                        //   child: Text(
-                                                        //     "Edit",
-                                                        //     style: TextStyle(
-                                                        //       color: Colors.black,
-                                                        //       fontSize: 16,
-                                                        //       fontWeight: FontWeight.w600,
-                                                        //     ),
-                                                        //   ),
-                                                        // ),
-                                                        const PopupMenuItem<
-                                                            String>(
-                                                          value: "Delete",
-                                                          child: Text(
-                                                            "Delete",
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                      child: const Icon(
-                                                        Icons.more_vert,
-                                                        size: 24,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                  ),
                                                 ),
                                               ],
                                             ),
                                             SizedBox(
-                                              height: 2,
+                                              height: 5,
                                             ),
                                             Row(
                                               children: [
@@ -863,7 +771,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.nunito(
                                                       fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       color: Color(0xff8F94A4)),
                                                 ),
                                                 SizedBox(
@@ -875,7 +783,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                     height: 5,
                                                     decoration: BoxDecoration(
                                                         color:
-                                                            Color(0xff8F94A4),
+                                                        Color(0xff8F94A4),
                                                         shape: BoxShape.circle),
                                                   ),
                                                 ),
@@ -887,7 +795,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                   style: GoogleFonts.nunito(
                                                       fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       color: Color(0xff8F94A4)),
                                                 ),
                                               ],
@@ -914,114 +822,114 @@ class _DinnerScreenState extends State<DinnerScreen> {
                   ],
                 ),
                 Obx(
-                  () => Align(
+                      () => Align(
                     alignment: Alignment.bottomCenter,
                     child: adminController.isAdmin.value
                         ? Container()
                         : pizzaController.isBootomSheet.value
-                            ? Container(
-                                width: double.infinity,
-                                height: 60,
-                                color: Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 15),
+                        ? Container(
+                      width: double.infinity,
+                      height: 60,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, right: 15),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    backgroundColor: Colors.white,
+                                    isScrollControlled: true,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topRight:
+                                          Radius.circular(20),
+                                          topLeft:
+                                          Radius.circular(20)),
+                                    ),
+                                    context: context,
+                                    builder: (context) {
+                                      return BottomSheetDialog(
+                                          pizzaindex: pizzaController
+                                              .pizzaindex.value,
+                                          data: pizzaController
+                                              .pizzalist);
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 40,
                                   child: Row(
                                     children: [
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                              backgroundColor: Colors.white,
-                                              isScrollControlled: true,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(20),
-                                                    topLeft:
-                                                        Radius.circular(20)),
-                                              ),
-                                              context: context,
-                                              builder: (context) {
-                                                return BottomSheetDialog(
-                                                    pizzaindex: pizzaController
-                                                        .pizzaindex.value,
-                                                    data: pizzaController
-                                                        .pizzalist);
-                                              },
-                                            );
-                                          },
-                                          child: Container(
-                                            height: 40,
-                                            child: Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "images/order.webp"),
-                                                  color: Color(0xff40495D),
-                                                  width: 20,
-                                                  height: 20,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  "ITEM ADDED",
-                                                  style: GoogleFonts.lexend(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Color(0xff40495D),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_drop_up_rounded,
-                                                  color: Color(0xffEF4F5F),
-                                                  size: 20,
-                                                )
-                                              ],
-                                            ),
-                                          ),
+                                      Image(
+                                        image: AssetImage(
+                                            "images/order.webp"),
+                                        color: Color(0xff40495D),
+                                        width: 20,
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "ITEM ADDED",
+                                        style: GoogleFonts.lexend(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff40495D),
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 40,
-                                          child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                  shape: MaterialStateProperty
-                                                      .all(RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)))),
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          Color(0xffEF4F5F))),
-                                              onPressed: () {
-                                                setState(() {
-                                                  pizzaController
-                                                      .Pizzatotalprice();
-                                                  bottomController
-                                                      .currentindex.value = 3;
-                                                });
-                                              },
-                                              child: Text(
-                                                "Next",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.white),
-                                              )),
-                                        ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_drop_up_rounded,
+                                        color: Color(0xffEF4F5F),
+                                        size: 20,
                                       )
                                     ],
                                   ),
                                 ),
-                              )
-                            : Container(),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                height: 40,
+                                child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty
+                                            .all(RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.all(
+                                                Radius
+                                                    .circular(
+                                                    10)))),
+                                        backgroundColor:
+                                        MaterialStateProperty.all(
+                                            Color(0xffEF4F5F))),
+                                    onPressed: () {
+                                      setState(() {
+                                        pizzaController
+                                            .Pizzatotalprice();
+                                        bottomController
+                                            .currentindex.value = 3;
+                                      });
+                                    },
+                                    child: Text(
+                                      "Next",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white),
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                        : Container(),
                   ),
                 )
               ],

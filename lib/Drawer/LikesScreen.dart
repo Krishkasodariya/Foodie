@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:Pizza/All%20Screen/PizzaScreen.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
+import 'package:shimmer/shimmer.dart';
 
 class LikesScreen extends StatefulWidget {
   const LikesScreen({super.key});
@@ -155,15 +157,29 @@ class _LikesScreenState extends State<LikesScreen> {
                                             itemBuilder: (context, iindex, realIndex) {
                                               return Stack(
                                                 children: [
-                                                  Image(
-                                                      image: AssetImage(
-                                                          "${ pizzaController
-                                                              .likelist[index]
-                                                              .foodimagelist[iindex]
-                                                              .image}"),
+
+                                                  CachedNetworkImage(
+                                                      imageUrl: "${ pizzaController.likelist[index].foodimagelist[iindex].image}",
+                                                      placeholder: (context, url) =>
+                                                          Shimmer.fromColors(
+                                                              direction: ShimmerDirection.ltr,
+                                                              enabled: true,
+                                                              baseColor: Colors
+                                                                  .grey
+                                                                  .shade300,
+                                                              highlightColor:
+                                                              Colors.grey
+                                                                  .shade100,
+                                                              child:
+                                                              Container(
+                                                                color: Colors
+                                                                    .grey,
+                                                              )),
                                                       width: double.infinity,
                                                       height: 200,
                                                       fit: BoxFit.cover),
+
+
 
                                                   Padding(
                                                     padding:

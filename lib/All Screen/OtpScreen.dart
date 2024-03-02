@@ -196,7 +196,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   Future FirstTimeUserProfile()async{
     logincontroller.sharedPreferences= await SharedPreferences.getInstance();
-    //SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+
     bool check=(logincontroller.sharedPreferences!.getBool("ok")??false);
     if(check){
       Navigator.of(context).pushReplacement(

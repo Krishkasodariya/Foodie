@@ -30,6 +30,7 @@ class _FavouriteOrderScreenState extends State<FavouriteOrderScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    orderController.RefreshOrder(ref);
     if (orderController.favouriteOrderDatalist.isEmpty) {
       orderController.getFavouriteUserOrderData();
     }
@@ -173,8 +174,11 @@ class _FavouriteOrderScreenState extends State<FavouriteOrderScreen> {
                                               });
 
                                               if(!orderController.favouriteOrderDatalist[index].favouriteOrder){
-                                                orderController.order_Remove_Like_Favourite_OrderData(index);
-                                                orderController.remove_Favourite_User_Favourite_OrderData(index);
+
+                                                setState(() {
+                                                  orderController.order_Remove_Like_Favourite_OrderData(index);
+                                                  orderController.remove_Favourite_User_Favourite_OrderData(index);
+                                                });
                                               }
 
                                             },
@@ -933,5 +937,10 @@ class _FavouriteOrderScreenState extends State<FavouriteOrderScreen> {
                 ),
               ),
         ));
+  }
+  void ref(){
+    setState(() {
+
+    });
   }
 }

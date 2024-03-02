@@ -85,7 +85,7 @@ class _$Detaildatabase extends Detaildatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `detail` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `ordertype` TEXT NOT NULL, `addresstype` TEXT NOT NULL, `flat` TEXT NOT NULL, `area` TEXT NOT NULL, `near` TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `detail` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `ordertype` TEXT NOT NULL, `addresstype` TEXT NOT NULL, `flat` TEXT NOT NULL, `area` TEXT NOT NULL, `near` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -113,7 +113,9 @@ class _$Detaildao extends Detaildao {
                   'addresstype': item.addresstype,
                   'flat': item.flat,
                   'area': item.area,
-                  'near': item.near
+                  'near': item.near,
+                  'latitude': item.latitude,
+                  'longitude': item.longitude
                 },
             changeListener),
         _detail_tableDeletionAdapter = DeletionAdapter(
@@ -126,7 +128,9 @@ class _$Detaildao extends Detaildao {
                   'addresstype': item.addresstype,
                   'flat': item.flat,
                   'area': item.area,
-                  'near': item.near
+                  'near': item.near,
+                  'latitude': item.latitude,
+                  'longitude': item.longitude
                 },
             changeListener);
 
@@ -140,7 +144,6 @@ class _$Detaildao extends Detaildao {
 
   final DeletionAdapter<Detail_table> _detail_tableDeletionAdapter;
 
-
   @override
   Stream<List<Detail_table>> getalldetail() {
     return _queryAdapter.queryListStream('select * from detail',
@@ -150,6 +153,8 @@ class _$Detaildao extends Detaildao {
             row['flat'] as String,
             row['area'] as String,
             row['near'] as String,
+            row['latitude'] as double? ??0.0,
+            row['longitude'] as double? ??0.0,
             id: row['id'] as int?),
         queryableName: 'detail',
         isView: false);
@@ -163,10 +168,21 @@ class _$Detaildao extends Detaildao {
     String area,
     String flat,
     String near,
+    double latitude,
+    double longitude,
   ) async {
     await _queryAdapter.queryNoReturn(
-        'update detail set addresstype =?3,ordertype =?2,area =?4,flat =?5,near =?6 where id=?1',
-        arguments: [id, ordertype, addresstype, area, flat, near]);
+        'update detail set addresstype =?3,ordertype =?2,area =?4,flat =?5,near =?6,latitude =?7,longitude =?8 where id=?1',
+        arguments: [
+          id,
+          ordertype,
+          addresstype,
+          area,
+          flat,
+          near,
+          latitude,
+          longitude
+        ]);
   }
 
   @override

@@ -1,16 +1,19 @@
+import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/GoogleMapData/AddressDetails.dart';
 import 'package:Pizza/GoogleMapData/DetailDao.dart';
 import 'package:Pizza/GoogleMapData/Detail_table.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UpdateAddressDetails extends StatefulWidget {
   final List<Detail_table> snapshot;
   int index;
+  Placemark palce;
 
   UpdateAddressDetails(
-      {super.key, required this.snapshot, required this.index});
+      {super.key, required this.snapshot, required this.index,required this.palce});
 
   @override
   State<UpdateAddressDetails> createState() => _UpdateAddressDetailsState();
@@ -26,10 +29,9 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
     Address(name: "Other", check: false),
   ];
 
+  GoogleMapControllerScreen googleMapControllerScreen=Get.find();
   int currentindex = 0;
-  TextEditingController flatController = new TextEditingController();
-  TextEditingController areaController = new TextEditingController();
-  TextEditingController nearController = new TextEditingController();
+  late Placemark data;
 
   @override
   void initState() {
@@ -46,9 +48,13 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
     } else {
       currentindex = 3;
     }
-    flatController.text = widget.snapshot[widget.index].flat;
-    areaController.text = widget.snapshot[widget.index].area;
-    nearController.text = widget.snapshot[widget.index].near;
+
+    data = widget.palce;
+
+    googleMapControllerScreen.flatController.text = "${data.name}";
+    googleMapControllerScreen.areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
+    googleMapControllerScreen.nearController.text = "${data.thoroughfare}";
+
   }
 
   @override
@@ -242,7 +248,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      controller: flatController,
+                      controller:  googleMapControllerScreen.flatController,
                       onTap: () {},
                       decoration: InputDecoration(
                         contentPadding:
@@ -264,12 +270,13 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                   height: 10,
                 ),
                 Padding(
+
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Container(
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      controller: areaController,
+                      controller:  googleMapControllerScreen.areaController,
                       onTap: () {},
                       decoration: InputDecoration(
                         contentPadding:
@@ -296,7 +303,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      controller: nearController,
+                      controller:  googleMapControllerScreen.nearController,
                       onTap: () {},
                       decoration: InputDecoration(
                         contentPadding:
@@ -334,6 +341,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                         setState(() {
                            _updatedata(widget.index);
                           Navigator.pop(context);
+                          Navigator.pop(context);
                         });
                       },
                       child: Text(
@@ -342,6 +350,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                       )),
                 ),
               ],
+
             )
           ]),
         ));
@@ -352,9 +361,11 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
       "${widget.snapshot[index].id}",
       order,
       addresstype[currentindex].name,
-      areaController.text,
-      flatController.text,
-      nearController.text,
+      googleMapControllerScreen.areaController.text,
+      googleMapControllerScreen.flatController.text,
+      googleMapControllerScreen.nearController.text,
+        googleMapControllerScreen.draggedLatlng.latitude,
+        googleMapControllerScreen.draggedLatlng.longitude,
     );
 
     setState(() {});

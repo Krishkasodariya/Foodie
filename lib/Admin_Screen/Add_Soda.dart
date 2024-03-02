@@ -2,9 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:uuid/uuid.dart';
-
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,12 +11,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import '../ModelClass/FoodItemModel.dart';
+import 'custom_text_field_widget.dart';
 
 class SodaAddView extends StatefulWidget {
-  final FoodItemModel? editItemId;
-
-  const SodaAddView({super.key, this.editItemId});
+  const SodaAddView({super.key});
 
   @override
   State<SodaAddView> createState() => _SodaAddViewState();
@@ -33,49 +29,34 @@ class _SodaAddViewState extends State<SodaAddView> {
   TextEditingController coldDrinkController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
-  PizzaController pizzaController = Get.find();
+  PizzaController pizzaController=Get.find();
 
   @override
   Widget build(BuildContext context) {
-    if (widget.editItemId != null &&
-        selectedImagePath == null &&
-        downloadImageUrl == null) {
-      downloadImageUrl = widget.editItemId?.image;
-      coldDrinkController =
-          TextEditingController(text: widget.editItemId?.name);
-      priceController = TextEditingController(
-          text: widget.editItemId?.price.toString() ?? "20");
-      setState(() {});
-    }
-
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:Colors.white,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
           leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(
-                context,
-              );
+            onTap: (){
+              Navigator.pop(context,);
               setState(() {});
             },
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back_rounded,
               size: 25,
               color: Colors.black,
             ),
           ),
-          title: Text(
-              widget.editItemId == null
-                  ? "Create New Cold drinks"
-                  : "Edit cold drink",
+
+          title: Text("Create New Cold drinks",
               style: GoogleFonts.nunito(
                   color: Color(0xff293041),
                   fontSize: 20,
                   fontWeight: FontWeight.w500)),
         ),
-        body: SingleChildScrollView(
+        body:  SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -86,19 +67,20 @@ class _SodaAddViewState extends State<SodaAddView> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10),
                       child: Container(
                         height: 1,
                         decoration: BoxDecoration(
                             border: Border.all(
-                          color: Color(0xffDAD9DD),
-                          width: 1,
-                        )),
+                              color: Color(0xffDAD9DD),
+                              width: 1,
+                            )),
                       ),
                     ),
                   ),
                   Text(
-                    widget.editItemId == null ? "ADD NEW ONE" : "Edit",
+                    "ADD NEW ONE",
                     style: GoogleFonts.nunito(
                         color: Color(0xff7e878d),
                         fontSize: 15.2,
@@ -106,22 +88,25 @@ class _SodaAddViewState extends State<SodaAddView> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20),
                       child: Container(
                         height: 1,
                         decoration: BoxDecoration(
                             border: Border.all(
-                          color: Color(0xffDAD9DD),
-                          width: 1,
-                        )),
+                              color: Color(0xffDAD9DD),
+                              width: 1,
+                            )),
                       ),
                     ),
                   )
                 ],
               ),
+
               SizedBox(
                 height: 25,
               ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Container(
@@ -148,16 +133,14 @@ class _SodaAddViewState extends State<SodaAddView> {
                             decoration: BoxDecoration(
                                 color: Color(0xffEF4F5F),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
+                                BorderRadius.all(Radius.circular(5))),
                           ),
                           SizedBox(
                             width: 15,
                           ),
                           Center(
                             child: Text(
-                              widget.editItemId == null
-                                  ? "Add New Cold drinks"
-                                  : "Edit cold drink",
+                              "Add New Cold drinks",
                               style: GoogleFonts.lexend(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -180,48 +163,37 @@ class _SodaAddViewState extends State<SodaAddView> {
                       SizedBox(
                         height: 20,
                       ),
+
                       Center(
-                        child: selectedImagePath == null &&
-                                downloadImageUrl == null
+                        child: selectedImagePath == null
                             ? Container(
-                                width: 110,
-                                height: 110,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xffE9E9F7),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Color(0xffB1BBDA),
-                                  size: 60,
-                                ),
-                              )
+                            width: 110,
+                            height: 110,
+                            decoration: BoxDecoration(
+                              color: Color(0xffE9E9F7),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Color(0xffB1BBDA),
+                              size: 60,
+                            ))
                             : ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(60)),
-                                child: Container(
-                                  width: 110,
-                                  height: 110,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xffE9E9F7),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: downloadImageUrl != null &&
-                                          selectedImagePath == null
-                                      ? Image.network(
-                                          "$downloadImageUrl",
-                                          height: 240,
-                                          width: double.maxFinite,
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.file(
-                                          File(selectedImagePath!),
-                                          height: 240,
-                                          width: double.maxFinite,
-                                          fit: BoxFit.fill,
-                                        ),
-                                ),
-                              ),
+                          borderRadius: BorderRadius.all(Radius.circular(60)),
+                          child: Container(
+                            width: 110,
+                            height: 110,
+                            decoration: BoxDecoration(
+                              color: Color(0xffE9E9F7),
+                              shape: BoxShape.circle,
+                            ),
+                            child:  Image.file(
+                              File(selectedImagePath!),
+                              height: 240,
+                              width: double.maxFinite,
+                              fit: BoxFit.fill,
+                            ),),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
@@ -238,7 +210,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                                 return Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 190,
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                       color: Color(0xffF4F6FA),
                                       borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(15),
@@ -247,14 +219,14 @@ class _SodaAddViewState extends State<SodaAddView> {
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10, top: 10),
                                     child: Container(
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(15),
                                               topLeft: Radius.circular(15))),
                                       child: Column(
                                         children: [
-                                          const SizedBox(
+                                          SizedBox(
                                             height: 30,
                                           ),
                                           Row(
@@ -262,22 +234,19 @@ class _SodaAddViewState extends State<SodaAddView> {
                                               Container(
                                                 width: 4,
                                                 height: 30,
-                                                decoration: const BoxDecoration(
+                                                decoration: BoxDecoration(
                                                     color: Color(0xffEF4F5F),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5))),
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(5))),
                                               ),
-                                              const SizedBox(
+                                              SizedBox(
                                                 width: 15,
                                               ),
                                               Text("Change photo",
                                                   style: GoogleFonts.lexend(
                                                       color: Colors.black,
                                                       fontSize: 21,
-                                                      fontWeight:
-                                                          FontWeight.w500)),
+                                                      fontWeight: FontWeight.w500)),
                                             ],
                                           ),
                                           SizedBox(
@@ -286,8 +255,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                pickAttachment(
-                                                    ImageSource.camera);
+                                                pickAttachment(ImageSource.camera);
                                               });
                                             },
                                             child: Padding(
@@ -300,44 +268,33 @@ class _SodaAddViewState extends State<SodaAddView> {
                                                   children: [
                                                     Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                      MainAxisAlignment.start,
                                                       children: [
                                                         Container(
                                                           width: 36,
                                                           height: 36,
                                                           decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  0xffF2F4F7),
-                                                              shape: BoxShape
-                                                                  .circle),
-                                                          child: Icon(
-                                                              Icons.camera,
-                                                              color: Color(
-                                                                  0xff787E91)),
+                                                              color: Color(0xffF2F4F7),
+                                                              shape: BoxShape.circle),
+                                                          child: Icon(Icons.camera,
+                                                              color: Color(0xff787E91)),
                                                         ),
                                                         Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 5),
+                                                          padding: const EdgeInsets.only(
+                                                              left: 5),
                                                           child: Text(
                                                             "Camera",
                                                             style: GoogleFonts.nunito(
                                                                 fontSize: 18,
-                                                                color: Color(
-                                                                    0xff313848),
+                                                                color: Color(0xff313848),
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
+                                                                FontWeight.w600),
                                                           ),
                                                         ),
                                                         Spacer(),
                                                         Icon(
-                                                          Icons
-                                                              .arrow_forward_ios,
-                                                          color:
-                                                              Color(0xff313848),
+                                                          Icons.arrow_forward_ios,
+                                                          color: Color(0xff313848),
                                                           size: 17,
                                                         )
                                                       ],
@@ -347,18 +304,16 @@ class _SodaAddViewState extends State<SodaAddView> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              left: 45),
+                                                      const EdgeInsets.only(left: 45),
                                                       child: Container(
                                                         width: double.infinity,
                                                         height: 1,
                                                         decoration: BoxDecoration(
                                                             border: Border.symmetric(
                                                                 horizontal: BorderSide(
-                                                                    color: Color(
-                                                                        0xffEAEDF3),
-                                                                    width:
-                                                                        1.5))),
+                                                                    color:
+                                                                    Color(0xffEAEDF3),
+                                                                    width: 1.5))),
                                                       ),
                                                     ),
                                                   ],
@@ -375,8 +330,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  pickAttachment(
-                                                      ImageSource.gallery);
+                                                  pickAttachment(ImageSource.gallery);
                                                 });
                                               },
                                               child: Container(
@@ -390,37 +344,27 @@ class _SodaAddViewState extends State<SodaAddView> {
                                                           width: 36,
                                                           height: 36,
                                                           decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  0xffF2F4F7),
-                                                              shape: BoxShape
-                                                                  .circle),
-                                                          child: Icon(
-                                                              Icons.photo,
-                                                              color: Color(
-                                                                  0xff787E91)),
+                                                              color: Color(0xffF2F4F7),
+                                                              shape: BoxShape.circle),
+                                                          child: Icon(Icons.photo,
+                                                              color: Color(0xff787E91)),
                                                         ),
                                                         Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 5),
+                                                          padding: const EdgeInsets.only(
+                                                              left: 5),
                                                           child: Text(
                                                             "Gallery",
                                                             style: GoogleFonts.nunito(
                                                                 fontSize: 18,
-                                                                color: Color(
-                                                                    0xff313848),
+                                                                color: Color(0xff313848),
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
+                                                                FontWeight.w600),
                                                           ),
                                                         ),
                                                         Spacer(),
                                                         Icon(
-                                                          Icons
-                                                              .arrow_forward_ios,
-                                                          color:
-                                                              Color(0xff313848),
+                                                          Icons.arrow_forward_ios,
+                                                          color: Color(0xff313848),
                                                           size: 17,
                                                         )
                                                       ],
@@ -430,18 +374,16 @@ class _SodaAddViewState extends State<SodaAddView> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              left: 45),
+                                                      const EdgeInsets.only(left: 45),
                                                       child: Container(
                                                         width: double.infinity,
                                                         height: 1,
                                                         decoration: BoxDecoration(
                                                             border: Border.symmetric(
                                                                 horizontal: BorderSide(
-                                                                    color: Color(
-                                                                        0xffEAEDF3),
-                                                                    width:
-                                                                        1.5))),
+                                                                    color:
+                                                                    Color(0xffEAEDF3),
+                                                                    width: 1.5))),
                                                       ),
                                                     ),
                                                   ],
@@ -464,12 +406,16 @@ class _SodaAddViewState extends State<SodaAddView> {
                                   fontWeight: FontWeight.w500)),
                         ),
                       ),
+
+
                       SizedBox(
                         height: 20,
                       ),
+
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Text(
@@ -488,11 +434,10 @@ class _SodaAddViewState extends State<SodaAddView> {
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
                                   color: Colors.white,
-                                  border: Border.all(
-                                      color: Color(0xffe7e7e7), width: 1),
+                                  border:
+                                  Border.all(color: Color(0xffe7e7e7), width: 1),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Color(0xfff5f5f5),
@@ -501,11 +446,11 @@ class _SodaAddViewState extends State<SodaAddView> {
                                         blurStyle: BlurStyle.outer)
                                   ]),
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
+                                padding: const EdgeInsets.only(left: 10, right: 10),
                                 child: TextField(
                                   autofocus: false,
                                   controller: coldDrinkController,
+
                                   cursorColor: Color(0xff7E8286),
                                   decoration: InputDecoration(
                                     icon: Image(
@@ -560,11 +505,10 @@ class _SodaAddViewState extends State<SodaAddView> {
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
                                   color: Colors.white,
-                                  border: Border.all(
-                                      color: Color(0xffe7e7e7), width: 1),
+                                  border:
+                                  Border.all(color: Color(0xffe7e7e7), width: 1),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Color(0xfff5f5f5),
@@ -573,11 +517,11 @@ class _SodaAddViewState extends State<SodaAddView> {
                                         blurStyle: BlurStyle.outer)
                                   ]),
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
+                                padding: const EdgeInsets.only(left: 10, right: 10),
                                 child: TextField(
                                   autofocus: false,
                                   controller: priceController,
+
                                   cursorColor: Color(0xff7E8286),
                                   decoration: InputDecoration(
                                     icon: Image(
@@ -604,55 +548,55 @@ class _SodaAddViewState extends State<SodaAddView> {
                           const SizedBox(
                             height: 40,
                           ),
+
                           ElevatedButton(
                               style: ButtonStyle(
-                                  minimumSize: MaterialStateProperty.all(
-                                      Size(double.infinity, 50)),
-                                  shape: MaterialStateProperty.all(
-                                      const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              bottomRight: Radius.circular(25),
-                                              bottomLeft:
-                                                  Radius.circular(25)))),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xffEF505F))),
-                              onPressed: () {
-                                if (widget.editItemId == null) {
-                                  addSoda();
-                                } else {
-                                  updateSoda(widget.editItemId);
-                                }
-
+                                  minimumSize:
+                                  MaterialStateProperty.all(Size(double.infinity, 50)),
+                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(25),
+                                          bottomLeft: Radius.circular(25)))),
+                                  backgroundColor:
+                                  MaterialStateProperty.all(Color(0xffEF505F))),
+                              onPressed: (){
+                                addSoda();
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                widget.editItemId==null ? "Create New Cold drink" : "Edit Cold Drink",
-                                style: const TextStyle(
-                                    fontSize: 16, color: Colors.white),
+                                "Create New Cold drink",
+                                style: TextStyle(fontSize: 16,color: Colors.white),
                               )),
+
                         ],
                       ),
+
+
                     ],
                   ),
                 ),
               ),
-              const SizedBox(
+
+
+              SizedBox(
                 height: 40,
               )
+
             ],
           ),
-        ));
+        )
+    );
   }
 
   pickAttachment(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: source);
+    final XFile? image = await picker.pickImage(source:source);
     if (image != null && image.path.isNotEmpty) {
       await setAttachmentImagePath(image.path);
     }
   }
 
-  setAttachmentImagePath(String? value) async {
+  setAttachmentImagePath(String? value) async{
     selectedImagePath = value;
     setState(() {});
     if (value != null) {
@@ -662,10 +606,10 @@ class _SodaAddViewState extends State<SodaAddView> {
         String randomString = getRandomId();
         String imagePath = "ItemPhoto/$randomString.jpg";
         final profilePictureRef =
-            FirebaseStorage.instance.ref().child(imagePath);
+        FirebaseStorage.instance.ref().child(imagePath);
         await profilePictureRef.putFile(File(value));
         downloadImageUrl = await profilePictureRef.getDownloadURL();
-        setState(() {});
+
         EasyLoading.dismiss();
       } on FirebaseException catch (e) {
         print("ERROR : $e");
@@ -677,17 +621,15 @@ class _SodaAddViewState extends State<SodaAddView> {
     }
     setState(() {});
   }
-
   addSoda() async {
     var uuid = Uuid();
     var sodaid = uuid.v4();
     try {
       final CollectionReference categoryCollectionReference =
-          FirebaseFirestore.instance.collection('coldDrink');
+      FirebaseFirestore.instance.collection('coldDrink');
 
       EasyLoading.show();
       String docId = categoryCollectionReference.doc().id;
-
       Map<String, dynamic> coldDrink = {
         "id": sodaid,
         "image": downloadImageUrl,
@@ -704,45 +646,6 @@ class _SodaAddViewState extends State<SodaAddView> {
       await categoryCollectionReference.doc(docId).set(coldDrink);
 
       EasyLoading.dismiss();
-    } catch (e) {
-      print("ADD PIZZA ERROR : $e");
-    }
-  }
-
-  updateSoda(FoodItemModel? editItemId) async {
-    try {
-      final CollectionReference categoryCollectionReference =
-          FirebaseFirestore.instance.collection('coldDrink');
-
-      EasyLoading.show();
-      String? docId;
-
-      var query =
-          categoryCollectionReference.where('id', isEqualTo: editItemId?.id);
-
-      query.get().then(
-        (querySnapshot) async {
-          for (var element in querySnapshot.docs) {
-            docId = element.id;
-            print("sdfghjkhfgdg : ${element.id}");
-            Map<String, dynamic> coldDrink = {
-              "id": editItemId?.id,
-              "image": downloadImageUrl,
-              "price": int.parse(priceController.text),
-              "name": coldDrinkController.text,
-              "rating": "50 rating",
-              "selectitem": 1,
-              "checkadd": false,
-              "foodtotal": 0,
-              "foodbill": int.parse(priceController.text),
-              "food": "soda",
-            };
-
-            await categoryCollectionReference.doc(docId).update(coldDrink);
-            EasyLoading.dismiss();
-          }
-        },
-      );
     } catch (e) {
       print("ADD PIZZA ERROR : $e");
     }

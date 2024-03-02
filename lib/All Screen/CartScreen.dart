@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:Pizza/All%20Screen/DonationBottomsheetDialog.dart';
 import 'package:Pizza/All%20Screen/PaymentScreen.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
@@ -6,13 +5,11 @@ import 'package:Pizza/Controller/OrderController.dart';
 import 'package:Pizza/Drawer/AddressBook.dart';
 import 'package:Pizza/Drawer/ProfileScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:Pizza/All%20Screen/GoldBottomSheetDialog.dart';
@@ -26,7 +23,6 @@ import 'package:shimmer/shimmer.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
-
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
@@ -38,6 +34,7 @@ class _CartScreenState extends State<CartScreen> {
   LoginController loginController = Get.find();
   BottomController bottomController = Get.find();
   OrderController orderController=Get.find();
+
   int ordertotal = 0;
   @override
   void initState() {
@@ -53,66 +50,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*   appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(
-              context,
-            );
-          },
-          child: Icon(
-            Icons.arrow_back_rounded,
-            size: 27,
-            color: Colors.black,
-          ),
-        ),
-        toolbarHeight: 50,
-        elevation: 0,
-        */
-      /*flexibleSpace: Opacity(
-          opacity: 0.1,
-          child: Container(
-            color: Color(0xffFFF6F7),
-            child: Image(
-              image: AssetImage("images/bg1.webp"),
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width,
-              height: 230,
-            ),
-          ),
-        ),*/
-      /*
-        backgroundColor: CupertinoColors.white,
-        title: Text("Cart Screen",
-            style: TextStyle(color: Colors.black, fontSize: 19)),
-       */
-      /* actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: GestureDetector(
-              onTap: (){
-                setState(() {
-                  Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft,child: CartScreen()));
-                });
-              },
-              child: Container(
-                  width: 38,
-                  height: 38,
-                  decoration: BoxDecoration(
-                      color: Color(0xffE9E9F7), shape: BoxShape.circle),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Center(
-                      child: Image(
-                        image: AssetImage("images/cart.webp"),
-                        color: Color(0xffB1BBDA),
-                      ),
-                    ),
-                  )),
-            ),
-          ),
-        ],*/ /*
-      ),*/
       backgroundColor: Color(0xffF4F6FA),
       body: WillPopScope(
         onWillPop: () {
@@ -1908,22 +1845,15 @@ class _CartScreenState extends State<CartScreen> {
                                                             ),
                                                             Container(
                                                               width: 280,
-
                                                               child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(left: 30),
+                                                                padding: const EdgeInsets.only(left: 30),
                                                                 child: Obx(
                                                                   () => Text(
                                                                     "${googleMapControllerScreen.area.value}",
-                                                                    style: GoogleFonts
-                                                                        .lexend(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400,
+                                                                    style: GoogleFonts.lexend(
+                                                                      fontWeight: FontWeight.w400,
                                                                       fontSize: 16,
-                                                                      color: Color(
-                                                                          0xff8F94A4),
+                                                                      color: Color(0xff8F94A4),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -2553,6 +2483,9 @@ class _CartScreenState extends State<CartScreen> {
                                         setState(() {
                                           orderController.addUserOrderData();
                                           orderController.addAllUserOrderData();
+                                          orderController.tracking_Order();
+
+
                                           print("cash");
                                           Navigator.push(
                                               context,

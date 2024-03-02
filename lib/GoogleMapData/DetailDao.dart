@@ -13,7 +13,6 @@ abstract class Detaildao {
   Future<void> deletedetail(Detail_table detailtable);
 
   @Query(
-      "update detail set addresstype =:addresstype,ordertype =:ordertype,area =:area,flat =:flat,near =:near where id=:id")
-  Future<void> updatedetail(String id, String ordertype, String addresstype,
-      String area, String flat, String near);
+      "update detail set addresstype =:addresstype,ordertype =:ordertype,area =:area,flat =:flat,near =:near,latitude =:latitude,longitude =:longitude where id=:id")
+  Future<void> updatedetail(String id, String ordertype, String addresstype, String area, String flat, String near,double latitude,double longitude);
 }

@@ -154,7 +154,7 @@ class _AddressBookState extends State<AddressBook> {
                           child: StreamBuilder<List<Detail_table>>(
                             stream: detaildao.getalldetail(),
                             builder: (context, snapshot) {
-                              if (snapshot.hasData) {
+                              if (snapshot.hasData){
                                 return ListView.separated(
                                     padding: EdgeInsets.only(bottom: 20),
                                     itemCount: snapshot.data!.length,
@@ -164,9 +164,20 @@ class _AddressBookState extends State<AddressBook> {
                                             left: 15, right: 15),
                                         child: GestureDetector(
                                           onTap: () {
+
                                             googleMapControllerScreen.SetLocationData(
                                                 "${snapshot.data![index].addresstype}",
                                                 "${snapshot.data![index].area}");
+
+                                            googleMapControllerScreen.areaController.text=snapshot.data![index].area;
+                                            googleMapControllerScreen.nearController.text=snapshot.data![index].near;
+
+                                            googleMapControllerScreen.latitude=snapshot.data![index].latitude;
+                                            googleMapControllerScreen.longitude=snapshot.data![index].longitude;
+
+                                            print("--------latitude---------${snapshot.data![index].latitude}");
+                                            print("--------longitude--------${snapshot.data![index].longitude}");
+
                                             googleMapControllerScreen.selectAddress.value = true;
                                             googleMapControllerScreen.visibleAddress.value = true;
                                             Get.back();
@@ -238,30 +249,18 @@ class _AddressBookState extends State<AddressBook> {
                                                   SizedBox(width: 48),
                                                   GestureDetector(
                                                     onTap: () {
-                                                      showModalBottomSheet(
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        isScrollControlled:
-                                                            true,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          20),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          20)),
-                                                        ),
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return UpdateAddressDetails(
-                                                              snapshot: snapshot
-                                                                  .data!,
-                                                              index: index);
-                                                        },
-                                                      );
+                                                      setState(() {
+                                                        googleMapControllerScreen.editAddress=true;
+                                                      });
+
+                                                      Navigator.push(
+                                                          context,
+                                                          PageTransition(
+                                                              type: PageTransitionType.rightToLeft,
+                                                              child: GoogleMapScreen(snapshot: snapshot.data,index: index,)));
+
+
+
                                                     },
                                                     child: Container(
                                                       width: 25,
@@ -355,11 +354,13 @@ class _AddressBookState extends State<AddressBook> {
                       ],
                     ),
                   );
-                } else if (snapshot.hasError) {
+                }
+                else if (snapshot.hasError) {
                   return Text(
                     "Error",
                   );
-                } else {
+                }
+                else {
                   return Center(child: CircularProgressIndicator());
                 }
               },

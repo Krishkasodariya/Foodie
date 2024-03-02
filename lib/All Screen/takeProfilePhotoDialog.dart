@@ -67,6 +67,7 @@ class _takeProfilePhotoDialogState extends State<takeProfilePhotoDialog> {
                   setState(() {
                     logincontroller.takephoto(ImageSource.camera);
                     logincontroller.changeColor = true;
+                    Navigator.pop(context);
                   });
                 },
                 child: Padding(
@@ -143,6 +144,7 @@ class _takeProfilePhotoDialogState extends State<takeProfilePhotoDialog> {
                     setState(() {
                       logincontroller.takephoto(ImageSource.gallery);
                       logincontroller.changeColor = true;
+                      Navigator.pop(context);
                     });
                   },
                   child: Container(

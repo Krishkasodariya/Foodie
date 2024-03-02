@@ -1,9 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class GoogleMapControllerScreen extends GetxController{
+
+  TextEditingController flatController = new TextEditingController();
+  TextEditingController areaController = new TextEditingController();
+  TextEditingController nearController = new TextEditingController();
+
   RxString area="".obs;
   RxString addresstype="".obs;
   SharedPreferences ?sharedPreferences;
@@ -14,6 +20,10 @@ class GoogleMapControllerScreen extends GetxController{
   RxBool visibleAddress=false.obs;
   RxBool changeAddressHeight=false.obs;
   RxBool changeProfileHeight=false.obs;
+  bool editAddress=false;
+
+  double latitude=0.0;
+  double longitude=0.0;
 
   late LatLng draggedLatlng;
   late LatLng defaultLatlng;
@@ -21,6 +31,7 @@ class GoogleMapControllerScreen extends GetxController{
 
   Placemark place = Placemark();
   late GoogleMapController googleMapController;
+
   void Allupdate(Function ref){
     reference = ref;
   }
@@ -58,6 +69,7 @@ class GoogleMapControllerScreen extends GetxController{
 
   Future gotoUserCurrentPosition() async {
     Position currentposition = await determineCurrentPosition();
+
     gotoSpecificPosition(LatLng(currentposition.latitude, currentposition.longitude));
   }
 
@@ -68,6 +80,7 @@ class GoogleMapControllerScreen extends GetxController{
     await getplacemark(position);
     print("222222222222");
   }
+
 
   Future getplacemark(LatLng position) async {
     List<Placemark> placemark =
@@ -87,7 +100,7 @@ class GoogleMapControllerScreen extends GetxController{
     draggedLatlng = defaultLatlng;
     cameraPosition = CameraPosition(target: defaultLatlng, zoom: 18);
     gotoUserCurrentPosition();
-    print("000000000000000000000000${place.subLocality}");
+
   }
 
   Future SetLocationData(String sector,String locality)async{
@@ -98,7 +111,8 @@ class GoogleMapControllerScreen extends GetxController{
     area.value=locality;
     print("--Set--)${addresstype}");
     print("--Set--)${area}");
-    // update1!();
+
+
   }
 
   Future GetLocationData()async{

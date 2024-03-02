@@ -13,6 +13,7 @@ import 'package:Pizza/Drawer/LikesScreen.dart';
 import 'package:Pizza/Drawer/OfferScreen.dart';
 import 'package:Pizza/Drawer/ProfileScreen.dart';
 import 'package:Pizza/Drawer/RatingScreen.dart';
+import 'package:Pizza/Drawer/TrackingOrder.dart';
 import 'package:Pizza/Drawer/YourOrderScreen.dart';
 import 'package:Pizza/DynamicLink/Path_Constant.dart';
 import 'package:Pizza/ModelClass/UserModel.dart';
@@ -589,6 +590,76 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               ),
                             ],
                           ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: TrackingOrder(),
+                                        type: PageTransitionType.rightToLeft));
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffF2F4F7),
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(9),
+                                          child: Image(
+                                              image: AssetImage(
+                                                  "images/order.webp"),
+                                              color: Color(0xff787E91)),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Tracking orders",
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 18,
+                                            color: Color(0xff313848),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Color(0xff313848),
+                                        size: 17,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 60),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 1,
+                                      decoration: BoxDecoration(
+                                          border: Border.symmetric(
+                                              horizontal: BorderSide(
+                                                  color: Color(0xffEAEDF3),
+                                                  width: 1.5))),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
                           SizedBox(
                             height: 20,
                           ),
@@ -1224,11 +1295,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             height: 20,
                           ),
                           GestureDetector(
-                            onTap: !createdLink
-                                ? () {
+                            onTap: !createdLink ? () {
                                     createDynamicLink(true, kAboutpage);
-                                    print(
-                                        "ssssssssssssssssssssssssssssssssss${linkMessage}");
+                                    print("ssssssssssssssssssssssssssssssssss${linkMessage}");
                                     Navigator.push(
                                         context,
                                         PageTransition(

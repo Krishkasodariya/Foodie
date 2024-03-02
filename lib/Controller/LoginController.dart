@@ -21,7 +21,6 @@ class LoginController extends GetxController {
 
   RxString cartName="".obs;
   RxString cartPhone="".obs;
-
   var changeName = "";
   var changePhoneNumber;
   var changeEmail = "";

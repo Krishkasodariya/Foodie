@@ -14,7 +14,8 @@ class Detail_table{
   String flat;
   String area;
   String near;
+  double latitude;
+  double longitude;
 
-
-  Detail_table(this.ordertype, this.addresstype, this.flat, this.area, this.near, { this.id});
+  Detail_table(this.ordertype, this.addresstype, this.flat, this.area, this.near,this.latitude,this.longitude,{ this.id});
 }

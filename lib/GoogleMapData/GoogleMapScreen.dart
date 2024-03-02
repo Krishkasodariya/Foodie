@@ -10,16 +10,21 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 
+import 'Detail_table.dart';
+import 'UpdateAddressDetails.dart';
+
 class GoogleMapScreen extends StatefulWidget {
-  const GoogleMapScreen({super.key});
+  final List<Detail_table>? snapshot;
+  int? index;
+
+  GoogleMapScreen({super.key, this.index, this.snapshot});
 
   @override
   State<GoogleMapScreen> createState() => _GoogleMapScreenState();
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
-
-  GoogleMapControllerScreen googleMapControllerscreen=Get.find();
+  GoogleMapControllerScreen googleMapControllerscreen = Get.find();
 
   @override
   void initState() {
@@ -28,8 +33,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     googleMapControllerscreen.defaultLocation();
     googleMapControllerscreen.Allupdate(ref);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,219 +59,250 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           ),
         ),
       ),
-      body: Stack(
-          children: [
-        Container(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height,
-          child: GoogleMap(
-            //myLocationEnabled: true,
-            initialCameraPosition:
-                CameraPosition(target: LatLng(10, 10), zoom: 10),
-            buildingsEnabled: true,
+      body: WillPopScope(
+        onWillPop: () {
+          setState(() {
+            googleMapControllerscreen.editAddress = false;
+          });
+          return Future.value(true);
+        },
+        child: Stack(children: [
+          Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height,
+            child: GoogleMap(
+              //myLocationEnabled: true,
+              initialCameraPosition:
+                  CameraPosition(target: LatLng(10, 10), zoom: 10),
+              buildingsEnabled: true,
 
-            onMapCreated: (controller) {
-              setState((){
-                //googleMapcontroller.complete(controller);
-                googleMapControllerscreen.googleMapController = controller;
-              });
-            },
-            onCameraMove: (position) {
-              googleMapControllerscreen.draggedLatlng = position.target;
-              print("----****${googleMapControllerscreen.draggedLatlng}");
-            },
-            onCameraIdle: () {
-              googleMapControllerscreen.getplacemark(googleMapControllerscreen.draggedLatlng);
-            },
+              onMapCreated: (controller) {
+                setState(() {
+                  googleMapControllerscreen.googleMapController = controller;
+                });
+              },
+              onCameraMove: (position) {
+                googleMapControllerscreen.draggedLatlng = position.target;
+                print("----****${googleMapControllerscreen.draggedLatlng}");
+              },
+              onCameraIdle: () {
+                googleMapControllerscreen
+                    .getplacemark(googleMapControllerscreen.draggedLatlng);
+              },
 
-
-            zoomControlsEnabled: false,
-            mapType: MapType.normal,
-          ),
-        ),
-        Center(child: Lottie.asset("images/pin.json", width: 50, height: 50)),
-        Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-          child: Container(
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              color: Colors.white,
-              border: Border.all(color: Color(0xffe7e7e7), width: 1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: TextFormField(
-                autofocus: false,
-                onTap: () {
-                  setState(() {
-                    FocusScope.of(context).unfocus();
-                  });
-                  showModalBottomSheet(
-                    backgroundColor: Colors.white,
-                    isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20)),
-                    ),
-                    context: context,
-                    builder: (context) {
-                      return SearchLocation();
-                    },
-                  );
-                },
-                cursorColor: Color(0xff7E8286),
-                decoration: InputDecoration(
-                  icon: Image(
-                    image: AssetImage("images/search.webp"),
-                    width: 25,
-                    height: 25,
-                    color: Color(0xffEF4F5F),
-                  ),
-                  hintText: "Search the locaion",
-                  hintStyle: GoogleFonts.nunito(
-                    fontSize: 17,
-                    color: Color(0xff7E8286),
-                  ),
-                  border: InputBorder.none,
-                ),
-                style: GoogleFonts.nunito(
-                    fontSize: 17,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400),
-              ),
+              zoomControlsEnabled: false,
+              mapType: MapType.normal,
             ),
           ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: GestureDetector(
-                onTap: () async {
-                  googleMapControllerscreen.gotoUserCurrentPosition();
-                },
-                child: Container(
-                  width: 220,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black26, blurRadius: 5, spreadRadius: 1)
-                    ],
-                    color: Color(0xffFFF6F7),
-                    border: Border.all(color: Color(0xffEF4F5F)),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      children: [
-                        Icon(Icons.location_searching,
-                            color: Color(0xffEF4F5F), size: 20),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text("Use current location",
-                              style: GoogleFonts.nunito(
-                                  color: Color(0xffEF4F5F),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+          Center(child: Lottie.asset("images/pin.json", width: 50, height: 50)),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                color: Colors.white,
+                border: Border.all(color: Color(0xffe7e7e7), width: 1),
               ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 150,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 15),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.location_on_rounded,
-                          color: Color(0xffEF505F),
-                          size: 28,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            "${googleMapControllerscreen.place.name}",
-                            style: GoogleFonts.nunito(
-                                fontSize: 20,
-                                color: Color(0xff313848),
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 48),
-                      Flexible(
-                        child: Container(
-                          child: Text(
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            "${googleMapControllerscreen.place.street}, ${googleMapControllerscreen.place.subLocality}, ${googleMapControllerscreen.place.locality}",
-                            style: GoogleFonts.nunito(
-                                fontSize: 14,
-                                color: Color(0xff6F6F74),
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: TextFormField(
+                  autofocus: false,
+                  onTap: () {
+                    setState(() {
+                      FocusScope.of(context).unfocus();
+                    });
+                    showModalBottomSheet(
+                      backgroundColor: Colors.white,
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20)),
                       ),
-                    ],
+                      context: context,
+                      builder: (context) {
+                        return SearchLocation();
+                      },
+                    );
+                  },
+                  cursorColor: Color(0xff7E8286),
+                  decoration: InputDecoration(
+                    icon: Image(
+                      image: AssetImage("images/search.webp"),
+                      width: 25,
+                      height: 25,
+                      color: Color(0xffEF4F5F),
+                    ),
+                    hintText: "Search the locaion",
+                    hintStyle: GoogleFonts.nunito(
+                      fontSize: 17,
+                      color: Color(0xff7E8286),
+                    ),
+                    border: InputBorder.none,
                   ),
-                  Spacer(),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
-                                Size(double.infinity, 50)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)))),
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xffEF505F))),
-                        onPressed: () async {
-                          showModalBottomSheet(
-                            backgroundColor: Colors.white,
-                            isScrollControlled: true,
-
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  topLeft: Radius.circular(20)),
-                            ),
-                            context: context,
-                            builder: (context) {
-                              return AddressDetails(palce: googleMapControllerscreen.place,);
-                            },
-                          );
-                        },
-                        child: Text(
-                          "Enter Complete Address",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        )),
-                  ),
-                ],
+                  style: GoogleFonts.nunito(
+                      fontSize: 17,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
             ),
-          ],
-        ),
-      ]),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: GestureDetector(
+                  onTap: () async {
+                    googleMapControllerscreen.gotoUserCurrentPosition();
+                  },
+                  child: Container(
+                    width: 220,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 5,
+                            spreadRadius: 1)
+                      ],
+                      color: Color(0xffFFF6F7),
+                      border: Border.all(color: Color(0xffEF4F5F)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        children: [
+                          Icon(Icons.location_searching,
+                              color: Color(0xffEF4F5F), size: 20),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text("Use current location",
+                                style: GoogleFonts.nunito(
+                                    color: Color(0xffEF4F5F),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 150,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 15),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_rounded,
+                            color: Color(0xffEF505F),
+                            size: 28,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              "${googleMapControllerscreen.place.name}",
+                              style: GoogleFonts.nunito(
+                                  fontSize: 20,
+                                  color: Color(0xff313848),
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 48),
+                        Flexible(
+                          child: Container(
+                            child: Text(
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              "${googleMapControllerscreen.place.street}, ${googleMapControllerscreen.place.subLocality}, ${googleMapControllerscreen.place.locality}",
+                              style: GoogleFonts.nunito(
+                                  fontSize: 14,
+                                  color: Color(0xff6F6F74),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, bottom: 10),
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              minimumSize: MaterialStateProperty.all(
+                                  Size(double.infinity, 50)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15)))),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Color(0xffEF505F))),
+                          onPressed: () async {
+                            showModalBottomSheet(
+                              backgroundColor: Colors.white,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    topLeft: Radius.circular(20)),
+                              ),
+                              context: context,
+                              builder: (context) {
+
+                                if (googleMapControllerscreen.editAddress) {
+                                  if (widget.snapshot != null && widget.index != null && googleMapControllerscreen.place != null) {
+                                    return UpdateAddressDetails(snapshot: widget.snapshot!, index: widget.index!,palce: googleMapControllerscreen.place);
+                                  } else {
+                                    return Container(child: Text('Snapshot or index is null.'),);
+                                  }
+                                } else {
+                                  if (googleMapControllerscreen.place != null) {
+                                    return AddressDetails(palce: googleMapControllerscreen.place,);
+                                  } else {
+                                    return Container(
+                                      child: Text('Place is null.'),
+                                    );
+                                  }
+                                }
+
+
+                              },
+                            );
+                          },
+                          child: googleMapControllerscreen.editAddress
+                              ? Text(
+                                  "Update Complete Address",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                )
+                              : Text(
+                                  "Enter Complete Address",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                )),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ]),
+      ),
     );
   }
 

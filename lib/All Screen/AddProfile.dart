@@ -238,7 +238,6 @@ class _AddProfileState extends State<AddProfile> {
                                           logincontroller.takephoto(ImageSource.gallery);
                                           logincontroller.changeColor=true;
                                         });
-
                                       },
                                       child: Container(
                                         width: double.infinity,

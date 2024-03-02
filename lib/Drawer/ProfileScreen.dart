@@ -6,7 +6,6 @@ import 'package:Pizza/ModelClass/UserModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class ProfileScreen extends StatefulWidget{
@@ -435,49 +434,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
-  // Future updateuserdetail(UserModel user) async {
-  //   FirebaseFirestore.instance
-  //       .collection("user")
-  //       .doc(logincontroller.userid)
-  //       .update(user.toJson())
-  //       .then((value) => print("useradd"));
-  // }
-
-/*  Future adduserdetail(UserModel user) async {
-    print("object");
-    FirebaseFirestore.instance
-        .collection("user")
-        .doc(logincontroller.userid)
-        .set(user.toJson())
-        .then((value) => print("useradd"));
-  }*/
-
-  /*Future dataofmobile() async {
-    FirebaseFirestore.instance
-        .collection('user')
-        .where(
-          "Uid",
-          isEqualTo: "${logincontroller.userid}",
-        )
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        // print("=============================================)");
-        // print("==========)${updatename.text = doc["Name"]}");
-        // print("==========)${updatephonenumber.text = doc["Phone"]}");
-        // print("==========)${updateemail.text = doc["Email"]}");
-        // print("==========)${imageurl=doc["Image"]}");
-        setState(() {
-          logincontroller.updatename.text = doc["Name"];
-          logincontroller.updatephonenumber.text = doc["Phone"];
-          logincontroller.updateemail.text = doc["Email"];
-          logincontroller.imageurl=doc["Image"];
-        });
-      });
-    });
-  }
-*/
 
   void ref() {
     setState(() {});

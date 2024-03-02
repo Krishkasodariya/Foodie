@@ -1,12 +1,11 @@
-import 'package:Pizza/Controller/BottomController.dart';
-import 'package:Pizza/Drawer/AddressBook.dart';
 import 'package:Pizza/GoogleMapData/DetailDao.dart';
-import 'package:Pizza/GoogleMapData/Detail_database.dart';
 import 'package:Pizza/GoogleMapData/Detail_table.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../Controller/GoogleMapController.dart';
+
 
 class AddressDetails extends StatefulWidget {
   Placemark palce;
@@ -28,10 +27,9 @@ class _AddressDetailsState extends State<AddressDetails> {
   ];
   late Placemark data;
   int currentindex = 0;
-  TextEditingController flatController = new TextEditingController();
-  TextEditingController areaController = new TextEditingController();
-  TextEditingController nearController = new TextEditingController();
 
+
+  GoogleMapControllerScreen googleMapControllerScreen=Get.find();
 
   @override
   void initState() {
@@ -40,9 +38,9 @@ class _AddressDetailsState extends State<AddressDetails> {
     print("1111");
     data = widget.palce;
 
-    flatController.text = "${data.name}";
-    areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
-    nearController.text = "${data.thoroughfare}";
+    googleMapControllerScreen.flatController.text = "${data.name}";
+    googleMapControllerScreen.areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
+    googleMapControllerScreen.nearController.text = "${data.thoroughfare}";
 
   }
 
@@ -236,7 +234,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                 width: double.infinity,
                 height: 50,
                 child: TextFormField(
-                  controller: flatController,
+                  controller: googleMapControllerScreen.flatController,
                   onTap: () {},
                   decoration: InputDecoration(
                     contentPadding:
@@ -263,7 +261,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                 width: double.infinity,
                 height: 50,
                 child: TextFormField(
-                  controller: areaController,
+                  controller: googleMapControllerScreen.areaController,
                   onTap: () {},
                   decoration: InputDecoration(
                     contentPadding:
@@ -290,7 +288,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                 width: double.infinity,
                 height: 50,
                 child: TextFormField(
-                  controller: nearController,
+                  controller: googleMapControllerScreen.nearController,
                   onTap: () {},
                   decoration: InputDecoration(
                     contentPadding:
@@ -328,6 +326,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                     print("AAAAAAAAA");
                     _adddata();
                     Navigator.pop(context);
+                    Navigator.pop(context);
 
                     print("-----)$order");
                     print("-----)${addresstype[currentindex].name}");
@@ -348,9 +347,14 @@ class _AddressDetailsState extends State<AddressDetails> {
     await detaildao.adddetail(Detail_table(
         order,
         addresstype[currentindex].name,
-        flatController.text,
-        areaController.text,
-        nearController.text));
+      googleMapControllerScreen.flatController.text,
+      googleMapControllerScreen.areaController.text,
+      googleMapControllerScreen.nearController.text,
+        googleMapControllerScreen.draggedLatlng.latitude,
+        googleMapControllerScreen.draggedLatlng.longitude,
+
+    ));
+
 
   }
 }

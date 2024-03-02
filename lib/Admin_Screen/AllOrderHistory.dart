@@ -151,16 +151,7 @@ class _AllOrderHistoryState extends State<AllOrderHistory>{
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                  Spacer(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: Image(
-                                      image: AssetImage("images/fill_like.webp"),
-                                      width: 29,
-                                      height: 29,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
+
                                 ],
                               ),
                               SizedBox(
@@ -485,6 +476,117 @@ class _AllOrderHistoryState extends State<AllOrderHistory>{
                               orderController.orderAllDatalist[index].viewDetail
                                   ? Column(
                                 children: [
+
+                                  DottedDashedLine(
+                                      height: 1,
+                                      width: double.infinity,
+                                      axis: Axis.horizontal,
+                                      dashColor: Color(0xffDAD9DD),
+                                      strokeWidth: 1,
+                                      dashSpace: 3),
+
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Name:-   ",
+                                          style: GoogleFonts.lexend(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 17,
+                                            color: Color(0xff313848),
+                                          ),
+                                        ),
+
+
+                                        Obx(
+                                              () => Padding(
+                                            padding: const EdgeInsets.only(left: 15),
+                                            child: Text(
+                                                "${orderController.orderAllDatalist[index].name}",
+                                                style: GoogleFonts.nunito(
+                                                  color: Color(0xff7e878d),
+                                                  fontSize: 17,
+                                                )),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Address:-",
+                                          style: GoogleFonts.lexend(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 17,
+                                            color: Color(0xff313848),
+                                          ),
+                                        ),
+
+                                        Obx(() => Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 15,top: 10),
+                                            child: Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 4,
+                                                "${orderController.orderAllDatalist[index].address} Near ${orderController.orderAllDatalist[index].nearAddress}",
+                                                style: GoogleFonts.nunito(
+                                                  color: Color(0xff7e878d),
+                                                  fontSize: 15.5,
+                                                )),
+                                          ),
+                                        ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Phone:-   ",
+                                          style: GoogleFonts.lexend(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 17,
+                                            color: Color(0xff313848),
+                                          ),
+                                        ),
+
+                                        Obx(() => Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 15,top: 10),
+                                            child: Text(
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 4,
+                                                "${orderController.orderAllDatalist[index].phoneNumber} ",
+                                                style: GoogleFonts.nunito(
+                                                  color: Color(0xff7e878d),
+                                                  fontSize: 15.5,
+                                                )),
+                                          ),
+                                        ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+
                                   DottedDashedLine(
                                       height: 1,
                                       width: double.infinity,
