@@ -1,14 +1,15 @@
-import 'package:Pizza/Admin_Screen/Add_Pizza.dart';
+import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'custom_text_field_widget.dart';
 
 class AddRestaurants extends StatefulWidget {
-  const AddRestaurants({super.key});
+  final PizzaItemModel? restaurantDetail;
+
+  const AddRestaurants({super.key, this.restaurantDetail});
 
   @override
   State<AddRestaurants> createState() => _AdminDinnerScreenState();
@@ -20,9 +21,18 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
 
   String? selectedValue;
 
-
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    nameController = TextEditingController(text: widget.restaurantDetail?.name);
+    priceController =
+        TextEditingController(text: widget.restaurantDetail?.price.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +48,18 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
             );
             setState(() {});
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_rounded,
             size: 25,
             color: Colors.black,
           ),
         ),
-        title: Text("Open New Restaurants",
+        title: Text(
+            widget.restaurantDetail == null
+                ? "Open New Restaurants"
+                : "Edit Restaurant",
             style: GoogleFonts.nunito(
-                color: Color(0xff293041),
+                color: const Color(0xff293041),
                 fontSize: 20,
                 fontWeight: FontWeight.w500)),
       ),
@@ -54,27 +67,28 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Container(
                       height: 1,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color(0xffDAD9DD),
-                            width: 1,
-                          )),
+                        color: Color(0xffDAD9DD),
+                        width: 1,
+                      )),
                     ),
                   ),
                 ),
                 Text(
-                  "ADD NEW ONE",
+                  widget.restaurantDetail == null
+                      ? "ADD NEW ONE"
+                      : "EDIT NEW ONE",
                   style: GoogleFonts.nunito(
                       color: Color(0xff7e878d),
                       fontSize: 15.2,
@@ -82,25 +96,22 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 20),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Container(
                       height: 1,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color(0xffDAD9DD),
-                            width: 1,
-                          )),
+                        color: Color(0xffDAD9DD),
+                        width: 1,
+                      )),
                     ),
                   ),
                 )
               ],
             ),
-        
             SizedBox(
               height: 25,
             ),
-        
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),
               child: Container(
@@ -127,14 +138,16 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                           decoration: BoxDecoration(
                               color: Color(0xffEF4F5F),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(5))),
+                                  BorderRadius.all(Radius.circular(5))),
                         ),
                         SizedBox(
                           width: 15,
                         ),
                         Center(
                           child: Text(
-                            "Open New Restaurants",
+                            widget.restaurantDetail == null
+                                ? "Open New Restaurants"
+                                : "Edit Restaurant",
                             style: GoogleFonts.lexend(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -160,7 +173,6 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-        
                         Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Text(
@@ -171,7 +183,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 5,
                         ),
                         Padding(
@@ -179,10 +191,11 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
                                 color: Colors.white,
-                                border:
-                                Border.all(color: Color(0xffe7e7e7), width: 1),
+                                border: Border.all(
+                                    color: Color(0xffe7e7e7), width: 1),
                                 boxShadow: [
                                   BoxShadow(
                                       color: Color(0xfff5f5f5),
@@ -191,11 +204,11 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                       blurStyle: BlurStyle.outer)
                                 ]),
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
                                 autofocus: false,
                                 controller: nameController,
-        
                                 cursorColor: Color(0xff7E8286),
                                 decoration: InputDecoration(
                                   icon: Image(
@@ -229,7 +242,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                             dashColor: Color(0xffDAD9DD),
                             strokeWidth: 1,
                             dashSpace: 3),
-                         SizedBox(
+                        SizedBox(
                           height: 15,
                         ),
                         Padding(
@@ -250,10 +263,11 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
                                 color: Colors.white,
-                                border:
-                                Border.all(color: Color(0xffe7e7e7), width: 1),
+                                border: Border.all(
+                                    color: Color(0xffe7e7e7), width: 1),
                                 boxShadow: [
                                   BoxShadow(
                                       color: Color(0xfff5f5f5),
@@ -262,14 +276,14 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                       blurStyle: BlurStyle.outer)
                                 ]),
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
                                 autofocus: false,
                                 controller: priceController,
-        
                                 cursorColor: Color(0xff7E8286),
                                 decoration: InputDecoration(
-                                  icon: Image(
+                                  icon: const Image(
                                     image: AssetImage("images/coin.webp"),
                                     width: 25,
                                     height: 25,
@@ -293,42 +307,44 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                         const SizedBox(
                           height: 40,
                         ),
-        
                         ElevatedButton(
                             style: ButtonStyle(
-                                minimumSize:
-                                MaterialStateProperty.all(Size(double.infinity, 50)),
-                                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        bottomRight: Radius.circular(25),
-                                        bottomLeft: Radius.circular(25)))),
-                                backgroundColor:
-                                MaterialStateProperty.all(Color(0xffEF505F))),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(double.infinity, 50)),
+                                shape: MaterialStateProperty.all(
+                                    const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            bottomRight: Radius.circular(25),
+                                            bottomLeft: Radius.circular(25)))),
+                                backgroundColor: MaterialStateProperty.all(
+                                    const Color(0xffEF505F))),
                             onPressed: () {
-                              addRestauratnsData();
+                              if (widget.restaurantDetail == null) {
+                                addRestauratnsData();
+                              } else {
+                                updateRestauratnsData(widget.restaurantDetail!);
+                              }
+
                               Navigator.pop(context);
                             },
                             child: Text(
-                              "Create New Restaurants",
-                              style: TextStyle(fontSize: 16,color: Colors.white),
+                              widget.restaurantDetail == null
+                                  ? "Create New Restaurants"
+                                  : "Edit Restaurant",
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.white),
                             )),
                       ],
                     ),
-        
                   ],
                 ),
               ),
             ),
-        
-        
-        
-        
           ],
         ),
       ),
     );
   }
-
 
   addRestauratnsData() async {
     try {
@@ -341,7 +357,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
         "distance": "2km",
         "name": nameController.text,
         "price": int.parse(priceController.text),
-        "foodimagelist":[],
+        "foodimagelist": [],
         "rating": 3.1,
         "subname": "Pizza",
         "time": "25 - 30 min"
@@ -353,6 +369,36 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
               {"foodimagelist": FieldValue.arrayUnion(pizzaList)},);*/
 
       EasyLoading.dismiss();
+    } catch (e) {
+      print("ADD PIZZA ERROR : $e");
+    }
+  }
+
+  updateRestauratnsData(PizzaItemModel restaurantDetail) async {
+    try {
+      final CollectionReference addCollectionReference =
+          FirebaseFirestore.instance.collection('pizza');
+
+      EasyLoading.show();
+
+      await addCollectionReference
+          .where("name", isEqualTo: restaurantDetail.name)
+          .get()
+          .then((value) async {
+        final resData = {
+          "checklike": false,
+          "distance": "2km",
+          "name": nameController.text,
+          "price": int.parse(priceController.text),
+          "foodimagelist": value.docs[0]['foodimagelist'],
+          "rating": 3.1,
+          "subname": "Pizza",
+          "time": "25 - 30 min"
+        };
+        await addCollectionReference.doc(value.docs[0].id).set(resData);
+
+        EasyLoading.dismiss();
+      });
     } catch (e) {
       print("ADD PIZZA ERROR : $e");
     }

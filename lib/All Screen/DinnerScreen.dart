@@ -1,3 +1,4 @@
+import 'package:Pizza/Admin_Screen/Add_Restaurants.dart';
 import 'package:Pizza/All%20Screen/PizzaScreen.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
@@ -376,7 +377,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                 height: 1,
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                  color: Color(0xffDAD9DD),
+                                  color: const Color(0xffDAD9DD),
                                   width: 1,
                                 )),
                               ),
@@ -805,20 +806,37 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                       .pizzalist[
                                                                           index]
                                                                       .name);
+                                                        } else {
+                                                          Navigator.push(
+                                                            context,
+                                                            PageTransition(
+                                                              type: PageTransitionType
+                                                                  .rightToLeft,
+                                                              child: AddRestaurants(
+                                                                  restaurantDetail:
+                                                                      pizzaController
+                                                                              .pizzalist[
+                                                                          index]),
+                                                            ),
+                                                          );
                                                         }
                                                       },
                                                       itemBuilder: (_) => [
-                                                        // const PopupMenuItem<String>(
-                                                        //   value: "Edit",
-                                                        //   child: Text(
-                                                        //     "Edit",
-                                                        //     style: TextStyle(
-                                                        //       color: Colors.black,
-                                                        //       fontSize: 16,
-                                                        //       fontWeight: FontWeight.w600,
-                                                        //     ),
-                                                        //   ),
-                                                        // ),
+                                                        const PopupMenuItem<
+                                                            String>(
+                                                          value: "Edit",
+                                                          child: Text(
+                                                            "Edit",
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ),
                                                         const PopupMenuItem<
                                                             String>(
                                                           value: "Delete",

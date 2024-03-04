@@ -36,7 +36,8 @@ class _SodaAddViewState extends State<SodaAddView> {
   PizzaController pizzaController = Get.find();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
     if (widget.editItemId != null &&
         selectedImagePath == null &&
         downloadImageUrl == null) {
@@ -47,6 +48,10 @@ class _SodaAddViewState extends State<SodaAddView> {
           text: widget.editItemId?.price.toString() ?? "20");
       setState(() {});
     }
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
         backgroundColor: Colors.white,

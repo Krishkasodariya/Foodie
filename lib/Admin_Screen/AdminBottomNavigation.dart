@@ -20,9 +20,9 @@ class AdminBottomNavigation extends StatefulWidget {
 }
 
 class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
-  BottomController bottomController=Get.find();
+  BottomController bottomController = Get.find();
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
-  AdminController adminController=Get.find();
+  AdminController adminController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -68,23 +68,24 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                                         color: Color(0xff313848),
                                         fontWeight: FontWeight.w700),
                                   )
-                                :*/ Obx(()=>
-                                Text(
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  "${googleMapControllerScreen.addresstype}",
-                                  style: GoogleFonts.nunito(
-                                      fontSize: 20,
-                                      color: Color(0xff313848),
-                                      fontWeight: FontWeight.w700),
-                                ),
+                                :*/
+                                Obx(
+                              () => Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                "${googleMapControllerScreen.addresstype}",
+                                style: GoogleFonts.nunito(
+                                    fontSize: 20,
+                                    color: Color(0xff313848),
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
                           ),
                           Container(
                             width: 220,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10),
-                              child:/* googleMapControllerScreen.area == null
+                              child: /* googleMapControllerScreen.area == null
                                   ? Text(
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -94,16 +95,17 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                                           color: Color(0xff737373),
                                           fontWeight: FontWeight.w700),
                                     )
-                                  :*/ Obx(()=>
-                                  Text(
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    "${googleMapControllerScreen.area}",
-                                    style: GoogleFonts.nunito(
-                                        fontSize: 15,
-                                        color: Color(0xff737373),
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                  :*/
+                                  Obx(
+                                () => Text(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  "${googleMapControllerScreen.area}",
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 15,
+                                      color: Color(0xff737373),
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                           ),
@@ -118,20 +120,21 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: GestureDetector(
-              onTap: (){
-                if(bottomController.adminCurrentindex==0){
-                    Navigator.push(
+              onTap: () {
+                if (bottomController.adminCurrentindex == 0) {
+                  Navigator.push(
                     context,
                     PageTransition(
-                        type: PageTransitionType.rightToLeft,
-                        child: AddRestaurants()));
-                    print("11111");
-                }else if(bottomController.adminCurrentindex==1){
+                      type: PageTransitionType.rightToLeft,
+                      child: const AddRestaurants(),
+                    ),
+                  );
+                } else if (bottomController.adminCurrentindex == 1) {
                   Navigator.push(
                       context,
                       PageTransition(
                           type: PageTransitionType.rightToLeft,
-                          child:SodaAddView()));
+                          child: SodaAddView()));
                   print("2222");
                 }
               },
@@ -149,8 +152,8 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
           ),
         ],
       ),
-      bottomNavigationBar:
-      Obx(() => Container(
+      bottomNavigationBar: Obx(
+        () => Container(
           color: Colors.red,
           width: double.infinity,
           height: 60,
@@ -182,51 +185,51 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
               BottomNavigationBarItem(
                   icon: bottomController.adminCurrentindex == 0
                       ? Image.asset(
-                    "images/food.webp",
-                    width: 23,
-                    height: 23,
-                    color: Color(0xffEF4F5F),
-                  )
+                          "images/food.webp",
+                          width: 23,
+                          height: 23,
+                          color: Color(0xffEF4F5F),
+                        )
                       : Image.asset(
-                    "images/food.webp",
-                    width: 23,
-                    height: 23,
-                    color: Color(0xff787E91),
-                  ),
+                          "images/food.webp",
+                          width: 23,
+                          height: 23,
+                          color: Color(0xff787E91),
+                        ),
                   label: "food"),
               BottomNavigationBarItem(
                   icon: bottomController.adminCurrentindex == 1
                       ? Image.asset(
-                    "images/bsoda.webp",
-                    width: 23,
-                    height: 23,
-                    color: Color(0xffEF4F5F),
-                  )
+                          "images/bsoda.webp",
+                          width: 23,
+                          height: 23,
+                          color: Color(0xffEF4F5F),
+                        )
                       : Image.asset(
-                    "images/bsoda.webp",
-                    width: 23,
-                    height: 23,
-                    color: Color(0xff787E91),
-                  ),
+                          "images/bsoda.webp",
+                          width: 23,
+                          height: 23,
+                          color: Color(0xff787E91),
+                        ),
                   label: "cold drinks"),
-
             ],
           ),
         ),
       ),
       body: Obx(
-            ()=> WillPopScope(
-              onWillPop: () {
-                Navigator.pop(context);
-                adminController.isAdmin.value=false;
-                return Future.value(true);
-              },
-              child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        child: bottomController.adminPage.value[bottomController.adminCurrentindex.value],
-                      ),
-            ),
+        () => WillPopScope(
+          onWillPop: () {
+            Navigator.pop(context);
+            adminController.isAdmin.value = false;
+            return Future.value(true);
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: bottomController
+                .adminPage.value[bottomController.adminCurrentindex.value],
+          ),
+        ),
       ),
     );
   }
