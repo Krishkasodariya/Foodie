@@ -66,7 +66,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
               color: Colors.black,
             ),
           ),
-          title: Text("Create New Pizza",
+          title: Text(widget.pizzaData == null ?"Create New Pizza" :  "Edit Pizza",
               style: GoogleFonts.nunito(
                   color: Color(0xff293041),
                   fontSize: 20,
@@ -95,7 +95,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                     ),
                   ),
                   Text(
-                    "ADD NEW ONE",
+                    widget.pizzaData == null ?  "ADD NEW ONE" : "Edit New One",
                     style: GoogleFonts.nunito(
                         color: Color(0xff7e878d),
                         fontSize: 15.2,
@@ -152,7 +152,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                           ),
                           Center(
                             child: Text(
-                              "Add New Pizza",
+                              widget.pizzaData == null ? "Add New Pizza" : "Edit Pizza",
                               style: GoogleFonts.lexend(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -619,10 +619,10 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                               }
                               Navigator.pop(context);
                             },
-                            child: const Text(
-                              "Create New Pizza",
+                            child:  Text(
+                              widget.pizzaData == null ? "Create New Pizza" : "Save Pizza",
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                                  const TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ],
@@ -631,7 +631,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               )
             ],

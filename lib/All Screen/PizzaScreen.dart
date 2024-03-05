@@ -3,6 +3,7 @@ import 'package:Pizza/All%20Screen/AdDialogScreen.dart';
 import 'package:Pizza/Controller/AdminController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -797,36 +798,72 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                         );
                                                       } else if (value ==
                                                           "Delete") {
-                                                        // var jobskill_query =
-                                                        // FirebaseFirestore
-                                                        //     .instance
-                                                        //     .collection("coldDrink")
-                                                        //     .where(
-                                                        //     "id",
-                                                        //     isEqualTo:
-                                                        //     pizzaController
-                                                        //         .sodalist[
-                                                        //     index]
-                                                        //         .id);
-                                                        //
-                                                        // jobskill_query.get().then(
-                                                        //       (querySnapshot) {
-                                                        //     querySnapshot.docs.forEach(
-                                                        //           (element) {
-                                                        //         FirebaseFirestore.instance
-                                                        //             .collection(
-                                                        //             "coldDrink")
-                                                        //             .doc(element.id)
-                                                        //             .delete();
-                                                        //       },
-                                                        //     );
-                                                        //   },
-                                                        // );
-                                                        // pizzaController.sodalist
-                                                        //     .removeWhere((element) =>
-                                                        // element.id ==
-                                                        //     pizzaController
-                                                        //         .sodalist[index].id);
+                                                        var jobskill_query =
+                                                            FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    "pizza")
+                                                                .where("name",
+                                                                    isEqualTo:
+                                                                        pizzalist[pizzaindex]
+                                                                            .name);
+
+                                                        jobskill_query
+                                                            .get()
+                                                            .then(
+                                                          (querySnapshot) async {
+                                                            List pizzaList =
+                                                                querySnapshot
+                                                                        .docs[0]
+                                                                    [
+                                                                    "foodimagelist"];
+
+                                                            pizzaList.removeWhere(
+                                                                (element) =>
+                                                                    element[
+                                                                        'id'] ==
+                                                                    pizzalist[
+                                                                            pizzaindex]
+                                                                        .foodimagelist[
+                                                                            index]
+                                                                        .id);
+
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    'pizza')
+                                                                .doc(
+                                                                    querySnapshot
+                                                                        .docs[0]
+                                                                        .id)
+                                                                .update(
+                                                              {
+                                                                "foodimagelist":
+                                                                    pizzaList
+                                                              },
+                                                            );
+                                                            int index1 = pizzaController
+                                                                .pizzalist
+                                                                .indexWhere((element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    pizzalist[
+                                                                            pizzaindex]
+                                                                        .name);
+                                                            pizzaController
+                                                                .pizzalist[
+                                                                    index1]
+                                                                .foodimagelist
+                                                                .removeWhere((element) =>
+                                                                    element
+                                                                        .id ==
+                                                                    pizzalist[
+                                                                            pizzaindex]
+                                                                        .foodimagelist[
+                                                                            index]
+                                                                        .id);
+                                                          },
+                                                        );
                                                       }
                                                     },
                                                     itemBuilder: (_) => [
