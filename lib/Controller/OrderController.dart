@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
@@ -124,10 +125,8 @@ class OrderController extends GetxController {
   }
 
   Future<List<MainOrderFoodItemModel>> getUserOrderData() async {
-    CollectionReference userCollectionReference =
-        await FirebaseFirestore.instance.collection("userOrderHistory");
-    DocumentReference userDocumentReference =
-        await userCollectionReference.doc(loginController.userid);
+    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
+    DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
     await userDocumentReference
         .collection("order")
@@ -135,6 +134,7 @@ class OrderController extends GetxController {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
         Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+        log("-------------------------)${data}");
         RxList<OrderFoodItemModel> orderdata = <OrderFoodItemModel>[].obs;
 
         List<dynamic> dynamicList = data['orderData'];
@@ -592,14 +592,16 @@ class OrderController extends GetxController {
         "userImage": loginController.imageurl,
         "userPhoneNumber": "+91${loginController.cartPhone.value}",
         "orderData": [...pizzaBottomListData, ...pizzaMetaListData],
-        "latitude": googleMapControllerScreen.latitude,
-        "longitude": googleMapControllerScreen.longitude,
+        "userLatitude": googleMapControllerScreen.latitude,
+        "userLongitude": googleMapControllerScreen.longitude,
         "deliveryViewDetail":deliveryViewDetail.value,
         "deliveryName": "",
         "deliveryUid": "",
         "deliveryPhone": "",
         "deliveryEmail": "",
         "deliveryImage": "",
+        "deliveryLatitude":0,
+        "deliveryLongitude": 0,
       };
 
       print("${formattedTime}");

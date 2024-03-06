@@ -168,7 +168,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                           width: 4,
                                           height: 30,
                                           decoration: BoxDecoration(
-                                              color: Color(0xffEF4F5F),
+                                              color: loginController.getColor(
+                                                  order['pending'], order['processing'],order['deliver'] ),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(5))),
                                         ),
@@ -249,7 +250,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                       height: 1,
                                       width: double.infinity,
                                       axis: Axis.horizontal,
-                                      dashColor: Color(0xffEF4F5F),
+                                      dashColor: loginController.getColor(
+                                          order['pending'], order['processing'],order['deliver'] ),
                                       strokeWidth: 1.2,
                                       dashSpace: 0,
                                     ),
@@ -447,8 +449,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                                                             .outer)
                                                               ],
                                                               border: Border.all(
-                                                                  color: Color(
-                                                                      0xffEF4F5F)),
+                                                                  color: loginController.getColor(
+                                                                      order['pending'], order['processing'],order['deliver'] ),),
                                                               borderRadius: BorderRadius
                                                                   .all(Radius
                                                                       .circular(
@@ -599,8 +601,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                                           child: Container(
                                                             height: 30,
                                                             decoration: BoxDecoration(
-                                                                color: Color(
-                                                                    0xffEF4F5F),
+                                                                color:loginController.getColor(
+                                                                    order['pending'], order['processing'],order['deliver'] ),
                                                                 borderRadius: BorderRadius.only(
                                                                     topRight: Radius
                                                                         .circular(
@@ -741,7 +743,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                                       height: 30,
                                                       decoration: BoxDecoration(
                                                           color:
-                                                              Color(0xffEF4F5F),
+                                                          loginController.getColor(
+                                                              order['pending'], order['processing'],order['deliver'] ),
                                                           borderRadius:
                                                               BorderRadius.only(
                                                                   topRight: Radius
@@ -832,7 +835,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                                   height: 1,
                                                   width: double.infinity,
                                                   axis: Axis.horizontal,
-                                                  dashColor: Color(0xffEF4F5F),
+                                                  dashColor: loginController.getColor(
+                                                      order['pending'], order['processing'],order['deliver'] ),
                                                   strokeWidth: 1,
                                                   dashSpace: 0),
                                               SizedBox(
@@ -1089,7 +1093,8 @@ class _TrackingOrderState extends State<TrackingOrder> {
                                                                     25)))),
                                             backgroundColor:
                                                 MaterialStateProperty.all(
-                                                    Color(0xffEF505F))),
+                                                  loginController.getColor(
+                                                      order['pending'], order['processing'],order['deliver'] ),)),
                                         onPressed: () {},
                                         child: Text(
                                           "Reorder Now",

@@ -178,9 +178,6 @@ class _LikesScreenState extends State<LikesScreen> {
                                                       width: double.infinity,
                                                       height: 200,
                                                       fit: BoxFit.cover),
-
-
-
                                                   Padding(
                                                     padding:
                                                     const EdgeInsets.only(top: 15, right: 15),

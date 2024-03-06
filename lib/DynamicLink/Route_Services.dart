@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class RouteServices{
   static Route<dynamic> generateRoute(RouteSettings routeSettings){
-    final args =routeSettings.arguments;
+    final args  =routeSettings.arguments;
     switch(routeSettings.name){
       case"/aboutpage":
         return CupertinoPageRoute(builder: (context) {

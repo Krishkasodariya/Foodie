@@ -86,8 +86,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                 print("----****${googleMapControllerscreen.draggedLatlng}");
               },
               onCameraIdle: () {
-                googleMapControllerscreen
-                    .getplacemark(googleMapControllerscreen.draggedLatlng);
+                googleMapControllerscreen.getplacemark(googleMapControllerscreen.draggedLatlng);
               },
 
               zoomControlsEnabled: false,

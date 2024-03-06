@@ -157,6 +157,17 @@ class LoginController extends GetxController {
 /*Future<void>getdata()async{
     userid=await Getuid();
 }*/
+  Color getColor(bool pending, bool processing, bool deliver) {
+    if (pending) {
+      return Color(0xffFC6701);
+    } else if (processing) {
+      return Color(0xff59A8B1);
+    } else if (deliver) {
+      return Color(0xff16A850);
+    } else {
+      return Color(0xffEF4F5F);
+    }
+  }
 
   Future<void> logout() async {
     await GoogleSignIn().signOut();
