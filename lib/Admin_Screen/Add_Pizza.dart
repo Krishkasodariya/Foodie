@@ -88,9 +88,9 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                         height: 1,
                         decoration: BoxDecoration(
                             border: Border.all(
-                          color: Color(0xffDAD9DD),
-                          width: 1,
-                        )),
+                              color: Color(0xffDAD9DD),
+                              width: 1,
+                            )),
                       ),
                     ),
                   ),
@@ -108,9 +108,9 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                         height: 1,
                         decoration: BoxDecoration(
                             border: Border.all(
-                          color: Color(0xffDAD9DD),
-                          width: 1,
-                        )),
+                              color: Color(0xffDAD9DD),
+                              width: 1,
+                            )),
                       ),
                     ),
                   )
@@ -145,7 +145,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                             decoration: BoxDecoration(
                                 color: Color(0xffEF4F5F),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
+                                BorderRadius.all(Radius.circular(5))),
                           ),
                           SizedBox(
                             width: 15,
@@ -177,46 +177,46 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                       ),
                       Center(
                         child: selectedImagePath == null &&
-                                downloadImageUrl == null
+                            downloadImageUrl == null
                             ? Container(
-                                width: 110,
-                                height: 110,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xffE9E9F7),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Color(0xffB1BBDA),
-                                  size: 60,
-                                ),
-                              )
+                          width: 110,
+                          height: 110,
+                          decoration: const BoxDecoration(
+                            color: Color(0xffE9E9F7),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.add,
+                            color: Color(0xffB1BBDA),
+                            size: 60,
+                          ),
+                        )
                             : ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(60)),
-                                child: Container(
-                                  width: 110,
-                                  height: 110,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xffE9E9F7),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: downloadImageUrl != null &&
-                                          selectedImagePath == null
-                                      ? Image.network(
-                                          "$downloadImageUrl",
-                                          height: 240,
-                                          width: double.maxFinite,
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.file(
-                                          File(selectedImagePath!),
-                                          height: 240,
-                                          width: double.maxFinite,
-                                          fit: BoxFit.fill,
-                                        ),
-                                ),
-                              ),
+                          borderRadius:
+                          const BorderRadius.all(Radius.circular(60)),
+                          child: Container(
+                            width: 110,
+                            height: 110,
+                            decoration: const BoxDecoration(
+                              color: Color(0xffE9E9F7),
+                              shape: BoxShape.circle,
+                            ),
+                            child: downloadImageUrl != null &&
+                                selectedImagePath == null
+                                ? Image.network(
+                              "$downloadImageUrl",
+                              height: 240,
+                              width: double.maxFinite,
+                              fit: BoxFit.fill,
+                            )
+                                : Image.file(
+                              File(selectedImagePath!),
+                              height: 240,
+                              width: double.maxFinite,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
@@ -260,9 +260,9 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                 decoration: const BoxDecoration(
                                                     color: Color(0xffEF4F5F),
                                                     borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5))),
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            5))),
                                               ),
                                               const SizedBox(
                                                 width: 15,
@@ -272,7 +272,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                       color: Colors.black,
                                                       fontSize: 21,
                                                       fontWeight:
-                                                          FontWeight.w500)),
+                                                      FontWeight.w500)),
                                             ],
                                           ),
                                           const SizedBox(
@@ -295,18 +295,18 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                   children: [
                                                     Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                      MainAxisAlignment
+                                                          .start,
                                                       children: [
                                                         Container(
                                                           width: 36,
                                                           height: 36,
                                                           decoration:
-                                                              const BoxDecoration(
-                                                                  color: Color(
-                                                                      0xffF2F4F7),
-                                                                  shape: BoxShape
-                                                                      .circle),
+                                                          const BoxDecoration(
+                                                              color: Color(
+                                                                  0xffF2F4F7),
+                                                              shape: BoxShape
+                                                                  .circle),
                                                           child: const Icon(
                                                               Icons.camera,
                                                               color: Color(
@@ -314,9 +314,9 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 5),
+                                                          const EdgeInsets
+                                                              .only(
+                                                              left: 5),
                                                           child: Text(
                                                             "Camera",
                                                             style: GoogleFonts.nunito(
@@ -324,8 +324,8 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                                 color: Color(
                                                                     0xff313848),
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
+                                                                FontWeight
+                                                                    .w600),
                                                           ),
                                                         ),
                                                         Spacer(),
@@ -333,7 +333,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                           Icons
                                                               .arrow_forward_ios,
                                                           color:
-                                                              Color(0xff313848),
+                                                          Color(0xff313848),
                                                           size: 17,
                                                         )
                                                       ],
@@ -343,8 +343,8 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              left: 45),
+                                                      const EdgeInsets.only(
+                                                          left: 45),
                                                       child: Container(
                                                         width: double.infinity,
                                                         height: 1,
@@ -354,7 +354,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                                     color: Color(
                                                                         0xffEAEDF3),
                                                                     width:
-                                                                        1.5))),
+                                                                    1.5))),
                                                       ),
                                                     ),
                                                   ],
@@ -397,9 +397,9 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 5),
+                                                          const EdgeInsets
+                                                              .only(
+                                                              left: 5),
                                                           child: Text(
                                                             "Gallery",
                                                             style: GoogleFonts.nunito(
@@ -407,8 +407,8 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                                 color: Color(
                                                                     0xff313848),
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
+                                                                FontWeight
+                                                                    .w600),
                                                           ),
                                                         ),
                                                         Spacer(),
@@ -416,7 +416,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                           Icons
                                                               .arrow_forward_ios,
                                                           color:
-                                                              Color(0xff313848),
+                                                          Color(0xff313848),
                                                           size: 17,
                                                         )
                                                       ],
@@ -426,8 +426,8 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              left: 45),
+                                                      const EdgeInsets.only(
+                                                          left: 45),
                                                       child: Container(
                                                         width: double.infinity,
                                                         height: 1,
@@ -437,7 +437,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                                                     color: Color(
                                                                         0xffEAEDF3),
                                                                     width:
-                                                                        1.5))),
+                                                                    1.5))),
                                                       ),
                                                     ),
                                                   ],
@@ -485,7 +485,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                               height: 50,
                               decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(15)),
                                   color: Colors.white,
                                   border: Border.all(
                                       color: Color(0xffe7e7e7), width: 1),
@@ -498,7 +498,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                   ]),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
+                                const EdgeInsets.only(left: 10, right: 10),
                                 child: TextField(
                                   autofocus: false,
                                   controller: nameController,
@@ -557,7 +557,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                               height: 50,
                               decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(15)),
                                   color: Colors.white,
                                   border: Border.all(
                                       color: Color(0xffe7e7e7), width: 1),
@@ -570,7 +570,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                   ]),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
+                                const EdgeInsets.only(left: 10, right: 10),
                                 child: TextField(
                                   autofocus: false,
                                   controller: priceController,
@@ -622,7 +622,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                             child:  Text(
                               widget.pizzaData == null ? "Create New Pizza" : "Save Pizza",
                               style:
-                                  const TextStyle(fontSize: 16, color: Colors.white),
+                              const TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ],
@@ -680,28 +680,28 @@ class _PizzaAddViewState extends State<PizzaAddView> {
       final CollectionReference categoryCollectionReference = FirebaseFirestore.instance.collection('pizza');
       EasyLoading.show();
       await categoryCollectionReference.where("name", isEqualTo: widget.name)
-        .get().then(
-        (documentSnapshot)async {
+          .get().then(
+            (documentSnapshot)async {
 
-            List pizzaList = documentSnapshot.docs[0]["foodimagelist"];
-            pizzaList.add({
-              "checkadd": false,
-              "food": "Pizza",
-              "foodbill":  int.parse(priceController.text),
-              "foodtotal": 0,
-              "id":pizzaid,
-              "image": downloadImageUrl,
-              "name": nameController.text,
-              "price": int.parse(priceController.text),
-              "rating": "3.1",
-              "selectitem": 1,
-            });
-            print("11111111111111");
-            print(widget.name);
+          List pizzaList = documentSnapshot.docs[0]["foodimagelist"];
+          pizzaList.add({
+            "checkadd": false,
+            "food": "Pizza",
+            "foodbill":  int.parse(priceController.text),
+            "foodtotal": 0,
+            "id":pizzaid,
+            "image": downloadImageUrl,
+            "name": nameController.text,
+            "price": int.parse(priceController.text),
+            "rating": "3.1",
+            "selectitem": 1,
+          });
+          print("11111111111111");
+          print(widget.name);
 
-            await categoryCollectionReference.doc(documentSnapshot.docs[0].id).update(
-              {"foodimagelist": FieldValue.arrayUnion(pizzaList)},
-            );
+          await categoryCollectionReference.doc(documentSnapshot.docs[0].id).update(
+            {"foodimagelist": FieldValue.arrayUnion(pizzaList)},
+          );
 
         },
       );
@@ -711,16 +711,16 @@ class _PizzaAddViewState extends State<PizzaAddView> {
     }
   }
 
- updatePizza(FoodItemModel? pizzaData) async {
+  updatePizza(FoodItemModel? pizzaData) async {
     try {
       final CollectionReference categoryCollectionReference =
-          FirebaseFirestore.instance.collection('pizza');
+      FirebaseFirestore.instance.collection('pizza');
       EasyLoading.show();
       await categoryCollectionReference
           .where("name", isEqualTo: widget.name)
           .get()
           .then(
-        (documentSnapshot) async {
+            (documentSnapshot) async {
           List pizzaList = documentSnapshot.docs[0]["foodimagelist"];
 
           pizzaList.removeWhere((element) => element['id'] == pizzaData?.id);

@@ -69,8 +69,8 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                                         fontWeight: FontWeight.w700),
                                   )
                                 :*/
-                                Obx(
-                              () => Text(
+                            Obx(
+                                  () => Text(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 "${googleMapControllerScreen.addresstype}",
@@ -96,8 +96,8 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                                           fontWeight: FontWeight.w700),
                                     )
                                   :*/
-                                  Obx(
-                                () => Text(
+                              Obx(
+                                    () => Text(
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   "${googleMapControllerScreen.area}",
@@ -153,7 +153,7 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
         ],
       ),
       bottomNavigationBar: Obx(
-        () => Container(
+            () => Container(
           color: Colors.red,
           width: double.infinity,
           height: 60,
@@ -185,39 +185,39 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
               BottomNavigationBarItem(
                   icon: bottomController.adminCurrentindex == 0
                       ? Image.asset(
-                          "images/food.webp",
-                          width: 23,
-                          height: 23,
-                          color: Color(0xffEF4F5F),
-                        )
+                    "images/food.webp",
+                    width: 23,
+                    height: 23,
+                    color: Color(0xffEF4F5F),
+                  )
                       : Image.asset(
-                          "images/food.webp",
-                          width: 23,
-                          height: 23,
-                          color: Color(0xff787E91),
-                        ),
+                    "images/food.webp",
+                    width: 23,
+                    height: 23,
+                    color: Color(0xff787E91),
+                  ),
                   label: "food"),
               BottomNavigationBarItem(
                   icon: bottomController.adminCurrentindex == 1
                       ? Image.asset(
-                          "images/bsoda.webp",
-                          width: 23,
-                          height: 23,
-                          color: Color(0xffEF4F5F),
-                        )
+                    "images/bsoda.webp",
+                    width: 23,
+                    height: 23,
+                    color: Color(0xffEF4F5F),
+                  )
                       : Image.asset(
-                          "images/bsoda.webp",
-                          width: 23,
-                          height: 23,
-                          color: Color(0xff787E91),
-                        ),
+                    "images/bsoda.webp",
+                    width: 23,
+                    height: 23,
+                    color: Color(0xff787E91),
+                  ),
                   label: "cold drinks"),
             ],
           ),
         ),
       ),
       body: Obx(
-        () => WillPopScope(
+            () => WillPopScope(
           onWillPop: () {
             Navigator.pop(context);
             adminController.isAdmin.value = false;

@@ -29,8 +29,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
     // TODO: implement initState
 
     nameController = TextEditingController(text: widget.restaurantDetail?.name);
-    priceController =
-        TextEditingController(text: widget.restaurantDetail?.price.toString());
+    priceController = TextEditingController(text: widget.restaurantDetail?.price.toString());
     super.initState();
   }
 
@@ -79,9 +78,9 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                       height: 1,
                       decoration: BoxDecoration(
                           border: Border.all(
-                        color: Color(0xffDAD9DD),
-                        width: 1,
-                      )),
+                            color: Color(0xffDAD9DD),
+                            width: 1,
+                          )),
                     ),
                   ),
                 ),
@@ -101,9 +100,9 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                       height: 1,
                       decoration: BoxDecoration(
                           border: Border.all(
-                        color: Color(0xffDAD9DD),
-                        width: 1,
-                      )),
+                            color: Color(0xffDAD9DD),
+                            width: 1,
+                          )),
                     ),
                   ),
                 )
@@ -138,7 +137,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                           decoration: BoxDecoration(
                               color: Color(0xffEF4F5F),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                              BorderRadius.all(Radius.circular(5))),
                         ),
                         SizedBox(
                           width: 15,
@@ -192,7 +191,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                BorderRadius.all(Radius.circular(15)),
                                 color: Colors.white,
                                 border: Border.all(
                                     color: Color(0xffe7e7e7), width: 1),
@@ -205,7 +204,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                 ]),
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
+                              const EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
                                 autofocus: false,
                                 controller: nameController,
@@ -264,7 +263,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                BorderRadius.all(Radius.circular(15)),
                                 color: Colors.white,
                                 border: Border.all(
                                     color: Color(0xffe7e7e7), width: 1),
@@ -277,7 +276,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                 ]),
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
+                              const EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
                                 autofocus: false,
                                 controller: priceController,
@@ -349,7 +348,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
   addRestauratnsData() async {
     try {
       final CollectionReference addCollectionReference =
-          FirebaseFirestore.instance.collection('pizza');
+      FirebaseFirestore.instance.collection('pizza');
       EasyLoading.show();
 
       final resData = {
@@ -377,7 +376,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
   updateRestauratnsData(PizzaItemModel restaurantDetail) async {
     try {
       final CollectionReference addCollectionReference =
-          FirebaseFirestore.instance.collection('pizza');
+      FirebaseFirestore.instance.collection('pizza');
 
       EasyLoading.show();
 

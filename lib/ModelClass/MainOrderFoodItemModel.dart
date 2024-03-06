@@ -1,7 +1,7 @@
 import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
 import 'package:get/get.dart';
 
-class MainOrderFoodItemModel {
+class MainOrderFoodItemModel{
   String? orderId;
   bool favouriteOrder = false;
   bool viewDetail = false;

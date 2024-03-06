@@ -75,30 +75,30 @@ class _PizzaScreenState extends State<PizzaScreen> {
         actions: !adminController.isAdmin.value
             ? []
             : [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: PizzaAddView(
-                                  name: "${pizzalist[pizzaindex].name}"),
-                              type: PageTransitionType.rightToLeft));
-                    },
-                    child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Color(0xffE9E9F7), shape: BoxShape.circle),
-                        child: Icon(
-                          Icons.add,
-                          color: Color(0xffB1BBDA),
-                          size: 30,
-                        )),
-                  ),
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: PizzaAddView(
+                            name: "${pizzalist[pizzaindex].name}"),
+                        type: PageTransitionType.rightToLeft));
+              },
+              child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Color(0xffE9E9F7), shape: BoxShape.circle),
+                  child: Icon(
+                    Icons.add,
+                    color: Color(0xffB1BBDA),
+                    size: 30,
+                  )),
+            ),
+          ),
+        ],
       ),
       backgroundColor: Color(0xfff5f5f5),
       body: Stack(
@@ -193,10 +193,10 @@ class _PizzaScreenState extends State<PizzaScreen> {
                               decoration: BoxDecoration(
                                   color: Color(0xff267E3E),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(8))),
+                                  BorderRadius.all(Radius.circular(8))),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 5, right: 2),
+                                const EdgeInsets.only(left: 5, right: 2),
                                 child: Row(
                                   children: [
                                     Center(
@@ -239,12 +239,12 @@ class _PizzaScreenState extends State<PizzaScreen> {
                             decoration: BoxDecoration(
                                 color: Color(0xffF8F9FC),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                BorderRadius.all(Radius.circular(15)),
                                 border: Border.all(
                                     color: Color(0xffE8EBF1), width: 1)),
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
+                              const EdgeInsets.only(left: 10, right: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -325,134 +325,134 @@ class _PizzaScreenState extends State<PizzaScreen> {
                       adminController.isAdmin.value
                           ? Container()
                           : Container(
-                              width: double.infinity,
-                              height: 80,
-                              color: Color(0xfff4f6fa),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: Container(
-                                  width: double.infinity,
+                        width: double.infinity,
+                        height: 80,
+                        color: Color(0xfff4f6fa),
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.only(left: 15, right: 15),
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 70,
                                   height: 60,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 70,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffdfe8ff),
-                                            borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(15),
-                                              topLeft: Radius.circular(15),
-                                            )),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Lottie.asset(
-                                              "${pizzaController.offerlist[offerindex].image}"),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 60,
-                                          color: Colors.white,
-                                          child: CarouselSlider.builder(
-                                              itemCount: pizzaController
-                                                  .offerlist.length,
-                                              itemBuilder:
-                                                  (context, index, realIndex) {
-                                                return Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 15,
-                                                              right: 15),
-                                                      child: Text(
-                                                        "${pizzaController.offerlist[index].name}",
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 15,
-                                                              right: 15),
-                                                      child: Text(
-                                                        "${pizzaController.offerlist[index].subname}",
-                                                        style:
-                                                            GoogleFonts.nunito(
-                                                                color: Color(
-                                                                    0xffC0C3CB),
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
-                                                    )
-                                                  ],
-                                                );
-                                              },
-                                              options: CarouselOptions(
-                                                onPageChanged: (index, reason) {
-                                                  setState(() {
-                                                    offerindex = index;
-                                                  });
-                                                },
-                                                aspectRatio: 16 / 9,
-                                                autoPlay: true,
-                                                viewportFraction: 1,
-                                                enableInfiniteScroll: true,
-                                                reverse: false,
-                                                autoPlayCurve:
-                                                    Curves.fastOutSlowIn,
-                                              )),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 60,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(15),
-                                              bottomRight: Radius.circular(15),
-                                            )),
-                                        child: Center(
-                                          child: AnimatedSmoothIndicator(
-                                            activeIndex: offerindex,
-                                            count: pizzaController
-                                                .offerlist.length,
-                                            effect: JumpingDotEffect(
-                                              activeDotColor: Color(0xffEF4F5F),
-                                              dotWidth: 5,
-                                              dotHeight: 5,
-                                              dotColor: Color(0xff787E91),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffdfe8ff),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(15),
+                                        topLeft: Radius.circular(15),
+                                      )),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Lottie.asset(
+                                        "${pizzaController.offerlist[offerindex].image}"),
                                   ),
                                 ),
-                              ),
-                            )
+                                Expanded(
+                                  child: Container(
+                                    height: 60,
+                                    color: Colors.white,
+                                    child: CarouselSlider.builder(
+                                        itemCount: pizzaController
+                                            .offerlist.length,
+                                        itemBuilder:
+                                            (context, index, realIndex) {
+                                          return Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.only(
+                                                    left: 15,
+                                                    right: 15),
+                                                child: Text(
+                                                  "${pizzaController.offerlist[index].name}",
+                                                  style:
+                                                  GoogleFonts.nunito(
+                                                      color: Colors
+                                                          .black,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow
+                                                      .ellipsis,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.only(
+                                                    left: 15,
+                                                    right: 15),
+                                                child: Text(
+                                                  "${pizzaController.offerlist[index].subname}",
+                                                  style:
+                                                  GoogleFonts.nunito(
+                                                      color: Color(
+                                                          0xffC0C3CB),
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow
+                                                      .ellipsis,
+                                                ),
+                                              )
+                                            ],
+                                          );
+                                        },
+                                        options: CarouselOptions(
+                                          onPageChanged: (index, reason) {
+                                            setState(() {
+                                              offerindex = index;
+                                            });
+                                          },
+                                          aspectRatio: 16 / 9,
+                                          autoPlay: true,
+                                          viewportFraction: 1,
+                                          enableInfiniteScroll: true,
+                                          reverse: false,
+                                          autoPlayCurve:
+                                          Curves.fastOutSlowIn,
+                                        )),
+                                  ),
+                                ),
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
+                                      )),
+                                  child: Center(
+                                    child: AnimatedSmoothIndicator(
+                                      activeIndex: offerindex,
+                                      count: pizzaController
+                                          .offerlist.length,
+                                      effect: JumpingDotEffect(
+                                        activeDotColor: Color(0xffEF4F5F),
+                                        dotWidth: 5,
+                                        dotHeight: 5,
+                                        dotColor: Color(0xff787E91),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -464,35 +464,35 @@ class _PizzaScreenState extends State<PizzaScreen> {
               adminController.isAdmin.value
                   ? SliverToBoxAdapter()
                   : SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Customize pizza for you",
-                              style: GoogleFonts.nunito(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 20),
-                                child: Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                    color: Color(0xffd5d5d5),
-                                    width: 1,
-                                  )),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Customize pizza for you",
+                        style: GoogleFonts.nunito(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600),
                       ),
-                    ),
+                      Expanded(
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.only(left: 10, right: 20),
+                          child: Container(
+                            height: 1,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Color(0xffd5d5d5),
+                                  width: 1,
+                                )),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
 
               SliverPadding(
                   padding: EdgeInsets.only(
@@ -501,136 +501,136 @@ class _PizzaScreenState extends State<PizzaScreen> {
               adminController.isAdmin.value
                   ? SliverToBoxAdapter()
                   : SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Container(
-                          width: double.infinity,
-                          height: 160,
-                          decoration: BoxDecoration(
-                            color: Color(0xffFFF6F7),
-                            border:
-                                Border.all(color: Color(0xffEF4F5F), width: 1),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Color(0xffffbcc2),
-                                  blurRadius: 5,
-                                  blurStyle: BlurStyle.outer)
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Container(
+                    width: double.infinity,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      color: Color(0xffFFF6F7),
+                      border:
+                      Border.all(color: Color(0xffEF4F5F), width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color(0xffffbcc2),
+                            blurRadius: 5,
+                            blurStyle: BlurStyle.outer)
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Stack(
+                      children: [
+                        Opacity(
+                          opacity: 0.1,
+                          child: ClipRRect(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(20)),
+                            child: Image(
+                              image: AssetImage("images/bg1.webp"),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: 160,
+                            ),
                           ),
-                          child: Stack(
-                            children: [
-                              Opacity(
-                                opacity: 0.1,
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  child: Image(
-                                    image: AssetImage("images/bg1.webp"),
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: 160,
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 15),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Customize your ",
-                                              style: GoogleFonts.lexend(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "own ",
-                                                  style: GoogleFonts.lexend(
-                                                      color: Colors.black,
-                                                      fontSize: 19,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                                Text(
-                                                  "pizza",
-                                                  style: GoogleFonts.lexend(
-                                                      color: Color(0xffEF4F5F),
-                                                      fontSize: 19,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
+                                      Text(
+                                        "Customize your ",
+                                        style: GoogleFonts.lexend(
+                                            color: Colors.black,
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.w400),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      ElevatedButton(
-                                        style: ButtonStyle(
-                                            minimumSize:
-                                                MaterialStatePropertyAll(
-                                                    Size(130, 38)),
-                                            shape: MaterialStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                25)))),
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                              Color(0xffEF4F5F),
-                                            ),
-                                            elevation:
-                                                MaterialStatePropertyAll(0)),
-                                        onPressed: () {
-                                          isLoaded = true;
-                                          loaded();
-                                          if (isLoaded) {
-                                            setState(() {
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AdDialogScreen();
-                                                },
-                                              );
-                                            });
-                                          }
-                                        },
-                                        child: Text("Order Now",
-                                            style: GoogleFonts.nunito(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white)),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "own ",
+                                            style: GoogleFonts.lexend(
+                                                color: Colors.black,
+                                                fontSize: 19,
+                                                fontWeight:
+                                                FontWeight.w400),
+                                          ),
+                                          Text(
+                                            "pizza",
+                                            style: GoogleFonts.lexend(
+                                                color: Color(0xffEF4F5F),
+                                                fontSize: 19,
+                                                fontWeight:
+                                                FontWeight.w400),
+                                          ),
+                                        ],
                                       )
                                     ],
                                   ),
-                                  Spacer(),
-                                  Image(
-                                    image:
-                                        AssetImage("images/pizza_vactor.webp"),
-                                    width: 155,
-                                    height: 155,
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                      minimumSize:
+                                      MaterialStatePropertyAll(
+                                          Size(130, 38)),
+                                      shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.all(
+                                                  Radius.circular(
+                                                      25)))),
+                                      backgroundColor:
+                                      MaterialStatePropertyAll(
+                                        Color(0xffEF4F5F),
+                                      ),
+                                      elevation:
+                                      MaterialStatePropertyAll(0)),
+                                  onPressed: () {
+                                    isLoaded = true;
+                                    loaded();
+                                    if (isLoaded) {
+                                      setState(() {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AdDialogScreen();
+                                          },
+                                        );
+                                      });
+                                    }
+                                  },
+                                  child: Text("Order Now",
+                                      style: GoogleFonts.nunito(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white)),
+                                )
+                              ],
+                            ),
+                            Spacer(),
+                            Image(
+                              image:
+                              AssetImage("images/pizza_vactor.webp"),
+                              width: 155,
+                              height: 155,
+                            )
+                          ],
                         ),
-                      ),
+                      ],
                     ),
+                  ),
+                ),
+              ),
 
               //------------------------)
 
@@ -654,9 +654,9 @@ class _PizzaScreenState extends State<PizzaScreen> {
                             height: 1,
                             decoration: BoxDecoration(
                                 border: Border.all(
-                              color: Color(0xffd5d5d5),
-                              width: 1,
-                            )),
+                                  color: Color(0xffd5d5d5),
+                                  width: 1,
+                                )),
                           ),
                         ),
                       )
@@ -668,7 +668,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
               SliverPadding(
                 padding: EdgeInsets.only(bottom: 80),
                 sliver: Obx(
-                  () => SliverList.separated(
+                      () => SliverList.separated(
                     itemCount: pizzalist[pizzaindex].foodimagelist.length,
                     itemBuilder: (context, index) {
                       return StatefulBuilder(
@@ -689,7 +689,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                   ],
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                  BorderRadius.all(Radius.circular(20))),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -700,7 +700,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                       child: Container(
                                         child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             const SizedBox(
                                               height: 15,
@@ -716,22 +716,22 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                                 0xff24963E),
                                                             width: 1.5),
                                                         borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                5))),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
+                                                      const EdgeInsets.all(
+                                                          5.0),
                                                       child: Container(
                                                         width: 3,
                                                         height: 3,
                                                         decoration:
-                                                            BoxDecoration(
-                                                                color: Color(
-                                                                    0xff24963E),
-                                                                shape: BoxShape
-                                                                    .circle),
+                                                        BoxDecoration(
+                                                            color: Color(
+                                                                0xff24963E),
+                                                            shape: BoxShape
+                                                                .circle),
                                                       ),
                                                     )),
                                                 const SizedBox(
@@ -743,125 +743,72 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                   decoration: BoxDecoration(
                                                       color: Color(0xffDB9C07),
                                                       borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5))),
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              5))),
                                                   child: Center(
                                                     child: Text("Bestseller",
                                                         style:
-                                                            GoogleFonts.nunito(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500)),
+                                                        GoogleFonts.nunito(
+                                                            color: Colors
+                                                                .white,
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w500)),
                                                   ),
                                                 ),
                                                 Align(
                                                   alignment: Alignment.topRight,
                                                   child:
-                                                      PopupMenuButton<String>(
+                                                  PopupMenuButton<String>(
                                                     tooltip: "",
                                                     splashRadius: 0,
                                                     enabled: true,
                                                     shape:
-                                                        ContinuousRectangleBorder(
+                                                    ContinuousRectangleBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(
-                                                              35),
+                                                      BorderRadius.circular(
+                                                          35),
                                                     ),
                                                     color: Theme.of(context)
                                                         .colorScheme
                                                         .onInverseSurface,
                                                     padding:
-                                                        const EdgeInsets.all(0),
+                                                    const EdgeInsets.all(0),
                                                     constraints:
-                                                        const BoxConstraints(
-                                                            maxWidth: 196),
+                                                    const BoxConstraints(
+                                                        maxWidth: 196),
                                                     onSelected: (value) async {
                                                       if (value == "Edit") {
                                                         Navigator.push(
                                                           context,
                                                           PageTransition(
                                                             child: PizzaAddView(
-                                                              name:
-                                                                  "${pizzalist[pizzaindex].name}",
-                                                              pizzaData: pizzalist[
-                                                                      pizzaindex]
-                                                                  .foodimagelist[index],
+                                                              name: "${pizzalist[pizzaindex].name}",
+                                                              pizzaData: pizzalist[pizzaindex].foodimagelist[index],
                                                             ),
                                                             type:
-                                                                PageTransitionType
-                                                                    .rightToLeft,
+                                                            PageTransitionType
+                                                                .rightToLeft,
                                                           ),
                                                         );
-                                                      } else if (value ==
-                                                          "Delete") {
+                                                      } else if (value == "Delete") {
                                                         var jobskill_query =
-                                                            FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    "pizza")
-                                                                .where("name",
-                                                                    isEqualTo:
-                                                                        pizzalist[pizzaindex]
-                                                                            .name);
+                                                        FirebaseFirestore.instance.collection("pizza").where("name", isEqualTo: pizzalist[pizzaindex].name);
 
-                                                        jobskill_query
-                                                            .get()
-                                                            .then(
-                                                          (querySnapshot) async {
-                                                            List pizzaList =
-                                                                querySnapshot
-                                                                        .docs[0]
-                                                                    [
-                                                                    "foodimagelist"];
+                                                        jobskill_query.get().then(
+                                                              (querySnapshot) async {
+                                                            List pizzaList = querySnapshot.docs[0]["foodimagelist"];
 
-                                                            pizzaList.removeWhere(
-                                                                (element) =>
-                                                                    element[
-                                                                        'id'] ==
-                                                                    pizzalist[
-                                                                            pizzaindex]
-                                                                        .foodimagelist[
-                                                                            index]
-                                                                        .id);
+                                                            pizzaList.removeWhere((element) => element['id'] == pizzalist[pizzaindex].foodimagelist[index].id);
 
-                                                            await FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    'pizza')
-                                                                .doc(
-                                                                    querySnapshot
-                                                                        .docs[0]
-                                                                        .id)
-                                                                .update(
-                                                              {
-                                                                "foodimagelist":
-                                                                    pizzaList
-                                                              },
-                                                            );
-                                                            int index1 = pizzaController
-                                                                .pizzalist
-                                                                .indexWhere((element) =>
-                                                                    element
-                                                                        .name ==
-                                                                    pizzalist[
-                                                                            pizzaindex]
-                                                                        .name);
-                                                            pizzaController
-                                                                .pizzalist[
-                                                                    index1]
-                                                                .foodimagelist
-                                                                .removeWhere((element) =>
-                                                                    element
-                                                                        .id ==
-                                                                    pizzalist[
-                                                                            pizzaindex]
-                                                                        .foodimagelist[
-                                                                            index]
-                                                                        .id);
+                                                            await FirebaseFirestore.instance.collection('pizza').doc(
+                                                                querySnapshot.docs[0].id).update({"foodimagelist": pizzaList},);
+
+                                                            int index1 = pizzaController.pizzalist.indexWhere((element) => element.name == pizzalist[pizzaindex].name);
+                                                            pizzaController.pizzalist[index1].foodimagelist.removeWhere((element) => element.id == pizzalist[pizzaindex].foodimagelist[index].id);
+
                                                           },
                                                         );
                                                       }
@@ -876,7 +823,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                             color: Colors.black,
                                                             fontSize: 16,
                                                             fontWeight:
-                                                                FontWeight.w600,
+                                                            FontWeight.w600,
                                                           ),
                                                         ),
                                                       ),
@@ -889,7 +836,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                             color: Colors.black,
                                                             fontSize: 16,
                                                             fontWeight:
-                                                                FontWeight.w600,
+                                                            FontWeight.w600,
                                                           ),
                                                         ),
                                                       ),
@@ -913,7 +860,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                     color: Color(0xff373D4D),
                                                     fontSize: 18,
                                                     fontWeight:
-                                                        FontWeight.w700)),
+                                                    FontWeight.w700)),
                                             SizedBox(
                                               height: 1,
                                             ),
@@ -923,7 +870,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                     color: Color(0xff535B6D),
                                                     fontSize: 16,
                                                     fontWeight:
-                                                        FontWeight.w500)),
+                                                    FontWeight.w500)),
                                             SizedBox(
                                               height: 1,
                                             ),
@@ -940,10 +887,10 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                     "${pizzalist[pizzaindex].foodimagelist[index].price}",
                                                     style: GoogleFonts.nunito(
                                                         color:
-                                                            Color(0xff1F1F1F),
+                                                        Color(0xff1F1F1F),
                                                         fontSize: 16,
                                                         fontWeight:
-                                                            FontWeight.w500)),
+                                                        FontWeight.w500)),
                                               ],
                                             ),
                                             SizedBox(
@@ -979,37 +926,37 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                   right: 10, left: 10),
                                               child: Stack(
                                                 alignment:
-                                                    Alignment.bottomCenter,
+                                                Alignment.bottomCenter,
                                                 children: [
                                                   Align(
                                                     alignment: FractionalOffset
                                                         .topCenter,
                                                     child: ClipRRect(
                                                       borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10)),
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10)),
                                                       child: CachedNetworkImage(
                                                           imageUrl:
-                                                              "${pizzalist[pizzaindex].foodimagelist[index].image}",
+                                                          "${pizzalist[pizzaindex].foodimagelist[index].image}",
                                                           placeholder: (context, url) => Shimmer
                                                               .fromColors(
-                                                                  direction:
-                                                                      ShimmerDirection
-                                                                          .ltr,
-                                                                  enabled: true,
-                                                                  baseColor: Colors
-                                                                      .grey
-                                                                      .shade300,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .grey
-                                                                          .shade100,
-                                                                  child:
-                                                                      Container(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                  )),
+                                                              direction:
+                                                              ShimmerDirection
+                                                                  .ltr,
+                                                              enabled: true,
+                                                              baseColor: Colors
+                                                                  .grey
+                                                                  .shade300,
+                                                              highlightColor:
+                                                              Colors
+                                                                  .grey
+                                                                  .shade100,
+                                                              child:
+                                                              Container(
+                                                                color: Colors
+                                                                    .grey,
+                                                              )),
                                                           width: 150,
                                                           height: 120,
                                                           fit: BoxFit.cover),
@@ -1020,117 +967,117 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                     height: 35,
                                                     bottom: 10,
                                                     child: adminController
-                                                            .isAdmin.value
+                                                        .isAdmin.value
                                                         ? Container()
                                                         : !pizzalist[pizzaindex]
-                                                                .foodimagelist[
-                                                                    index]
-                                                                .checkadd
-                                                            ? GestureDetector(
-                                                                onTap: () {
-                                                                  setState(() =>
-                                                                      pizzaController.Pizzaadd(
-                                                                          pizzaindex,
-                                                                          index));
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  width: 80,
-                                                                  height: 35,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                          color: Colors
-                                                                              .black26,
-                                                                          blurRadius:
-                                                                              5,
-                                                                          spreadRadius:
-                                                                              1)
-                                                                    ],
-                                                                    color: Color(
-                                                                        0xffFFF6F7),
-                                                                    border: Border.all(
-                                                                        color: Color(
-                                                                            0xffEF4F5F)),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(10)),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                        "Add",
-                                                                        style: GoogleFonts.nunito(
-                                                                            color: Color(
-                                                                                0xffEF4F5F),
-                                                                            fontSize:
-                                                                                17,
-                                                                            fontWeight:
-                                                                                FontWeight.w500)),
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            : Container(
-                                                                width: 80,
-                                                                height: 35,
-                                                                decoration:
-                                                                    BoxDecoration(
+                                                        .foodimagelist[
+                                                    index]
+                                                        .checkadd
+                                                        ? GestureDetector(
+                                                      onTap: () {
+                                                        setState(() =>
+                                                            pizzaController.Pizzaadd(
+                                                                pizzaindex,
+                                                                index));
+                                                      },
+                                                      child:
+                                                      Container(
+                                                        width: 80,
+                                                        height: 35,
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                blurRadius:
+                                                                5,
+                                                                spreadRadius:
+                                                                1)
+                                                          ],
+                                                          color: Color(
+                                                              0xffFFF6F7),
+                                                          border: Border.all(
+                                                              color: Color(
+                                                                  0xffEF4F5F)),
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(10)),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                              "Add",
+                                                              style: GoogleFonts.nunito(
                                                                   color: Color(
                                                                       0xffEF4F5F),
-                                                                  border: Border.all(
-                                                                      color: Color(
-                                                                          0xffEF4F5F)),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              10)),
-                                                                ),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceAround,
-                                                                  children: [
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(() => pizzaController.Pizzaremove(
-                                                                            pizzaindex,
-                                                                            index));
-                                                                      },
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .remove,
-                                                                          color: Colors
-                                                                              .white,
-                                                                          size:
-                                                                              20),
-                                                                    ),
-                                                                    Center(
-                                                                      child: Text(
-                                                                          "${pizzalist[pizzaindex].foodimagelist[index].selectitem}",
-                                                                          style: GoogleFonts.nunito(
-                                                                              color: Colors.white,
-                                                                              fontSize: 17,
-                                                                              fontWeight: FontWeight.w500)),
-                                                                    ),
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(() => pizzaController.Pizzaplus(
-                                                                            pizzaindex,
-                                                                            index));
-                                                                      },
-                                                                      child: Icon(
-                                                                          Icons
-                                                                              .add,
-                                                                          color: Colors
-                                                                              .white,
-                                                                          size:
-                                                                              20),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
+                                                                  fontSize:
+                                                                  17,
+                                                                  fontWeight:
+                                                                  FontWeight.w500)),
+                                                        ),
+                                                      ),
+                                                    )
+                                                        : Container(
+                                                      width: 80,
+                                                      height: 35,
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        color: Color(
+                                                            0xffEF4F5F),
+                                                        border: Border.all(
+                                                            color: Color(
+                                                                0xffEF4F5F)),
+                                                        borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                        children: [
+                                                          GestureDetector(
+                                                            onTap:
+                                                                () {
+                                                              setState(() => pizzaController.Pizzaremove(
+                                                                  pizzaindex,
+                                                                  index));
+                                                            },
+                                                            child: Icon(
+                                                                Icons
+                                                                    .remove,
+                                                                color: Colors
+                                                                    .white,
+                                                                size:
+                                                                20),
+                                                          ),
+                                                          Center(
+                                                            child: Text(
+                                                                "${pizzalist[pizzaindex].foodimagelist[index].selectitem}",
+                                                                style: GoogleFonts.nunito(
+                                                                    color: Colors.white,
+                                                                    fontSize: 17,
+                                                                    fontWeight: FontWeight.w500)),
+                                                          ),
+                                                          GestureDetector(
+                                                            onTap:
+                                                                () {
+                                                              setState(() => pizzaController.Pizzaplus(
+                                                                  pizzaindex,
+                                                                  index));
+                                                            },
+                                                            child: Icon(
+                                                                Icons
+                                                                    .add,
+                                                                color: Colors
+                                                                    .white,
+                                                                size:
+                                                                20),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   )
                                                 ],
                                               ),
@@ -1158,112 +1105,112 @@ class _PizzaScreenState extends State<PizzaScreen> {
             ],
           ),
           Obx(
-            () => Align(
+                () => Align(
               alignment: Alignment.bottomCenter,
               child: adminController.isAdmin.value
                   ? Container()
                   : pizzaController.isBootomSheet.value
-                      ? Container(
-                          width: double.infinity,
-                          height: 60,
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15),
+                  ? Container(
+                width: double.infinity,
+                height: 60,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                              backgroundColor: Colors.white,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    topLeft: Radius.circular(20)),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return BottomSheetDialog(
+                                    pizzaindex: pizzaindex,
+                                    data: pizzalist);
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: 40,
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.white,
-                                        isScrollControlled: true,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              topLeft: Radius.circular(20)),
-                                        ),
-                                        context: context,
-                                        builder: (context) {
-                                          return BottomSheetDialog(
-                                              pizzaindex: pizzaindex,
-                                              data: pizzalist);
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      height: 40,
-                                      child: Row(
-                                        children: [
-                                          Image(
-                                            image:
-                                                AssetImage("images/order.webp"),
-                                            color: Color(0xff40495D),
-                                            width: 20,
-                                            height: 20,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "ITEM ADDED",
-                                            style: GoogleFonts.lexend(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xff40495D),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_up_rounded,
-                                            color: Color(0xffEF4F5F),
-                                            size: 20,
-                                          )
-                                        ],
-                                      ),
-                                    ),
+                                Image(
+                                  image:
+                                  AssetImage("images/order.webp"),
+                                  color: Color(0xff40495D),
+                                  width: 20,
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "ITEM ADDED",
+                                  style: GoogleFonts.lexend(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff40495D),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    height: 40,
-                                    child: ElevatedButton(
-                                        style: ButtonStyle(
-                                            shape: MaterialStateProperty.all(
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)))),
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Color(0xffEF4F5F))),
-                                        onPressed: () {
-                                          setState(() {
-                                            Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                    child: CartScreen(),
-                                                    type: PageTransitionType
-                                                        .rightToLeft));
-                                            pizzaController.Pizzatotalprice();
-                                            //bottomController.currentindex.value = 3;
-                                          });
-                                        },
-                                        child: Text(
-                                          "Next",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white),
-                                        )),
-                                  ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Icon(
+                                  Icons.arrow_drop_up_rounded,
+                                  color: Color(0xffEF4F5F),
+                                  size: 20,
                                 )
                               ],
                             ),
                           ),
-                        )
-                      : Container(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 40,
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.all(
+                                              Radius.circular(
+                                                  10)))),
+                                  backgroundColor:
+                                  MaterialStateProperty.all(
+                                      Color(0xffEF4F5F))),
+                              onPressed: () {
+                                setState(() {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          child: CartScreen(),
+                                          type: PageTransitionType
+                                              .rightToLeft));
+                                  pizzaController.Pizzatotalprice();
+                                  //bottomController.currentindex.value = 3;
+                                });
+                              },
+                              child: Text(
+                                "Next",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white),
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+                  : Container(),
             ),
           )
         ],
