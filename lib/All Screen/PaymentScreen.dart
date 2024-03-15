@@ -171,6 +171,7 @@ class _PaymentScreenState extends State<PaymentScreen>{
     paymentController.text = "";
     orderController.addUserOrderData();
     orderController.addAllUserOrderData();
+
     Navigator.push(
         context,
         PageTransition(
