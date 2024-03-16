@@ -81,6 +81,7 @@ dependencies:
   dotted_border:
   dropdown_button2: ^2.3.9
   uuid:
+  flutter_html:
 
 dev_dependencies:
   flutter_test:

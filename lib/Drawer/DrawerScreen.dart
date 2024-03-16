@@ -2,6 +2,7 @@ import 'package:Pizza/Admin_Screen/AdminBottomNavigation.dart';
 import 'package:Pizza/Admin_Screen/payment_history.dart';
 import 'package:Pizza/All%20Screen/AboutScreen.dart';
 import 'package:Pizza/All%20Screen/LoginScreen.dart';
+import 'package:Pizza/All%20Screen/user_payment_history.dart';
 import 'package:Pizza/Controller/AdminController.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
@@ -97,14 +98,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 width: double.infinity,
                 height: 110,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color(0xffE9E9F7),
-                          blurRadius: 10,
-                          spreadRadius: 4)
-                    ]),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Color(0xffE9E9F7),
+                        blurRadius: 10,
+                        spreadRadius: 4)
+                  ],
+                ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Row(
@@ -304,12 +306,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              /*Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      child: PaymentScreen(),
-                                      type: PageTransitionType
-                                          .rightToLeft));*/
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return const UserPaymentHistory();
+                                  },
+                                ),
+                              );
                             },
                             child: Container(
                               height: 80,
@@ -326,14 +330,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               child: Column(
                                 children: [
                                   Spacer(),
-                                  Image(
-                                    image: AssetImage("images/payment.webp"),
-                                    width: 29,
-                                    height: 29,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 3),
+                                    child: Image(
+                                      image: AssetImage("images/payment.webp"),
+                                      width: 29,
+                                      height: 29,
+                                    ),
                                   ),
                                   Spacer(),
                                   Text(
-                                    "Payments",
+                                    "Payment\nHistory",
+                                    textAlign: TextAlign.center,
                                     style: GoogleFonts.nunito(
                                         fontSize: 17,
                                         color: Colors.black,
