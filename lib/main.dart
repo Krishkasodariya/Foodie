@@ -16,6 +16,8 @@ import 'package:Pizza/SplashScreenData/SpalshScreen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Controller/TrackingController.dart';
+
 // splashscrren ma appopen ads,bottom ma bannner, dinner screen ma native,pizzascreen ma intersession
 
 //aikey------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
@@ -35,6 +37,7 @@ Future main() async {
   Get.put(GoogleMapControllerScreen());
   Get.put(OrderController());
   Get.put(AdminController());
+  Get.put(TrackingController());
 
   configLoading();
   runApp(GetMaterialApp(

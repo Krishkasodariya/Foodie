@@ -3,10 +3,12 @@ import 'package:Pizza/BottomNavigation/BottomNavigation.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/ModelClass/UserModel.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProfileScreen extends StatefulWidget{
   const ProfileScreen({super.key});
@@ -120,10 +122,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: Color(0xffE9E9F7),
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image(
-                                  image: NetworkImage(logincontroller.imageurl),
-                                  fit: BoxFit.cover,
-                                )),
+                                child:  CachedNetworkImage(
+                                    imageUrl: logincontroller.imageurl,
+                                    placeholder: (context, url) =>
+                                        Shimmer.fromColors(
+                                            direction: ShimmerDirection.ltr,
+                                            enabled: true,
+                                            baseColor: Colors
+                                                .grey
+                                                .shade300,
+                                            highlightColor:
+                                            Colors.grey
+                                                .shade100,
+                                            child:
+                                            Container(
+                                              color: Colors
+                                                  .grey,
+                                            )),
+                                    width: 110,
+                                    height: 110,
+                                    fit: BoxFit.cover)),
                           ),
                   ),
                   Padding(

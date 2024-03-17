@@ -932,7 +932,7 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                             Color(0xffEF505F))),
                                     onPressed: () {
 
-                                      setState(() {
+
                                         for (int j = 0; j < orderController.orderDatalist[index].datalist!.length; j++){
                                           pizzaController.isBootomSheet.value = true;
 
@@ -961,8 +961,12 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                               );
                                             }
                                           }
+
+
                                           if (dataList != null && j < dataList.length) {
                                             var id = dataList[j]?.id;
+                                            var restaurantName = dataList[j]?.restaurantName;
+
                                             var food = dataList[j]?.food;
                                             var price = dataList[j]?.price;
                                             var checkadd = dataList[j]?.checkadd;
@@ -973,11 +977,13 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                             var name = dataList[j]?.name;
                                             var rating = dataList[j]?.rating;
 
-                                            if (id != null && food != null && price != null && checkadd != null &&
+                                            if (id != null && restaurantName != null && food != null && price != null && checkadd != null &&
                                                 selectitem != null && foodbill != null && foodtotal != null &&
                                                 image != null && name != null && rating != null) {
 
                                               pizzaController.pizzabottomlist.add(FoodItemModel(
+
+                                                restaurantName: "$restaurantName",
                                                 id: "$id",
                                                 food: "$food",
                                                 price: price,
@@ -1015,10 +1021,11 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                           pizzaController.grandtotal.value=orderController.orderDatalist[index].grandTotal!;
                                           pizzaController.finalfoodtotal.value=orderController.orderDatalist[index].subTotal!;
                                         }
+                                        setState(() {});
                                         // pizzaController.reference!();
                                         Get.off(BottomNavigation());
 
-                                      });
+
 
 
                                     },

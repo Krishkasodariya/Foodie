@@ -46,8 +46,8 @@ class _LoginScrrenState extends State<LoginScrren> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: WillPopScope(
-        onWillPop: () async{
-          return await true;
+        onWillPop: (){
+          return Future.value(false);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,

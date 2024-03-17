@@ -67,6 +67,14 @@ class GoogleMapControllerScreen extends GetxController{
     return position;
   }
 
+  void defaultLocation(){
+    defaultLatlng = LatLng(10, 10);
+    draggedLatlng = defaultLatlng;
+    cameraPosition = CameraPosition(target: defaultLatlng, zoom: 18);
+    gotoUserCurrentPosition();
+  }
+
+
   Future gotoUserCurrentPosition() async {
     Position currentposition = await determineCurrentPosition();
 
@@ -91,17 +99,13 @@ class GoogleMapControllerScreen extends GetxController{
       String currentAddress = "name:-- ${place.name},locality:--  ${place.locality},postalCode:--  ${place.postalCode},country:--  ${place.country},street:-- ${place.street},subLocality:-- ${place.subLocality},administrativeArea:-- ${place.administrativeArea},subAdministrativeArea:-- ${place.subAdministrativeArea}";
       print("--------------------)$currentAddress");
       draggedAddress.value = currentAddress;
-    reference!();
+      if(reference!=null){
+        reference!();
+      }
+
     print("33333333333333");
   }
 
-  void defaultLocation(){
-    defaultLatlng = LatLng(10, 10);
-    draggedLatlng = defaultLatlng;
-    cameraPosition = CameraPosition(target: defaultLatlng, zoom: 18);
-    gotoUserCurrentPosition();
-
-  }
 
   Future SetLocationData(String sector,String locality)async{
     sharedPreferences =await SharedPreferences.getInstance();

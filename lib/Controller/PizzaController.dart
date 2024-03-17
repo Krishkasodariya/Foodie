@@ -16,6 +16,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:video_player/video_player.dart';
 
 class PizzaController extends GetxController {
   /*RxList<OrderFoodItemModel> yourOrderlist = <OrderFoodItemModel>[
@@ -127,13 +128,10 @@ class PizzaController extends GetxController {
         pizzametalist: [])
   ].obs;*/
 
-
   RxDouble offer = 0.0.obs;
   RxBool isalertset = false.obs;
   RxBool isdeviceconnected = false.obs;
-
   late StreamSubscription subscription;
-
   RxList<PizzaItemModel> likelist = <PizzaItemModel>[].obs;
   RxList<PizzaItemModel> pizzalist = <PizzaItemModel>[].obs;
 
@@ -161,6 +159,7 @@ class PizzaController extends GetxController {
 
   RxList<FoodItemModel> customizepizzalist = <FoodItemModel>[
     FoodItemModel(
+      restaurantName: "",
         id: "",
         price: 0,
         checkadd: false,
@@ -324,6 +323,45 @@ class PizzaController extends GetxController {
         print(changePhoneNumber);
         updateData!();*/
 
+
+  Future<void> videoInit() async {
+    for (final pizzaItem in pizzalist.value) {
+      for (final videoController in pizzaItem.videoPlayerController ?? []) {
+        videoController.clear();
+      }
+    }
+    try {
+      for (int i = 0; i < pizzalist.value.length; i++) {
+        if (pizzalist.value[i].promo) {
+          print("---------)${pizzalist.value[i].promoUrl}");
+          List<String> promoUrls = pizzalist.value[i].promoUrl?.split(',') ?? [];
+
+          for (final promoUrl in promoUrls) {
+            VideoPlayerController videoController = VideoPlayerController.network("$promoUrl");
+            await videoController.initialize();
+            if (videoController != null) {
+
+                videoController.play();
+                videoController.setLooping(true);
+                videoController.setVolume(0);
+                print("Video controller initialized: $videoController");
+
+                if (pizzalist[i].videoPlayerController == null) {
+                  pizzalist[i].videoPlayerController = [];
+                }
+                pizzalist[i].videoPlayerController!.add(videoController);
+
+            } else {
+              print("Error: Video controller is null");
+            }
+          }
+        }
+      }
+    } catch (e) {
+      print("----)${e}");
+    }
+  }
+
   Future<List<PizzaItemModel>> getPizzaData()async {
     try {
       pizzalist.clear();
@@ -336,12 +374,14 @@ class PizzaController extends GetxController {
           log("${data}");
 
           RxList<FoodItemModel> food = <FoodItemModel>[].obs;
+
           List<dynamic> dynamicList = data['foodimagelist'];
 
           dynamicList.forEach((element){
             food.add(FoodItemModel.fromJson(element));
           });
           PizzaItemModel pizzaItem = PizzaItemModel(
+
             checklike: data['checklike'],
             name: data['name'],
             distance: data['distance'],
@@ -350,6 +390,11 @@ class PizzaController extends GetxController {
             time: data['time'],
             subname: data['subname'],
             foodimagelist: food,
+            customFood: data['customFood'],
+            promo: data['promo'],
+            restaurantPhone: data['restaurantPhone'],
+            promoUrl: data['promoUrl'],
+
           );
 
           pizzalist.add(pizzaItem);
@@ -794,9 +839,6 @@ class PizzaController extends GetxController {
   ].obs;*/
 
 
-  /*void refreshPizza(){
-
-  }*/
 
   void Pizzaadd(int pizzaindex, int index) {
     pizzalist[pizzaindex].foodimagelist[index].checkadd = true;
@@ -1060,7 +1102,9 @@ class PizzaController extends GetxController {
         deliveryfee.value +
         donation.value +
         goldprimium.value;
-    reference!();
+    if(reference!=null){
+      reference!();
+    }
     update();
 
     print("bottomremove");
@@ -1127,10 +1171,12 @@ class PizzaController extends GetxController {
         donation.value +
         goldprimium.value;
     update();
-    reference!();
+    if(reference!=null){
+      reference!();
+    }
   }
 
-  void Pizzaclear(BuildContext context) {
+  void Pizzaclear() {
     for (int i = 0; i < pizzalist.length; i++) {
       for (int j = 0; j < pizzalist[i].foodimagelist.length; j++) {
         pizzalist[i].foodimagelist[j].checkadd = false;
@@ -1157,7 +1203,6 @@ class PizzaController extends GetxController {
     print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
     //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
 
-    Navigator.pop(context);
   }
 
   void Pizzatotalprice(){
@@ -1719,8 +1764,7 @@ class PizzaController extends GetxController {
     }
 
     for (int j = 0; j < customizepizzalist[0].pizzametalist!.length; j++) {
-      if (customizepizzalist[0].pizzametalist!.isNotEmpty ||
-          pizzabottomlist.isNotEmpty) {
+      if (customizepizzalist[0].pizzametalist!.isNotEmpty || pizzabottomlist.isNotEmpty) {
         Customfoodtotal.value += customizepizzalist[0].pizzametalist![j].customPizzametaBill;
       }
     }
@@ -1734,8 +1778,10 @@ class PizzaController extends GetxController {
         donation.value +
         goldprimium.value;
 
-    reference!();
-
+    if(reference!=null){
+      reference!();
+      print("qqqqqqqqqqqqqq");
+    }
   }
 
 //------------check---------------)
@@ -1795,18 +1841,19 @@ class PizzaController extends GetxController {
         donation.value +
         goldprimium.value;
 
-    reference!();
+    if(reference!=null){
+      reference!();
+    }
 
   }
 
-  void Sodaclear(BuildContext context) {
+  void Sodaclear() {
     for (int i = 0; i < sodalist.length; i++) {
       sodalist[i].checkadd = false;
       sodalist[i].selectitem = 1;
 
       for (int k = 0; k < pizzabottomlist.length; k++) {
-        if (pizzabottomlist.isNotEmpty ||
-            customizepizzalist[0].pizzametalist!.isNotEmpty) {
+        if (pizzabottomlist.isNotEmpty || customizepizzalist[0].pizzametalist!.isNotEmpty) {
           pizzabottomlist[k].foodbill = pizzabottomlist[k].price;
         }
       }
@@ -1826,14 +1873,15 @@ class PizzaController extends GetxController {
     //addsizelist!.clear();
     iscountfoodtotal.value = 0;
 
-    print(
-        "------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
-    print(
-        "------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
+    print("------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
+    print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
     //print("------------pizzabottomlist-------------------)${addsizelist!.length}");
-    reference!();
-    Navigator.pop(context);
+    if(reference!=null){
+      reference!();
+    }
+
     update();
+
   }
 
   void Sodatotalprice() {
@@ -2110,7 +2158,9 @@ class PizzaController extends GetxController {
         pizzabottomlist.clear();
         customizepizzalist[0].pizzametalist!.clear();
 
-        reference!();
+        if(reference!=null){
+          reference!();
+        }
 
         print("------------pizzabottomlist-------------------)${pizzabottomlist!.length}");
         print("------------customizepizzalist[0].pizzametalist-------------------)${customizepizzalist[0].pizzametalist!.length}");
@@ -2168,8 +2218,10 @@ class PizzaController extends GetxController {
         likelist.value.remove(likelist.value[index]);
       }
     }
+if(likeupdate!=null){
+  likeupdate!();
+}
 
-    likeupdate!();
   }
 
   RxList<OfferModel> offerlist = <OfferModel>[
@@ -2207,14 +2259,18 @@ class PizzaController extends GetxController {
           print("88888888888888888----${grandtotal.value}");
           print("qqqqqqqqqqqqqqqqqqqq----${offer.value}");
           grandtotal.value = grandtotal.value - offer.value.floor();
-          reference!();
+          if(reference!=null){
+            reference!();
+          }
           update();
           refresh();
         } else {
           print("aaaaaaaaaaaaaaaaaaaaaaa----${offer.value}");
           grandtotal.value = grandtotal.value + offer.value.floor();
           print("6666666666666666----${grandtotal.value}");
-          reference!();
+          if(reference!=null){
+            reference!();
+          }
           update();
           refresh();
         }
@@ -2289,7 +2345,9 @@ class PizzaController extends GetxController {
       }
     }*/
 
-    reference!();
+    if(reference!=null){
+      reference!();
+    }
     update();
   }
 
@@ -2301,7 +2359,10 @@ class PizzaController extends GetxController {
         .toList();
 
     foundsoda.value = sodaresult;
-    searchupdate!();
+    if(searchupdate!=null){
+      searchupdate!();
+    }
+
     update(foundsoda);
   }
 

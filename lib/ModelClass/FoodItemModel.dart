@@ -3,6 +3,7 @@ import 'package:Pizza/ModelClass/PizzaMeta.dart';
 import 'package:Pizza/ModelClass/PizzaSize.dart';
 
 class FoodItemModel{
+  String restaurantName;
   String id;
   String food;
   String? image;
@@ -17,6 +18,7 @@ class FoodItemModel{
   List<Ingredient>? ingredients = [];
   List<PizzaMeta>? pizzametalist = [];
   FoodItemModel({
+    required this.restaurantName,
     required this.id,
     required this.food,
     this.name,
@@ -33,6 +35,7 @@ class FoodItemModel{
   });
   Map<String, dynamic> toJson() {
     return {
+      "restaurantName":restaurantName,
       "id": id,
       "food": food,
       "checkadd": checkadd,
@@ -47,6 +50,7 @@ class FoodItemModel{
   }
   factory FoodItemModel.fromJson(Map<String, dynamic> data) {
     return FoodItemModel(
+      restaurantName: data["restaurantName"],
         image: data["image"],
         price: data["price"],
         id: data["id"],

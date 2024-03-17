@@ -32,7 +32,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     super.initState();
     pizzaController.Allupdate(ref);
     googleMapControllerScreen.defaultLocation();
-    print("1111111111111111111${googleMapControllerScreen.place.subLocality}");
+
     pizzaController.getconnectivity(context);
     googleMapControllerScreen.GetLocationData();
     logincontroller.Getuid();

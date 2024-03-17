@@ -856,6 +856,7 @@ class _FavouriteOrderScreenState extends State<FavouriteOrderScreen> {
                                                 }
                                               }
                                               if (dataList != null && j < dataList.length) {
+                                                var restaurantName = dataList[j]?.restaurantName;
                                                 var id = dataList[j]?.id;
                                                 var food = dataList[j]?.food;
                                                 var price = dataList[j]?.price;
@@ -867,11 +868,12 @@ class _FavouriteOrderScreenState extends State<FavouriteOrderScreen> {
                                                 var name = dataList[j]?.name;
                                                 var rating = dataList[j]?.rating;
 
-                                                if (id != null && food != null && price != null && checkadd != null &&
+                                                if (id != null && restaurantName != null && food != null && price != null && checkadd != null &&
                                                     selectitem != null && foodbill != null && foodtotal != null &&
                                                     image != null && name != null && rating != null) {
 
                                                   pizzaController.pizzabottomlist.add(FoodItemModel(
+                                                    restaurantName: "$restaurantName",
                                                     id: "$id",
                                                     food: "$food",
                                                     price: price,

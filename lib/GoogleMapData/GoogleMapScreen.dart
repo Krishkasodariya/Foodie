@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/GoogleMapData/AddressDetails.dart';
-import 'package:Pizza/GoogleMapData/SearchLocation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -94,60 +93,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
             ),
           ),
           Center(child: Lottie.asset("images/pin.json", width: 50, height: 50)),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.white,
-                border: Border.all(color: Color(0xffe7e7e7), width: 1),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: TextFormField(
-                  autofocus: false,
-                  onTap: () {
-                    setState(() {
-                      FocusScope.of(context).unfocus();
-                    });
-                    showModalBottomSheet(
-                      backgroundColor: Colors.white,
-                      isScrollControlled: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            topLeft: Radius.circular(20)),
-                      ),
-                      context: context,
-                      builder: (context) {
-                        return SearchLocation();
-                      },
-                    );
-                  },
-                  cursorColor: Color(0xff7E8286),
-                  decoration: InputDecoration(
-                    icon: Image(
-                      image: AssetImage("images/search.webp"),
-                      width: 25,
-                      height: 25,
-                      color: Color(0xffEF4F5F),
-                    ),
-                    hintText: "Search the locaion",
-                    hintStyle: GoogleFonts.nunito(
-                      fontSize: 17,
-                      color: Color(0xff7E8286),
-                    ),
-                    border: InputBorder.none,
-                  ),
-                  style: GoogleFonts.nunito(
-                      fontSize: 17,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-            ),
-          ),
+
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

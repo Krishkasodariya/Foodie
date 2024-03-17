@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:Pizza/Controller/GoogleMapController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
@@ -9,7 +8,6 @@ import 'package:Pizza/ModelClass/MainOrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/PizzaMeta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -32,10 +30,6 @@ class OrderController extends GetxController {
       <MainOrderFoodItemModel>[].obs;
   RxList<MainOrderFoodItemModel> orderAllDatalist =
       <MainOrderFoodItemModel>[].obs;
-
-  RxList<MainOrderFoodItemModel> paymentHistoryDataList =
-      <MainOrderFoodItemModel>[].obs;
-
   var uuid = Uuid();
   var orderId;
 
@@ -65,7 +59,9 @@ class OrderController extends GetxController {
 
       final pizzaBottomListData =
           pizzaController.pizzabottomlist.map((element) {
+
         FoodItemModel foodItem = FoodItemModel(
+          restaurantName: element.restaurantName,
           image: element.image,
           rating: element.rating,
           name: element.name,
@@ -130,10 +126,8 @@ class OrderController extends GetxController {
   }
 
   Future<List<MainOrderFoodItemModel>> getUserOrderData() async {
-    CollectionReference userCollectionReference =
-        await FirebaseFirestore.instance.collection("userOrderHistory");
-    DocumentReference userDocumentReference =
-        await userCollectionReference.doc(loginController.userid);
+    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
+    DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
     await userDocumentReference
         .collection("order")
@@ -141,7 +135,7 @@ class OrderController extends GetxController {
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
         Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-        log("-------------------------)${data}");
+
         RxList<OrderFoodItemModel> orderdata = <OrderFoodItemModel>[].obs;
 
         List<dynamic> dynamicList = data['orderData'];
@@ -194,6 +188,7 @@ class OrderController extends GetxController {
       final pizzaBottomListData =
           pizzaController.pizzabottomlist.map((element) {
         FoodItemModel foodItem = FoodItemModel(
+          restaurantName: element.restaurantName,
           image: element.image,
           rating: element.rating,
           name: element.name,
@@ -257,8 +252,7 @@ class OrderController extends GetxController {
   }
 
   Future<List<MainOrderFoodItemModel>> getAllUserOrderData() async {
-    CollectionReference userCollectionReference =
-        await FirebaseFirestore.instance.collection("allUserOrderHistory");
+    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("allUserOrderHistory");
 
     await userCollectionReference.get().then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
@@ -300,55 +294,6 @@ class OrderController extends GetxController {
     return orderAllDatalist;
   }
 
-  Future<List<MainOrderFoodItemModel>> getAllUserPaymentHistoryData() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    User? user = _auth.currentUser;
-    if (user == null) return [];
-
-    var userCollectionReference = await FirebaseFirestore.instance
-        .collection("allUserOrderHistory")
-        .where("uid", isEqualTo: user.uid);
-
-    await userCollectionReference.get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((element) {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-
-        print(data);
-
-        RxList<OrderFoodItemModel> orderdata = <OrderFoodItemModel>[].obs;
-        List<dynamic> dynamicList = data['orderData'];
-
-        dynamicList.forEach((element) {
-          orderdata.add(OrderFoodItemModel.fromJson(element));
-        });
-        MainOrderFoodItemModel mainOrderFoodItemModel = MainOrderFoodItemModel(
-          orderId: data['orderId'],
-          milliseconds: data['milliseconds'],
-          datalist: orderdata,
-          apply: data['apply'],
-          viewDetail: data['viewDetail'],
-          favouriteOrder: data['favouriteOrder'],
-          date: data['date'],
-          deliveryFee: data['deliveryFee'],
-          grandTotal: data['grandTotal'],
-          gst: data['gst'],
-          subTotal: data['subTotal'],
-          time: data['time'],
-          uid: data['uid'],
-          address: data['address'],
-          nearAddress: data['nearAddress'],
-          name: data['name'],
-          phoneNumber: data['phoneNumber'],
-          latitude: data['latitude'],
-          longitude: data['longitude'],
-        );
-        paymentHistoryDataList.add(mainOrderFoodItemModel);
-      });
-    });
-
-    return paymentHistoryDataList;
-  }
-
   void add_Favourite_User_OrderData(int index) async {
     try {
       CollectionReference userFavouriteCollectionReference =
@@ -365,6 +310,8 @@ class OrderController extends GetxController {
       final favouriteOrderListData =
           orderDatalist[index].datalist!.map((element) {
         OrderFoodItemModel foodItem = OrderFoodItemModel(
+
+          restaurantName: element.restaurantName,
           pizzaSize: element.pizzaSize,
           base64: element.base64,
           customPizzametaBill: element.customPizzametaBill,
@@ -456,10 +403,9 @@ class OrderController extends GetxController {
 
 //------------------------------------------------------YOUR ORDER SCREEN----------------------------------------------------
   void order_Fill_Like_OrderData(int index) async {
-    CollectionReference userCollectionReference =
-        await FirebaseFirestore.instance.collection("userOrderHistory");
-    DocumentReference userDocumentReference =
-        await userCollectionReference.doc(loginController.userid);
+    print("-----------------)order_Fill_Like_OrderData");
+    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
+    DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
     await userDocumentReference
         .collection("order")
@@ -479,6 +425,7 @@ class OrderController extends GetxController {
   }
 
   void order_Remove_Like_OrderData(int index) async {
+    print("-----------------)order_Remove_Like_OrderData");
     CollectionReference userCollectionReference =
         await FirebaseFirestore.instance.collection("userOrderHistory");
     DocumentReference userDocumentReference =
@@ -502,6 +449,7 @@ class OrderController extends GetxController {
   }
 
   void remove_Favourite_User_OrderData(int index) async {
+    print("----------------)remove_Favourite_User_OrderData");
     CollectionReference userFavouriteCollectionReference =
         await FirebaseFirestore.instance
             .collection("userFavouriteOrderHistory");
@@ -531,6 +479,7 @@ class OrderController extends GetxController {
   //------------------------------------------------------FAVOURITE ORDER SCREEN--------------------------------------------
 
   void remove_Favourite_User_Favourite_OrderData(int index) async {
+    print("--------------------)remove_Favourite_User_Favourite_OrderData");
     CollectionReference userFavouriteCollectionReference =
         await FirebaseFirestore.instance
             .collection("userFavouriteOrderHistory");
@@ -557,10 +506,9 @@ class OrderController extends GetxController {
   }
 
   void order_Remove_Like_Favourite_OrderData(int index) async {
-    CollectionReference userCollectionReference =
-        await FirebaseFirestore.instance.collection("userOrderHistory");
-    DocumentReference userDocumentReference =
-        await userCollectionReference.doc(loginController.userid);
+    print("--------------------)order_Remove_Like_Favourite_OrderData");
+    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
+    DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
     await userDocumentReference
         .collection("order")
@@ -599,6 +547,7 @@ class OrderController extends GetxController {
       final pizzaBottomListData =
           pizzaController.pizzabottomlist.map((element) {
         FoodItemModel foodItem = FoodItemModel(
+          restaurantName: element.restaurantName,
           image: element.image,
           rating: element.rating,
           name: element.name,
@@ -653,14 +602,14 @@ class OrderController extends GetxController {
         "orderData": [...pizzaBottomListData, ...pizzaMetaListData],
         "userLatitude": googleMapControllerScreen.latitude,
         "userLongitude": googleMapControllerScreen.longitude,
-        "deliveryViewDetail": deliveryViewDetail.value,
+        "deliveryViewDetail":deliveryViewDetail.value,
         "deliveryName": "",
         "deliveryUid": "",
         "deliveryPhone": "",
         "deliveryEmail": "",
         "deliveryImage": "",
-        "deliveryLatitude": 0,
-        "deliveryLongitude": 0,
+        "deliveryLatitude":0.0,
+        "deliveryLongitude": 0.0,
       };
 
       print("${formattedTime}");
@@ -672,4 +621,6 @@ class OrderController extends GetxController {
       print('Error: $e');
     }
   }
+
+
 }

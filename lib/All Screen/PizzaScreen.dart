@@ -463,7 +463,8 @@ class _PizzaScreenState extends State<PizzaScreen> {
                       top: adminController.isAdmin.value ? 0 : 20)),
               adminController.isAdmin.value
                   ? SliverToBoxAdapter()
-                  : SliverToBoxAdapter(
+                  : pizzalist[pizzaindex].customFood?
+              SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Row(
@@ -492,15 +493,14 @@ class _PizzaScreenState extends State<PizzaScreen> {
                     ],
                   ),
                 ),
-              ),
-
+              ):SliverToBoxAdapter(),
               SliverPadding(
                   padding: EdgeInsets.only(
                       top: adminController.isAdmin.value ? 0 : 20)),
 
               adminController.isAdmin.value
                   ? SliverToBoxAdapter()
-                  : SliverToBoxAdapter(
+                  :  pizzalist[pizzaindex].customFood?SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Container(
@@ -630,11 +630,11 @@ class _PizzaScreenState extends State<PizzaScreen> {
                     ),
                   ),
                 ),
-              ),
+              ):SliverToBoxAdapter(),
 
               //------------------------)
 
-              SliverPadding(padding: EdgeInsets.only(top: 20)),
+              SliverPadding(padding: EdgeInsets.only(top: pizzalist[pizzaindex].customFood?20: 0)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
@@ -758,7 +758,52 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                                 .w500)),
                                                   ),
                                                 ),
-                                                Align(
+
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                                "${pizzalist[pizzaindex].foodimagelist[index].name}",
+                                                maxLines: 2,
+                                                style: GoogleFonts.nunito(
+                                                    color: Color(0xff373D4D),
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                    FontWeight.w700)),
+                                            SizedBox(
+                                              height: 1,
+                                            ),
+                                            Text(
+                                                "${pizzalist[pizzaindex].rating} ratings",
+                                                style: GoogleFonts.nunito(
+                                                    color: Color(0xff535B6D),
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                    FontWeight.w500)),
+                                            SizedBox(
+                                              height: 1,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Image(
+                                                  image: AssetImage(
+                                                      "images/rupee.webp"),
+                                                  width: 16,
+                                                  height: 16,
+                                                  color: Color(0xff1F1F1F),
+                                                ),
+                                                Text(
+                                                    "${pizzalist[pizzaindex].foodimagelist[index].price}",
+                                                    style: GoogleFonts.nunito(
+                                                        color:
+                                                        Color(0xff1F1F1F),
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                        FontWeight.w500)),
+                                                Spacer(),
+                                                adminController.isAdmin.value?Align(
                                                   alignment: Alignment.topRight,
                                                   child:
                                                   PopupMenuButton<String>(
@@ -771,9 +816,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                       BorderRadius.circular(
                                                           35),
                                                     ),
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onInverseSurface,
+                                                    color: Colors.white,
                                                     padding:
                                                     const EdgeInsets.all(0),
                                                     constraints:
@@ -847,50 +890,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                                                       color: Colors.black,
                                                     ),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                                "${pizzalist[pizzaindex].foodimagelist[index].name}",
-                                                maxLines: 2,
-                                                style: GoogleFonts.nunito(
-                                                    color: Color(0xff373D4D),
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                    FontWeight.w700)),
-                                            SizedBox(
-                                              height: 1,
-                                            ),
-                                            Text(
-                                                "${pizzalist[pizzaindex].rating} ratings",
-                                                style: GoogleFonts.nunito(
-                                                    color: Color(0xff535B6D),
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight.w500)),
-                                            SizedBox(
-                                              height: 1,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "images/rupee.webp"),
-                                                  width: 16,
-                                                  height: 16,
-                                                  color: Color(0xff1F1F1F),
-                                                ),
-                                                Text(
-                                                    "${pizzalist[pizzaindex].foodimagelist[index].price}",
-                                                    style: GoogleFonts.nunito(
-                                                        color:
-                                                        Color(0xff1F1F1F),
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
+                                                ):Container()
                                               ],
                                             ),
                                             SizedBox(

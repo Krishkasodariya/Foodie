@@ -1,7 +1,7 @@
 
 
 class OrderFoodItemModel {
-
+  String ?restaurantName;
   String ?image;
   String ?rating;
   String ?name;
@@ -21,6 +21,7 @@ class OrderFoodItemModel {
 
 
   OrderFoodItemModel({
+    this.restaurantName,
       this.food,
       this.name,
       this.image,
@@ -43,6 +44,7 @@ class OrderFoodItemModel {
   Map<String, dynamic> toJson(){
     return {
 
+      "restaurantName": restaurantName,
       "food": food,
       "name": name,
       "image": image,
@@ -65,7 +67,7 @@ class OrderFoodItemModel {
 
   factory OrderFoodItemModel.fromJson(Map<String, dynamic> data) {
     return OrderFoodItemModel(
-
+restaurantName: data["restaurantName"],
         food: data["food"],
         name: data["name"],
         image: data["image"],

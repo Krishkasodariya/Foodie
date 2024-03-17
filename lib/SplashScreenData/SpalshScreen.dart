@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:Pizza/Controller/GoogleMapController.dart';
+import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +23,7 @@ AppOpenAd? openad;
 class _SplashScreenState extends State<SplashScreen> {
   LoginController loginController = Get.find();
   GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+
   bool isShowingAd = false;
   bool isLoaded = false;
 
@@ -44,6 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
         isocode: loginController.LoginIsoCode,
         dialcode: loginController.LoginCountryCode));
     loginController.getmodel();
+
   }
 
   Widget build(BuildContext context) {

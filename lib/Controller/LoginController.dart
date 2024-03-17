@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
@@ -82,13 +83,19 @@ class LoginController extends GetxController {
   }
 
   Future takephoto(ImageSource source) async {
+
     file = await picker.pickImage(source: source);
     print("-----file!.path------${file!.path}");
     addphoto();
-    reference!();
+    if(reference!=null){
+      reference!();
+    }
+
+
   }
 
   Future addphoto() async {
+    EasyLoading.show();
     if (file == null) {
       return;
     }
@@ -102,10 +109,13 @@ class LoginController extends GetxController {
       imageurl = await upload.getDownloadURL();
       print("-----------logincontroller.imageurl----------------)${imageurl}");
       print("22222222222${file!.path}");
-      reference!();
+      if(reference!=null){
+        reference!();
+      }
     } catch (e) {
       print('========)${e}');
     }
+    EasyLoading.dismiss();
   }
 
 
@@ -135,7 +145,11 @@ class LoginController extends GetxController {
         cartName.value=doc["Name"];
         cartPhone.value=doc["Phone"];
         print(changePhoneNumber);
-        updateData!();
+        if( updateData!=null){
+          print("Aaa");
+          updateData!();
+        }
+
       });
     });
   }
@@ -159,7 +173,7 @@ class LoginController extends GetxController {
 }*/
   Color getColor(bool pending, bool processing, bool deliver) {
     if (pending) {
-      return Color(0xffFC6701);
+      return Color(0xffF1802D);
     } else if (processing) {
       return Color(0xff59A8B1);
     } else if (deliver) {

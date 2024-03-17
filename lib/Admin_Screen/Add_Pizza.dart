@@ -281,8 +281,8 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                pickAttachment(
-                                                    ImageSource.camera);
+                                                pickAttachment(ImageSource.camera);
+                                                Navigator.pop(context);
                                               });
                                             },
                                             child: Padding(
@@ -371,8 +371,9 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  pickAttachment(
-                                                      ImageSource.gallery);
+
+                                                  pickAttachment(ImageSource.gallery);
+                                                  Navigator.pop(context);
                                                 });
                                               },
                                               child: Container(
@@ -572,6 +573,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                 padding:
                                 const EdgeInsets.only(left: 10, right: 10),
                                 child: TextField(
+                                  keyboardType: TextInputType.number,
                                   autofocus: false,
                                   controller: priceController,
                                   cursorColor: Color(0xff7E8286),
@@ -582,7 +584,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                       height: 25,
                                       color: Color(0xffEF4F5F),
                                     ),
-                                    hintText: "Enter Pizz Price",
+                                    hintText: "Enter Pizza Price",
                                     hintStyle: GoogleFonts.nunito(
                                       fontSize: 17,
                                       color: Color(0xff7E8286),
@@ -685,6 +687,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
 
           List pizzaList = documentSnapshot.docs[0]["foodimagelist"];
           pizzaList.add({
+            "restaurantName": widget.name,
             "checkadd": false,
             "food": "Pizza",
             "foodbill":  int.parse(priceController.text),
@@ -743,12 +746,11 @@ class _PizzaAddViewState extends State<PizzaAddView> {
               .update(
             {"foodimagelist": pizzaList},
           );
-          int index = pizzaController.pizzalist
-              .indexWhere((element) => element.name == widget.name);
-          pizzaController.pizzalist[index].foodimagelist
-              .removeWhere((element) => element.id == pizzaData?.id);
+          int index = pizzaController.pizzalist.indexWhere((element) => element.name == widget.name);
+          pizzaController.pizzalist[index].foodimagelist.removeWhere((element) => element.id == pizzaData?.id);
           pizzaController.pizzalist[index].foodimagelist.add(
             FoodItemModel(
+              restaurantName: widget.name!,
               id: pizzaData?.id ?? "",
               food: "Pizza",
               price: int.parse(priceController.text),

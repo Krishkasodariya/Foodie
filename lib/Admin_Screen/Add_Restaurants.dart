@@ -18,18 +18,19 @@ class AddRestaurants extends StatefulWidget {
 class _AdminDinnerScreenState extends State<AddRestaurants> {
   String? selectedImagePath;
   String? downloadImageUrl;
-
+  bool customFood = false;
   String? selectedValue;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
-
     nameController = TextEditingController(text: widget.restaurantDetail?.name);
     priceController = TextEditingController(text: widget.restaurantDetail?.price.toString());
+    phoneController = TextEditingController(text: widget.restaurantDetail?.restaurantPhone.toString());
     super.initState();
   }
 
@@ -78,9 +79,9 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                       height: 1,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color(0xffDAD9DD),
-                            width: 1,
-                          )),
+                        color: Color(0xffDAD9DD),
+                        width: 1,
+                      )),
                     ),
                   ),
                 ),
@@ -100,9 +101,9 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                       height: 1,
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color(0xffDAD9DD),
-                            width: 1,
-                          )),
+                        color: Color(0xffDAD9DD),
+                        width: 1,
+                      )),
                     ),
                   ),
                 )
@@ -137,7 +138,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                           decoration: BoxDecoration(
                               color: Color(0xffEF4F5F),
                               borderRadius:
-                              BorderRadius.all(Radius.circular(5))),
+                                  BorderRadius.all(Radius.circular(5))),
                         ),
                         SizedBox(
                           width: 15,
@@ -191,7 +192,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 color: Colors.white,
                                 border: Border.all(
                                     color: Color(0xffe7e7e7), width: 1),
@@ -204,7 +205,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                 ]),
                             child: Padding(
                               padding:
-                              const EdgeInsets.only(left: 10, right: 10),
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
                                 autofocus: false,
                                 controller: nameController,
@@ -263,7 +264,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
+                                    BorderRadius.all(Radius.circular(15)),
                                 color: Colors.white,
                                 border: Border.all(
                                     color: Color(0xffe7e7e7), width: 1),
@@ -276,8 +277,9 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                 ]),
                             child: Padding(
                               padding:
-                              const EdgeInsets.only(left: 10, right: 10),
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
+                                keyboardType: TextInputType.number,
                                 autofocus: false,
                                 controller: priceController,
                                 cursorColor: Color(0xff7E8286),
@@ -302,6 +304,119 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DottedDashedLine(
+                            height: 1,
+                            width: double.infinity,
+                            axis: Axis.horizontal,
+                            dashColor: Color(0xffDAD9DD),
+                            strokeWidth: 1,
+                            dashSpace: 3),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Text(
+                            "Phone Number",
+                            style: GoogleFonts.nunito(
+                                fontSize: 18,
+                                color: Color(0xff313848),
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Color(0xffe7e7e7), width: 1),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color(0xfff5f5f5),
+                                      spreadRadius: 1,
+                                      blurRadius: 5,
+                                      blurStyle: BlurStyle.outer)
+                                ]),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                autofocus: false,
+                                controller: phoneController,
+                                cursorColor: Color(0xff7E8286),
+                                decoration: InputDecoration(
+                                  icon: Icon(
+                                    Icons.phone_in_talk_rounded,
+                                    size: 23,
+                                    color: Color(0xffEF4F5F),
+                                  ),
+                                  hintText: "Enter Phone Number",
+                                  hintStyle: GoogleFonts.nunito(
+                                    fontSize: 17,
+                                    color: Color(0xff7E8286),
+                                  ),
+                                  border: InputBorder.none,
+                                ),
+                                style: GoogleFonts.nunito(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DottedDashedLine(
+                            height: 1,
+                            width: double.infinity,
+                            axis: Axis.horizontal,
+                            dashColor: Color(0xffDAD9DD),
+                            strokeWidth: 1,
+                            dashSpace: 3),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: Text(
+                                "Are you make custom pizza ?",
+                                style: GoogleFonts.nunito(
+                                    fontSize: 18,
+                                    color: Color(0xff313848),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            Checkbox(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              activeColor: Color(0xffEF4F5F),
+                              value: customFood,
+                              onChanged: (value) {
+                                setState(() {
+                                  customFood=value!;
+                                });
+                              },
+
+                            )
+                          ],
                         ),
                         const SizedBox(
                           height: 40,
@@ -348,7 +463,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
   addRestauratnsData() async {
     try {
       final CollectionReference addCollectionReference =
-      FirebaseFirestore.instance.collection('pizza');
+          FirebaseFirestore.instance.collection('pizza');
       EasyLoading.show();
 
       final resData = {
@@ -359,7 +474,11 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
         "foodimagelist": [],
         "rating": 3.1,
         "subname": "Pizza",
-        "time": "25 - 30 min"
+        "time": "25 - 30 min",
+        "restaurantPhone":phoneController.text,
+        "customFood":customFood,
+        "promo":false,
+        "promoUrl":""
       };
 
       await addCollectionReference.doc("${nameController.text}").set(resData);
@@ -376,7 +495,7 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
   updateRestauratnsData(PizzaItemModel restaurantDetail) async {
     try {
       final CollectionReference addCollectionReference =
-      FirebaseFirestore.instance.collection('pizza');
+          FirebaseFirestore.instance.collection('pizza');
 
       EasyLoading.show();
 
@@ -392,7 +511,11 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
           "foodimagelist": value.docs[0]['foodimagelist'],
           "rating": 3.1,
           "subname": "Pizza",
-          "time": "25 - 30 min"
+          "time": "25 - 30 min",
+          "restaurantPhone":phoneController.text,
+          "customFood":customFood,
+          "promo":false,
+          "promoUrl":""
         };
         await addCollectionReference.doc(value.docs[0].id).set(resData);
 

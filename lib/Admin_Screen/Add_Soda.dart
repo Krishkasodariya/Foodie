@@ -291,8 +291,8 @@ class _SodaAddViewState extends State<SodaAddView> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                pickAttachment(
-                                                    ImageSource.camera);
+                                                pickAttachment(ImageSource.camera);
+                                                Navigator.pop(context);
                                               });
                                             },
                                             child: Padding(
@@ -380,8 +380,8 @@ class _SodaAddViewState extends State<SodaAddView> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  pickAttachment(
-                                                      ImageSource.gallery);
+                                                  pickAttachment(ImageSource.gallery);
+                                                  Navigator.pop(context);
                                                 });
                                               },
                                               child: Container(
@@ -581,6 +581,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                                 padding:
                                 const EdgeInsets.only(left: 10, right: 10),
                                 child: TextField(
+                                  keyboardType: TextInputType.number,
                                   autofocus: false,
                                   controller: priceController,
                                   cursorColor: Color(0xff7E8286),
@@ -591,7 +592,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                                       height: 25,
                                       color: Color(0xffEF4F5F),
                                     ),
-                                    hintText: "Enter Pizz Price",
+                                    hintText: "Enter Soda Price",
                                     hintStyle: GoogleFonts.nunito(
                                       fontSize: 17,
                                       color: Color(0xff7E8286),
@@ -694,6 +695,7 @@ class _SodaAddViewState extends State<SodaAddView> {
       String docId = categoryCollectionReference.doc().id;
 
       Map<String, dynamic> coldDrink = {
+        "restaurantName":"SodaBar",
         "id": sodaid,
         "image": downloadImageUrl,
         "price": int.parse(priceController.text),
@@ -731,6 +733,7 @@ class _SodaAddViewState extends State<SodaAddView> {
             docId = element.id;
             print("sdfghjkhfgdg : ${element.id}");
             Map<String, dynamic> coldDrink = {
+              "restaurantName":"SodaBar",
               "id": editItemId?.id,
               "image": downloadImageUrl,
               "price": int.parse(priceController.text),

@@ -1,4 +1,3 @@
-
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
 import 'package:Pizza/ModelClass/PizzaItemModelClass.dart';
@@ -67,18 +66,23 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
                     onTap: () {
                       for (int i = 0; i < pizzaController.pizzabottomlist.length; i++) {
                         if (pizzaController.pizzabottomlist[i].food.contains("soda")) {
-                          pizzaController.Sodaclear(context);
+                          pizzaController.Sodaclear();
                           print("soda");
                           print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
                         } else {
-                          pizzaController.Pizzaclear(context);
+                          pizzaController.Pizzaclear();
                           print("pizza");
                         }
-
                         setState(() {});
                         pizzaController.update();
                         print("2222222222222222222222222222222");
                       }
+
+                      setState(() {
+                          pizzaController.customizepizzalist[0].pizzametalist!.clear();
+                          pizzaController.isBootomSheet.value=false;
+                          Navigator.pop(context);
+                      });
                     },
                     child: Text(
                       "Clear all",
