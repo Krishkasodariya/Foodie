@@ -2,7 +2,7 @@ import 'package:Pizza/Admin_Screen/AdminBottomNavigation.dart';
 import 'package:Pizza/Admin_Screen/payment_history.dart';
 import 'package:Pizza/All%20Screen/AboutScreen.dart';
 import 'package:Pizza/All%20Screen/LoginScreen.dart';
-
+import 'package:Pizza/All%20Screen/user_payment_history.dart';
 import 'package:Pizza/Controller/AdminController.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
@@ -19,14 +19,12 @@ import 'package:Pizza/Drawer/TrackingOrder.dart';
 import 'package:Pizza/Drawer/YourOrderScreen.dart';
 import 'package:Pizza/DynamicLink/Path_Constant.dart';
 import 'package:Pizza/ModelClass/UserModel.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:shimmer/shimmer.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -175,48 +173,33 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               child: Center(
                                 child: logincontroller.imageurl.isEmpty
                                     ? Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xffE9E9F7),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Color(0xffB1BBDA),
-                                          size: 60,
-                                        ))
+                                    width: 110,
+                                    height: 110,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffE9E9F7),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Color(0xffB1BBDA),
+                                      size: 60,
+                                    ))
                                     : ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(60)),
-                                        child: Container(
-                                            width: 110,
-                                            height: 110,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xffE9E9F7),
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: CachedNetworkImage(
-                                                imageUrl: logincontroller.imageurl,
-                                                placeholder: (context, url) =>
-                                                    Shimmer.fromColors(
-                                                        direction: ShimmerDirection.ltr,
-                                                        enabled: true,
-                                                        baseColor: Colors
-                                                            .grey
-                                                            .shade300,
-                                                        highlightColor:
-                                                        Colors.grey
-                                                            .shade100,
-                                                        child:
-                                                        Container(
-                                                          color: Colors
-                                                              .grey,
-                                                        )),
-                                                width: 110,
-                                                height: 110,
-                                                fit: BoxFit.cover)),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(60)),
+                                  child: Container(
+                                      width: 110,
+                                      height: 110,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xffE9E9F7),
+                                        shape: BoxShape.circle,
                                       ),
+                                      child: Image(
+                                        image: NetworkImage(
+                                            logincontroller.imageurl),
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
                               ),
                             ),
                           ),
@@ -229,7 +212,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                   decoration: BoxDecoration(
                                       color: Color(0xffEF4F5F),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
+                                      BorderRadius.all(Radius.circular(15)),
                                       border: Border.all(
                                           color: Color(0xffFEF1F3), width: 3)),
                                   child: Padding(
@@ -271,24 +254,24 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           child: GestureDetector(
                             onTap: !createdLink
                                 ? () {
-                                    createDynamicLink(true, kLikepage);
+                              createDynamicLink(true, kLikepage);
 
-                                    print(
-                                        "llllllllllllllllllllllllllllllllllllllll${linkMessage}");
-                                    Navigator.push(
-                                        context,
-                                        PageTransition(
-                                            child: LikesScreen(),
-                                            type: PageTransitionType
-                                                .rightToLeft));
-                                  }
+                              print(
+                                  "llllllllllllllllllllllllllllllllllllllll${linkMessage}");
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: LikesScreen(),
+                                      type: PageTransitionType
+                                          .rightToLeft));
+                            }
                                 : null,
                             child: Container(
                               height: 80,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(15)),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Color(0xffE9E9F7),
@@ -321,40 +304,52 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           width: 10,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 80,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0xffE9E9F7),
-                                      blurRadius: 10,
-                                      spreadRadius: 2)
-                                ]),
-                            child: Column(
-                              children: [
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 3),
-                                  child: Image(
-                                    image: AssetImage("images/payment.webp"),
-                                    width: 29,
-                                    height: 29,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return const UserPaymentHistory();
+                                  },
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 80,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffE9E9F7),
+                                        blurRadius: 10,
+                                        spreadRadius: 2)
+                                  ]),
+                              child: Column(
+                                children: [
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 3),
+                                    child: Image(
+                                      image: AssetImage("images/payment.webp"),
+                                      width: 29,
+                                      height: 29,
+                                    ),
                                   ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "Payment\nHistory",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.nunito(
-                                      fontSize: 17,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Spacer(),
-                              ],
+                                  Spacer(),
+                                  Text(
+                                    "Payment\nHistory",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.nunito(
+                                        fontSize: 17,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Spacer(),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -369,7 +364,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(15)),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Color(0xffE9E9F7),
@@ -452,7 +447,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               decoration: BoxDecoration(
                                   color: Color(0xffFFF6F7),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
+                                  BorderRadius.all(Radius.circular(15))),
                               child: Center(
                                 child: Text(
                                   "v17.27.0",
@@ -532,7 +527,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                   decoration: BoxDecoration(
                                       color: Color(0xffF2F4F7),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(8))),
+                                      BorderRadius.all(Radius.circular(8))),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -588,7 +583,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 decoration: BoxDecoration(
                                     color: Color(0xffEF4F5F),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
+                                    BorderRadius.all(Radius.circular(5))),
                               ),
                               SizedBox(
                                 width: 15,
@@ -914,7 +909,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 decoration: BoxDecoration(
                                     color: Color(0xffEF4F5F),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
+                                    BorderRadius.all(Radius.circular(5))),
                               ),
                               SizedBox(
                                 width: 15,
@@ -1034,7 +1029,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 decoration: BoxDecoration(
                                     color: Color(0xffEF4F5F),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
+                                    BorderRadius.all(Radius.circular(5))),
                               ),
                               SizedBox(
                                 width: 15,
@@ -1289,7 +1284,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 decoration: BoxDecoration(
                                     color: Color(0xffEF4F5F),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
+                                    BorderRadius.all(Radius.circular(5))),
                               ),
                               SizedBox(
                                 width: 15,
@@ -1376,20 +1371,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           GestureDetector(
                             onTap: !createdLink
                                 ? () {
-                                    createDynamicLink(true, kAboutpage);
-                                    print(
-                                        "ssssssssssssssssssssssssssssssssss${linkMessage}");
-                                    Navigator.push(
-                                        context,
-                                        PageTransition(
-                                            child: AboutScreen(),
-                                            type: PageTransitionType
-                                                .rightToLeft));
-                                  }
+                              createDynamicLink(true, kAboutpage);
+                              print(
+                                  "ssssssssssssssssssssssssssssssssss${linkMessage}");
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: AboutScreen(),
+                                      type: PageTransitionType
+                                          .rightToLeft));
+                            }
                                 : null,
                             child: Padding(
                               padding:
-                                  const EdgeInsets.only(right: 10, left: 10),
+                              const EdgeInsets.only(right: 10, left: 10),
                               child: Column(
                                 children: [
                                   Row(
@@ -1455,7 +1450,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 setState(() {
                                   logincontroller.logout();
                                   Get.off(LoginScrren());
-
                                 });
                               },
                               child: Column(
@@ -1577,7 +1571,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     Uri url;
     if (short) {
       final ShortDynamicLink shortLink =
-          await firebaseDynamicLinks.buildShortLink(parameters);
+      await firebaseDynamicLinks.buildShortLink(parameters);
       url = shortLink.shortUrl;
     } else {
       url = await firebaseDynamicLinks.buildLink(parameters);

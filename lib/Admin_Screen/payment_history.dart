@@ -175,8 +175,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 10, right: 10),
-                                child: Obx(
-                                  () => Container(
+                                child: Container(
                                     width: double.infinity,
                                     decoration: const BoxDecoration(
                                         color: Colors.white,
@@ -184,10 +183,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                                             topLeft: Radius.circular(20),
                                             topRight: Radius.circular(20))),
                                     child: ListView.separated(
-                                      itemCount: orderController
-                                          .orderAllDatalist[index]
-                                          .datalist!
-                                          .length,
+                                      itemCount: 1,
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       scrollDirection: Axis.vertical,
@@ -513,7 +509,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                                       },
                                     ),
                                   ),
-                                ),
+
                               ),
 
                             ],
