@@ -4,16 +4,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class TrackingController extends GetxController{
-
+class TrackingController extends GetxController {
   Set<Marker> markers = {};
-   GoogleMapController ?googleMapController;
-  LatLng deliverTarget= LatLng(10, 10);
-  LatLng userTarget = LatLng(10,10);
+  GoogleMapController? googleMapController;
+  LatLng deliverTarget = LatLng(10, 10);
+  LatLng userTarget = LatLng(10, 10);
 
-  LoginController loginController=Get.find();
+  LoginController loginController = Get.find();
 
-  Future determineCurrentPosition() async{
+  Future determineCurrentPosition() async {
     bool serviceEnabled;
     LocationPermission locationPermission;
 
@@ -37,7 +36,7 @@ class TrackingController extends GetxController{
   }
 
   Future gotoSpecificPosition(LatLng position) async {
-    if(googleMapController!=null){
+    if (googleMapController != null) {
       googleMapController!.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(target: position, zoom: 16)));
     }
@@ -55,13 +54,13 @@ class TrackingController extends GetxController{
     print("____________________((((((((((((((((${order['orderId']}");
     FirebaseFirestore.instance
         .collection('trackingOrder')
-        .where("uid", isEqualTo: loginController.userid).where("orderId",isEqualTo:order['orderId'] )
+        .where("uid", isEqualTo: loginController.userid)
+        .where("orderId", isEqualTo: order['orderId'])
         .snapshots()
         .listen((QuerySnapshot snapshot) {
       snapshot.docs.forEach((DocumentSnapshot doc) {
-
         print("------)${doc.data()}");
-        double deliveryLatitude = doc['deliveryLatitude'] ;
+        double deliveryLatitude = doc['deliveryLatitude'];
         double deliveryLongitude = doc['deliveryLongitude'];
         deliverTarget = LatLng(deliveryLatitude, deliveryLongitude);
         print("----deliveryLatitude--------)${deliveryLatitude}");
@@ -76,33 +75,28 @@ class TrackingController extends GetxController{
         userMarker(userTarget);
 
         gotoSpecificPosition(deliverTarget);
-
       });
     });
   }
 
   void updateDeliveryBoyMarker(LatLng latLng) {
-
     markers.clear();
+    Future.delayed(Duration(seconds: 1)).then((value) {
       markers.add(Marker(
         markerId: MarkerId("Delivery"),
         position: latLng,
         icon: BitmapDescriptor.defaultMarker,
         infoWindow: InfoWindow(title: "Delivery Boy"),
       ));
-
+    });
   }
 
   void userMarker(LatLng latLng) {
-
-      markers.add(Marker(
-        markerId: MarkerId("User"),
-        position: latLng,
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-        infoWindow: InfoWindow(title: "Customer"),
-      ));
-
+    markers.add(Marker(
+      markerId: MarkerId("User"),
+      position: latLng,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      infoWindow: InfoWindow(title: "Customer"),
+    ));
   }
-
-
 }

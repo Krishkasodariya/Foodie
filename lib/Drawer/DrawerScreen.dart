@@ -2,7 +2,6 @@ import 'package:Pizza/Admin_Screen/AdminBottomNavigation.dart';
 import 'package:Pizza/Admin_Screen/payment_history.dart';
 import 'package:Pizza/All%20Screen/AboutScreen.dart';
 import 'package:Pizza/All%20Screen/LoginScreen.dart';
-
 import 'package:Pizza/Controller/AdminController.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/GoogleMapController.dart';
@@ -27,6 +26,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
+
+import 'UserPaymentHistory.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -321,40 +322,49 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           width: 10,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 80,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0xffE9E9F7),
-                                      blurRadius: 10,
-                                      spreadRadius: 2)
-                                ]),
-                            child: Column(
-                              children: [
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 3),
-                                  child: Image(
-                                    image: AssetImage("images/payment.webp"),
-                                    width: 29,
-                                    height: 29,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.rightToLeft,
+                                      child: UserPaymentHistory()));
+                            },
+                            child: Container(
+                              height: 80,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xffE9E9F7),
+                                        blurRadius: 10,
+                                        spreadRadius: 2)
+                                  ]),
+                              child: Column(
+                                children: [
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 3),
+                                    child: Image(
+                                      image: AssetImage("images/payment.webp"),
+                                      width: 29,
+                                      height: 29,
+                                    ),
                                   ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  "Payment\nHistory",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.nunito(
-                                      fontSize: 17,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Spacer(),
-                              ],
+                                  Spacer(),
+                                  Text(
+                                    "Payment",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.nunito(
+                                        fontSize: 17,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Spacer(),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -1074,9 +1084,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                             color: Color(0xffF2F4F7),
                                             shape: BoxShape.circle),
                                         child: Padding(
+
                                           padding: const EdgeInsets.all(8),
-                                          child: Icon(Icons.payment_outlined,
-                                              color: Color(0xff787E91)),
+                                          child: Image(
+                                            color: Color(0xff787E91),
+                                            image: AssetImage("images/payment.webp"),
+                                            width: 29,
+                                            height: 29,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -1527,7 +1542,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Pizza",
+                          "Foodie",
                           style: GoogleFonts.calistoga(
                             fontSize: 30,
                             color: Color(0xffB0B4C0),

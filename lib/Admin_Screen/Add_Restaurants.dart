@@ -31,6 +31,11 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
     nameController = TextEditingController(text: widget.restaurantDetail?.name);
     priceController = TextEditingController(text: widget.restaurantDetail?.price.toString());
     phoneController = TextEditingController(text: widget.restaurantDetail?.restaurantPhone.toString());
+
+    if (widget.restaurantDetail != null) {
+      customFood = widget.restaurantDetail!.customFood;
+    }
+
     super.initState();
   }
 

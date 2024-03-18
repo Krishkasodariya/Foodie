@@ -131,391 +131,343 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 4,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffEF4F5F),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5))),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      "${orderController.orderAllDatalist[index].date} at ${orderController.orderAllDatalist[index].time}",
-                                      style: GoogleFonts.lexend(
-                                          color: Color(0xff313848),
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              DottedDashedLine(
-                                height: 1,
+                              Container(
                                 width: double.infinity,
-                                axis: Axis.horizontal,
-                                dashColor: Color(0xffEF4F5F),
-                                strokeWidth: 1.2,
-                                dashSpace: 0,
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Obx(
-                                  () => Container(
-                                    width: double.infinity,
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20))),
-                                    child: ListView.separated(
-                                      itemCount: orderController
-                                          .orderAllDatalist[index]
-                                          .datalist!
-                                          .length,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemBuilder: (context, oindex) {
-                                        return Container(
-                                          width: double.infinity,
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Name:-   ",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight: FontWeight.w400,
-                                                        fontSize: 17,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    Obx(
-                                                          () => Padding(
-                                                        padding:
-                                                        const EdgeInsets.only(
-                                                            left: 15),
-                                                        child: Text(
-                                                            "${orderController.orderAllDatalist[index].name}",
-                                                            style: GoogleFonts.nunito(
-                                                              color:
-                                                              Color(0xff7e878d),
-                                                              fontSize: 17,
-                                                            )),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Phone:-   ",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight: FontWeight.w400,
-                                                        fontSize: 17,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    Obx(
-                                                          () => Flexible(
-                                                        child: Padding(
-                                                          padding:
-                                                          const EdgeInsets.only(
-                                                              left: 15, top: 10),
-                                                          child: Text(
-                                                              overflow: TextOverflow
-                                                                  .ellipsis,
-                                                              maxLines: 4,
-                                                              "${orderController.orderAllDatalist[index].phoneNumber} ",
-                                                              style:
-                                                              GoogleFonts.nunito(
-                                                                color:
-                                                                Color(0xff7e878d),
-                                                                fontSize: 15.5,
-                                                              )),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              DottedDashedLine(
-                                                  height: 1,
-                                                  width: double.infinity,
-                                                  axis: Axis.horizontal,
-                                                  dashColor: Color(0xffDAD9DD),
-                                                  strokeWidth: 1,
-                                                  dashSpace: 3),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Subtotal",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight: FontWeight.w500,
-                                                        fontSize: 17.5,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Image(
-                                                      image: AssetImage(
-                                                          "images/rupee.webp"),
-                                                      width: 17,
-                                                      height: 17,
-                                                      color: Color(0xff1F1F1F),
-                                                    ),
-                                                    Obx(
-                                                          () => Text(
-                                                          "${orderController.orderAllDatalist[index].subTotal}",
-                                                          style: GoogleFonts.lexend(
-                                                              color:
-                                                              Color(0xff1F1F1F),
-                                                              fontSize: 17,
-                                                              fontWeight:
-                                                              FontWeight.w500)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          "images/bank.webp"),
-                                                      width: 20,
-                                                      height: 20,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      "GST",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight: FontWeight.w400,
-                                                        fontSize: 16,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return GstInformationDialog();
-                                                          },
-                                                        );
-                                                      },
-                                                      child: Image(
-                                                        image: AssetImage(
-                                                            "images/information.webp"),
-                                                        width: 19,
-                                                        height: 19,
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          bottom: 5),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "images/rupee.webp"),
-                                                            width: 16,
-                                                            height: 16,
-                                                            color: Color(0xff1F1F1F),
-                                                          ),
-                                                          Obx(
-                                                                () => Text(
-                                                                "${orderController.orderAllDatalist[index].gst}",
-                                                                style: GoogleFonts.lexend(
-                                                                    color: Color(
-                                                                        0xff1F1F1F),
-                                                                    fontSize: 16,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w400)),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Image(
-                                                      image: AssetImage(
-                                                          "images/scooter1.webp"),
-                                                      width: 20,
-                                                      height: 20,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      "Delivery partner fee",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight: FontWeight.w400,
-                                                        fontSize: 16,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          bottom: 5),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "images/rupee.webp"),
-                                                            width: 16,
-                                                            height: 16,
-                                                            color: Color(0xff1F1F1F),
-                                                          ),
-                                                          Obx(
-                                                                () => Text(
-                                                                "${orderController.orderAllDatalist[index].deliveryFee}",
-                                                                style: GoogleFonts.lexend(
-                                                                    color: Color(
-                                                                        0xff1F1F1F),
-                                                                    fontSize: 16,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w400)),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              DottedDashedLine(
-                                                height: 1,
-                                                width: double.infinity,
-                                                axis: Axis.horizontal,
-                                                dashColor: Color(0xffDAD9DD),
-                                                strokeWidth: 1.2,
-                                                dashSpace: 0,
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Grand Total",
-                                                      style: GoogleFonts.lexend(
-                                                        fontWeight: FontWeight.w400,
-                                                        fontSize: 16,
-                                                        color: Color(0xff313848),
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          bottom: 5),
-                                                      child: Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "images/rupee.webp"),
-                                                            width: 16,
-                                                            height: 16,
-                                                            color: Color(0xff1F1F1F),
-                                                          ),
-                                                          Obx(
-                                                                () => Text(
-                                                                "${orderController.orderAllDatalist[index].grandTotal}",
-                                                                style: GoogleFonts.lexend(
-                                                                    color: Color(
-                                                                        0xff1F1F1F),
-                                                                    fontSize: 16,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w400)),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          height: 5,
-                                        );
-                                      },
-                                    ),
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffEF4F5F),
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(30),
+                                        topLeft: Radius.circular(30))),
+                                child: Center(
+                                  child: Text(
+                                    "${orderController.orderAllDatalist[index].date} at ${orderController.orderAllDatalist[index].time}",
+                                    style: GoogleFonts.lexend(
+                                        color:  Colors.white.withOpacity(0.8),
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                               ),
 
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Container(
+                                    width: double.infinity,
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Name:-   ",
+                                                style: GoogleFonts.lexend(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 17,
+                                                  color: Color(0xff313848),
+                                                ),
+                                              ),
+                                              Obx(
+                                                () => Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15),
+                                                  child: Text(
+                                                      "${orderController.orderAllDatalist[index].name}",
+                                                      style: GoogleFonts.nunito(
+                                                        color:
+                                                            Color(0xff7e878d),
+                                                        fontSize: 17,
+                                                      )),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Phone:-   ",
+                                                style: GoogleFonts.lexend(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 17,
+                                                  color: Color(0xff313848),
+                                                ),
+                                              ),
+                                              Obx(
+                                                () => Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 15),
+                                                    child: Text(
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 4,
+                                                        "${orderController.orderAllDatalist[index].phoneNumber} ",
+                                                        style:
+                                                            GoogleFonts.nunito(
+                                                          color:
+                                                              Color(0xff7e878d),
+                                                          fontSize: 15.5,
+                                                        )),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        DottedDashedLine(
+                                            height: 1,
+                                            width: double.infinity,
+                                            axis: Axis.horizontal,
+                                            dashColor: Color(0xffDAD9DD),
+                                            strokeWidth: 1,
+                                            dashSpace: 3),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Subtotal",
+                                                style: GoogleFonts.lexend(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 17.5,
+                                                  color: Color(0xff313848),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Image(
+                                                image: AssetImage(
+                                                    "images/rupee.webp"),
+                                                width: 17,
+                                                height: 17,
+                                                color: Color(0xff1F1F1F),
+                                              ),
+                                              Obx(
+                                                () => Text(
+                                                    "${orderController.orderAllDatalist[index].subTotal}",
+                                                    style: GoogleFonts.lexend(
+                                                        color:
+                                                            Color(0xff1F1F1F),
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Image(
+                                                image: AssetImage(
+                                                    "images/bank.webp"),
+                                                width: 20,
+                                                height: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "GST",
+                                                style: GoogleFonts.lexend(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16,
+                                                  color: Color(0xff313848),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return GstInformationDialog();
+                                                    },
+                                                  );
+                                                },
+                                                child: Image(
+                                                  image: AssetImage(
+                                                      "images/information.webp"),
+                                                  width: 19,
+                                                  height: 19,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 5),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          "images/rupee.webp"),
+                                                      width: 16,
+                                                      height: 16,
+                                                      color: Color(0xff1F1F1F),
+                                                    ),
+                                                    Obx(
+                                                      () => Text(
+                                                          "${orderController.orderAllDatalist[index].gst}",
+                                                          style: GoogleFonts.lexend(
+                                                              color: Color(
+                                                                  0xff1F1F1F),
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Image(
+                                                image: AssetImage(
+                                                    "images/scooter1.webp"),
+                                                width: 20,
+                                                height: 20,
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "Delivery partner fee",
+                                                style: GoogleFonts.lexend(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16,
+                                                  color: Color(0xff313848),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 5),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          "images/rupee.webp"),
+                                                      width: 16,
+                                                      height: 16,
+                                                      color: Color(0xff1F1F1F),
+                                                    ),
+                                                    Obx(
+                                                      () => Text(
+                                                          "${orderController.orderAllDatalist[index].deliveryFee}",
+                                                          style: GoogleFonts.lexend(
+                                                              color: Color(
+                                                                  0xff1F1F1F),
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        DottedDashedLine(
+                                          height: 1,
+                                          width: double.infinity,
+                                          axis: Axis.horizontal,
+                                          dashColor: Color(0xffDAD9DD),
+                                          strokeWidth: 1.2,
+                                          dashSpace: 0,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Grand Total",
+                                                style: GoogleFonts.lexend(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16,
+                                                  color: Color(0xff313848),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 5),
+                                                child: Row(
+                                                  children: [
+                                                    Image(
+                                                      image: AssetImage(
+                                                          "images/rupee.webp"),
+                                                      width: 16,
+                                                      height: 16,
+                                                      color: Color(0xff1F1F1F),
+                                                    ),
+                                                    Obx(
+                                                      () => Text(
+                                                          "${orderController.orderAllDatalist[index].grandTotal}",
+                                                          style: GoogleFonts.lexend(
+                                                              color: Color(
+                                                                  0xff1F1F1F),
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                      ],
+                                    ),
+                                  )),
                             ],
                           ),
                         ),

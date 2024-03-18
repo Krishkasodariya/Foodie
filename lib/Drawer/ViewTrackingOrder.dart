@@ -24,7 +24,10 @@ class _ViewTrackingOrderState extends State<ViewTrackingOrder> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    timer=Timer.periodic(Duration(seconds: 10), (timer) {
       trackingController.subscribeToLocationUpdates(widget.order);
+    });
+
   }
   @override
   Widget build(BuildContext context) {

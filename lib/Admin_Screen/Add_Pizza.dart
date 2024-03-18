@@ -66,7 +66,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
               color: Colors.black,
             ),
           ),
-          title: Text(widget.pizzaData == null ?"Create New Pizza" :  "Edit Pizza",
+          title: Text(widget.pizzaData == null ?"Create New Item" :  "Edit Item",
               style: GoogleFonts.nunito(
                   color: Color(0xff293041),
                   fontSize: 20,
@@ -152,7 +152,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                           ),
                           Center(
                             child: Text(
-                              widget.pizzaData == null ? "Add New Pizza" : "Edit Pizza",
+                              widget.pizzaData == null ? "Add New Item" : "Edit Item",
                               style: GoogleFonts.lexend(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -267,7 +267,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                               const SizedBox(
                                                 width: 15,
                                               ),
-                                              Text("Change photo",
+                                              Text(widget.pizzaData == null ?"Add photo":"Change photo",
                                                   style: GoogleFonts.lexend(
                                                       color: Colors.black,
                                                       fontSize: 21,
@@ -454,7 +454,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                               },
                             );
                           },
-                          child: Text("Change photo",
+                          child: Text(widget.pizzaData == null ?"Add photo":"Change photo",
                               style: GoogleFonts.nunito(
                                   color: Color(0xffEF4F5F),
                                   fontSize: 16,
@@ -470,7 +470,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Text(
-                              "Pizza Name",
+                              "Item Name",
                               style: GoogleFonts.nunito(
                                   fontSize: 18,
                                   color: Color(0xff313848),
@@ -511,7 +511,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                       height: 23,
                                       color: Color(0xffEF4F5F),
                                     ),
-                                    hintText: "Enter Pizza Name",
+                                    hintText: "Enter Item Name",
                                     hintStyle: GoogleFonts.nunito(
                                       fontSize: 17,
                                       color: Color(0xff7E8286),
@@ -584,7 +584,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                       height: 25,
                                       color: Color(0xffEF4F5F),
                                     ),
-                                    hintText: "Enter Pizza Price",
+                                    hintText: "Enter Item Price",
                                     hintStyle: GoogleFonts.nunito(
                                       fontSize: 17,
                                       color: Color(0xff7E8286),
@@ -622,7 +622,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                               Navigator.pop(context);
                             },
                             child:  Text(
-                              widget.pizzaData == null ? "Create New Pizza" : "Save Pizza",
+                              widget.pizzaData == null ? "Create New Item" : "Save Item",
                               style:
                               const TextStyle(fontSize: 16, color: Colors.white),
                             ),

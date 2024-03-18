@@ -277,7 +277,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                                               const SizedBox(
                                                 width: 15,
                                               ),
-                                              Text("Change photo",
+                                              Text(  widget.editItemId==null ?"Add photo":"Change photo",
                                                   style: GoogleFonts.lexend(
                                                       color: Colors.black,
                                                       fontSize: 21,
@@ -462,7 +462,7 @@ class _SodaAddViewState extends State<SodaAddView> {
                               },
                             );
                           },
-                          child: Text("Change photo",
+                          child: Text( widget.editItemId==null ?"Add photo":"Change photo",
                               style: GoogleFonts.nunito(
                                   color: Color(0xffEF4F5F),
                                   fontSize: 16,

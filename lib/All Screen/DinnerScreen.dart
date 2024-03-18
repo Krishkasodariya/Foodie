@@ -41,25 +41,37 @@ class _DinnerScreenState extends State<DinnerScreen> {
   BottomController bottomController = Get.find();
   List<FoodImageSlider> dinnerimagelist = [
     FoodImageSlider(
-        image: "images/b1.webp",
+        image: "images/m1.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
         tital: "aa"),
     FoodImageSlider(
-        image: "images/b2.webp",
+        image: "images/m8.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
         tital: "aa"),
     FoodImageSlider(
-        image: "images/b12.webp",
+        image: "images/m9.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
         tital: "aa"),
     FoodImageSlider(
-        image: "images/b3.webp",
+        image: "images/m12.webp",
+        description: "aa",
+        offer: "aa",
+        order: "aa",
+        tital: "aa"),
+    FoodImageSlider(
+        image: "images/m10.webp",
+        description: "aa",
+        offer: "aa",
+        order: "aa",
+        tital: "aa"),
+    FoodImageSlider(
+        image: "images/m15.webp",
         description: "aa",
         offer: "aa",
         order: "aa",
@@ -78,11 +90,12 @@ class _DinnerScreenState extends State<DinnerScreen> {
     }
     Future.delayed(Duration(seconds: 1)).then((value) {
       pizzaController.videoInit();
+      setState(() {});
     });
     //loaded();
   }
 
-  /* @override
+   @override
   void dispose() {
     for (final pizzaItem in pizzaController.pizzalist.value) {
       for (final videoController in pizzaItem.videoPlayerController ?? []) {
@@ -90,7 +103,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
       }
     }
     super.dispose();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +117,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
             Future.delayed(Duration(seconds: 1)).then((value) {
               pizzaController.videoInit();
             });
+            setState(() {});
             return Future.delayed(const Duration(seconds: 3));
           },
           child: WillPopScope(
@@ -192,7 +206,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                             automaticallyImplyLeading: false,
                             snap: false,
                             stretch: true,
-                            expandedHeight: 285,
+                            expandedHeight: 295,
                             flexibleSpace: FlexibleSpaceBar(
                               background: Column(
                                 children: [
@@ -324,21 +338,19 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                 sliderindex = index;
                                               });
                                             },
-                                            aspectRatio: 16 / 8,
+                                            aspectRatio: 16 / 8.5,
                                             autoPlay: true,
-                                            autoPlayAnimationDuration:
-                                                Duration(milliseconds: 2200),
-                                            autoPlayInterval:
-                                                Duration(milliseconds: 2200),
+                                            autoPlayAnimationDuration: Duration(milliseconds: 2200),
                                             scrollPhysics:
                                                 BouncingScrollPhysics(),
-                                            viewportFraction: 0.93,
+                                            viewportFraction: 1,
                                             enableInfiniteScroll: true,
                                             reverse: false,
                                             autoPlayCurve: Curves.fastOutSlowIn,
                                           )),
                                     ),
                                   ),
+                                  SizedBox(height: 10,),
                                   AnimatedSmoothIndicator(
                                     activeIndex: sliderindex,
                                     count: dinnerimagelist.length,
@@ -799,13 +811,14 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                         borderRadius:
                                                             BorderRadius.all(
                                                                 Radius.circular(
-                                                                    5))),
+                                                                    7))),
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               left: 5,
                                                               right: 2),
                                                       child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           Center(
                                                             child: Text(
@@ -814,7 +827,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                                     color: Colors
                                                                         .white,
                                                                     fontSize:
-                                                                        14,
+                                                                        12.5,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600)),
@@ -823,7 +836,7 @@ class _DinnerScreenState extends State<DinnerScreen> {
                                                             child: Icon(
                                                               Icons
                                                                   .star_rounded,
-                                                              size: 13,
+                                                              size: 11,
                                                               color:
                                                                   Colors.white,
                                                             ),

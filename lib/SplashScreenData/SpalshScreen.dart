@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   Spacer(),
                   Spacer(),
                   Text(
-                    "Pizza",
+                    "Foodie",
                     style: GoogleFonts.calistoga(
                       fontSize: 50,
                       color: Colors.white,

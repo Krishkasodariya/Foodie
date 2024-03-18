@@ -8,6 +8,7 @@ import 'package:Pizza/ModelClass/MainOrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/OrderFoodItemModel.dart';
 import 'package:Pizza/ModelClass/PizzaMeta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -24,6 +25,10 @@ class OrderController extends GetxController {
   RxBool pending = false.obs;
   RxBool processing = false.obs;
   RxBool deliver = false.obs;
+
+  RxList<MainOrderFoodItemModel> paymentHistoryDataList =
+      <MainOrderFoodItemModel>[].obs;
+
 
   RxList<MainOrderFoodItemModel> orderDatalist = <MainOrderFoodItemModel>[].obs;
   RxList<MainOrderFoodItemModel> favouriteOrderDatalist =
@@ -620,6 +625,55 @@ class OrderController extends GetxController {
     } catch (e) {
       print('Error: $e');
     }
+  }
+
+  Future<List<MainOrderFoodItemModel>> getUserPaymentHistoryData() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    User? user = _auth.currentUser;
+    if (user == null) return [];
+
+    var userCollectionReference = await FirebaseFirestore.instance
+        .collection("allUserOrderHistory")
+        .where("uid", isEqualTo: user.uid);
+
+    await userCollectionReference.get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((element) {
+        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+        print(data);
+
+        RxList<OrderFoodItemModel> orderdata = <OrderFoodItemModel>[].obs;
+        List<dynamic> dynamicList = data['orderData'];
+
+        dynamicList.forEach((element) {
+          orderdata.add(OrderFoodItemModel.fromJson(element));
+        });
+        MainOrderFoodItemModel mainOrderFoodItemModel = MainOrderFoodItemModel(
+          orderId: data['orderId'],
+          milliseconds: data['milliseconds'],
+          datalist: orderdata,
+          apply: data['apply'],
+          viewDetail: data['viewDetail'],
+          favouriteOrder: data['favouriteOrder'],
+          date: data['date'],
+          deliveryFee: data['deliveryFee'],
+          grandTotal: data['grandTotal'],
+          gst: data['gst'],
+          subTotal: data['subTotal'],
+          time: data['time'],
+          uid: data['uid'],
+          address: data['address'],
+          nearAddress: data['nearAddress'],
+          name: data['name'],
+          phoneNumber: data['phoneNumber'],
+          latitude: data['latitude'],
+          longitude: data['longitude'],
+        );
+        paymentHistoryDataList.add(mainOrderFoodItemModel);
+      });
+    });
+
+    return paymentHistoryDataList;
   }
 
 

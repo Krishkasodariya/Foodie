@@ -61,10 +61,11 @@ class _HomeScreenState extends State<HomeScreen>{
   ];
   List<String> homeimagelist = [
     "images/m2.webp",
-    "images/m1.webp",
-    "images/m4.webp",
-    "images/m3.webp",
-    "images/m5.webp",
+    "images/m20.webp",
+    "images/m13.webp",
+    "images/m11.webp",
+    "images/m21.webp",
+    "images/m14.webp",
   ];
 
   List<EatingPizzaOne> eatingOneList = [
@@ -503,7 +504,7 @@ class _HomeScreenState extends State<HomeScreen>{
                                   ),
                                 ),
                                 Text(
-                                  "DISCOVER PIZZA",
+                                  "DISCOVER ITEM",
                                   style: GoogleFonts.nunito(
                                       color: Color(0xff696969),
                                       fontSize: 15.5,

@@ -174,7 +174,7 @@ class _PizzaScreenState extends State<PizzaScreen> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text("${pizzalist[pizzaindex].subname}",
+                          Text("Item",
                               style: GoogleFonts.nunito(
                                   color: Color(0xff646C81),
                                   fontSize: 16,
