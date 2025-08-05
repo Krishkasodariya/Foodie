@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PrivacyPolicyView extends StatelessWidget {
   const PrivacyPolicyView({super.key});
@@ -8,6 +9,27 @@ class PrivacyPolicyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor:Colors.white,
+          elevation: 0,
+          title: Text("Privacy Policy",
+              style: GoogleFonts.nunito(
+                  color: Colors.black,
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500)),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(
+                context,);
+
+            },
+            child: Icon(
+              Icons.arrow_back_rounded,
+              size: 23,
+              color: Colors.black,
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: SingleChildScrollView(

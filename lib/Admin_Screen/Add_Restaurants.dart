@@ -438,13 +438,62 @@ class _AdminDinnerScreenState extends State<AddRestaurants> {
                                 backgroundColor: MaterialStateProperty.all(
                                     const Color(0xffEF505F))),
                             onPressed: () {
-                              if (widget.restaurantDetail == null) {
-                                addRestauratnsData();
-                              } else {
-                                updateRestauratnsData(widget.restaurantDetail!);
+
+                              if (nameController.text.isEmpty){
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:Color(0xffffeeee),
+                                    duration: Duration(milliseconds: 2000),
+                                    elevation: 5,
+                                    width: 230,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25)),
+                                    content: Center(
+                                        child: Text(
+                                          "Enter Restaurants Name",
+                                          style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                        ))));
+                              }else if(priceController.text.isEmpty){
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:Color(0xffffeeee),
+                                    duration: Duration(milliseconds: 2000),
+                                    elevation: 5,
+                                    width: 230,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25)),
+                                    content: Center(
+                                        child: Text(
+                                          "Enter Starting Price",
+                                          style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                        ))));
+                              }else if(phoneController.text.isEmpty){
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:Color(0xffffeeee),
+                                    duration: Duration(milliseconds: 2000),
+                                    elevation: 5,
+                                    width: 230,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25)),
+                                    content: Center(
+                                        child: Text(
+                                          "Enter Phone Number",
+                                          style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                        ))));
+                              }else{
+                                if (widget.restaurantDetail == null) {
+                                  addRestauratnsData();
+                                } else {
+                                  updateRestauratnsData(widget.restaurantDetail!);
+                                }
+
+                                Navigator.pop(context);
+
                               }
 
-                              Navigator.pop(context);
+
+
                             },
                             child: Text(
                               widget.restaurantDetail == null

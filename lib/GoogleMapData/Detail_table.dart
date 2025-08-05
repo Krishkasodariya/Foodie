@@ -1,8 +1,4 @@
-
-import 'dart:ffi';
-
 import 'package:floor/floor.dart';
-
 
 @Entity(tableName: "detail")
 

@@ -29,7 +29,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
     Address(name: "Other", check: false),
   ];
 
-  GoogleMapControllerScreen googleMapControllerScreen=Get.find();
+  GoogleMapControllerScreen GoogleMapController=Get.find();
   int currentindex = 0;
   late Placemark data;
 
@@ -51,9 +51,9 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
 
     data = widget.palce;
 
-    googleMapControllerScreen.flatController.text = "${data.name}";
-    googleMapControllerScreen.areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
-    googleMapControllerScreen.nearController.text = "${data.thoroughfare}";
+    GoogleMapController.flatController.text = "${data.name}";
+    GoogleMapController.areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
+    GoogleMapController.nearController.text = "${data.thoroughfare}";
 
   }
 
@@ -248,7 +248,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      controller:  googleMapControllerScreen.flatController,
+                      controller:  GoogleMapController.flatController,
                       onTap: () {},
                       decoration: InputDecoration(
                         contentPadding:
@@ -276,7 +276,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      controller:  googleMapControllerScreen.areaController,
+                      controller:  GoogleMapController.areaController,
                       onTap: () {},
                       decoration: InputDecoration(
                         contentPadding:
@@ -303,8 +303,9 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                     width: double.infinity,
                     height: 50,
                     child: TextFormField(
-                      controller:  googleMapControllerScreen.nearController,
-                      onTap: () {},
+                      controller:  GoogleMapController.nearController,
+                      onTap: () {
+                      },
                       decoration: InputDecoration(
                         contentPadding:
                             EdgeInsets.only(bottom: 10, left: 15, right: 10),
@@ -339,6 +340,7 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
                               MaterialStateProperty.all(Color(0xffEF505F))),
                       onPressed: () async {
                         setState(() {
+                          GoogleMapController.editAddress = false;
                            _updatedata(widget.index);
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -361,11 +363,11 @@ class _UpdateAddressDetailsState extends State<UpdateAddressDetails> {
       "${widget.snapshot[index].id}",
       order,
       addresstype[currentindex].name,
-      googleMapControllerScreen.areaController.text,
-      googleMapControllerScreen.flatController.text,
-      googleMapControllerScreen.nearController.text,
-        googleMapControllerScreen.draggedLatlng.latitude,
-        googleMapControllerScreen.draggedLatlng.longitude,
+      GoogleMapController.areaController.text,
+      GoogleMapController.flatController.text,
+      GoogleMapController.nearController.text,
+        GoogleMapController.draggedLatlng.latitude,
+        GoogleMapController.draggedLatlng.longitude,
     );
 
     setState(() {});

@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>{
   var homesearchContoller = TextEditingController();
 
   BottomController bottomController = Get.find();
-  CarouselController carouselController = CarouselController();
+  CarouselSliderController carouselController = CarouselSliderController();
 
   int sliderindex = 0;
   PizzaController pizzaController = Get.find();
@@ -125,15 +125,15 @@ class _HomeScreenState extends State<HomeScreen>{
 
   List<HomeCetegorieModel> foundcategorieslist = [];
   FocusNode focusNode = FocusNode();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   @override
   void initState(){
     // TODO: implement initState
     super.initState();
     pizzaController.Allupdate(ref);
-    googleMapControllerScreen.HomeLocationupdate(ref);
-    googleMapControllerScreen.GetLocationData();
+    GoogleMapController.HomeLocationupdate(ref);
+    GoogleMapController.GetLocationData();
     foundcategorieslist = categorieslist;
   }
   @override

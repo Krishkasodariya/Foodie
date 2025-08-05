@@ -83,15 +83,12 @@ class LoginController extends GetxController {
   }
 
   Future takephoto(ImageSource source) async {
-
     file = await picker.pickImage(source: source);
     print("-----file!.path------${file!.path}");
     addphoto();
     if(reference!=null){
       reference!();
     }
-
-
   }
 
   Future addphoto() async {

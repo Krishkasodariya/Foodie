@@ -10,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:shimmer/shimmer.dart';
 
-
 class AddProfile extends StatefulWidget {
   const AddProfile({super.key});
 

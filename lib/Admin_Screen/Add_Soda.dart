@@ -38,12 +38,9 @@ class _SodaAddViewState extends State<SodaAddView> {
   @override
   void initState() {
     // TODO: implement initState
-    if (widget.editItemId != null &&
-        selectedImagePath == null &&
-        downloadImageUrl == null) {
+    if (widget.editItemId != null && selectedImagePath == null && downloadImageUrl == null) {
       downloadImageUrl = widget.editItemId?.image;
-      coldDrinkController =
-          TextEditingController(text: widget.editItemId?.name);
+      coldDrinkController = TextEditingController(text: widget.editItemId?.name);
       priceController = TextEditingController(
           text: widget.editItemId?.price.toString() ?? "20");
       setState(() {});
@@ -623,13 +620,67 @@ class _SodaAddViewState extends State<SodaAddView> {
                                   backgroundColor: MaterialStateProperty.all(
                                       const Color(0xffEF505F))),
                               onPressed: () {
-                                if (widget.editItemId == null) {
-                                  addSoda();
-                                } else {
-                                  updateSoda(widget.editItemId);
+
+                                if ( downloadImageUrl==null||downloadImageUrl!.isEmpty ) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: Color(0xffffeeee),
+                                      duration: Duration(milliseconds: 2000),
+                                      elevation: 5,
+                                      width: 230,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(25)
+                                      ),
+                                      content: Center(
+                                        child: Text(
+                                          "Enter ColdDrink Photo",
+                                          style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                } else if (coldDrinkController.text.isEmpty){
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor:Color(0xffffeeee),
+                                      duration: Duration(milliseconds: 2000),
+                                      elevation: 5,
+                                      width: 230,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(25)),
+                                      content: Center(
+                                          child: Text(
+                                            "Enter ColdDrink Name",
+                                            style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                          ))));
+                                }
+                                else if(priceController.text.isEmpty){
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor:Color(0xffffeeee),
+                                      duration: Duration(milliseconds: 2000),
+                                      elevation: 5,
+                                      width: 230,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(25)),
+                                      content: Center(
+                                          child: Text(
+                                            "Enter ColdDrink Price",
+                                            style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                          ))));
+                                }else{
+                                  if (widget.editItemId == null) {
+                                    addSoda();
+                                  } else {
+                                    updateSoda(widget.editItemId);
+                                  }
+
+                                  Navigator.pop(context);
                                 }
 
-                                Navigator.pop(context);
+
+
                               },
                               child: Text(
                                 widget.editItemId==null ? "Create New Cold drink" : "Edit Cold Drink",

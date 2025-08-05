@@ -27,6 +27,7 @@ class GoogleMapControllerScreen extends GetxController{
 
   late LatLng draggedLatlng;
   late LatLng defaultLatlng;
+
   CameraPosition? cameraPosition;
 
   Placemark place = Placemark();
@@ -89,10 +90,8 @@ class GoogleMapControllerScreen extends GetxController{
     print("222222222222");
   }
 
-
   Future getplacemark(LatLng position) async {
-    List<Placemark> placemark =
-    await placemarkFromCoordinates(position.latitude, position.longitude);
+    List<Placemark> placemark = await placemarkFromCoordinates(position.latitude, position.longitude);
 
     place = placemark[0];
 

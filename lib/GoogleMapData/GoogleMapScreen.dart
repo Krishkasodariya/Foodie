@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_webservice/places.dart';
 import 'package:lottie/lottie.dart';
-import 'package:google_api_headers/google_api_headers.dart';
-
 import 'Detail_table.dart';
 import 'UpdateAddressDetails.dart';
 
@@ -23,14 +20,14 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
-  GoogleMapControllerScreen googleMapControllerscreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
-    googleMapControllerscreen.defaultLocation();
-    googleMapControllerscreen.Allupdate(ref);
+    GoogleMapController.defaultLocation();
+    GoogleMapController.Allupdate(ref);
   }
 
   @override
@@ -47,8 +44,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(
-              context,
-            );
+              context,);
+            GoogleMapController.editAddress = false;
             setState(() {});
           },
           child: Icon(
@@ -61,7 +58,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       body: WillPopScope(
         onWillPop: () {
           setState(() {
-            googleMapControllerscreen.editAddress = false;
+            GoogleMapController.editAddress = false;
           });
           return Future.value(true);
         },
@@ -77,15 +74,15 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
               onMapCreated: (controller) {
                 setState(() {
-                  googleMapControllerscreen.googleMapController = controller;
+                  GoogleMapController.googleMapController = controller;
                 });
               },
               onCameraMove: (position) {
-                googleMapControllerscreen.draggedLatlng = position.target;
-                print("----****${googleMapControllerscreen.draggedLatlng}");
+                GoogleMapController.draggedLatlng = position.target;
+                print("----****${GoogleMapController.draggedLatlng}");
               },
               onCameraIdle: () {
-                googleMapControllerscreen.getplacemark(googleMapControllerscreen.draggedLatlng);
+                GoogleMapController.getplacemark(GoogleMapController.draggedLatlng);
               },
 
               zoomControlsEnabled: false,
@@ -101,7 +98,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                 padding: const EdgeInsets.only(bottom: 10),
                 child: GestureDetector(
                   onTap: () async {
-                    googleMapControllerscreen.gotoUserCurrentPosition();
+                    GoogleMapController.gotoUserCurrentPosition();
                   },
                   child: Container(
                     width: 220,
@@ -155,7 +152,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
-                              "${googleMapControllerscreen.place.name}",
+                              "${GoogleMapController.place.name}",
                               style: GoogleFonts.nunito(
                                   fontSize: 20,
                                   color: Color(0xff313848),
@@ -173,7 +170,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                             child: Text(
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              "${googleMapControllerscreen.place.street}, ${googleMapControllerscreen.place.subLocality}, ${googleMapControllerscreen.place.locality}",
+                              "${GoogleMapController.place.street}, ${GoogleMapController.place.subLocality}, ${GoogleMapController.place.locality}",
                               style: GoogleFonts.nunito(
                                   fontSize: 14,
                                   color: Color(0xff6F6F74),
@@ -209,27 +206,25 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                               context: context,
                               builder: (context) {
 
-                                if (googleMapControllerscreen.editAddress) {
-                                  if (widget.snapshot != null && widget.index != null && googleMapControllerscreen.place != null) {
-                                    return UpdateAddressDetails(snapshot: widget.snapshot!, index: widget.index!,palce: googleMapControllerscreen.place);
+                                if (GoogleMapController.editAddress) {
+                                  if (widget.snapshot != null && widget.index != null && GoogleMapController.place != null) {
+                                    return UpdateAddressDetails(snapshot: widget.snapshot!, index: widget.index!,palce: GoogleMapController.place);
                                   } else {
                                     return Container(child: Text('Snapshot or index is null.'),);
                                   }
                                 } else {
-                                  if (googleMapControllerscreen.place != null) {
-                                    return AddressDetails(palce: googleMapControllerscreen.place,);
+                                  if (GoogleMapController.place != null) {
+                                    return AddressDetails(palce: GoogleMapController.place,);
                                   } else {
                                     return Container(
                                       child: Text('Place is null.'),
                                     );
                                   }
                                 }
-
-
                               },
                             );
                           },
-                          child: googleMapControllerscreen.editAddress
+                          child: GoogleMapController.editAddress
                               ? Text(
                                   "Update Complete Address",
                                   style: TextStyle(

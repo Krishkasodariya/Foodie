@@ -22,7 +22,7 @@ AppOpenAd? openad;
 
 class _SplashScreenState extends State<SplashScreen> {
   LoginController loginController = Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   bool isShowingAd = false;
   bool isLoaded = false;
@@ -33,10 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     loadAd();
 
-    googleMapControllerScreen.defaultLocation();
+    GoogleMapController.defaultLocation();
     loginController.Getuid();
     loginController.profileData();
-    googleMapControllerScreen.GetLocationData();
+    GoogleMapController.GetLocationData();
     loginController.savemodel(UserModel(
         name: loginController.addname.text,
         phonenumber: loginController.addphonenumber.text,
@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  Future chekedfirsttime() async {
+/*  Future chekedfirsttime() async {
     //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     loginController.sharedPreferences = await SharedPreferences.getInstance();
     bool check = (loginController.sharedPreferences!.getBool("che") ?? false);
@@ -129,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await loginController.sharedPreferences!.setBool('che', true);
       Timer(Duration(seconds: 5), () => Get.off(() => LoginScrren()));
     }
-  }
+  }*/
 
   Future<void> loadAd() async {
     await AppOpenAd.load(
@@ -147,7 +147,7 @@ class _SplashScreenState extends State<SplashScreen> {
               },
               onAdDismissedFullScreenContent: (ad){
                 setState(() {
-                  chekedfirsttime();
+                  Get.off(BottomNavigation());
                   ad.dispose();
                   isLoaded = false;
                   print("122222");

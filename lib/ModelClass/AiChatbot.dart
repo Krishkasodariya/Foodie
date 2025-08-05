@@ -12,7 +12,7 @@ class AiChatbot {
   Future<String> getGeminiData(promts,context) async {
     try {
       final header = await getheader();
-      String apiKey = "AIzaSyAg-hzGNUNGlJr88aYbRE0jCB2FfUjN0WA";
+      String apiKey = "Test Key";
       String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}";
 
       final Map<String, dynamic> requestBody = {

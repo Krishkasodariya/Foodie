@@ -21,7 +21,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   BottomController bottomController = Get.find();
   PizzaController pizzaController = Get.find();
   LoginController logincontroller = Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
   //BannerAd? bannerAd;
   //bool isLoaded = false;
 
@@ -31,10 +31,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     //loaded();
     super.initState();
     pizzaController.Allupdate(ref);
-    googleMapControllerScreen.defaultLocation();
+    GoogleMapController.defaultLocation();
 
     pizzaController.getconnectivity(context);
-    googleMapControllerScreen.GetLocationData();
+    GoogleMapController.GetLocationData();
     logincontroller.Getuid();
     logincontroller.profileData();
     logincontroller.savemodel(UserModel(
@@ -69,7 +69,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    googleMapControllerScreen.changeAddressHeight.value = false;
+                    GoogleMapController.changeAddressHeight.value = false;
                   });
 
                   Navigator.push(
@@ -87,7 +87,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           color: Color(0xffEF505F),
                           size: 28,
                         ),
-                        googleMapControllerScreen.addresstype.isEmpty
+                        GoogleMapController.addresstype.isEmpty
                             ?
                             Text(
                               maxLines: 1,
@@ -108,7 +108,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                                     Text(
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          "${googleMapControllerScreen.addresstype}",
+                                          "${GoogleMapController.addresstype}",
                                           style: GoogleFonts.nunito(
                                               fontSize: 20,
                                               color: Color(0xff313848),
@@ -124,7 +124,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                                       Text(
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
-                                            "${googleMapControllerScreen.area}",
+                                            "${GoogleMapController.area}",
                                             style: GoogleFonts.nunito(
                                                 fontSize: 15,
                                                 color: Color(0xff737373),

@@ -8,7 +8,7 @@
 
     <application
         android:usesCleartextTraffic="true"
-        android:label="Pizza"
+        android:label="Foodie"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -51,11 +51,11 @@
 
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBlpz67sTT_ZPj3p512jy5z-m-GJPHUd98"/>
+            android:value="Tets Key"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="Test Key"/>
 
 
     </application>

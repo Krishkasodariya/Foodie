@@ -16,3 +16,4 @@ abstract class Detaildao {
       "update detail set addresstype =:addresstype,ordertype =:ordertype,area =:area,flat =:flat,near =:near,latitude =:latitude,longitude =:longitude where id=:id")
   Future<void> updatedetail(String id, String ordertype, String addresstype, String area, String flat, String near,double latitude,double longitude);
 }
+//"update detail set addresstype =:addresstype,ordertype =:ordertype,area =:area,flat =:flat,near =:near,latitude =:latitude,longitude =:longitude where id=:id")

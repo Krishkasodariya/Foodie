@@ -177,6 +177,16 @@ class _YourOrderScreenState extends State<YourOrderScreen> {
                                             }else{
                                               orderController.order_Remove_Like_OrderData(index);
                                               orderController.remove_Favourite_User_OrderData(index);
+
+                                              for(int i=0;i<orderController.favouriteOrderDatalist.length;i++){
+                                                if(orderController.orderDatalist[index].orderId==orderController.favouriteOrderDatalist[i].orderId){
+                                                  print("===========)${ orderController.favouriteOrderDatalist[i].time}");
+                                                  orderController.favouriteOrderDatalist.remove(orderController.favouriteOrderDatalist[i]);
+                                                  orderController.orderDatalist[index].favouriteOrder=false;
+
+                                                }
+                                              }
+
                                             }
                                           });
                                         },

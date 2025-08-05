@@ -5,7 +5,6 @@ import 'package:Pizza/GoogleMapData/DetailDao.dart';
 import 'package:Pizza/GoogleMapData/Detail_database.dart';
 import 'package:Pizza/GoogleMapData/Detail_table.dart';
 import 'package:Pizza/GoogleMapData/GoogleMapScreen.dart';
-import 'package:Pizza/GoogleMapData/UpdateAddressDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,15 +21,15 @@ class AddressBook extends StatefulWidget {
 class _AddressBookState extends State<AddressBook> {
   BottomController bottomController = Get.find();
   late final Detaildao detaildao = Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: googleMapControllerScreen.changeAddressHeight.value
+      backgroundColor: GoogleMapController.changeAddressHeight.value
           ? Colors.transparent
           : Color(0xffF4F6FA),
-      appBar: googleMapControllerScreen.changeAddressHeight.value
+      appBar: GoogleMapController.changeAddressHeight.value
           ? null
           : AppBar(
               backgroundColor: Color(0xffF2F4F7),
@@ -46,9 +45,9 @@ class _AddressBookState extends State<AddressBook> {
                     context,
                   );
                   setState(() {
-                    googleMapControllerScreen.changeAddressHeight.value = false;
+                    GoogleMapController.changeAddressHeight.value = false;
 
-                    googleMapControllerScreen.Allupdate(ref);
+                    GoogleMapController.Allupdate(ref);
                   });
                 },
                 child: Icon(
@@ -61,13 +60,13 @@ class _AddressBookState extends State<AddressBook> {
       body: Obx(
         () => WillPopScope(
           onWillPop: () {
-            googleMapControllerScreen.changeAddressHeight.value = false;
+            GoogleMapController.changeAddressHeight.value = false;
             Navigator.pop(context);
             return Future.value(true);
           },
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: googleMapControllerScreen.changeAddressHeight.value
+            height: GoogleMapController.changeAddressHeight.value
                 ? 400
                 : MediaQuery.of(context).size.height,
             child: FutureBuilder(
@@ -79,12 +78,12 @@ class _AddressBookState extends State<AddressBook> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: googleMapControllerScreen.changeAddressHeight.value
+                          padding: GoogleMapController.changeAddressHeight.value
                               ? EdgeInsets.only(left: 20, top: 15, bottom: 15)
                               : EdgeInsets.all(0),
                           child: Align(
                             alignment: AlignmentDirectional.centerStart,
-                            child: googleMapControllerScreen.changeAddressHeight.value
+                            child: GoogleMapController.changeAddressHeight.value
                                 ? Text(
                                     "Select Address  ",
                                     style: GoogleFonts.lexend(
@@ -165,21 +164,21 @@ class _AddressBookState extends State<AddressBook> {
                                         child: GestureDetector(
                                           onTap: () {
 
-                                            googleMapControllerScreen.SetLocationData(
+                                            GoogleMapController.SetLocationData(
                                                 "${snapshot.data![index].addresstype}",
                                                 "${snapshot.data![index].area}");
 
-                                            googleMapControllerScreen.areaController.text=snapshot.data![index].area;
-                                            googleMapControllerScreen.nearController.text=snapshot.data![index].near;
+                                            GoogleMapController.areaController.text=snapshot.data![index].area;
+                                            GoogleMapController.nearController.text=snapshot.data![index].near;
 
-                                            googleMapControllerScreen.latitude=snapshot.data![index].latitude;
-                                            googleMapControllerScreen.longitude=snapshot.data![index].longitude;
+                                            GoogleMapController.latitude=snapshot.data![index].latitude;
+                                            GoogleMapController.longitude=snapshot.data![index].longitude;
 
                                             print("--------latitude---------${snapshot.data![index].latitude}");
                                             print("--------longitude--------${snapshot.data![index].longitude}");
 
-                                            googleMapControllerScreen.selectAddress.value = true;
-                                            googleMapControllerScreen.visibleAddress.value = true;
+                                            GoogleMapController.selectAddress.value = true;
+                                            GoogleMapController.visibleAddress.value = true;
                                             Get.back();
                                             setState(() {});
                                           },
@@ -250,7 +249,7 @@ class _AddressBookState extends State<AddressBook> {
                                                   GestureDetector(
                                                     onTap: () {
                                                       setState(() {
-                                                        googleMapControllerScreen.editAddress=true;
+                                                        GoogleMapController.editAddress=true;
                                                       });
 
                                                       Navigator.push(
@@ -356,9 +355,7 @@ class _AddressBookState extends State<AddressBook> {
                   );
                 }
                 else if (snapshot.hasError) {
-                  return Text(
-                    "Error",
-                  );
+                  return Text("Error",);
                 }
                 else {
                   return Center(child: CircularProgressIndicator());

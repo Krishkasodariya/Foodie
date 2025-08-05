@@ -487,16 +487,13 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                             valueNotifier.value = true;
                                             addIngredient(value);
                                             value.checkIngredient = true;
-                                            print("===============)${value
-                                                .checkIngredient}}");
+                                            print("===============)${value.checkIngredient}}");
                                             //  print(listofingredient.length);
-                                            Future.delayed(
-                                                Duration(milliseconds: 1000));
+                                            Future.delayed(Duration(milliseconds: 1000));
                                             valueNotifier.value = false;
                                             print("===)onAccept");
                                             addpizzaAnimation();
-                                            IngredientAnimationController!
-                                                .forward(from: 0.0);
+                                            IngredientAnimationController!.forward(from: 0.0);
                                           });
                                         },
                                         onWillAccept: (value) {
@@ -516,8 +513,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                           valueNotifier.value = false;
                                           print("===)onLeave");
                                         },
-                                        builder: (context, candidateData,
-                                            rejectedData) {
+                                        builder: (context, candidateData, rejectedData) {
                                           return ValueListenableBuilder(
                                             valueListenable: valueNotifier,
                                             builder: (context, value, child) {
@@ -539,8 +535,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                                         Image(
                                                           image: AssetImage(
                                                               "images/dish.webp"),
-                                                          width: valueNotifier
-                                                              .value
+                                                          width: valueNotifier.value
                                                               ? Width.maxWidth
                                                               : Width.maxWidth -
                                                               10,
@@ -781,8 +776,7 @@ class _CustomizePizzaState extends State<CustomizePizza>
                                     ..scale(pizzaScaleAnimation!.value)
                                     ..translate(
                                         0.0,
-                                        25 *
-                                            (1 - pizzaOpacityAnimation!.value)),
+                                        25 * (1 - pizzaOpacityAnimation!.value)),
                                   alignment: Alignment.center,
                                   child: Image(
                                     image: MemoryImage(

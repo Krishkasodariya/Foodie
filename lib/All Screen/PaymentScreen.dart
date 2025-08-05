@@ -22,7 +22,7 @@ class _PaymentScreenState extends State<PaymentScreen>{
   PizzaController pizzaController=Get.find();
   LoginController loginController =Get.find();
   OrderController orderController=Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   @override
   void initState() {
@@ -185,8 +185,8 @@ class _PaymentScreenState extends State<PaymentScreen>{
 
     pizzaController.resetOffer();
     pizzaController.functionCartClear();
-    googleMapControllerScreen.visibleAddress.value=false;
-    googleMapControllerScreen.selectAddress.value = false;
+    GoogleMapController.visibleAddress.value=false;
+    GoogleMapController.selectAddress.value = false;
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

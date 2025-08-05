@@ -28,7 +28,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   PizzaController pizzaController = Get.find();
   LoginController loginController = Get.find();
@@ -1658,7 +1658,7 @@ class _CartScreenState extends State<CartScreen> {
                               Obx(
                                 () => Container(
                                   child:
-                                      googleMapControllerScreen.visibleAddress.value
+                                      GoogleMapController.visibleAddress.value
                                           ? Row(
                                               children: [
                                                 Expanded(
@@ -1703,10 +1703,10 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                               Obx(
                                 () => Padding(
-                                  padding: googleMapControllerScreen.visibleAddress.value
+                                  padding: GoogleMapController.visibleAddress.value
                                       ? const EdgeInsets.only(left: 10, right: 10, top: 15)
                                       : EdgeInsets.only(left: 0, right: 0, top: 0),
-                                  child: googleMapControllerScreen
+                                  child: GoogleMapController
                                           .visibleAddress.value
                                       ? Container(
                                           width: double.infinity,
@@ -1791,7 +1791,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       },
                                                     );
                                                     setState((){
-                                                      googleMapControllerScreen
+                                                      GoogleMapController
                                                           .changeAddressHeight
                                                           .value = true;
                                                     });
@@ -1829,7 +1829,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                 ),
                                                                 Obx(
                                                                   () => Text(
-                                                                    "${googleMapControllerScreen.addresstype.value}",
+                                                                    "${GoogleMapController.addresstype.value}",
                                                                     style: GoogleFonts
                                                                         .lexend(
                                                                       fontWeight:
@@ -1849,7 +1849,7 @@ class _CartScreenState extends State<CartScreen> {
                                                                 padding: const EdgeInsets.only(left: 30),
                                                                 child: Obx(
                                                                   () => Text(
-                                                                    "${googleMapControllerScreen.area.value}",
+                                                                    "${GoogleMapController.area.value}",
                                                                     style: GoogleFonts.lexend(
                                                                       fontWeight: FontWeight.w400,
                                                                       fontSize: 16,
@@ -1917,7 +1917,7 @@ class _CartScreenState extends State<CartScreen> {
                                                       },
                                                     );
                                                     setState(() {
-                                                      googleMapControllerScreen
+                                                      GoogleMapController
                                                           .changeProfileHeight
                                                           .value = true;
                                                     });
@@ -2478,7 +2478,7 @@ class _CartScreenState extends State<CartScreen> {
                                       backgroundColor: MaterialStateProperty.all(
                                           Color(0xffEF505F))),
                                   onPressed: () async {
-                                    if (googleMapControllerScreen.selectAddress.value) {
+                                    if (GoogleMapController.selectAddress.value) {
                                       if (pizzaController.orderMethod.value == "Cash") {
                                         setState(() {
                                           orderController.addUserOrderData();
@@ -2495,8 +2495,8 @@ class _CartScreenState extends State<CartScreen> {
                                                           .grandtotal.value),
                                                   type: PageTransitionType
                                                       .rightToLeft));
-                                          googleMapControllerScreen.selectAddress.value = false;
-                                          googleMapControllerScreen.visibleAddress.value = false;
+                                          GoogleMapController.selectAddress.value = false;
+                                          GoogleMapController.visibleAddress.value = false;
 
                                           pizzaController.resetOffer();
                                           pizzaController.functionCartClear();
@@ -2533,11 +2533,11 @@ class _CartScreenState extends State<CartScreen> {
                                         },
                                       );
                                       setState(() {
-                                        googleMapControllerScreen.changeAddressHeight.value = true;
+                                        GoogleMapController.changeAddressHeight.value = true;
                                       });
                                     }
                                   },
-                                  child: googleMapControllerScreen.selectAddress.value
+                                  child: GoogleMapController.selectAddress.value
                                       ? Text(
                                           "Conform Order",
                                           style: TextStyle(

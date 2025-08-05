@@ -32,7 +32,7 @@ class _AboutScreenState extends State<AboutScreen> {
           },
           child: Icon(
             Icons.arrow_back_rounded,
-            size: 30,
+            size: 26,
             color: Colors.black,
           ),
         ),
@@ -145,11 +145,11 @@ class _AboutScreenState extends State<AboutScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          try {
+                         /* try {
                             launchUrl(Uri.parse("https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-act-2001-forms.html"));
                           } on Exception catch (e) {
                             print("Error is $e");
-                          }
+                          }*/
                         },
                         behavior: HitTestBehavior.opaque,
                         child: Row(

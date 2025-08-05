@@ -16,7 +16,7 @@ import 'package:uuid/uuid.dart';
 class OrderController extends GetxController {
   LoginController loginController = Get.find();
   PizzaController pizzaController = Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
   RxBool favouriteOrder = false.obs;
   RxBool deliveryViewDetail = false.obs;
   RxBool viewDetail = false.obs;
@@ -28,7 +28,6 @@ class OrderController extends GetxController {
 
   RxList<MainOrderFoodItemModel> paymentHistoryDataList =
       <MainOrderFoodItemModel>[].obs;
-
 
   RxList<MainOrderFoodItemModel> orderDatalist = <MainOrderFoodItemModel>[].obs;
   RxList<MainOrderFoodItemModel> favouriteOrderDatalist =
@@ -52,19 +51,14 @@ class OrderController extends GetxController {
       DateTime orderdate = DateTime.now();
 
       String formattedTime = DateFormat('hh:mm a').format(orderdate);
-      CollectionReference userCollectionReference =
-          await FirebaseFirestore.instance.collection("userOrderHistory");
-      DocumentReference userDocumentReference =
-          await userCollectionReference.doc(loginController.userid);
+      CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
+      DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
-      CollectionReference orderCollectionReference =
-          await userDocumentReference.collection("order");
-      DocumentReference orderDocumentReference =
-          await orderCollectionReference.doc();
+      CollectionReference orderCollectionReference = await userDocumentReference.collection("order");
+      DocumentReference orderDocumentReference = await orderCollectionReference.doc();
 
       final pizzaBottomListData =
           pizzaController.pizzabottomlist.map((element) {
-
         FoodItemModel foodItem = FoodItemModel(
           restaurantName: element.restaurantName,
           image: element.image,
@@ -111,13 +105,13 @@ class OrderController extends GetxController {
         "grandTotal": pizzaController.grandtotal.value,
         "date": "${orderdate.day}-${orderdate.month}-${orderdate.year}",
         "time": "${formattedTime}",
-        "address": googleMapControllerScreen.areaController.text,
-        "nearAddress": googleMapControllerScreen.nearController.text,
+        "address": GoogleMapController.areaController.text,
+        "nearAddress": GoogleMapController.nearController.text,
         "name": loginController.cartName.value,
         "phoneNumber": "+91${loginController.cartPhone.value}",
         "orderData": [...pizzaBottomListData, ...pizzaMetaListData],
-        "latitude": googleMapControllerScreen.latitude,
-        "longitude": googleMapControllerScreen.longitude,
+        "latitude": GoogleMapController.latitude,
+        "longitude": GoogleMapController.longitude,
       };
 
       print("${formattedTime}");
@@ -237,13 +231,13 @@ class OrderController extends GetxController {
         "grandTotal": pizzaController.grandtotal.value,
         "date": "${orderdate.day}-${orderdate.month}-${orderdate.year}",
         "time": "${formattedTime}",
-        "address": googleMapControllerScreen.areaController.text,
-        "nearAddress": googleMapControllerScreen.nearController.text,
+        "address": GoogleMapController.areaController.text,
+        "nearAddress": GoogleMapController.nearController.text,
         "name": loginController.cartName.value,
         "phoneNumber": "+91${loginController.cartPhone.value}",
         "orderData": [...pizzaBottomListData, ...pizzaMetaListData],
-        "latitude": googleMapControllerScreen.latitude,
-        "longitude": googleMapControllerScreen.longitude,
+        "latitude": GoogleMapController.latitude,
+        "longitude": GoogleMapController.longitude,
       };
 
       print("${formattedTime}");
@@ -257,7 +251,8 @@ class OrderController extends GetxController {
   }
 
   Future<List<MainOrderFoodItemModel>> getAllUserOrderData() async {
-    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("allUserOrderHistory");
+    CollectionReference userCollectionReference =
+        await FirebaseFirestore.instance.collection("allUserOrderHistory");
 
     await userCollectionReference.get().then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
@@ -315,7 +310,6 @@ class OrderController extends GetxController {
       final favouriteOrderListData =
           orderDatalist[index].datalist!.map((element) {
         OrderFoodItemModel foodItem = OrderFoodItemModel(
-
           restaurantName: element.restaurantName,
           pizzaSize: element.pizzaSize,
           base64: element.base64,
@@ -409,129 +403,146 @@ class OrderController extends GetxController {
 //------------------------------------------------------YOUR ORDER SCREEN----------------------------------------------------
   void order_Fill_Like_OrderData(int index) async {
     print("-----------------)order_Fill_Like_OrderData");
-    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
-    DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
-
-    await userDocumentReference
-        .collection("order")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((element) async {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
-
-        if (orderDatalist[index].orderId == data['orderId']) {
-          await userDocumentReference
-              .collection("order")
-              .doc(element.id)
-              .update({"favouriteOrder": true});
-        }
-      });
-    });
-  }
-
-  void order_Remove_Like_OrderData(int index) async {
-    print("-----------------)order_Remove_Like_OrderData");
     CollectionReference userCollectionReference =
         await FirebaseFirestore.instance.collection("userOrderHistory");
     DocumentReference userDocumentReference =
         await userCollectionReference.doc(loginController.userid);
 
     await userDocumentReference
-        .collection("order")
+        .collection("order").where("orderId", isEqualTo:orderDatalist[index].orderId )
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) async {
         Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-        if (orderDatalist[index].orderId == data['orderId']) {
+       // if (orderDatalist[index].orderId == data['orderId']) {
           await userDocumentReference
               .collection("order")
               .doc(element.id)
-              .update({"favouriteOrder": false});
-        }
+              .update({"favouriteOrder": true});
+       // }
       });
     });
   }
 
-  void remove_Favourite_User_OrderData(int index) async {
-    print("----------------)remove_Favourite_User_OrderData");
-    CollectionReference userFavouriteCollectionReference =
-        await FirebaseFirestore.instance
-            .collection("userFavouriteOrderHistory");
-    DocumentReference userFavouriteDocumentReference =
-        await userFavouriteCollectionReference.doc(loginController.userid);
+  void order_Remove_Like_OrderData(int index) async {
 
-    /*CollectionReference orderFavouriteCollectionReference = await userFavouriteDocumentReference.collection("favouriteOrder");
-    DocumentReference orderFavouriteDocumentReference = await orderFavouriteCollectionReference.doc();*/
+    try{
+      print("-----------------)order_Remove_Like_OrderData");
+      CollectionReference userCollectionReference =
+      await FirebaseFirestore.instance.collection("userOrderHistory");
+      DocumentReference userDocumentReference =
+      await userCollectionReference.doc(loginController.userid);
 
-    await userFavouriteDocumentReference
-        .collection("favouriteOrder")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((element) async {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      await userDocumentReference
+          .collection("order").where("orderId", isEqualTo:orderDatalist[index].orderId )
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((element) async {
+          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-        if (orderDatalist[index].orderId == data['orderId']) {
-          await userFavouriteDocumentReference
-              .collection("favouriteOrder")
-              .doc(element.id)
-              .delete();
-        }
+          //if (orderDatalist[index].orderId == data['orderId']) {
+            await userDocumentReference
+                .collection("order")
+                .doc(element.id)
+                .update({"favouriteOrder": false});
+          //}
+        });
       });
-    });
+
+    }catch(e){
+      print("=============order_Remove_Like_OrderData======================)${e}");
+    }
+
+
+  }
+
+  void remove_Favourite_User_OrderData(int index) async {
+    try{
+      print("----------------)remove_Favourite_User_OrderData");
+      CollectionReference userFavouriteCollectionReference = await FirebaseFirestore.instance.collection("userFavouriteOrderHistory");
+      DocumentReference userFavouriteDocumentReference = await userFavouriteCollectionReference.doc(loginController.userid);
+
+      await userFavouriteDocumentReference
+          .collection("favouriteOrder").where("orderId", isEqualTo:orderDatalist[index].orderId )
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((element) async {
+          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+          //if (orderDatalist[index].orderId == data['orderId']) {
+            await userFavouriteDocumentReference
+                .collection("favouriteOrder")
+                .doc(element.id)
+                .delete();
+         // }
+        });
+      });
+
+
+
+    }catch(e){
+      print("==============remove_Favourite_User_OrderData=================)${e}");
+    }
+
   }
 
   //------------------------------------------------------FAVOURITE ORDER SCREEN--------------------------------------------
 
   void remove_Favourite_User_Favourite_OrderData(int index) async {
-    print("--------------------)remove_Favourite_User_Favourite_OrderData");
-    CollectionReference userFavouriteCollectionReference =
-        await FirebaseFirestore.instance
-            .collection("userFavouriteOrderHistory");
-    DocumentReference userFavouriteDocumentReference =
-        await userFavouriteCollectionReference.doc(loginController.userid);
+    try {
+     // print("----${favouriteOrderDatalist[index].grandTotal}----------------)remove_Favourite_User_Favourite_OrderData");
+      CollectionReference userFavouriteCollectionReference = await FirebaseFirestore.instance.collection("userFavouriteOrderHistory");
+      DocumentReference userFavouriteDocumentReference = await userFavouriteCollectionReference.doc(loginController.userid);
 
-    await userFavouriteDocumentReference
-        .collection("favouriteOrder")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((element) async {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      await userFavouriteDocumentReference
+          .collection("favouriteOrder").where("orderId", isEqualTo:favouriteOrderDatalist[index].orderId)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((element) async {
+          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
 
-        if (favouriteOrderDatalist[index].orderId == data['orderId']) {
-          await userFavouriteDocumentReference
-              .collection("favouriteOrder")
-              .doc(element.id)
-              .delete();
-        }
+          //if (favouriteOrderDatalist[index].orderId == data['orderId']) {
+            await userFavouriteDocumentReference
+                .collection("favouriteOrder")
+                .doc(element.id)
+                .delete();
+         // }
+        });
       });
-    });
 
-    refreshData!();
+    } catch (e) {
+      print("================remove_Favourite_User_Favourite_OrderData================)${e}");
+    }
   }
 
   void order_Remove_Like_Favourite_OrderData(int index) async {
-    print("--------------------)order_Remove_Like_Favourite_OrderData");
-    CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
-    DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
-    await userDocumentReference
-        .collection("order")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((element) async {
-        Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+    try{
+      //print("-----${favouriteOrderDatalist[index].grandTotal}---------------)order_Remove_Like_Favourite_OrderData");
+      CollectionReference userCollectionReference = await FirebaseFirestore.instance.collection("userOrderHistory");
+      DocumentReference userDocumentReference = await userCollectionReference.doc(loginController.userid);
 
-        if (favouriteOrderDatalist[index].orderId == data['orderId']) {
-          await userDocumentReference
-              .collection("order")
-              .doc(element.id)
-              .update({"favouriteOrder": false});
-        }
+      await userDocumentReference
+          .collection("order").where("orderId", isEqualTo:favouriteOrderDatalist[index].orderId)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((element) async {
+          Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+
+          //if (favouriteOrderDatalist[index].orderId == data['orderId']) {
+            await userDocumentReference
+                .collection("order")
+                .doc(element.id)
+                .update({"favouriteOrder": false});
+        //  }
+        });
       });
-    });
 
-    refreshData!();
+    }catch(e){
+      print("============order_Remove_Like_Favourite_OrderData====================)${e}");
+    }
+
   }
 
 //------------------------------------------------------REAL TIME------------------------------------
@@ -599,21 +610,21 @@ class OrderController extends GetxController {
         "grandTotal": pizzaController.grandtotal.value,
         "date": "${orderdate.day}-${orderdate.month}-${orderdate.year}",
         "time": "${formattedTime}",
-        "address": googleMapControllerScreen.areaController.text,
-        "nearAddress": googleMapControllerScreen.nearController.text,
+        "address": GoogleMapController.areaController.text,
+        "nearAddress": GoogleMapController.nearController.text,
         "userName": loginController.cartName.value,
         "userImage": loginController.imageurl,
         "userPhoneNumber": "+91${loginController.cartPhone.value}",
         "orderData": [...pizzaBottomListData, ...pizzaMetaListData],
-        "userLatitude": googleMapControllerScreen.latitude,
-        "userLongitude": googleMapControllerScreen.longitude,
-        "deliveryViewDetail":deliveryViewDetail.value,
+        "userLatitude": GoogleMapController.latitude,
+        "userLongitude": GoogleMapController.longitude,
+        "deliveryViewDetail": deliveryViewDetail.value,
         "deliveryName": "",
         "deliveryUid": "",
         "deliveryPhone": "",
         "deliveryEmail": "",
         "deliveryImage": "",
-        "deliveryLatitude":0.0,
+        "deliveryLatitude": 0.0,
         "deliveryLongitude": 0.0,
       };
 
@@ -675,6 +686,4 @@ class OrderController extends GetxController {
 
     return paymentHistoryDataList;
   }
-
-
 }

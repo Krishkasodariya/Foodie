@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   LoginController logincontroller = Get.find();
   var countrydata = "";
-  GoogleMapControllerScreen googleMapControllerScreen=Get.find();
+  GoogleMapControllerScreen GoogleMapController=Get.find();
    ScrollController scrollController = ScrollController();
   FocusNode namefocusNode = FocusNode();
   FocusNode phonefocusNode = FocusNode();
@@ -49,15 +49,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context){
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor:googleMapControllerScreen.changeProfileHeight.value?Colors.transparent: Colors.white,
-      appBar: googleMapControllerScreen.changeProfileHeight.value?
+      backgroundColor:GoogleMapController.changeProfileHeight.value?Colors.transparent: Colors.white,
+      appBar: GoogleMapController.changeProfileHeight.value?
           null: AppBar(
         backgroundColor: Colors.white,
         leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
               setState(() {
-                googleMapControllerScreen.changeProfileHeight.value=false;
+                GoogleMapController.changeProfileHeight.value=false;
               });
             },
             child: Icon(
@@ -88,12 +88,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: WillPopScope(
             onWillPop: (){
               Get.back();
-              googleMapControllerScreen.changeProfileHeight.value=false;
+              GoogleMapController.changeProfileHeight.value=false;
               return Future.value(true);
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height:googleMapControllerScreen.changeProfileHeight.value?500: MediaQuery.of(context).size.height,
+              height:GoogleMapController.changeProfileHeight.value?500: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
                   SizedBox(

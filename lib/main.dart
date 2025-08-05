@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:Pizza/Controller/BottomController.dart';
 import 'package:Pizza/Controller/LoginController.dart';
 import 'package:Pizza/Controller/PizzaController.dart';
-import 'package:Pizza/Controller/SodaController.dart';
 import 'package:Pizza/OnBoardingScreen/BoardingScreen.dart';
 import 'package:Pizza/SplashScreenData/SpalshScreen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -33,7 +32,6 @@ Future main() async {
   Get.put(LoginController());
   Get.put(BottomController());
   Get.put(PizzaController());
-  Get.put(SodaController());
   Get.put(GoogleMapControllerScreen());
   Get.put(OrderController());
   Get.put(AdminController());
@@ -105,7 +103,9 @@ class _MyappState extends State<Myapp> {
     bool check = (loginController.sharedPreferences!.getBool("check") ?? false);
     if (check) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => SplashScreen()));
+
+
+      MaterialPageRoute(builder: (context) => SplashScreen()));
     } else {
       await loginController.sharedPreferences!.setBool('check', true);
       Navigator.of(context).pushReplacement(

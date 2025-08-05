@@ -40,8 +40,7 @@ class _PizzaAddViewState extends State<PizzaAddView> {
   void initState() {
     // TODO: implement initState
     nameController = TextEditingController(text: widget.pizzaData?.name);
-    priceController =
-        TextEditingController(text: widget.pizzaData?.price.toString());
+    priceController = TextEditingController(text: widget.pizzaData?.price.toString());
     downloadImageUrl = widget.pizzaData?.image;
     super.initState();
   }
@@ -201,15 +200,13 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                               color: Color(0xffE9E9F7),
                               shape: BoxShape.circle,
                             ),
-                            child: downloadImageUrl != null &&
-                                selectedImagePath == null
+                            child: downloadImageUrl != null && selectedImagePath == null
                                 ? Image.network(
                               "$downloadImageUrl",
                               height: 240,
                               width: double.maxFinite,
                               fit: BoxFit.fill,
-                            )
-                                : Image.file(
+                            ) : Image.file(
                               File(selectedImagePath!),
                               height: 240,
                               width: double.maxFinite,
@@ -614,12 +611,69 @@ class _PizzaAddViewState extends State<PizzaAddView> {
                                 backgroundColor: MaterialStateProperty.all(
                                     const Color(0xffEF505F))),
                             onPressed: () {
-                              if (widget.pizzaData == null) {
-                                addPizza();
-                              } else {
-                                updatePizza(widget.pizzaData);
+
+
+                              if ( downloadImageUrl==null||downloadImageUrl!.isEmpty ) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor: Color(0xffffeeee),
+                                    duration: Duration(milliseconds: 2000),
+                                    elevation: 5,
+                                    width: 230,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25)
+                                    ),
+                                    content: Center(
+                                      child: Text(
+                                        "Enter Item Photo",
+                                        style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }  else if (nameController.text.isEmpty){
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:Color(0xffffeeee),
+                                    duration: Duration(milliseconds: 2000),
+                                    elevation: 5,
+                                    width: 230,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25)),
+                                    content: Center(
+                                        child: Text(
+                                          "Enter Item Name",
+                                          style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                        ))));
                               }
-                              Navigator.pop(context);
+                              else if(priceController.text.isEmpty){
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    backgroundColor:Color(0xffffeeee),
+                                    duration: Duration(milliseconds: 2000),
+                                    elevation: 5,
+                                    width: 230,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25)),
+                                    content: Center(
+                                        child: Text(
+                                          "Enter Item Price",
+                                          style: TextStyle(color: Color(0xffEF505F), fontSize: 16),
+                                        ))));
+                              }else{
+
+                                if (widget.pizzaData == null) {
+                                  addPizza();
+                                } else {
+                                  updatePizza(widget.pizzaData);
+                                }
+                                Navigator.pop(context);
+                              }
+
+
+
+
                             },
                             child:  Text(
                               widget.pizzaData == null ? "Create New Item" : "Save Item",

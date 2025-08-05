@@ -29,7 +29,7 @@ class _AddressDetailsState extends State<AddressDetails> {
   int currentindex = 0;
 
 
-  GoogleMapControllerScreen googleMapControllerScreen=Get.find();
+  GoogleMapControllerScreen GoogleMapController=Get.find();
 
   @override
   void initState() {
@@ -38,9 +38,9 @@ class _AddressDetailsState extends State<AddressDetails> {
     print("1111");
     data = widget.palce;
 
-    googleMapControllerScreen.flatController.text = "${data.name}";
-    googleMapControllerScreen.areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
-    googleMapControllerScreen.nearController.text = "${data.thoroughfare}";
+    GoogleMapController.flatController.text = "${data.name}";
+    GoogleMapController.areaController.text = "${data.street}, ${data.subLocality}, ${data.locality}";
+    GoogleMapController.nearController.text = "${data.thoroughfare}";
 
   }
 
@@ -234,7 +234,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                 width: double.infinity,
                 height: 50,
                 child: TextFormField(
-                  controller: googleMapControllerScreen.flatController,
+                  controller: GoogleMapController.flatController,
                   onTap: () {},
                   decoration: InputDecoration(
                     contentPadding:
@@ -261,7 +261,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                 width: double.infinity,
                 height: 50,
                 child: TextFormField(
-                  controller: googleMapControllerScreen.areaController,
+                  controller: GoogleMapController.areaController,
                   onTap: () {},
                   decoration: InputDecoration(
                     contentPadding:
@@ -288,7 +288,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                 width: double.infinity,
                 height: 50,
                 child: TextFormField(
-                  controller: googleMapControllerScreen.nearController,
+                  controller: GoogleMapController.nearController,
                   onTap: () {},
                   decoration: InputDecoration(
                     contentPadding:
@@ -327,7 +327,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                     _adddata();
                     Navigator.pop(context);
                     Navigator.pop(context);
-
+                    GoogleMapController.editAddress = false;
                     print("-----)$order");
                     print("-----)${addresstype[currentindex].name}");
                   },
@@ -347,11 +347,11 @@ class _AddressDetailsState extends State<AddressDetails> {
     await detaildao.adddetail(Detail_table(
         order,
         addresstype[currentindex].name,
-      googleMapControllerScreen.flatController.text,
-      googleMapControllerScreen.areaController.text,
-      googleMapControllerScreen.nearController.text,
-        googleMapControllerScreen.draggedLatlng.latitude,
-        googleMapControllerScreen.draggedLatlng.longitude,
+      GoogleMapController.flatController.text,
+      GoogleMapController.areaController.text,
+      GoogleMapController.nearController.text,
+        GoogleMapController.draggedLatlng.latitude,
+        GoogleMapController.draggedLatlng.longitude,
 
     ));
 

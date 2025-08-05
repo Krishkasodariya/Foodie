@@ -41,7 +41,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   PizzaController pizzaController = Get.find();
   BottomController bottomController = Get.find();
   AdminController adminController = Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
 
   String? linkMessage;
   bool createdLink = false;
@@ -53,8 +53,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
     super.initState();
     initDynamicLink();
 
-    googleMapControllerScreen.GetLocationData();
-    googleMapControllerScreen.HomeLocationupdate(ref);
+    GoogleMapController.GetLocationData();
+    GoogleMapController.HomeLocationupdate(ref);
     logincontroller.Getuid();
     logincontroller.profileData();
     logincontroller.savemodel(UserModel(
@@ -159,7 +159,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                       child: ProfileScreen()));
                               setState(() {
                                 logincontroller.changeColor = false;
-                                googleMapControllerScreen
+                                GoogleMapController
                                     .changeProfileHeight.value = false;
                               });
                             },
@@ -830,7 +830,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                     PageTransition(
                                         child: AddressBook(),
                                         type: PageTransitionType.rightToLeft));
-                                googleMapControllerScreen
+                                GoogleMapController
                                     .changeAddressHeight.value = false;
                               },
                               child: Column(
@@ -1018,7 +1018,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Padding(
+                 logincontroller.userid=="oRUCWQLD3OVl7DP9uMIYiorSqx02" ?Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: Container(
                       width: double.infinity,
@@ -1274,7 +1274,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         ],
                       ),
                     ),
-                  ),
+                  ):Container(),
                   SizedBox(
                     height: 20,
                   ),

@@ -21,7 +21,7 @@ class AdminBottomNavigation extends StatefulWidget {
 
 class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
   BottomController bottomController = Get.find();
-  GoogleMapControllerScreen googleMapControllerScreen = Get.find();
+  GoogleMapControllerScreen GoogleMapController = Get.find();
   AdminController adminController = Get.find();
 
   @override
@@ -58,11 +58,11 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
-                            child: /*googleMapControllerScreen.addresstype == null
+                            child: /*GoogleMapController.addresstype == null
                                 ? Text(
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    "${googleMapControllerScreen.place.subLocality}",
+                                    "${GoogleMapController.place.subLocality}",
                                     style: GoogleFonts.nunito(
                                         fontSize: 20,
                                         color: Color(0xff313848),
@@ -73,7 +73,7 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                                   () => Text(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                "${googleMapControllerScreen.addresstype}",
+                                "${GoogleMapController.addresstype}",
                                 style: GoogleFonts.nunito(
                                     fontSize: 20,
                                     color: Color(0xff313848),
@@ -85,11 +85,11 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                             width: 220,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10),
-                              child: /* googleMapControllerScreen.area == null
+                              child: /* GoogleMapController.area == null
                                   ? Text(
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      "${googleMapControllerScreen.place.locality}",
+                                      "${GoogleMapController.place.locality}",
                                       style: GoogleFonts.nunito(
                                           fontSize: 15,
                                           color: Color(0xff737373),
@@ -100,7 +100,7 @@ class _AdminBottomNavigationState extends State<AdminBottomNavigation> {
                                     () => Text(
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  "${googleMapControllerScreen.area}",
+                                  "${GoogleMapController.area}",
                                   style: GoogleFonts.nunito(
                                       fontSize: 15,
                                       color: Color(0xff737373),
