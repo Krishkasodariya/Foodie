@@ -1,4 +1,4 @@
-<h1>🍕 Pizza Order App</h1>
+<h1>🍕 Foodie Food Order App</h1>
 
 ### 🚀 A Flutter-based Pizza Ordering App
 
@@ -65,7 +65,7 @@ Follow these steps to run the app locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/pizzaorder.git
+git clone https://github.com/Krishkasodariya/Foodie.git
 
 # Navigate to the project directory
 cd pizzaorder
@@ -75,3 +75,4 @@ flutter pub get
 
 # Run the app
 flutter run
+
